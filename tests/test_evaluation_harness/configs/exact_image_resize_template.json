@@ -1,0 +1,31 @@
+{
+    "sites": ["reddit"],
+    "task_id": 0,
+    "require_login": true,
+    "start_url": "__REDDIT__/forums/all",
+    "geolocation": null,
+    "intent_template": "Make a Reddit post with this image ({{image_url}}) in the most relevant subreddit.",
+    "intent": "Make a Reddit post with this image (__REDDIT__/submission_images/66a1b3d1334e5f2ec04fdab4d0fa4892744e9dda6c38b5d3ae971d7dc2c1dfdb.jpg) in the most relevant subreddit.",
+    "image": "images",
+    "instantiation_dict": {
+        "image_url": "__REDDIT__/submission_images/66a1b3d1334e5f2ec04fdab4d0fa4892744e9dda6c38b5d3ae971d7dc2c1dfdb.jpg"
+    },
+    "require_reset": false,
+    "eval": {
+        "eval_types": [
+            "url_match",
+            "page_image_query"
+        ],
+        "reference_answers": null,
+        "reference_url": "__REDDIT__/f/food/18838/homemade-obligatory-halloween-pumpkin-loaf",
+        "url_note": "GOLD in PRED",
+        "page_image_query": [
+            {
+                "eval_image_url": "last",
+                "eval_image_class": ".submission__image",
+                "eval_fuzzy_image_match": "",
+                "ssim_threshold": 0.95
+            }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "sites": ["reddit"],
+    "task_id": 0,
+    "require_login": true,
+    "start_url": "__REDDIT__/forums/all",
+    "geolocation": null,
+    "intent_template": "Make a Reddit post with this image ({{image_url}}) in the most relevant subreddit.",
+    "intent": "Make a Reddit post with this image (__REDDIT__/submission_images/58fd8145d1b2dfa2dfddb2f29c481e66d38c487cc1b2e1d613cb086b0c1caaad.png) in the most relevant subreddit.",
+    "image": "__REDDIT__/submission_images/58fd8145d1b2dfa2dfddb2f29c481e66d38c487cc1b2e1d613cb086b0c1caaad.png",
+    "instantiation_dict": {
+        "image_url": "__REDDIT__/submission_images/58fd8145d1b2dfa2dfddb2f29c481e66d38c487cc1b2e1d613cb086b0c1caaad.png"
+    },
+    "require_reset": false,
+    "eval": {
+        "eval_types": [
+            "url_match",
+            "page_image_query"
+        ],
+        "reference_answers": null,
+        "reference_url": "__REDDIT__/f/funny/125684/neighborhood-watch",
+        "url_note": "GOLD in PRED",
+        "page_image_query": [
+            {
+                "eval_image_url": "last",
+                "eval_image_class": ".submission__image",
+                "eval_fuzzy_image_match": "__REDDIT__/submission_images/58fd8145d1b2dfa2dfddb2f29c481e66d38c487cc1b2e1d613cb086b0c1caaad.png"
+            }
+        ]
+    }
+}

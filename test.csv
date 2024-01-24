@@ -1,0 +1,1524 @@
+ID,Element,Top,Right,Bottom,Left,Width,Height,Alt,Class,Id,TextContent,Interactable
+1,LI,10.0,750.03125,30.0,673.921875,76.109375,20.0,,,,My Account,False
+2,A,10.5,750.03125,29.0,673.921875,76.109375,18.5,,,iddVpFcKwN,My Account,True
+3,LI,10.0,846.203125,30.0,765.03125,81.171875,20.0,,link wishlist,,"
+    My Wish List        
+    
+",False
+4,A,10.5,846.203125,29.0,765.03125,81.171875,18.5,,,,"My Wish List        
+    ",True
+5,LI,10.0,904.828125,30.0,861.203125,43.625,20.0,,link authorization-link,,"
+    Sign In
+",False
+6,A,10.5,904.828125,29.0,861.203125,43.625,18.5,,,,Sign In,True
+7,LI,10.0,1125.8671875,29.59375,934.828125,191.0390625,19.59375,,greet welcome,,"
+        
+        
+        Welcome to One Stop Market
+                
+    ",False
+8,SPAN,10.5,1125.8671875,29.0,934.828125,191.0390625,18.5,,not-logged-in,,Welcome to One Stop Market,False
+9,LI,10.0,1260.0,30.0,1140.8671875,119.1328125,20.0,,,,Create an Account,False
+10,A,10.5,1260.0,29.0,1140.8671875,119.1328125,18.5,,,idz59pUwdt,Create an Account,True
+11,A,9.0,20.0,10.0,19.0,1.0,1.0,,action skip contentarea,,"
+    
+        Skip to Content    
+",True
+12,IMG,71.0,220.0,98.265625,20.0,200.0,27.265625,"one_stop_market_logo, description: one stop market logo, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/logo/websites/1/image_15__1.png",,,,True
+13,A,71.0,1260.0,104.0,1225.0,35.0,33.0,,action showcart,,"
+        My Cart
+        
+            
+                
+            
+            
+            
+            
+        
+    ",True
+14,SPAN,102.0,961.0,103.0,960.0,1.0,1.0,,,,Search,False
+15,INPUT,71.0,1212.0,103.0,962.0,250.0,32.0,,input-text,search,,True
+16,A,108.5,1073.5859375,127.0,962.0,111.5859375,18.5,,action advanced,,"
+        Advanced Search    ",True
+17,BUTTON,71.0,1202.0,103.0,1180.0,22.0,32.0,,action search,,"
+                    Search
+                ",True
+18,UL,128.0,1280.0,234.0,0.0,1280.0,106.0,,ui-menu ui-widget ui-widget-content,ui-id-1,"
+        Beauty & Personal CareOral CareToothbrushes & AccessoriesDental Floss & PicksOrthodontic SuppliesChildren's Dental CareOral Pain ReliefToothpasteTeeth WhiteningBreath FreshenersDenture CareTongue CleanersMouthwashSkin CareSunscreens & Tanning ProductsFaceLip CareMaternityEyesSets & KitsBodyMakeupBodyEyesLipsMakeup PalettesFaceMakeup SetsMakeup RemoverFoot, Hand & Nail CareTools & AccessoriesNail Art & PolishFoot & Hand CareHair CareHair Loss ProductsHair MasksHair Cutting ToolsHair Coloring ProductsHair Treatment OilsHair Extensions, Wigs & AccessoriesShampoo & ConditionerStyling ProductsStyling Tools & AppliancesHair AccessoriesTools & AccessoriesBags & CasesMakeup Brushes & ToolsRefillable ContainersMirrorsSkin Care ToolsCotton Balls & SwabsFragranceWomen'sMen'sPersonal CareBath & Bathing AccessoriesDeodorants & AntiperspirantsPiercing & Tattoo SuppliesShave & Hair RemovalMen'sWomen'sSalon & Spa EquipmentSpa Storage SystemsSpa Beds & TablesProfessional Massage EquipmentSports & OutdoorsHunting & FishingShootingExercise & FitnessFan ShopClothingFootwearSports & Outdoor Recreation AccessoriesBall StorageSportsClothing, Shoes & JewelryMenClothingShoesUniforms, Work & SafetyWomenClothingShoesAccessoriesUniforms, Work & SafetyNovelty & MoreClothingSport Specific ClothingCompetitive SwimwearHome & KitchenFurnitureLiving Room FurnitureAccent FurnitureHome Office FurnitureKitchen FurnitureGame & Recreation Room FurnitureBedroom FurnitureEntryway FurnitureDining Room FurnitureKids' FurnitureBeddingKids' BeddingBlankets & ThrowsDecorative Pillows, Inserts & CoversStorage & OrganizationBaskets, Bins & ContainersHome Storage HooksRacks, Shelves & DrawersClothing & Closet StorageHome Décor ProductsHome Décor AccentsWindow TreatmentsArtificial Plants & FlowersCandles & HoldersMirrorsRugs, Pads & ProtectorsSlipcoversKitchen & DiningDining & EntertainingStorage & OrganizationKitchen & Table LinensHeating, Cooling & Air QualityWall ArtPosters & PrintsBathBathroom AccessoriesOffice ProductsOffice ElectronicsPrinters & AccessoriesOffice & School SuppliesDesk Accessories & Workspace OrganizersOffice Furniture & LightingChairs & SofasCabinets, Racks & ShelvesTools & Home ImprovementLighting & Ceiling FansLamps & ShadesWall LightsCeiling LightsHealth & HouseholdHousehold SuppliesHousehold BatteriesHealth CareDiet & Sports NutritionNutrition Bars & DrinksPatio, Lawn & GardenGardening & Lawn CarePlants, Seeds & BulbsPots, Planters & Container AccessoriesPatio Furniture & AccessoriesElectronicsHome AudioHome Audio AccessoriesSpeakersCompact Radios & StereosHome TheaterTurntables & AccessoriesVideo ProjectorsAccessories & SuppliesAudio & Video AccessoriesPower Strips & Surge ProtectorsTelephone AccessoriesTelevision & VideoProjection ScreensTelevisionsDVD Players & RecordersStreaming Media PlayersHome Theater SystemsTelevision AccessoriesCamera & PhotoTripods & MonopodsLighting & StudioBags & CasesBinoculars & ScopesVideo SurveillanceAccessoriesDigital CamerasUnderwater PhotographyFilm PhotographyFlashesLensesVideoComputers & AccessoriesComputer Accessories & PeripheralsNetworking ProductsTablet AccessoriesComputers & TabletsData StorageLaptop AccessoriesComputer ComponentsHeadphonesOver-Ear HeadphonesEarbud HeadphonesOn-Ear HeadphonesPortable Audio & VideoBoomboxesPortable Speakers & DocksRadiosMP3 & MP4 Player AccessoriesSecurity & SurveillanceAccessoriesSurveillance Video EquipmentPower AccessoriesAC AdaptersCar & Vehicle ElectronicsCar ElectronicsVehicle Electronics AccessoriesWearable TechnologySmartwatchesGPS, Finders & AccessoriesGPS System AccessoriesCell Phones & AccessoriesAccessoriesChargers & Power AdaptersMaintenance, Upkeep & RepairsSingle Ear Bluetooth HeadsetsSmartwatch AccessoriesVirtual Reality (VR) HeadsetsStandsAutomobile AccessoriesPhoto & Video AccessoriesSignal BoostersCases, Holsters & SleevesBasic CasesFlip CasesCell PhonesVideo GamesXbox OneAccessoriesPCAccessoriesVirtual RealityLegacy SystemsXbox SystemsPlayStation SystemsNintendo SystemsPlayStation 4AccessoriesNintendo SwitchGrocery & Gourmet FoodFood & Beverage GiftsBakery & Dessert GiftsSnack GiftsCoffee & Tea GiftsFruit & Nut GiftsHerb, Spice & Seasoning GiftsAssortments & Variety GiftsMeat & Seafood GiftsCheese & Charcuterie GiftsBreads & BakeryCookiesBreadsCakesPastries & BakeryPantry StaplesHerbs, Spices & SeasoningsCooking & BakingOlives, Pickles & RelishesCanned, Jarred & Packaged FoodsSauces, Gravies & MarinadesPasta & NoodlesSoups, Stocks & BrothsDried Grains & RiceJams, Jellies & Sweet SpreadsCondiments & Salad DressingsNut & Seed ButtersSnacks & SweetsSnack FoodsChocolateCandy & ChocolateDairy, Cheese & EggsCheeseYogurtCheese Assortments & SamplersNon-Dairy MilksMilk & CreamBreakfast FoodsCerealsBreakfast & Cereal BarsBeveragesBottled Beverages, Water & Drink MixesCoffee, Tea & CocoaProduceDried Fruits & VegetablesAlcoholic BeveragesWineDeli & Prepared FoodsDeli Meats & CheesesFrozenMeals & EntreesMeatsIce Cream & NoveltiesAppetizers & SnacksSeafoodHome Brewing & WinemakingWinemaking IngredientsMeat & SeafoodBeefSeafoodFresh Meal KitsMeat Substitutes            ",True
+19,A,128.0,203.4921875,181.0,8.0,195.4921875,53.0,,level-top ui-menu-item-wrapper,ui-id-2,Beauty & Personal Care,True
+20,A,128.0,373.8359375,181.0,213.4921875,160.34375,53.0,,level-top ui-menu-item-wrapper,ui-id-67,Sports & Outdoors,True
+21,A,128.0,592.1171875,181.0,383.8359375,208.28125,53.0,,level-top ui-menu-item-wrapper,ui-id-77,"Clothing, Shoes & Jewelry",True
+22,A,128.0,746.8125,181.0,602.1171875,144.6953125,53.0,,level-top ui-menu-item-wrapper,ui-id-91,Home & Kitchen,True
+23,A,128.0,895.9921875,181.0,756.8125,139.1796875,53.0,,level-top ui-menu-item-wrapper,ui-id-128,Office Products,True
+24,A,128.0,1131.7421875,181.0,905.9921875,225.75,53.0,,level-top ui-menu-item-wrapper,ui-id-136,Tools & Home Improvement,True
+25,A,181.0,179.578125,234.0,8.0,171.578125,53.0,,level-top ui-menu-item-wrapper,ui-id-141,Health & Household,True
+26,A,181.0,371.8671875,234.0,189.578125,182.2890625,53.0,,level-top ui-menu-item-wrapper,ui-id-147,"Patio, Lawn & Garden",True
+27,A,181.0,489.90625,234.0,381.8671875,108.0390625,53.0,,level-top ui-menu-item-wrapper,ui-id-152,Electronics,True
+28,A,181.0,710.921875,234.0,499.90625,211.015625,53.0,,level-top ui-menu-item-wrapper,ui-id-213,Cell Phones & Accessories,True
+29,A,181.0,843.3046875,234.0,720.921875,122.3828125,53.0,,level-top ui-menu-item-wrapper,ui-id-228,Video Games,True
+30,A,181.0,1057.734375,234.0,853.3046875,204.4296875,53.0,,level-top ui-menu-item-wrapper,ui-id-241,Grocery & Gourmet Food,True
+31,LI,259.0,81.1171875,277.0,20.0,61.1171875,18.0,,item home,,"
+                            
+                    Home                
+                        ",False
+32,A,259.5,57.1171875,275.5,20.0,37.1171875,16.0,,,,"
+                    Home                ",True
+33,LI,259.0,261.9296875,276.140625,84.234375,177.6953125,17.140625,,item search,,"
+                            Search results for: 'green t-shirt'
+                        ",False
+34,H1,297.0,589.046875,341.0,20.0,569.046875,44.0,,page-title,,"
+        Search results for: 'green t-shirt'    ",False
+35,SPAN,292.0,589.046875,345.5,20.0,569.046875,53.5,,base,,Search results for: 'green t-shirt',False
+36,SPAN,388.0,296.46875,389.0,295.46875,1.0,1.0,,,,Grid,False
+37,A,381.0,352.46875,421.0,306.46875,46.0,40.0,,modes-mode mode-list,mode-list,"
+                        List
+                    ",True
+38,P,381.0,501.546875,415.0,372.46875,129.078125,34.0,,toolbar-amount,toolbar-amount,"
+            Items 1-12 of 14843    ",False
+39,SPAN,392.5,420.515625,411.0,412.5078125,8.0078125,18.5,,toolbar-number,,1,False
+40,SPAN,392.5,441.0390625,411.0,425.0234375,16.015625,18.5,,toolbar-number,,12,False
+41,SPAN,392.5,501.546875,411.0,461.515625,40.03125,18.5,,toolbar-number,,14843,False
+42,SELECT,385.0,1218.359375,417.0,1082.359375,136.0,32.0,,sorter-options,sorter,"
+                    
+                Product Name            
+                    
+                Price            
+                    
+                Relevance            
+            ",True
+43,A,383.0,1250.0,415.0,1222.0,28.0,32.0,,action sorter-action sort-desc,,"
+            Set Ascending Direction
+        ",True
+44,LI,461.0,488.46875,947.25,251.46875,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-85112 {
+    width: 240px;
+}
+.product-image-container-85112 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-85112);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-85112  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                AVVS Happy St. Patrick's Day Hawaiian Shirts for Men&Women Short Sleeve Regular Fit Mens Shamrock Green T Shirts Dress                            
+                        
+                                                
+    
+
+
+        $40.96
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+45,SPAN,461.0,488.46875,757.25,251.46875,237.0,296.25,,product-image-container product-image-container-85112,,"
+    
+        
+",False
+46,SPAN,461.0,488.46875,757.25,251.46875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+47,IMG,461.0,488.46875,757.25,251.46875,237.0,296.25,"Image, description: st patrick's day shamrock t shirt, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B09QGR9X8P.0.jpg",product-image-photo,,,True
+48,A,767.75,468.6171875,846.25,251.46875,217.1484375,78.5,,product-item-link,,"
+                                AVVS Happy St. Patrick's Day Hawaiian Shirts for Men&Women Short Sleeve Regular Fit Mens Shamrock Green T Shirts Dress                            ",True
+49,SPAN,857.75,295.421875,876.25,251.46875,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $40.96
+        ",False
+50,SPAN,857.75,295.421875,876.25,251.46875,43.953125,18.5,,price-wrapper ,product-price-85112,$40.96,False
+51,SPAN,857.25,295.421875,876.75,251.46875,43.953125,19.5,,price,,$40.96,False
+52,BUTTON,903.75,362.6796875,935.75,251.46875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+53,A,902.25,397.6796875,937.25,362.6796875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+54,A,902.25,436.3203125,937.25,401.3203125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+55,LI,461.0,745.6328125,947.25,508.6328125,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-84918 {
+    width: 240px;
+}
+.product-image-container-84918 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-84918);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-84918  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                DC Comics Green Lantern Heather T-Shirt                            
+                        
+                                
+                
+            Rating:
+            
+                87%
+            
+                var elemgCH4LOtMArray = document.querySelectorAll('#rating-result_84918 span');
+    if(elemgCH4LOtMArray.length !== 'undefined'){
+        elemgCH4LOtMArray.forEach(function(element) {
+            if (element) {
+                element.style.width = '87%';
+
+            }
+        });
+    }        
+                
+            12                 Reviews                
+            
+        
+    
+                        
+    
+
+
+        $19.75
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+56,SPAN,461.0,745.6328125,757.25,508.6328125,237.0,296.25,,product-image-container product-image-container-84918,,"
+    
+        
+",False
+57,SPAN,461.0,745.6328125,757.25,508.6328125,237.0,296.25,,product-image-wrapper,,"
+        ",False
+58,IMG,461.0,745.6328125,757.25,508.6328125,237.0,296.25,"Image, description: a man wearing a green lantern symbol t - shirt, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B01LWZ60QI.0.jpg",product-image-photo,,,True
+59,A,767.75,733.171875,806.25,508.6328125,224.5390625,38.5,,product-item-link,,"
+                                DC Comics Green Lantern Heather T-Shirt                            ",True
+60,SPAN,816.25,503.6328125,817.25,502.6328125,1.0,1.0,,label,,Rating:,False
+61,SPAN,816.75,547.546875,835.25,502.6328125,44.9140625,18.5,,,,Rating:,False
+62,SPAN,817.25,585.6328125,845.25,498.6328125,87.0,28.0,,,,87%,False
+63,SPAN,844.25,584.6328125,845.25,497.6328125,87.0,1.0,,,,87%,False
+64,A,823.25,668.1015625,839.25,603.6328125,64.46875,16.0,,action view,,"12                 Reviews                
+            ",True
+65,SPAN,857.75,552.5859375,876.25,508.6328125,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $19.75
+        ",False
+66,SPAN,857.75,552.5859375,876.25,508.6328125,43.953125,18.5,,price-wrapper ,product-price-84918,$19.75,False
+67,SPAN,857.25,552.5859375,876.75,508.6328125,43.953125,19.5,,price,,$19.75,False
+68,BUTTON,903.75,619.84375,935.75,508.6328125,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+69,A,902.25,654.84375,937.25,619.84375,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+70,A,902.25,693.484375,937.25,658.484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+71,LI,461.0,1002.796875,907.25,765.796875,237.0,446.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-94906 {
+    width: 240px;
+}
+.product-image-container-94906 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-94906);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-94906  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Marvel Spider-Man Green Goblin Norman Osborn T-Shirt                            
+                        
+                                                
+    
+
+
+        $22.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+72,SPAN,461.0,1002.796875,757.25,765.796875,237.0,296.25,,product-image-container product-image-container-94906,,"
+    
+        
+",False
+73,SPAN,461.0,1002.796875,757.25,765.796875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+74,IMG,461.0,1002.796875,757.25,765.796875,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B08CM3JNN6.1.jpg",product-image-photo,,,True
+75,A,767.75,979.5703125,806.25,765.796875,213.7734375,38.5,,product-item-link,,"
+                                Marvel Spider-Man Green Goblin Norman Osborn T-Shirt                            ",True
+76,SPAN,817.75,809.75,836.25,765.796875,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $22.99
+        ",False
+77,SPAN,817.75,809.75,836.25,765.796875,43.953125,18.5,,price-wrapper ,product-price-94906,$22.99,False
+78,SPAN,817.25,809.75,836.75,765.796875,43.953125,19.5,,price,,$22.99,False
+79,BUTTON,863.75,877.0078125,895.75,765.796875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+80,A,862.25,912.0078125,897.25,877.0078125,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+81,A,862.25,950.6484375,897.25,915.6484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+82,LI,461.0,1259.9609375,947.25,1022.9609375,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-62012 {
+    width: 240px;
+}
+.product-image-container-62012 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-62012);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-62012  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Star Wars Yoda Don't Need Green St. Patrick's Day T-Shirt                            
+                        
+                                
+                
+            Rating:
+            
+                62%
+            
+                var elemz6UxK6uGArray = document.querySelectorAll('#rating-result_62012 span');
+    if(elemz6UxK6uGArray.length !== 'undefined'){
+        elemz6UxK6uGArray.forEach(function(element) {
+            if (element) {
+                element.style.width = '62%';
+
+            }
+        });
+    }        
+                
+            9                 Reviews                
+            
+        
+    
+                        
+    
+
+
+        $22.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+83,SPAN,461.0,1259.9609375,757.25,1022.9609375,237.0,296.25,,product-image-container product-image-container-62012,,"
+    
+        
+",False
+84,SPAN,461.0,1259.9609375,757.25,1022.9609375,237.0,296.25,,product-image-wrapper,,"
+        ",False
+85,IMG,461.0,1259.9609375,757.25,1022.9609375,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B07N91WPC3.1.jpg",product-image-photo,,,True
+86,A,767.75,1242.03125,806.25,1022.9609375,219.0703125,38.5,,product-item-link,,"
+                                Star Wars Yoda Don't Need Green St. Patrick's Day T-Shirt                            ",True
+87,SPAN,816.25,1017.9609375,817.25,1016.9609375,1.0,1.0,,label,,Rating:,False
+88,SPAN,816.75,1061.875,835.25,1016.9609375,44.9140625,18.5,,,,Rating:,False
+89,SPAN,817.25,1074.9609375,845.25,1012.9609375,62.0,28.0,,,,62%,False
+90,SPAN,844.25,1073.9609375,845.25,1011.9609375,62.0,1.0,,,,62%,False
+91,A,823.25,1175.5703125,839.25,1117.9609375,57.609375,16.0,,action view,,"9                 Reviews                
+            ",True
+92,SPAN,857.75,1066.9140625,876.25,1022.9609375,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $22.99
+        ",False
+93,SPAN,857.75,1066.9140625,876.25,1022.9609375,43.953125,18.5,,price-wrapper ,product-price-62012,$22.99,False
+94,SPAN,857.25,1066.9140625,876.75,1022.9609375,43.953125,19.5,,price,,$22.99,False
+95,BUTTON,903.75,1134.171875,935.75,1022.9609375,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+96,A,902.25,1169.171875,937.25,1134.171875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+97,A,902.25,1207.8125,937.25,1172.8125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+98,LI,977.25,488.46875,1463.5,251.46875,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-65184 {
+    width: 240px;
+}
+.product-image-container-65184 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-65184);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-65184  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Green Shamrock Skull Irish Ireland ST PATRICKS DAY Gift T-Shirt                            
+                        
+                                
+                
+            Rating:
+            
+                40%
+            
+                var elemlCwhEyAGArray = document.querySelectorAll('#rating-result_65184 span');
+    if(elemlCwhEyAGArray.length !== 'undefined'){
+        elemlCwhEyAGArray.forEach(function(element) {
+            if (element) {
+                element.style.width = '40%';
+
+            }
+        });
+    }        
+                
+            1                 Review                
+            
+        
+    
+                        
+    
+
+
+        $16.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+99,SPAN,977.25,488.46875,1273.5,251.46875,237.0,296.25,,product-image-container product-image-container-65184,,"
+    
+        
+",False
+100,SPAN,977.25,488.46875,1273.5,251.46875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+101,IMG,977.25,488.46875,1273.5,251.46875,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B083K9JLVG.1.jpg",product-image-photo,,,True
+102,A,1284.0,475.765625,1322.5,251.46875,224.296875,38.5,,product-item-link,,"
+                                Green Shamrock Skull Irish Ireland ST PATRICKS DAY Gift T-Shirt                            ",True
+103,SPAN,1332.5,246.46875,1333.5,245.46875,1.0,1.0,,label,,Rating:,False
+104,SPAN,1333.0,290.3828125,1351.5,245.46875,44.9140625,18.5,,,,Rating:,False
+105,SPAN,1333.5,281.46875,1361.5,241.46875,40.0,28.0,,,,40%,False
+106,SPAN,1360.5,280.46875,1361.5,240.46875,40.0,1.0,,,,40%,False
+107,A,1339.5,398.359375,1355.5,346.46875,51.890625,16.0,,action view,,"1                 Review                
+            ",True
+108,SPAN,1374.0,295.421875,1392.5,251.46875,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $16.99
+        ",False
+109,SPAN,1374.0,295.421875,1392.5,251.46875,43.953125,18.5,,price-wrapper ,product-price-65184,$16.99,False
+110,SPAN,1373.5,295.421875,1393.0,251.46875,43.953125,19.5,,price,,$16.99,False
+111,BUTTON,1420.0,362.6796875,1452.0,251.46875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+112,A,1418.5,397.6796875,1453.5,362.6796875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+113,A,1418.5,436.3203125,1453.5,401.3203125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+114,LI,977.25,745.6328125,1443.5,508.6328125,237.0,466.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-96757 {
+    width: 240px;
+}
+.product-image-container-96757 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-96757);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-96757  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                John Deere Men's Heather Logo Green Short Sleeve T-Shirt Tractor Green                            
+                        
+                                                
+    
+
+
+        $22.05
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+115,SPAN,977.25,745.6328125,1273.5,508.6328125,237.0,296.25,,product-image-container product-image-container-96757,,"
+    
+        
+",False
+116,SPAN,977.25,745.6328125,1273.5,508.6328125,237.0,296.25,,product-image-wrapper,,"
+        ",False
+117,IMG,977.25,745.6328125,1273.5,508.6328125,237.0,296.25,"Image, description: john deere tractor t - shirt, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B092DWN76J.0.jpg",product-image-photo,,,True
+118,A,1284.0,728.234375,1342.5,508.6328125,219.6015625,58.5,,product-item-link,,"
+                                John Deere Men's Heather Logo Green Short Sleeve T-Shirt Tractor Green                            ",True
+119,SPAN,1354.0,552.5859375,1372.5,508.6328125,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $22.05
+        ",False
+120,SPAN,1354.0,552.5859375,1372.5,508.6328125,43.953125,18.5,,price-wrapper ,product-price-96757,$22.05,False
+121,SPAN,1353.5,552.5859375,1373.0,508.6328125,43.953125,19.5,,price,,$22.05,False
+122,BUTTON,1400.0,619.84375,1432.0,508.6328125,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+123,A,1398.5,654.84375,1433.5,619.84375,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+124,A,1398.5,693.484375,1433.5,658.484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+125,LI,977.25,1002.796875,1423.5,765.796875,237.0,446.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-83264 {
+    width: 240px;
+}
+.product-image-container-83264 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-83264);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-83264  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Naruto Shippuden Naruto Neon Green Outline T-Shirt                            
+                        
+                                                
+    
+
+
+        $21.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+126,SPAN,977.25,1002.796875,1273.5,765.796875,237.0,296.25,,product-image-container product-image-container-83264,,"
+    
+        
+",False
+127,SPAN,977.25,1002.796875,1273.5,765.796875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+128,IMG,977.25,1002.796875,1273.5,765.796875,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B08CMH5QRV.1.jpg",product-image-photo,,,True
+129,A,1284.0,974.859375,1322.5,765.796875,209.0625,38.5,,product-item-link,,"
+                                Naruto Shippuden Naruto Neon Green Outline T-Shirt                            ",True
+130,SPAN,1334.0,809.75,1352.5,765.796875,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $21.99
+        ",False
+131,SPAN,1334.0,809.75,1352.5,765.796875,43.953125,18.5,,price-wrapper ,product-price-83264,$21.99,False
+132,SPAN,1333.5,809.75,1353.0,765.796875,43.953125,19.5,,price,,$21.99,False
+133,BUTTON,1380.0,877.0078125,1412.0,765.796875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+134,A,1378.5,912.0078125,1413.5,877.0078125,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+135,A,1378.5,950.6484375,1413.5,915.6484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+136,LI,977.25,1259.9609375,1423.5,1022.9609375,237.0,446.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-24471 {
+    width: 240px;
+}
+.product-image-container-24471 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-24471);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-24471  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Funky Irish Flamingo Green Bird St Pattys Day T-Shirt                            
+                        
+                                                
+    
+
+
+        $19.90
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+137,SPAN,977.25,1259.9609375,1273.5,1022.9609375,237.0,296.25,,product-image-container product-image-container-24471,,"
+    
+        
+",False
+138,SPAN,977.25,1259.9609375,1273.5,1022.9609375,237.0,296.25,,product-image-wrapper,,"
+        ",False
+139,IMG,977.25,1259.9609375,1273.5,1022.9609375,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B07MZF1V3J.1.jpg",product-image-photo,,,True
+140,A,1284.0,1247.40625,1322.5,1022.9609375,224.4453125,38.5,,product-item-link,,"
+                                Funky Irish Flamingo Green Bird St Pattys Day T-Shirt                            ",True
+141,SPAN,1334.0,1066.9140625,1352.5,1022.9609375,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $19.90
+        ",False
+142,SPAN,1334.0,1066.9140625,1352.5,1022.9609375,43.953125,18.5,,price-wrapper ,product-price-24471,$19.90,False
+143,SPAN,1333.5,1066.9140625,1353.0,1022.9609375,43.953125,19.5,,price,,$19.90,False
+144,BUTTON,1380.0,1134.171875,1412.0,1022.9609375,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+145,A,1378.5,1169.171875,1413.5,1134.171875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+146,A,1378.5,1207.8125,1413.5,1172.8125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+147,LI,1493.5,488.46875,1979.75,251.46875,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-24681 {
+    width: 240px;
+}
+.product-image-container-24681 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-24681);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-24681  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                St Patrick's Day Tank Tops for Women Sleeveless Shirts Green Plaid Lips Graphic Tees Vest Casual Trendy T Shirt Blouse                            
+                        
+                                                
+    
+
+
+        $8.49
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+148,SPAN,1493.5,488.46875,1789.75,251.46875,237.0,296.25,,product-image-container product-image-container-24681,,"
+    
+        
+",False
+149,SPAN,1493.5,488.46875,1789.75,251.46875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+150,IMG,1493.5,488.46875,1789.75,251.46875,237.0,296.25,"Image, description: a woman wearing a green lipstick sleeveless tee, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B09PHTZ2ZT.0.jpg",product-image-photo,,,True
+151,A,1800.25,478.2890625,1878.75,251.46875,226.8203125,78.5,,product-item-link,,"
+                                St Patrick's Day Tank Tops for Women Sleeveless Shirts Green Plaid Lips Graphic Tees Vest Casual Trendy T Shirt Blouse                            ",True
+152,SPAN,1890.25,287.4296875,1908.75,251.46875,35.9609375,18.5,,price-container price-final_price tax weee,,"
+        $8.49
+        ",False
+153,SPAN,1890.25,287.4296875,1908.75,251.46875,35.9609375,18.5,,price-wrapper ,product-price-24681,$8.49,False
+154,SPAN,1889.75,287.4296875,1909.25,251.46875,35.9609375,19.5,,price,,$8.49,False
+155,BUTTON,1936.25,362.6796875,1968.25,251.46875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+156,A,1934.75,397.6796875,1969.75,362.6796875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+157,A,1934.75,436.3203125,1969.75,401.3203125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+158,LI,1493.5,745.6328125,1979.75,508.6328125,237.0,486.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-28562 {
+    width: 240px;
+}
+.product-image-container-28562 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-28562);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-28562  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Star Wars Rebel Alliance Green Shamrocks St. Patrick's Day T-Shirt                            
+                        
+                                
+                
+            Rating:
+            
+                100%
+            
+                var elem1dp4f5thArray = document.querySelectorAll('#rating-result_28562 span');
+    if(elem1dp4f5thArray.length !== 'undefined'){
+        elem1dp4f5thArray.forEach(function(element) {
+            if (element) {
+                element.style.width = '100%';
+
+            }
+        });
+    }        
+                
+            1                 Review                
+            
+        
+    
+                        
+    
+
+
+        $22.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+159,SPAN,1493.5,745.6328125,1789.75,508.6328125,237.0,296.25,,product-image-container product-image-container-28562,,"
+    
+        
+",False
+160,SPAN,1493.5,745.6328125,1789.75,508.6328125,237.0,296.25,,product-image-wrapper,,"
+        ",False
+161,IMG,1493.5,745.6328125,1789.75,508.6328125,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B0844G1PMK.1.jpg",product-image-photo,,,True
+162,A,1800.25,732.1953125,1838.75,508.6328125,223.5625,38.5,,product-item-link,,"
+                                Star Wars Rebel Alliance Green Shamrocks St. Patrick's Day T-Shirt                            ",True
+163,SPAN,1848.75,503.6328125,1849.75,502.6328125,1.0,1.0,,label,,Rating:,False
+164,SPAN,1849.25,547.546875,1867.75,502.6328125,44.9140625,18.5,,,,Rating:,False
+165,SPAN,1849.75,598.6328125,1877.75,498.6328125,100.0,28.0,,,,100%,False
+166,SPAN,1876.75,597.6328125,1877.75,497.6328125,100.0,1.0,,,,100%,False
+167,A,1855.75,655.5234375,1871.75,603.6328125,51.890625,16.0,,action view,,"1                 Review                
+            ",True
+168,SPAN,1890.25,552.5859375,1908.75,508.6328125,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $22.99
+        ",False
+169,SPAN,1890.25,552.5859375,1908.75,508.6328125,43.953125,18.5,,price-wrapper ,product-price-28562,$22.99,False
+170,SPAN,1889.75,552.5859375,1909.25,508.6328125,43.953125,19.5,,price,,$22.99,False
+171,BUTTON,1936.25,619.84375,1968.25,508.6328125,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+172,A,1934.75,654.84375,1969.75,619.84375,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+173,A,1934.75,693.484375,1969.75,658.484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+174,LI,1493.5,1002.796875,1959.75,765.796875,237.0,466.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-29874 {
+    width: 240px;
+}
+.product-image-container-29874 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-29874);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-29874  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                Funny Green Irish Tuxedo Leprechaun Outfit St Patrick's Day T-Shirt                            
+                        
+                                                
+    
+
+
+        $16.99
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+175,SPAN,1493.5,1002.796875,1789.75,765.796875,237.0,296.25,,product-image-container product-image-container-29874,,"
+    
+        
+",False
+176,SPAN,1493.5,1002.796875,1789.75,765.796875,237.0,296.25,,product-image-wrapper,,"
+        ",False
+177,IMG,1493.5,1002.796875,1789.75,765.796875,237.0,296.25,"Image, description: a chart showing the sizes of the men's and women's sizes, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B09Q677X4V.1.jpg",product-image-photo,,,True
+178,A,1800.25,1002.015625,1858.75,765.796875,236.21875,58.5,,product-item-link,,"
+                                Funny Green Irish Tuxedo Leprechaun Outfit St Patrick's Day T-Shirt                            ",True
+179,SPAN,1870.25,809.75,1888.75,765.796875,43.953125,18.5,,price-container price-final_price tax weee,,"
+        $16.99
+        ",False
+180,SPAN,1870.25,809.75,1888.75,765.796875,43.953125,18.5,,price-wrapper ,product-price-29874,$16.99,False
+181,SPAN,1869.75,809.75,1889.25,765.796875,43.953125,19.5,,price,,$16.99,False
+182,BUTTON,1916.25,877.0078125,1948.25,765.796875,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+183,A,1914.75,912.0078125,1949.75,877.0078125,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+184,A,1914.75,950.6484375,1949.75,915.6484375,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+185,LI,1493.5,1259.9609375,1999.75,1022.9609375,237.0,506.25,,item product product-item,,"
+                
+                                                            
+                        
+    
+        
+
+.product-image-container-12084 {
+    width: 240px;
+}
+.product-image-container-12084 span.product-image-wrapper {
+    padding-bottom: 125%;
+}prodImageContainers = document.querySelectorAll(.product-image-container-12084);
+for (var i = 0; i < prodImageContainers.length; i++) {
+    prodImageContainers[i].style.width = 240px;
+}
+prodImageContainersWrappers = document.querySelectorAll(
+    .product-image-container-12084  span.product-image-wrapper
+);
+for (var i = 0; i < prodImageContainersWrappers.length; i++) {
+    prodImageContainersWrappers[i].style.paddingBottom = 125%;
+}                    
+                    
+                                                
+                            
+                                R.F. Ratfink Green Rat Mouse Rodant Distressed Adult Black T-Shirt Tee                            
+                        
+                                
+                
+            Rating:
+            
+                92%
+            
+                var elemMnbZ7WA9Array = document.querySelectorAll('#rating-result_12084 span');
+    if(elemMnbZ7WA9Array.length !== 'undefined'){
+        elemMnbZ7WA9Array.forEach(function(element) {
+            if (element) {
+                element.style.width = '92%';
+
+            }
+        });
+    }        
+                
+            12                 Reviews                
+            
+        
+    
+                        
+    
+
+
+        $8.98
+        
+
+
+                        
+                        
+                            
+                                
+                                                                                                                    
+                                                                                                                                    
+                                            
+                                                                                        
+                                                Add to Cart
+                                            
+                                        
+                                                                    
+                                                                
+                                                                                
+        Add to Wish List
+    
+
+    Add to Compare
+
+                                                                    
+                                                            
+                                                    
+                    
+                
+                            ",False
+186,SPAN,1493.5,1259.9609375,1789.75,1022.9609375,237.0,296.25,,product-image-container product-image-container-12084,,"
+    
+        
+",False
+187,SPAN,1493.5,1259.9609375,1789.75,1022.9609375,237.0,296.25,,product-image-wrapper,,"
+        ",False
+188,IMG,1493.5,1259.9609375,1789.75,1022.9609375,237.0,296.25,"Image, description: a black t - shirt with a green rat on it, url: http://ec2-3-13-232-171.us-east-2.compute.amazonaws.com:7770/media/catalog/product/cache/89ff578b9cd87e0600daac45c9e1ea98/B/0/B00UY09Z52.0.jpg",product-image-photo,,,True
+189,A,1800.25,1233.5859375,1858.75,1022.9609375,210.625,58.5,,product-item-link,,"
+                                R.F. Ratfink Green Rat Mouse Rodant Distressed Adult Black T-Shirt Tee                            ",True
+190,SPAN,1868.75,1017.9609375,1869.75,1016.9609375,1.0,1.0,,label,,Rating:,False
+191,SPAN,1869.25,1061.875,1887.75,1016.9609375,44.9140625,18.5,,,,Rating:,False
+192,SPAN,1869.75,1104.9609375,1897.75,1012.9609375,92.0,28.0,,,,92%,False
+193,SPAN,1896.75,1103.9609375,1897.75,1011.9609375,92.0,1.0,,,,92%,False
+194,A,1875.75,1182.4296875,1891.75,1117.9609375,64.46875,16.0,,action view,,"12                 Reviews                
+            ",True
+195,SPAN,1910.25,1058.921875,1928.75,1022.9609375,35.9609375,18.5,,price-container price-final_price tax weee,,"
+        $8.98
+        ",False
+196,SPAN,1910.25,1058.921875,1928.75,1022.9609375,35.9609375,18.5,,price-wrapper ,product-price-12084,$8.98,False
+197,SPAN,1909.75,1058.921875,1929.25,1022.9609375,35.9609375,19.5,,price,,$8.98,False
+198,BUTTON,1956.25,1134.171875,1988.25,1022.9609375,111.2109375,32.0,,action tocart primary,,"
+                                                Add to Cart
+                                            ",True
+199,A,1954.75,1169.171875,1989.75,1134.171875,35.0,35.0,,action towishlist,,"
+        Add to Wish List
+    ",True
+200,A,1954.75,1207.8125,1989.75,1172.8125,35.0,35.0,,action tocompare,,"
+    Add to Compare
+",True
+201,LI,2060.75,276.3203125,2092.75,261.46875,14.8515625,32.0,,item current,,"
+                        
+                            You're currently reading page
+                            1
+                        
+                    ",False
+202,SPAN,2059.75,265.46875,2060.75,264.46875,1.0,1.0,,label,,You're currently reading page,False
+203,SPAN,2068.25,272.3203125,2085.25,265.46875,6.8515625,17.0,,,,1,False
+204,LI,2060.75,293.171875,2092.75,278.3203125,14.8515625,32.0,,item,,"
+                        
+                            Page
+                            2
+                        
+                    ",False
+205,A,2060.75,293.171875,2092.75,278.3203125,14.8515625,32.0,,page,,"
+                            Page
+                            2
+                        ",True
+206,LI,2060.75,310.0234375,2092.75,295.171875,14.8515625,32.0,,item,,"
+                        
+                            Page
+                            3
+                        
+                    ",False
+207,A,2060.75,310.0234375,2092.75,295.171875,14.8515625,32.0,,page,,"
+                            Page
+                            3
+                        ",True
+208,LI,2060.75,326.875,2092.75,312.0234375,14.8515625,32.0,,item,,"
+                        
+                            Page
+                            4
+                        
+                    ",False
+209,A,2060.75,326.875,2092.75,312.0234375,14.8515625,32.0,,page,,"
+                            Page
+                            4
+                        ",True
+210,LI,2060.75,343.7265625,2092.75,328.875,14.8515625,32.0,,item,,"
+                        
+                            Page
+                            5
+                        
+                    ",False
+211,A,2060.75,343.7265625,2092.75,328.875,14.8515625,32.0,,page,,"
+                            Page
+                            5
+                        ",True
+212,LI,2059.75,393.7265625,2093.75,345.7265625,48.0,34.0,,item pages-item-next,,"
+                                        
+                        Page
+                        Next
+                    
+                ",False
+213,A,2059.75,393.7265625,2093.75,357.7265625,36.0,34.0,,action  next,,"
+                        Page
+                        Next
+                    ",True
+214,SPAN,2067.0,1114.5390625,2085.5,1079.1953125,35.34375,18.5,,,,Show,False
+215,SELECT,2059.75,1183.6796875,2091.75,1125.1796875,58.5,32.0,,limiter-options,limiter,"
+                            
+                    12                
+                            
+                    24                
+                            
+                    36                
+                    ",True
+216,SPAN,2067.0,1250.0,2085.5,1192.3203125,57.6796875,18.5,,limiter-text,,per page,False
+217,LI,482.109375,201.8671875,522.109375,20.0,181.8671875,40.0,,item,,"
+                            Beauty & Personal Care
+                            1798item
+                    
+                    ",False
+218,A,482.609375,177.546875,521.109375,20.0,157.546875,38.5,,,,"Beauty & Personal Care
+                            1798item
+                    ",True
+219,SPAN,501.109375,52.0234375,502.109375,51.0234375,1.0,1.0,,filter-count-label,,item,False
+220,LI,525.109375,201.8671875,545.109375,20.0,181.8671875,20.0,,item,,"
+                            Sports & Outdoors
+                            505item
+                    
+                    ",False
+221,A,525.609375,177.828125,544.109375,20.0,157.828125,18.5,,,,"Sports & Outdoors
+                            505item
+                    ",True
+222,SPAN,524.109375,173.6796875,525.109375,172.6796875,1.0,1.0,,filter-count-label,,item,False
+223,LI,548.109375,201.8671875,588.109375,20.0,181.8671875,40.0,,item,,"
+                            Clothing, Shoes & Jewelry
+                            8491item
+                    
+                    ",False
+224,A,548.609375,188.515625,587.109375,20.0,168.515625,38.5,,,,"Clothing, Shoes & Jewelry
+                            8491item
+                    ",True
+225,SPAN,567.109375,52.0234375,568.109375,51.0234375,1.0,1.0,,filter-count-label,,item,False
+226,LI,591.109375,201.8671875,611.109375,20.0,181.8671875,20.0,,item,,"
+                            Home & Kitchen
+                            1297item
+                    
+                    ",False
+227,A,591.609375,169.890625,610.109375,20.0,149.890625,18.5,,,,"Home & Kitchen
+                            1297item
+                    ",True
+228,SPAN,590.109375,165.7421875,591.109375,164.7421875,1.0,1.0,,filter-count-label,,item,False
+229,LI,614.109375,201.8671875,634.109375,20.0,181.8671875,20.0,,item,,"
+                            Office Products
+                            49item
+                    
+                    ",False
+230,A,614.609375,147.8359375,633.109375,20.0,127.8359375,18.5,,,,"Office Products
+                            49item
+                    ",True
+231,SPAN,613.109375,143.6875,614.109375,142.6875,1.0,1.0,,filter-count-label,,item,False
+232,LI,637.109375,201.8671875,677.109375,20.0,181.8671875,40.0,,item,,"
+                            Tools & Home Improvement
+                            156item
+                    
+                    ",False
+233,A,637.609375,144.3515625,676.109375,20.0,124.3515625,38.5,,,,"Tools & Home Improvement
+                            156item
+                    ",True
+234,SPAN,656.109375,140.203125,657.109375,139.203125,1.0,1.0,,filter-count-label,,item,False
+235,LI,680.109375,201.8671875,700.109375,20.0,181.8671875,20.0,,item,,"
+                            Health & Household
+                            50item
+                    
+                    ",False
+236,A,680.609375,179.5703125,699.109375,20.0,159.5703125,18.5,,,,"Health & Household
+                            50item
+                    ",True
+237,SPAN,679.109375,175.421875,680.109375,174.421875,1.0,1.0,,filter-count-label,,item,False
+238,LI,703.109375,201.8671875,723.109375,20.0,181.8671875,20.0,,item,,"
+                            Patio, Lawn & Garden
+                            68item
+                    
+                    ",False
+239,A,703.609375,188.640625,722.109375,20.0,168.640625,18.5,,,,"Patio, Lawn & Garden
+                            68item
+                    ",True
+240,SPAN,702.109375,184.4921875,703.109375,183.4921875,1.0,1.0,,filter-count-label,,item,False
+241,LI,726.109375,201.8671875,746.109375,20.0,181.8671875,20.0,,item,,"
+                            Electronics
+                            862item
+                    
+                    ",False
+242,A,726.609375,126.1171875,745.109375,20.0,106.1171875,18.5,,,,"Electronics
+                            862item
+                    ",True
+243,SPAN,725.109375,121.96875,726.109375,120.96875,1.0,1.0,,filter-count-label,,item,False
+244,LI,749.109375,201.8671875,789.109375,20.0,181.8671875,40.0,,item,,"
+                            Cell Phones & Accessories
+                            247item
+                    
+                    ",False
+245,A,749.609375,193.296875,788.109375,20.0,173.296875,38.5,,,,"Cell Phones & Accessories
+                            247item
+                    ",True
+246,SPAN,768.109375,44.015625,769.109375,43.015625,1.0,1.0,,filter-count-label,,item,False
+247,LI,792.109375,201.8671875,812.109375,20.0,181.8671875,20.0,,item,,"
+                            Video Games
+                            70item
+                    
+                    ",False
+248,A,792.609375,133.8828125,811.109375,20.0,113.8828125,18.5,,,,"Video Games
+                            70item
+                    ",True
+249,SPAN,791.109375,129.734375,792.109375,128.734375,1.0,1.0,,filter-count-label,,item,False
+250,LI,815.109375,201.8671875,855.109375,20.0,181.8671875,40.0,,item,,"
+                            Grocery & Gourmet Food
+                            1250item
+                    
+                    ",False
+251,A,815.609375,188.1484375,854.109375,20.0,168.1484375,38.5,,,,"Grocery & Gourmet Food
+                            1250item
+                    ",True
+252,SPAN,834.109375,52.0234375,835.109375,51.0234375,1.0,1.0,,filter-count-label,,item,False
+253,DIV,931.609375,226.6640625,951.609375,20.0,206.6640625,20.0,,empty,,You have no items to compare.,False
+254,DIV,1028.109375,226.6640625,1068.109375,20.0,206.6640625,40.0,,empty,,You have no items in your wish list.,False
+255,SPAN,2223.75,936.3046875,2224.75,935.3046875,1.0,1.0,,label,,"
+                            Sign Up for Our Newsletter:                        ",False
+256,INPUT,2224.75,1156.3046875,2256.75,936.3046875,220.0,32.0,,,newsletter,,True
+257,BUTTON,2224.75,1260.0,2256.75,1160.3046875,99.6953125,32.0,,action subscribe primary,,"
+                    Subscribe
+                ",True
+258,LI,2224.75,184.25,2244.75,20.0,164.25,20.0,,nav item,,Privacy and Cookie Policy,False
+259,A,2225.25,184.25,2243.75,20.0,164.25,18.5,,,,Privacy and Cookie Policy,True
+260,LI,2252.75,184.25,2272.75,20.0,164.25,20.0,,nav item,,Search Terms,False
+261,A,2253.25,107.6953125,2271.75,20.0,87.6953125,18.5,,,,Search Terms,True
+262,LI,2280.75,184.25,2300.75,20.0,164.25,20.0,,nav item,,Advanced Search,False
+263,A,2281.25,131.5859375,2299.75,20.0,111.5859375,18.5,,,,Advanced Search,True
+264,LI,2308.75,184.25,2328.75,20.0,164.25,20.0,,nav item,,Orders and Returns,False
+265,A,2309.25,148.4296875,2327.75,20.0,128.4296875,18.5,,,,Orders and Returns,True
+266,LI,2336.75,184.25,2356.75,20.0,164.25,20.0,,nav item,,Contact Us,False
+267,A,2337.25,90.7265625,2355.75,20.0,70.7265625,18.5,,,,Contact Us,True
+268,SPAN,2405.25,349.765625,2421.25,20.0,329.765625,16.0,,,,"Copyright © 2013-present Magento, Inc. All rights reserved.",False
+269,SPAN,2442.390625,193.6953125,2458.390625,20.0,173.6953125,16.0,,,,Help Us Keep Magento Healthy,False
+270,A,2442.390625,282.0390625,2458.390625,196.8125,85.2265625,16.0,,,,"
+        Report All Bugs    ",True
+271,ASIDE,0.0,1280.0,2048.0,0.0,1280.0,2048.0,,"modal-popup popup-authentication
+               modal-slide
+               _inner-scroll",,"
+    
+    
+        
+            
+            
+                Close
+            
+        
+        
+    
+        
+            Checkout as a new customer
+        
+        
+            Creating an account has many benefits:
+            
+                See order and shipping status
+                Track order history
+                Check out faster
+            
+            
+                
+                    
+                        Create an Account
+                    
+                
+            
+        
+    
+
+    
+        
+            Checkout using your account
+        
+        
+        
+
+    
+    
+
+
+        
+        
+        
+            
+                
+                    
+                        Email Address
+                        
+                            
+                        
+                    
+                    
+                        Password
+                        
+                            
+                        
+                    
+                    
+                    
+
+
+
+                    
+                    
+                        
+                        
+                            
+                                Sign In
+                            
+                        
+                        
+                            
+                                Forgot Your Password?
+                            
+                        
+                    
+                
+            
+        
+    
+
+        
+    
+    
+",True
+272,BUTTON,-798.5625,1024.0,-744.5625,952.0,72.0,54.0,,action-close,,"
+                Close
+            ",True
+273,P,-646.28125,610.0,-626.28125,286.0,324.0,20.0,,,,Creating an account has many benefits:,False
+274,LI,-616.28125,610.0,-596.28125,296.0,314.0,20.0,,,,See order and shipping status,False
+275,LI,-586.28125,610.0,-566.28125,296.0,314.0,20.0,,,,Track order history,False
+276,LI,-556.28125,610.0,-536.28125,296.0,314.0,20.0,,,,Check out faster,False
+277,A,-452.28125,610.0,-400.28125,409.15625,200.84375,52.0,,action action-register primary,,"
+                        Create an Account
+                    ",True
+278,SPAN,-639.78125,772.984375,-621.28125,681.0,91.984375,18.5,,,,Email Address,False
+279,INPUT,-620.28125,994.0,-588.28125,681.0,313.0,32.0,,input-text,customer-email,,True
+280,SPAN,-552.78125,743.9375,-534.28125,681.0,62.9375,18.5,,,,Password,False
+281,INPUT,-533.28125,994.0,-501.28125,681.0,313.0,32.0,,input-text,pass,,True
+282,BUTTON,-472.28125,994.0,-420.28125,898.125,95.875,52.0,,action action-login secondary,send2,"
+                                Sign In
+                            ",True
+283,A,-456.28125,829.453125,-436.28125,681.0,148.453125,20.0,,action,,"
+                                Forgot Your Password?
+                            ",True

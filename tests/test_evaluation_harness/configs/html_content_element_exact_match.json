@@ -1,0 +1,29 @@
+{
+    "sites": ["shopping"],
+    "task_id": 0,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": null,
+    "geolocation": null,
+    "intent_template": "",
+    "instantiation_dict": {},
+    "intent": "",
+    "require_reset": false,
+    "eval": {
+        "eval_types": ["program_html"],
+        "reference_answers": [],
+        "reference_url": "",
+        "program_html": [
+            {
+                "url": "last",
+                "required_contents": {"must_include": ["Hello World"], "must_exclude": ["Goodbye World"]},
+                "locator": "document.querySelector('[id=\"form-name\"').value"
+            },
+            {
+                "url": "last",
+                "required_contents": {"must_include": ["alexisxy@hotmail.com"], "must_exclude": ["alexisxy@gmail.com"]},
+                "locator": "document.querySelector('[id=\"form-email\"').value"
+            }
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "sites": [
+        "shopping"
+    ],
+    "task_id": 0,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": "__SHOPPING__",
+    "geolocation": null,
+    "intent_template": "Bring me to the produce page of something like this.",
+    "intent": "Bring me to the produce page of something like this.",
+    "image": "https://images.pexels.com/photos/837267/pexels-photo-837267.jpeg",
+    "instantiation_dict": {},
+    "require_reset": false,
+    "eval": {
+        "eval_types": [
+            "page_image_query"
+        ],
+        "page_image_query": [
+            {
+                "eval_image_url": "__SHOPPING__/artificial-cactus-fake-cactus-16-faux-cacti-plants-for-home-garden-office-store-decoration.html",
+                "eval_image_class": ".fotorama__stage__frame",
+                "eval_vqa": [
+                    {
+                        "question": "Is this a cactus? (yes/no)",
+                        "answer": "yes"
+                    },
+                    {
+                        "question": "Is this a potted plant? (yes/no)",
+                        "answer": "yes"
+                    }
+                ]
+            }
+        ],
+        "reference_url": "__SHOPPING__/artificial-cactus-fake-cactus-16-faux-cacti-plants-for-home-garden-office-store-decoration.html",
+        "program_html": [],
+        "string_note": "",
+        "reference_answer_raw_annotation": ""
+    },
+    "intent_template_id": 0,
+    "reasoning_difficulty": "easy",
+    "visual_difficulty": "medium",
+    "comments": "__SHOPPING__/artificial-cactus-fake-cactus-16-faux-cacti-plants-for-home-garden-office-store-decoration.html",
+    "overall_difficulty": "medium"
+}

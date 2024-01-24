@@ -1,0 +1,57 @@
+{
+    "sites": [
+        "shopping"
+    ],
+    "task_id": 0,
+    "require_login": false,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": null,
+    "geolocation": null,
+    "intent_template": "Find me {{category}} that has the same brand as products in one of the following picture. It needs to {{description}}.",
+    "intent": "Find me a digital camera that has the same brand as products in one of the following picture. It needs to be black and have at least 12 reviews. Furthermore, it cannot be too expensive - it needs to have price less than $700.",
+    "image": [
+        "https://images.pexels.com/photos/1022187/pexels-photo-1022187.jpeg",
+        "https://images.pexels.com/photos/89551/pexels-photo-89551.jpeg"
+    ],
+    "instantiation_dict": {
+        "category": "a digital camera",
+        "description": "be black and have at least 12 reviews. Furthermore, it cannot be too expensive - it needs to have price less than $700"
+    },
+    "require_reset": false,
+    "eval": {
+        "eval_types": [
+            "program_html"
+        ],
+        "reference_answers": [],
+        "reference_url": "__SHOPPING__/olympus-om-d-e-m1-16mp-mirrorless-digital-camera-with-3-inch-lcd-body-only-silver-w-black-trim.html",
+        "program_html": [
+            {
+                "url": "last",
+                "locator": "func:shopping_get_num_reviews(__page__)",
+                "required_contents": {
+                    "required_values": [
+                        ">= 12"
+                    ]
+                }
+            },
+            {
+                "url": "last",
+                "locator": "func:shopping_get_product_price(__page__)",
+                "required_contents": {
+                    "required_values": [
+                        "< 600"
+                    ]
+                }
+            },
+            {
+                "url": "last",
+                "locator": "func:shopping_get_product_attributes(__page__, 'manufacturer |OR| brand name')",
+                "required_contents": {
+                    "must_include": [
+                        "Olympus |OR| Nikon"
+                    ]
+                }
+            }
+        ]
+    }
+}

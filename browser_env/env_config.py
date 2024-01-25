@@ -16,7 +16,7 @@ assert (
     and HOMEPAGE
     and CLASSIFIEDS
     and CLASSIFIEDS_RESET_TOKEN
-    and REDDIT_RESET_URL
+#    and REDDIT_RESET_URL
 ), (
     f"Please setup the URLs and tokens to each site. Current: "
     + f"Reddit: {REDDIT}"

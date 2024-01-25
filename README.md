@@ -8,7 +8,7 @@
 </p> -->
 
 [<a href="https://jykoh.com/vwa">Website</a>] 
-[<a href="https://arxiv.org/24xx.xxxxx">Paper</a>]
+[<a href="https://arxiv.org/abs/2401.13649">Paper</a>]
 
 <i>VisualWebArena</i> is a realistic and diverse benchmark for evaluating multimodal autonomous language agents. It comprises of a set of diverse and complex web-based visual tasks that evaluate various capabilities of autonomous multimodal agents. It builds off the reproducible, execution based evaluation introduced in <a href="https://webarena.dev" target="_blank">WebArena</a>.
 
@@ -123,7 +123,7 @@ If you find our environment or our models useful, please consider citing <a href
 @article{koh2024visualwebarena,
   title={VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks},
   author={Koh, Jing Yu and Lo, Robert and Jang, Lawrence and Duvvur, Vikram and Lim, Ming Chong and Huang, Po-Yu and Neubig, Graham and Zhou, Shuyan and Salakhutdinov, Ruslan and Fried, Daniel},
-  journal={arXiv preprint arXiv:24xx.xxxxx},
+  journal={arXiv preprint arXiv:2401.13649},
   year={2024}
 }
 

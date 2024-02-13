@@ -52,16 +52,27 @@ export WIKIPEDIA="<your_wikipedia_domain>:8888"
 export HOMEPAGE="<your_homepage_domain>:4399"
 ```
 
+In addition, if you want to run on the original WebArena tasks, make sure to also set up the [CMS](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#e-commerce-content-management-system-cms), [GitLab](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#gitlab-website), and [map](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#map) environments, and then set their respective environment variables:
+```bash
+export SHOPPING_ADMIN="<your_e_commerce_cms_domain>:7780/admin"
+export GITLAB="<your_gitlab_domain>:8023"
+export MAP="<your_map_domain>:3000"
+```
+
 3. Generate config files for each test example:
 ```bash
 python scripts/generate_test_data.py
 ```
 You will see `*.json` files generated in the [config_files](./config_files) folder. Each file contains the configuration for one test example.
 
+*If you want to run on the original WebArena tasks:* Make sure to uncomment the line in `scripts/generate_test_data.py` to generate task files for `config_files/test_webarena.raw.json`.
+
 4. Obtain and save the auto-login cookies for all websites:
 ```
 bash prepare.sh
 ```
+
+*If you want to run on the original WebArena tasks:* Make sure to uncomment lines 35-38 in `browser_env/auto_login.py` to create cookies for the WebArena environments.
 
 5. Set up API keys.
 

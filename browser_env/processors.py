@@ -823,8 +823,6 @@ class ImageObservationProcessor(ObservationProcessor):
         """
         # Read CSV data
         df = pd.read_csv(StringIO(data_string), delimiter=",", quotechar='"')
-        # Save df to a CSV file
-        df.to_csv("test.csv", index=False)
         df["Area"] = df["Width"] * df["Height"]
         # Remove bounding boxes that are clipped.
         b_x, b_y = (

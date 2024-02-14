@@ -14,6 +14,8 @@ from browser_env.env_config import (
     CLASSIFIEDS,
     REDDIT,
     SHOPPING,
+    GITLAB,
+    SHOPPING_ADMIN,
 )
 
 HEADLESS = True
@@ -29,6 +31,12 @@ URLS = [
 EXACT_MATCH = [True, True, True]
 KEYWORDS = ["", "Delete", "My listings"]
 
+# If you want to test WebArena tasks, uncomment the following lines to add the configs:
+# SITES.extend(["shopping_admin", "gitlab"])
+# URLS.extend([f"{SHOPPING_ADMIN}/dashboard", f"{GITLAB}/-/profile"])
+# EXACT_MATCH.extend([True, True])
+# KEYWORDS.extend(["Dashboard", ""])
+assert len(SITES) == len(URLS) == len(EXACT_MATCH) == len(KEYWORDS)
 
 def is_expired(
     storage_state: Path, url: str, keyword: str, url_exact: bool = True
@@ -56,7 +64,7 @@ def is_expired(
             return url not in d_url
 
 
-def renew_comb(comb: list[str]) -> None:
+def renew_comb(comb: list[str], auth_folder: str = "./.auth") -> None:
     context_manager = sync_playwright()
     playwright = context_manager.__enter__()
     browser = playwright.chromium.launch(headless=HEADLESS)
@@ -87,16 +95,47 @@ def renew_comb(comb: list[str]) -> None:
         page.locator("#password").fill(password)
         page.get_by_role("button", name="Log in").click()
 
-    context.storage_state(path=f"./.auth/{'.'.join(comb)}_state.json")
+    if "shopping_admin" in comb:
+        username = ACCOUNTS["shopping_admin"]["username"]
+        password = ACCOUNTS["shopping_admin"]["password"]
+        page.goto(f"{SHOPPING_ADMIN}")
+        page.get_by_placeholder("user name").fill(username)
+        page.get_by_placeholder("password").fill(password)
+        page.get_by_role("button", name="Sign in").click()
+
+    if "gitlab" in comb:
+        username = ACCOUNTS["gitlab"]["username"]
+        password = ACCOUNTS["gitlab"]["password"]
+        page.goto(f"{GITLAB}/users/sign_in")
+        page.get_by_test_id("username-field").click()
+        page.get_by_test_id("username-field").fill(username)
+        page.get_by_test_id("username-field").press("Tab")
+        page.get_by_test_id("password-field").fill(password)
+        page.get_by_test_id("sign-in-button").click()
+
+    context.storage_state(path=f"{auth_folder}/{'.'.join(comb)}_state.json")
 
     context_manager.__exit__()
 
 
-def main() -> None:
-    for site in SITES:
-        renew_comb([site])
+def main(auth_folder: str = "./.auth") -> None:
+    pairs = list(combinations(SITES, 2))
 
-    for c_file in glob.glob("./.auth/*.json"):
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        for pair in pairs:
+            # Auth doesn't work on this pair as they share the same cookie
+            if "reddit" in pair and (
+                "shopping" in pair or "shopping_admin" in pair
+            ):
+                continue
+            executor.submit(
+                renew_comb, list(sorted(pair)), auth_folder=auth_folder
+            )
+
+        for site in SITES:
+            executor.submit(renew_comb, [site], auth_folder=auth_folder)
+
+    for c_file in glob.glob(f"{auth_folder}/*.json"):
         comb = c_file.split("/")[-1].rsplit("_", 1)[0].split(".")
         for cur_site in comb:
             url = URLS[SITES.index(cur_site)]

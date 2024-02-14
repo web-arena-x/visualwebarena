@@ -7,7 +7,10 @@ from browser_env.env_config import *
 
 
 def main() -> None:
-    inp_paths = ["config_files/test_classifieds.raw.json", "config_files/test_shopping.raw.json", "config_files/test_reddit.raw.json"]
+    inp_paths = [
+        "config_files/test_classifieds.raw.json", "config_files/test_shopping.raw.json", "config_files/test_reddit.raw.json",
+        # "config_files/test_webarena.raw.json"  # Uncommon to generate test files for WebArena
+    ]
 
     for inp_path in inp_paths:
         output_dir = inp_path.replace('.raw.json', '')
@@ -18,6 +21,12 @@ def main() -> None:
         raw = raw.replace("__SHOPPING__", SHOPPING)
         raw = raw.replace("__WIKIPEDIA__", WIKIPEDIA)
         raw = raw.replace("__CLASSIFIEDS__", CLASSIFIEDS)
+
+        if "test_webarena.raw.json" in inp_path:
+            raw = raw.replace("__GITLAB__", GITLAB)
+            raw = raw.replace("__SHOPPING_ADMIN__", SHOPPING_ADMIN)
+            raw = raw.replace("__MAP__", MAP)
+
         with open(inp_path.replace(".raw", ""), "w") as f:
             f.write(raw)
         data = json.loads(raw)

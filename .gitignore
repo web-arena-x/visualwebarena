@@ -136,3 +136,9 @@ dmypy.json
 
 .auth/*
 
+config_files/test_classifieds
+config_files/test_reddit
+config_files/test_shopping
+config_files/test_classifieds.json
+config_files/test_reddit.json
+config_files/test_shopping.json

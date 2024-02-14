@@ -130,8 +130,8 @@ python run.py \
 ```
 
 ### Demo
-
-We have also prepared a demo for you to run the agents on your own task on an arbitrary webpage.
+![Demo](media/find_restaurant.gif)
+We have also prepared a demo for you to run the agents on your own task on an arbitrary webpage. An example is shown above where the agent is tasked to find the best Thai restaurant in Pittsburgh.
 
 After following the setup instructions above and setting the OpenAI API key (the other environment variables for website URLs aren't really used, so you should be able to set them to some dummy variable), you can run the GPT-4V + SoM agent with the following command:
 ```bash

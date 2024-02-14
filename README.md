@@ -130,6 +130,7 @@ python run.py \
 ```
 
 ### Demo
+![Demo](media/find_restaurant.gif)
 
 We have also prepared a demo for you to run the agents on your own task on an arbitrary webpage.
 

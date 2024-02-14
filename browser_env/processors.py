@@ -77,9 +77,9 @@ class TextObervationProcessor(ObservationProcessor):
             "accessibility_tree_with_captioner",
             "image_som",
         ]:
-            assert (
-                captioning_fn is not None
-            ), "Must provide captioning function."
+            # assert (
+            #     captioning_fn is not None
+            # ), "Must provide captioning function."
             self.captioning_fn = captioning_fn
             # Cache captions.
             self.url2caption = {}
@@ -597,7 +597,7 @@ class TextObervationProcessor(ObservationProcessor):
             if page.url.endswith((".jpg", ".jpeg", ".png")):
                 print("NOTE: We are on an image page!!!")
                 # Load image from current url and run captioning on it.
-                if page.url not in self.url2caption:
+                if page.url not in self.url2caption and self.captioning_fn is not None:
                     try:
                         image = Image.open(
                             requests.get(page.url, stream=True).raw
@@ -609,92 +609,92 @@ class TextObervationProcessor(ObservationProcessor):
 
                 content = self.url2caption.get(page.url, "Image")
             else:
-                # images = page.get_by_role("img").all()
-                images = page.query_selector_all("img")
-                image_urls = []
-                for image in images:
-                    try:
-                        image_url = image.get_attribute("src")
-                        if not image_url.startswith(
-                            ("http://", "https://", "www.")
-                        ):
-                            image_url = urljoin(page.url, image_url)
-                        if image_url not in self.url2caption:
-                            image_urls.append(image_url)
-                    except Exception as e:
-                        print("L604 WARNING: ", e)
+                if self.captioning_fn is not None:
+                    images = page.query_selector_all("img")
+                    image_urls = []
+                    for image in images:
+                        try:
+                            image_url = image.get_attribute("src")
+                            if not image_url.startswith(
+                                ("http://", "https://", "www.")
+                            ):
+                                image_url = urljoin(page.url, image_url)
+                            if image_url not in self.url2caption:
+                                image_urls.append(image_url)
+                        except Exception as e:
+                            print("L604 WARNING: ", e)
 
-                # Run image captioning on image_url pixels. This is for models which use captioning as a baseline.
-                if len(image_urls) > 0:
-                    image_pixels = []
-                    valid_urls = []
-                    for url in image_urls:
-                        if "data:image/svg" in url:
-                            continue
-                        else:
-                            try:
-                                image = Image.open(
-                                    requests.get(url, stream=True).raw
-                                )
-                                image_pixels.append(image)
-                                valid_urls.append(url)
-                            except Exception as e:
-                                print("L616 WARNING: ", e)
-
-                    # Caption images.
-                    if image_pixels:
-                        # Run in batches of 4.
-                        bs = 4
-                        captions = []
-                        for i in range(0, len(image_pixels), bs):
-                            try:
-                                captions.extend(
-                                    self.captioning_fn(
-                                        image_pixels[i : i + bs]
+                    # Run image captioning on image_url pixels. This is for models which use captioning as a baseline.
+                    if len(image_urls) > 0:
+                        image_pixels = []
+                        valid_urls = []
+                        for url in image_urls:
+                            if "data:image/svg" in url:
+                                continue
+                            else:
+                                try:
+                                    image = Image.open(
+                                        requests.get(url, stream=True).raw
                                     )
+                                    image_pixels.append(image)
+                                    valid_urls.append(url)
+                                except Exception as e:
+                                    print("L616 WARNING: ", e)
+
+                        # Caption images.
+                        if image_pixels:
+                            # Run in batches of 4.
+                            bs = 4
+                            captions = []
+                            for i in range(0, len(image_pixels), bs):
+                                try:
+                                    captions.extend(
+                                        self.captioning_fn(
+                                            image_pixels[i : i + bs]
+                                        )
+                                    )
+                                except Exception as e:
+                                    print("L628 WARNING: ", e)
+                                    captions.extend(
+                                        [""] * len(image_pixels[i : i + bs])
+                                    )
+                            assert len(valid_urls) == len(
+                                captions
+                            ), f"len(images)={len(valid_urls)}, len(captions)={len(captions)}"
+                            for image_url, caption in zip(valid_urls, captions):
+                                self.url2caption[image_url] = remove_unicode(
+                                    caption.strip()
                                 )
-                            except Exception as e:
-                                print("L628 WARNING: ", e)
-                                captions.extend(
-                                    [""] * len(image_pixels[i : i + bs])
+
+                    image_idx = 0
+                    for image in images:
+                        try:
+                            original_alt = image.get_attribute("alt") or ""
+                            image_url = image.get_attribute("src")
+                            if not image_url.startswith(
+                                ("http://", "https://", "www.")
+                            ):
+                                image_url = urljoin(page.url, image_url)
+
+                            updated_alt = original_alt
+
+                            if image_url in self.url2caption:
+                                if self.url2caption[image_url] not in updated_alt:
+                                    updated_alt = f"{updated_alt}, description: {self.url2caption[image_url]}"
+                            elif "data:image/svg" not in image_url:
+                                print(
+                                    f"WARNING: {image_url} not in self.url2caption"
                                 )
-                        assert len(valid_urls) == len(
-                            captions
-                        ), f"len(images)={len(valid_urls)}, len(captions)={len(captions)}"
-                        for image_url, caption in zip(valid_urls, captions):
-                            self.url2caption[image_url] = remove_unicode(
-                                caption.strip()
+
+                            if "url:" not in updated_alt:
+                                updated_alt = f"{updated_alt}, url: {image_url}"
+
+                            safe_updated_alt = json.dumps(updated_alt)
+                            image.evaluate(
+                                f"node => node.alt = {safe_updated_alt}"
                             )
-
-                image_idx = 0
-                for image in images:
-                    try:
-                        original_alt = image.get_attribute("alt") or ""
-                        image_url = image.get_attribute("src")
-                        if not image_url.startswith(
-                            ("http://", "https://", "www.")
-                        ):
-                            image_url = urljoin(page.url, image_url)
-
-                        updated_alt = original_alt
-
-                        if image_url in self.url2caption:
-                            if self.url2caption[image_url] not in updated_alt:
-                                updated_alt = f"{updated_alt}, description: {self.url2caption[image_url]}"
-                        elif "data:image/svg" not in image_url:
-                            print(
-                                f"WARNING: {image_url} not in self.url2caption"
-                            )
-
-                        if "url:" not in updated_alt:
-                            updated_alt = f"{updated_alt}, url: {image_url}"
-
-                        safe_updated_alt = json.dumps(updated_alt)
-                        image.evaluate(
-                            f"node => node.alt = {safe_updated_alt}"
-                        )
-                    except Exception as e:
-                        print("L653 WARNING:", e)
+                        except Exception as e:
+                            print("L653 WARNING:", e)
 
                 if (
                     self.observation_type

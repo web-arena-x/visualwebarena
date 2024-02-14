@@ -127,6 +127,7 @@ class PromptAgent(Agent):
     @beartype
     def next_action(
         self, trajectory: Trajectory, intent: str, meta_data: dict[str, Any], images: Optional[list[Image.Image]] = None,
+        output_response: bool = False
     ) -> Action:
         # Create page screenshot image for multimodal models.
         if self.multimodal_inputs:
@@ -148,7 +149,7 @@ class PromptAgent(Agent):
                         image_input_caption += ", "
                 # Update intent to include captions of input images.
                 intent = f"{image_input_caption}\nIntent: {intent}"
-            else:
+            elif not self.multimodal_inputs:
                 print(
                     "WARNING: Input image provided but no image captioner available."
                 )
@@ -169,6 +170,8 @@ class PromptAgent(Agent):
                 "meta_data"
             ].get("force_prefix", "")
             response = f"{force_prefix}{response}"
+            if output_response:
+                print(f'Agent: {response}', flush=True)
             n += 1
             try:
                 parsed_response = self.prompt_constructor.extract_action(

@@ -32,10 +32,10 @@ EXACT_MATCH = [True, True, True]
 KEYWORDS = ["", "Delete", "My listings"]
 
 # If you want to test WebArena tasks, uncomment the following lines to add the configs:
-SITES.extend(["shopping_admin", "gitlab"])
-URLS.extend([f"{SHOPPING_ADMIN}/dashboard", f"{GITLAB}/-/profile"])
-EXACT_MATCH.extend([True, True])
-KEYWORDS.extend(["Dashboard", ""])
+# SITES.extend(["shopping_admin", "gitlab"])
+# URLS.extend([f"{SHOPPING_ADMIN}/dashboard", f"{GITLAB}/-/profile"])
+# EXACT_MATCH.extend([True, True])
+# KEYWORDS.extend(["Dashboard", ""])
 assert len(SITES) == len(URLS) == len(EXACT_MATCH) == len(KEYWORDS)
 
 def is_expired(

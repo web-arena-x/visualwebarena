@@ -9,7 +9,7 @@ from browser_env.env_config import *
 def main() -> None:
     inp_paths = [
         "config_files/test_classifieds.raw.json", "config_files/test_shopping.raw.json", "config_files/test_reddit.raw.json",
-        "config_files/test_webarena.raw.json"  # Uncommon to generate test files for WebArena
+        # "config_files/test_webarena.raw.json"  # Uncommon to generate test files for WebArena
     ]
 
     for inp_path in inp_paths:

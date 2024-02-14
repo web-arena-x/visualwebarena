@@ -73,7 +73,7 @@ def config() -> argparse.Namespace:
         help="Slow down the browser by the specified amount",
     )
     parser.add_argument(
-        "--action_set_tag", default="id_accessibility_tree", help="Action type"
+        "--action_set_tag", default="som", help="Action type"
     )
     parser.add_argument(
         "--observation_type",
@@ -84,7 +84,7 @@ def config() -> argparse.Namespace:
             "image",
             "image_som",
         ],
-        default="accessibility_tree",
+        default="image_som",
         help="Observation type",
     )
     parser.add_argument(
@@ -104,7 +104,7 @@ def config() -> argparse.Namespace:
     parser.add_argument(
         "--instruction_path",
         type=str,
-        default="agent/prompts/jsons/p_cot_id_actree_3s.json",
+        default="agent/prompts/jsons/p_som_cot_id_actree_3s.json",
     )
     parser.add_argument(
         "--parsing_failure_th",
@@ -143,7 +143,7 @@ def config() -> argparse.Namespace:
 
     # lm config
     parser.add_argument("--provider", type=str, default="openai")
-    parser.add_argument("--model", type=str, default="gpt-3.5-turbo-0613")
+    parser.add_argument("--model", type=str, default="gpt-4-vision-preview")
     parser.add_argument("--mode", type=str, default="chat")
     parser.add_argument("--temperature", type=float, default=1.0)
     parser.add_argument("--top_p", type=float, default=0.9)

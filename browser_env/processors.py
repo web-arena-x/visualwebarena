@@ -77,9 +77,9 @@ class TextObervationProcessor(ObservationProcessor):
             "accessibility_tree_with_captioner",
             "image_som",
         ]:
-            # assert (
-            #     captioning_fn is not None
-            # ), "Must provide captioning function."
+            assert (
+                captioning_fn is not None
+            ), "Must provide captioning function."
             self.captioning_fn = captioning_fn
             # Cache captions.
             self.url2caption = {}

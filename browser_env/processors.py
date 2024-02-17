@@ -759,7 +759,8 @@ class ImageObservationProcessor(ObservationProcessor):
             const interactableSelectors = [
                 'a[href]:not(:has(img))', 'a[href] img', 'button', 'input:not([type="hidden"])', 'textarea', 'select',
                 '[tabindex]:not([tabindex="-1"])', '[contenteditable="true"]', '[role="button"]', '[role="link"]',
-                '[role="checkbox"]', '[role="menuitem"]', '[role="tab"]', '[draggable="true"]'
+                '[role="checkbox"]', '[role="menuitem"]', '[role="tab"]', '[draggable="true"]',
+                '.btn'
             ];
 
             const textSelectors = ['p', 'span', 'div:not(:has(*))', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'article'];

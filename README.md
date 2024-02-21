@@ -16,7 +16,7 @@
 
 ## TODOs
 - [ ] Add example scripts to run HuggingFace models.
-- [ ] Add scripts for end-to-end training and reset of environments.
+- [x] Add scripts for end-to-end training and reset of environments.
 - [x] Add demo to run multimodal agents on any arbitrary webpage.
 
 ## News

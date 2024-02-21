@@ -129,6 +129,12 @@ python run.py \
   --action_set_tag som  --observation_type image_som
 ```
 
+If you'd like to reproduce the results from our paper, we have also provided scripts in `scripts/` to run the full evaluation pipeline on each of the VWA environments. For example, to reproduce the results from the Classifieds environment, you can run:
+
+```bash
+bash scripts/run_classifieds_som.sh
+```
+
 ### Demo
 ![Demo](media/find_restaurant.gif)
 

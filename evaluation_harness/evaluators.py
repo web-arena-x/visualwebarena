@@ -239,7 +239,9 @@ class StringEvaluator(Evaluator):
                 case "must_include":
                     assert isinstance(value, list)
                     for must_value in value:
-                        score *= self.must_include(ref=must_value, pred=pred)
+                        value_or = must_value.split(" |OR| ")
+                        for v in value_or:
+                            score *= self.must_include(ref=v, pred=pred)
                 case "must_exclude":
                     assert isinstance(value, list)
                     for must_excl_value in value:

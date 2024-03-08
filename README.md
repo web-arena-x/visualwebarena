@@ -16,10 +16,12 @@
 
 ## TODOs
 - [ ] Add example scripts to run HuggingFace models.
+- [x] Add GPT-4V + SoM trajectories from our paper.
 - [x] Add scripts for end-to-end training and reset of environments.
 - [x] Add demo to run multimodal agents on any arbitrary webpage.
 
 ## News
+- [03/8/2024]: Added the [agent trajectories](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing) of our GPT-4V + SoM agent on the full set of 910 VWA tasks.
 - [02/14/2024]: Added a [demo script](run_demo.py) for running the GPT-4V + SoM agent on any task on an arbitrary website.
 - [01/25/2024]: GitHub repo released with tasks and scripts for setting up the VWA environments.
 
@@ -134,6 +136,10 @@ If you'd like to reproduce the results from our paper, we have also provided scr
 ```bash
 bash scripts/run_classifieds_som.sh
 ```
+
+### Agent Trajectories
+
+To facilitate analysis and evals, we have also released the trajectories of the GPT-4V + SoM agent on the full set of 910 VWA tasks [here](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing). It consists of .html files that record the agent's observations and output at each step of the trajectory.
 
 ### Demo
 ![Demo](media/find_restaurant.gif)

@@ -664,7 +664,7 @@
         "geolocation": null,
         "intent_template": "Find and upvote this post. I think it was posted in {{forum}}.",
         "intent": "Find and upvote this post. I think it was posted in /f/space.",
-        "image": "__REDDIT__/submission_images/a1920694edca7656fc929bab1166d2d667181e3aa495147cbe319dbadcd6cccb.jpg",
+        "image": "__REDDIT__/media/cache/resolve/submission_thumbnail_1x/a1920694edca7656fc929bab1166d2d667181e3aa495147cbe319dbadcd6cccb.jpg",
         "instantiation_dict": {
             "forum": "/f/space"
         },

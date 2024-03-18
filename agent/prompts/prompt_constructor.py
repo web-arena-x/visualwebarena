@@ -173,7 +173,11 @@ class DirectPromptConstructor(PromptConstructor):
         obs = state_info["observation"][self.obs_modality]
         max_obs_length = self.lm_config.gen_config["max_obs_length"]
         if max_obs_length:
-            obs = self.tokenizer.decode(self.tokenizer.encode(obs)[:max_obs_length])  # type: ignore[arg-type]
+            if self.lm_config.provider == "google":
+                print("NOTE: This is a Gemini model, so we use characters instead of tokens for max_obs_length.")
+                obs = obs[:max_obs_length]
+            else:
+                obs = self.tokenizer.decode(self.tokenizer.encode(obs)[:max_obs_length])  # type: ignore[arg-type]
 
         page = state_info["info"]["page"]
         url = page.url
@@ -231,7 +235,11 @@ class CoTPromptConstructor(PromptConstructor):
         obs = state_info["observation"][self.obs_modality]
         max_obs_length = self.lm_config.gen_config["max_obs_length"]
         if max_obs_length:
-            obs = self.tokenizer.decode(self.tokenizer.encode(obs)[:max_obs_length])  # type: ignore[arg-type]
+            if self.lm_config.provider == "google":
+                print("NOTE: This is a Gemini model, so we use characters instead of tokens for max_obs_length.")
+                obs = obs[:max_obs_length]
+            else:
+                obs = self.tokenizer.decode(self.tokenizer.encode(obs)[:max_obs_length])  # type: ignore[arg-type]
 
         page = state_info["info"]["page"]
         url = page.url

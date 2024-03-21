@@ -57,8 +57,12 @@ URL_MAPPINGS = {
     WIKIPEDIA: "http://wikipedia.org",
     HOMEPAGE: "http://homepage.com",
     CLASSIFIEDS: "http://classifieds.com",
-    # WebArena:
-    SHOPPING_ADMIN: "http://luma.com/admin",
-    GITLAB: "http://gitlab.com",
-    MAP: "http://openstreetmap.org",
 }
+
+# WebArena:
+if SHOPPING_ADMIN:
+    URL_MAPPINGS[SHOPPING_ADMIN] = "http://luma.com/admin"
+if GITLAB:
+    URL_MAPPINGS[GITLAB] = "http://gitlab.com"
+if MAP:
+    URL_MAPPINGS[MAP] = "http://openstreetmap.org"

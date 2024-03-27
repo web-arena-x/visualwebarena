@@ -13,8 +13,10 @@ import aiolimiter
 import openai
 from openai import AsyncOpenAI, OpenAI
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"] or "fake-key")
-aclient = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"] or "fake-key")
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"]
+                if "OPENAI_API_KEY" in os.environ else "fake-key")
+aclient = AsyncOpenAI(
+    api_key=os.environ["OPENAI_API_KEY"] if "OPENAI_API_KEY" in os.environ else "fake-key")
 
 
 def retry_with_exponential_backoff(  # type: ignore

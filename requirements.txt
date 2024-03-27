@@ -133,7 +133,7 @@ torch==2.0.1
 tornado==6.3.3
 tqdm==4.66.1
 traitlets==5.11.2
-transformers>=4.36.2
+transformers==4.34.0
 types-requests==2.31.0.10
 types-tqdm==4.66.0.1
 typing_extensions==4.7.1

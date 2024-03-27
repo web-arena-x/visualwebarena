@@ -1,6 +1,7 @@
 """Tools to generate from OpenAI prompts.
 Adopted from https://github.com/zeno-ml/zeno-build/"""
 
+from tqdm.asyncio import tqdm_asyncio
 import asyncio
 import logging
 import os
@@ -12,9 +13,8 @@ import aiolimiter
 import openai
 from openai import AsyncOpenAI, OpenAI
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-aclient = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"])
-from tqdm.asyncio import tqdm_asyncio
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"] or "fake-key")
+aclient = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"] or "fake-key")
 
 
 def retry_with_exponential_backoff(  # type: ignore

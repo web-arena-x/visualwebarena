@@ -32,12 +32,13 @@ def png_bytes_to_numpy(png: bytes) -> npt.NDArray[np.uint8]:
     return np.array(Image.open(BytesIO(png)))
 
 
-def pil_to_b64(img: Image.Image) -> str:
+def pil_to_b64(img: Image.Image, add_prefix: bool = True) -> str:
     with BytesIO() as image_buffer:
         img.save(image_buffer, format="PNG")
         byte_data = image_buffer.getvalue()
         img_b64 = base64.b64encode(byte_data).decode("utf-8")
-        img_b64 = "data:image/png;base64," + img_b64
+        if add_prefix:
+            img_b64 = "data:image/png;base64," + img_b64
     return img_b64
 
 

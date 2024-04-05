@@ -34,7 +34,7 @@ def construct_llm_config(args: argparse.Namespace) -> LMConfig:
     llm_config = LMConfig(
         provider=args.provider, model=args.model, mode=args.mode
     )
-    if args.provider in ["openai", "google"]:
+    if args.provider in ["openai", "google", "anthropic"]:
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p
         llm_config.gen_config["context_length"] = args.context_length

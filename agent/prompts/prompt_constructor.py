@@ -401,6 +401,86 @@ class MultimodalCoTPromptConstructor(CoTPromptConstructor):
                 raise ValueError(
                     f"GPT-4V models do not support mode {self.lm_config.mode}"
                 )
+        elif "anthropic" in self.lm_config.provider:
+            if self.lm_config.mode == "chat":
+                message = [
+                    # {
+                    #     "role": "system",
+                    #     "content": [{"type": "text", "text": intro}],
+                    # }
+                    intro
+                ]
+                for (x, y, z) in examples:
+                    example_img = Image.open(z)
+                    message.append(
+                        {
+                            # "role": "system",
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": x},
+                                {
+                                    "type": "text",
+                                    "text": "IMAGES: (1) current page screenshot",
+                                },
+                                {
+                                    "type": "image",
+                                    "source": {
+                                        "type": "base64",
+                                        "media_type": "image/png",
+                                        "data": pil_to_b64(example_img, add_prefix=False),
+                                    },
+                                },
+                            ],
+                        }
+                    )
+                    message.append(
+                        {
+                            "role": "assistant",
+                            "content": [{"type": "text", "text": y}],
+                        }
+                    )
+
+                # Encode images and page_screenshot_img as base64 strings.
+                current_prompt = current
+                content = [
+                    {
+                        "type": "text",
+                        "text": "IMAGES: (1) current page screenshot",
+                    },
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/png",
+                            "data": pil_to_b64(page_screenshot_img, add_prefix=False),
+                        },
+                    },
+                ]
+                for image_i, image in enumerate(images):
+                    content.extend(
+                        [
+                            {
+                                "type": "text",
+                                "text": f"({image_i+2}) input image {image_i+1}",
+                            },
+                            {
+                                "type": "image",
+                                "source": {
+                                    "type": "base64",
+                                    "media_type": "image/png",
+                                    "data": pil_to_b64(image, add_prefix=False),
+                                },
+                            },
+                        ]
+                    )
+                content = [{"type": "text", "text": current_prompt}] + content
+
+                message.append({"role": "user", "content": content})
+                return message
+            else:
+                raise ValueError(
+                    f"Anthropic models do not support mode {self.lm_config.mode}"
+                )
         elif "google" in self.lm_config.provider:
             if self.lm_config.mode == "completion":
                 message = [

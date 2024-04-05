@@ -7,6 +7,12 @@ try:
 except:
     print('Google Cloud not set up, skipping import of vertexai.preview.generative_models.Image and llms.generate_from_gemini_completion')
 
+try:
+    import anthropic
+    from llms import generate_from_anthropic_chat_completion
+except:
+    print('Anthropic not set up, skipping import of providers.anthropic_utils.generate_from_anthropic_chat_completion')
+
 from llms import (
     generate_from_huggingface_completion,
     generate_from_openai_chat_completion,
@@ -48,6 +54,17 @@ def call_llm(
             raise ValueError(
                 f"OpenAI models do not support mode {lm_config.mode}"
             )
+    elif lm_config.provider == "anthropic":
+        assert isinstance(prompt, list)
+        response = generate_from_anthropic_chat_completion(
+            messages=prompt,
+            model=lm_config.model,
+            temperature=lm_config.gen_config["temperature"],
+            top_p=lm_config.gen_config["top_p"],
+            context_length=lm_config.gen_config["context_length"],
+            max_tokens=lm_config.gen_config["max_tokens"],
+            stop_token=None,
+        )
     elif lm_config.provider == "huggingface":
         assert isinstance(prompt, str)
         response = generate_from_huggingface_completion(

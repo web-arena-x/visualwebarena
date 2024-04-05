@@ -14,6 +14,8 @@ class Tokenizer(object):
             self.tokenizer.add_special_tokens = False  # type: ignore[attr-defined]
             self.tokenizer.add_bos_token = False  # type: ignore[attr-defined]
             self.tokenizer.add_eos_token = False  # type: ignore[attr-defined]
+        elif provider == "anthropic":
+            self.tokenizer = tiktoken.encoding_for_model("gpt-4-vision-preview")  # Assume tokens are around the same length
         elif provider == "google":
             self.tokenizer = None  # Not used for input length computation, as Gemini is based on characters
         else:

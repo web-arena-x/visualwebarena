@@ -15,7 +15,7 @@
 ![Overview](media/overview.png)
 
 ## TODOs
-- [ ] Add example scripts to run HuggingFace models.
+- [x] Add human trajectories.
 - [x] Add GPT-4V + SoM trajectories from our paper.
 - [x] Add scripts for end-to-end training and reset of environments.
 - [x] Add demo to run multimodal agents on any arbitrary webpage.
@@ -160,6 +160,11 @@ python run_demo.py \
 ```
 
 This tasks the agent to find a shirt that looks like the provided image (the "This is fine" dog) from Amazon. Have fun!
+
+
+## Human Evaluations
+
+We collected human trajectories on 233 tasks (one from each template type) and the Playwright recording files are provided [here](https://drive.google.com/drive/folders/1S_fDzB1VUTwUphWPKZ0DdjJOAXjGz94g). These are the same tasks reported in our paper (with a human success rate of ~89%). You can view the HTML pages, actions, etc., by running `playwright show-trace <example_id>.zip`. The `example_id` follows the same structure as the examples from the corresponding site in `config_files/`.
 
 
 ## Citation

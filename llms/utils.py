@@ -13,6 +13,7 @@ from llms import (
     generate_from_openai_completion,
     lm_config,
 )
+from PIL import Image as PILImage
 
 APIInput = str | list[Any] | dict[str, Any]
 
@@ -61,7 +62,7 @@ def call_llm(
     elif lm_config.provider == "google":
         assert isinstance(prompt, list)
         assert all(
-            [isinstance(p, str) or isinstance(p, Image) for p in prompt]
+            [isinstance(p, str) or isinstance(p, Image) or isinstance(p, PILImage.Image) for p in prompt]
         )
         response = generate_from_gemini_completion(
             prompt=prompt,

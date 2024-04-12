@@ -1,27 +1,34 @@
 """Tools to generate from Gemini prompts."""
 
+import os
 import random
 import time
 from typing import Any
 
-from google.api_core.exceptions import InvalidArgument
+from google.api_core.exceptions import InvalidArgument, ResourceExhausted
 from vertexai.preview.generative_models import (
     GenerativeModel,
-    HarmBlockThreshold,
-    HarmCategory,
+#    HarmBlockThreshold,
+#    HarmCategory,
     Image,
 )
+import google.generativeai as genai
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from PIL import Image as PILImage
 
-model = GenerativeModel("gemini-pro-vision")
+
+#model = GenerativeModel("gemini-pro-vision")
+genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
+model = genai.GenerativeModel('gemini-1.5-pro-latest')
 
 
 def retry_with_exponential_backoff(  # type: ignore
     func,
-    initial_delay: float = 1,
+    initial_delay: float = 30, #1,
     exponential_base: float = 1,
     jitter: bool = True,
     max_retries: int = 10,
-    errors: tuple[Any] = (InvalidArgument,),
+    errors: tuple[Any] = (InvalidArgument, ResourceExhausted),
 ):
     """Retry a function with exponential backoff."""
 
@@ -70,7 +77,7 @@ def generate_from_gemini_completion(
 ) -> str:
     del engine
     safety_config = {
-        HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+        #HarmCategory.HARM_CATEGORY_UNSPECIFIED: HarmBlockThreshold.BLOCK_ONLY_HIGH,
         HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_ONLY_HIGH,
         HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_ONLY_HIGH,
         HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_ONLY_HIGH,

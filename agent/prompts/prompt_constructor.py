@@ -414,7 +414,8 @@ class MultimodalCoTPromptConstructor(CoTPromptConstructor):
                         [
                             "IMAGES:",
                             "(1) current page screenshot:",
-                            pil_to_vertex(example_img),
+                            #pil_to_vertex(example_img),
+                            example_img.convert('RGB'),
                         ]
                     )
                     message.append(f"Action: {y}")
@@ -424,14 +425,16 @@ class MultimodalCoTPromptConstructor(CoTPromptConstructor):
                     [
                         "IMAGES:",
                         "(1) current page screenshot:",
-                        pil_to_vertex(page_screenshot_img),
+                        #pil_to_vertex(page_screenshot_img),
+                        page_screenshot_img.convert('RGB'),
                     ]
                 )
                 for image_i, image in enumerate(images):
                     message.extend(
                         [
                             f"({image_i+2}) input image {image_i+1}",
-                            pil_to_vertex(image),
+                            #pil_to_vertex(image),
+                            image.convert('RGB'),
                         ]
                     )
                 message.append("Action:")

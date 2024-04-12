@@ -529,7 +529,7 @@
         "geolocation": null,
         "intent_template": "What {{question}} {{modifier}}?",
         "intent": "What month and year (in mm-yyyy format) was this image posted in the /f/pics subreddit?",
-        "image": "__REDDIT__/submission_coco_images/00d2341392f787ba15960934bea08a81090053c0ac17458c37c743a2eacb9f66.jpg",
+        "image": "__REDDIT__/submission_images/00d2341392f787ba15960934bea08a81090053c0ac17458c37c743a2eacb9f66.jpg",
         "instantiation_dict": {
             "question": "month and year (in mm-yyyy format)",
             "modifier": "was this image posted in the /f/pics subreddit"
@@ -4447,7 +4447,7 @@
         "intent_template": "Send a direct message to the user that created the post that contains the following picture.",
         "intent": "Send a direct message to the user that created the post that contains the following picture.",
         "image": [
-            "__REDDIT__/submission_coco_images/0e2afc6ce7d06b708f04ece3b0481d64aed4deab399c13e6eb9343525c730993.png"
+            "__REDDIT__/submission_images/0e2afc6ce7d06b708f04ece3b0481d64aed4deab399c13e6eb9343525c730993.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4862,7 +4862,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_coco_images/026347b13e015519ffdb759fdb368c33ba7ada80b66e4ff8947fcc9cd3c41433.jpg",
+        "image": "__REDDIT__/submission_images/026347b13e015519ffdb759fdb368c33ba7ada80b66e4ff8947fcc9cd3c41433.jpg",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {

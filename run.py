@@ -455,7 +455,7 @@ def prepare(args: argparse.Namespace) -> None:
         logger.info(f"Create result dir: {result_dir}")
 
     if not (Path(result_dir) / "traces").exists():
-        (Path(result_dir) / "traces").mkdir(parents=True)
+        (Path(result_dir) / "traces").mkdir(parents=True, exist_ok=True)
 
     # log the log file
     with open(os.path.join(result_dir, "log_files.txt"), "a+") as f:

@@ -7,7 +7,7 @@ try:
 except:
     print('Google Cloud not set up, skipping import of vertexai.preview.generative_models.Image and llms.generate_from_gemini_completion')
 
-from llms import (
+from . import (
     generate_from_huggingface_completion,
     generate_from_openai_chat_completion,
     generate_from_openai_completion,

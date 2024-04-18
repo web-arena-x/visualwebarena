@@ -760,7 +760,7 @@ class ImageObservationProcessor(ObservationProcessor):
                 'a[href]:not(:has(img))', 'a[href] img', 'button', 'input:not([type="hidden"])', 'textarea', 'select',
                 '[tabindex]:not([tabindex="-1"])', '[contenteditable="true"]', '[role="button"]', '[role="link"]',
                 '[role="checkbox"]', '[role="menuitem"]', '[role="tab"]', '[draggable="true"]',
-                '.btn', 'no-mobile','a[href="/notifications"]', 'a[href="/submit"]', '.fa.fa-star.is-rating-item','input[type="checkbox"]'
+                '.btn', 'a[href="/notifications"]', 'a[href="/submit"]', '.fa.fa-star.is-rating-item', 'input[type="checkbox"]'
 
             ];
 

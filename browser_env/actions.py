@@ -1194,6 +1194,7 @@ def execute_action(
         case ActionTypes.CLICK:
             # check each kind of locator in order
             # TODO[shuyanzh]: order is temp now
+            num_tabs_before = len(browser_ctx.pages)
             if action["element_id"]:
                 element_id = action["element_id"]
                 element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
@@ -1211,6 +1212,13 @@ def execute_action(
                 execute_playwright_click(locator_code=locator_code, page=page)
             else:
                 raise ValueError("No proper locator found for click action")
+            num_tabs_now = len(browser_ctx.pages)
+            # if a new tab is opened by clicking, switch to the new tab
+            if num_tabs_now > num_tabs_before:
+                page = browser_ctx.pages[-1]
+                page.bring_to_front()
+                page.client = page.context.new_cdp_session(page)  # type: ignore[attr-defined]
+
         case ActionTypes.HOVER:
             if action["element_id"]:
                 element_id = action["element_id"]

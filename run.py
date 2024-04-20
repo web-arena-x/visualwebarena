@@ -38,6 +38,8 @@ from browser_env.helper_functions import (
 )
 from evaluation_harness import evaluator_router, image_utils
 
+DATASET = os.environ["DATASET"]
+
 LOG_FOLDER = "log_files"
 Path(LOG_FOLDER).mkdir(parents=True, exist_ok=True)
 LOG_FILE_NAME = f"{LOG_FOLDER}/log_{time.strftime('%Y%m%d%H%M%S', time.localtime())}_{random.randint(0, 10000)}.log"
@@ -274,23 +276,26 @@ def test(
         caption_image_fn = None
 
     # Load a (possibly different) captioning model for running VQA evals.
-    if (
-        caption_image_fn
-        and args.eval_captioning_model == args.captioning_model
-    ):
-        eval_caption_image_fn = caption_image_fn
-    else:
-        eval_caption_image_fn = image_utils.get_captioning_fn(
-            args.eval_captioning_model_device,
-            torch.float16
-            if (
-                torch.cuda.is_available()
-                and args.eval_captioning_model_device == "cuda"
+    if DATASET == 'visualwebarena':
+        if (
+            caption_image_fn
+            and args.eval_captioning_model == args.captioning_model
+        ):
+            eval_caption_image_fn = caption_image_fn
+        else:
+            eval_caption_image_fn = image_utils.get_captioning_fn(
+                args.eval_captioning_model_device,
+                torch.float16
+                if (
+                    torch.cuda.is_available()
+                    and args.eval_captioning_model_device == "cuda"
+                )
+                else torch.float32,
+                args.eval_captioning_model,
             )
-            else torch.float32,
-            args.eval_captioning_model,
-        )
-
+    else:
+        caption_image_fn = None
+        eval_caption_image_fn = None
     agent = construct_agent(
         args,
         captioning_fn=caption_image_fn
@@ -486,6 +491,7 @@ def dump_config(args: argparse.Namespace) -> None:
 
 if __name__ == "__main__":
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
     args = config()
     args.sleep_after_execution = 2.5
     prepare(args)

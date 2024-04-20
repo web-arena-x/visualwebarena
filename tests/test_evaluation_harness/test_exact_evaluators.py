@@ -115,7 +115,7 @@ def test_url_exact_match_fail(script_browser_env: ScriptBrowserEnv) -> None:
 
     agent = TeacherForcingAgent()
     agent.set_action_set_tag(tag="playwright")
-    action_seq = f"""page.goto("{CLASSIFIEDS}")
+    action_seq = f"""page.goto("https://github.com/web-arena-x")
     page.stop()"""
     agent.set_actions(action_seq)
 

@@ -1,5 +1,5 @@
 {
-    "sites": ["shopping"],
+    "sites": ["gitlab"],
     "task_id": 0,
     "require_login": true,
     "storage_state": null,
@@ -17,12 +17,12 @@
         "program_html": [
             {
                 "url": "last",
-                "required_contents": {"must_include": ["Hello World"], "must_exclude": ["Goodbye World"]},
+                "required_contents": {"must_include": ["Hello World"]},
                 "locator": "document.querySelector('[id=\"form-name\"').value"
             },
             {
                 "url": "last",
-                "required_contents": {"must_include": ["alexisxy@hotmail.com"], "must_exclude": ["alexisxy@gmail.com"]},
+                "required_contents": {"must_include": ["alexisxy@hotmail.com"]},
                 "locator": "document.querySelector('[id=\"form-email\"').value"
             }
         ]

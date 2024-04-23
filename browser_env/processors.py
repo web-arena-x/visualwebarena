@@ -862,6 +862,7 @@ class ImageObservationProcessor(ObservationProcessor):
         # Provide [id] textContent inputs to the model as text.
         text_content_elements = []
         text_content_text = set()  # Store text of interactable elements
+        id2semantic = {}
 
         # Iterate through each row in the CSV and draw bounding boxes
         for _, row in df.iterrows():
@@ -1030,6 +1031,7 @@ class ImageObservationProcessor(ObservationProcessor):
                     text_content_elements.append(
                         f"[{unique_id}] [{row['Element']}] [{content}]"
                     )
+                    id2semantic[unique_id] = f"[{row['Element']}] element with content [{content}]"
                     if content in text_content_text:
                         # Remove text_content_elements with content
                         text_content_elements = [
@@ -1047,7 +1049,7 @@ class ImageObservationProcessor(ObservationProcessor):
             draw.text(text_position, unique_id, font=font, fill="white")
 
         content_str = "\n".join(text_content_elements)
-        return img, id2center, content_str
+        return img, id2center, content_str, id2semantic
 
     def rectangles_overlap(self, rect1, rect2, padding):
         """
@@ -1076,13 +1078,14 @@ class ImageObservationProcessor(ObservationProcessor):
                 screenshot_bytes = page.screenshot()
                 som_bboxes = self.get_page_bboxes(page)
                 screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                bbox_img, id2center, content_str, id2semantic = self.draw_bounding_boxes(
                     som_bboxes,
                     screenshot_img,
                     viewport_size=self.viewport_size,
                 )
                 self.som_id_info = id2center
                 self.meta_data["obs_nodes_info"] = id2center
+                self.meta_data["obs_nodes_semantic_info"] = id2semantic
                 screenshot_som = np.array(bbox_img)
                 return screenshot_som, content_str
             except:
@@ -1090,13 +1093,14 @@ class ImageObservationProcessor(ObservationProcessor):
                 screenshot_bytes = page.screenshot()
                 som_bboxes = self.get_page_bboxes(page)
                 screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                bbox_img, id2center, content_str, id2semantic = self.draw_bounding_boxes(
                     som_bboxes,
                     screenshot_img,
                     viewport_size=self.viewport_size,
                 )
                 self.som_id_info = id2center
                 self.meta_data["obs_nodes_info"] = id2center
+                self.meta_data["obs_nodes_semantic_info"] = id2semantic
                 screenshot_som = np.array(bbox_img)
                 return screenshot_som, content_str
         else:

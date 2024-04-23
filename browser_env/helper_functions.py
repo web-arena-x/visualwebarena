@@ -57,9 +57,9 @@ def get_render_action(
             action_str += f"<div class='parsed_action' style='background-color:yellow'><pre>{action2str(action, action_set_tag, node_content)}</pre></div>"
 
         case "som":
-            text_meta_data = observation_metadata["text"]
-            if action["element_id"] in text_meta_data["obs_nodes_info"]:
-                node_content = text_meta_data["obs_nodes_info"][
+            meta_data = observation_metadata["image"]
+            if action["element_id"] in meta_data["obs_nodes_semantic_info"]:
+                node_content = meta_data["obs_nodes_semantic_info"][
                     action["element_id"]
                 ]
             else:
@@ -120,21 +120,19 @@ def get_action_description(
                     action_str = action2str(action, action_set_tag, "")
 
         case "som":
-            text_meta_data = observation_metadata["image"]
+            meta_data = observation_metadata["image"]
             if action["action_type"] in [
                 ActionTypes.CLICK,
                 ActionTypes.HOVER,
                 ActionTypes.TYPE,
             ]:
                 action_name = str(action["action_type"]).split(".")[1].lower()
-                if action["element_id"] in text_meta_data["obs_nodes_info"]:
-                    action_str = action2str(action, action_set_tag, "")
+                if action["element_id"] in meta_data["obs_nodes_semantic_info"]:
+                    node_content = meta_data["obs_nodes_semantic_info"][
+                        action["element_id"]
+                    ]
+                    action_str = action2str(action, action_set_tag, node_content)
                 else:
-                    print(
-                        'action["element_id"], text_meta_data["obs_nodes_info"]',
-                        action["element_id"],
-                        text_meta_data["obs_nodes_info"],
-                    )
                     action_str = f"Attempt to perfom \"{action_name}\" on element \"[{action['element_id']}]\" but no matching element found. Please check the observation more carefully."
             else:
                 if (

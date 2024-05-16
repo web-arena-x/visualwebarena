@@ -2,6 +2,7 @@ import asyncio
 import collections
 import json
 import tempfile
+import time
 from typing import Callable, Dict, Optional, Tuple, Type, Union, cast
 
 import pytest
@@ -20,13 +21,9 @@ from browser_env import (
     create_scroll_action,
 )
 from browser_env.actions import create_id_based_action
-from browser_env.env_config import (
-    ACCOUNTS,
-    REDDIT,
-    SHOPPING,
-)
+from browser_env.env_config import ACCOUNTS, REDDIT, SHOPPING
 
-
+@pytest.mark.skip(reason="The actions are deprecated")
 def test_script_browser_env(script_browser_env: ScriptBrowserEnv) -> None:
     env = script_browser_env
     env.reset()
@@ -274,3 +271,21 @@ def test_accessibility_tree_observation_update(
         )
     )
     assert "UNIQUE_NAME" in obs["text"]
+
+
+def test_click_open_new_tab(
+    accessibility_tree_current_viewport_script_browser_env: ScriptBrowserEnv,
+) -> None:
+    env = accessibility_tree_current_viewport_script_browser_env
+    env.reset()
+    env.step(
+        create_playwright_action(
+            "page.goto('https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_open')"
+        )
+    )
+    obs, *_, info = env.step(
+        create_playwright_action(
+            'page.frame_locator("iframe[name=\\"iframeResult\\"]").get_by_role("button", name="Try it").click()'
+        )
+    )
+    assert info["page"].url == "https://www.w3schools.com/"

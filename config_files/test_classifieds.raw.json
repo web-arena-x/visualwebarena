@@ -422,7 +422,9 @@
                 "string_match"
             ],
             "reference_answers": {
-                "exact_match": "21"
+                "must_include": [
+                    "21"
+                ]
             },
             "reference_url": "__CLASSIFIEDS__/index.php?page=item&id=43887",
             "program_html": [],
@@ -457,7 +459,9 @@
                 "string_match"
             ],
             "reference_answers": {
-                "exact_match": "26"
+                "must_include": [
+                    "26"
+                ]
             },
             "reference_url": "__CLASSIFIEDS__/index.php?page=item&id=66613",
             "program_html": [],
@@ -492,7 +496,9 @@
                 "string_match"
             ],
             "reference_answers": {
-                "exact_match": "red"
+                "must_include": [
+                    "red"
+                ]
             },
             "reference_url": "__CLASSIFIEDS__/index.php?page=item&id=9068",
             "program_html": [],
@@ -527,7 +533,9 @@
                 "string_match"
             ],
             "reference_answers": {
-                "exact_match": "white"
+                "must_include": [
+                    "white"
+                ]
             },
             "reference_url": "__CLASSIFIEDS__/index.php?page=item&id=40932",
             "program_html": [],

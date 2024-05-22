@@ -240,9 +240,7 @@ class StringEvaluator(Evaluator):
                     assert isinstance(value, list)
                     for must_value in value:
                         value_or = must_value.split(" |OR| ")
-                        score *= any([
-                            self.must_include(ref=v, pred=pred)
-                        ] for v in value_or)
+                        score *= any([self.must_include(ref=v, pred=pred) for v in value_or])
                 case "must_exclude":
                     assert isinstance(value, list)
                     for must_excl_value in value:

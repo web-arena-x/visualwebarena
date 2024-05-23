@@ -1879,7 +1879,7 @@
             ],
             "reference_answers": {
                 "must_include": [
-                    "64"
+                    "64 |OR| 64GB"
                 ]
             },
             "reference_url": "",

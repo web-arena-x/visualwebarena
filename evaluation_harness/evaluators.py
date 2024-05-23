@@ -318,6 +318,8 @@ class URLExactEvaluator(Evaluator):
 
         def clean_url(url: str) -> str:
             url = str(url)
+            # Replace http://localhost with http://127.0.0.1 to keep things consistent across evals.
+            url = url.replace("localhost", "127.0.0.1")
             if url.endswith("/"):
                 url = url[:-1]
             return url

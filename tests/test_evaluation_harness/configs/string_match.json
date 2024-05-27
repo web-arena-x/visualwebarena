@@ -12,7 +12,8 @@
     "eval": {
         "eval_types": ["string_match"],
         "reference_answers": {
-            "must_include": ["1985/04/18"]
+            "must_include": ["1985/04/18"],
+            "must_exclude": ["1985/04/17"]
         },
         "reference_url": "",
         "program_html": null

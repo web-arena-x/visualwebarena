@@ -1,6 +1,6 @@
 {
     "sites": [
-        "shopping"
+        "gitlab"
     ],
     "task_id": 0,
     "require_login": true,

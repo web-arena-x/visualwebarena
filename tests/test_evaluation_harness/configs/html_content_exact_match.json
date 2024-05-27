@@ -1,8 +1,8 @@
 {
-    "sites": ["gitlab"],
+    "sites": ["shopping"],
     "task_id": 0,
     "require_login": true,
-    "storage_state": "./.auth/gitlab_state.json",
+    "storage_state": "./.auth/shopping_state.json",
     "start_url": null,
     "geolocation": null,
     "intent_template": "",
@@ -16,12 +16,12 @@
         "program_html": [
             {
                 "url": "last",
-                "required_contents": {"must_include": ["What are mammals?"]},
+                "required_contents": {"must_include": ["What are mammals?"], "must_exclude": ["What are birds?"]},
                 "locator": ""
             },
             {
                 "url": "https://www.google.com/",
-                "required_contents": {"must_include": ["Google Search"]},
+                "required_contents": {"must_include": ["Google Search"], "must_exclude": ["Bing Search"]},
                 "locator": ""
             }
         ]

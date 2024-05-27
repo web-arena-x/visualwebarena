@@ -46,6 +46,12 @@ pytest -x
 Please check out [this page](environment_docker/README.md) for details.
 
 2. Configurate the urls for each website.
+First, export the `DATASET` to be `visualwebarena`:
+```bash
+export DATASET=visualwebarena
+```
+Then, set the URL for the websites
+
 ```bash
 export CLASSIFIEDS="<your_classifieds_domain>:9980"
 export CLASSIFIEDS_RESET_TOKEN="4b61655535e7ed388f0d40a93600254c"  # Default reset token for classifieds site, change if you edited its docker-compose.yml
@@ -68,14 +74,10 @@ python scripts/generate_test_data.py
 ```
 You will see `*.json` files generated in the [config_files](./config_files) folder. Each file contains the configuration for one test example.
 
-*If you want to run on the original WebArena tasks:* Make sure to uncomment the line in `scripts/generate_test_data.py` to generate task files for `config_files/test_webarena.raw.json`.
-
 4. Obtain and save the auto-login cookies for all websites:
 ```
 bash prepare.sh
 ```
-
-*If you want to run on the original WebArena tasks:* Make sure to uncomment lines 35-38 in `browser_env/auto_login.py` to create cookies for the WebArena environments.
 
 5. Set up API keys.
 
@@ -97,7 +99,7 @@ python run.py \
   --test_start_idx 0 \
   --test_end_idx 1 \
   --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/test_classifieds \
+  --test_config_base_dir=config_files/vwa/test_classifieds \
   --model gpt-3.5-turbo-1106 \
   --observation_type accessibility_tree_with_captioner
 ```
@@ -113,7 +115,7 @@ python run.py \
   --test_start_idx 0 \
   --test_end_idx 1 \
   --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/test_classifieds \
+  --test_config_base_dir=config_files/vwa/test_classifieds \
   --model gpt-4-vision-preview \
   --action_set_tag som  --observation_type image_som
 ```
@@ -126,7 +128,7 @@ python run.py \
   --test_end_idx 1 \
   --max_steps 1 \
   --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/test_classifieds \
+  --test_config_base_dir=config_files/vwa/test_classifieds \
   --provider google  --model gemini --mode completion  --max_obs_length 15360 \
   --action_set_tag som  --observation_type image_som
 ```

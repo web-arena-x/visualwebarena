@@ -240,8 +240,7 @@ class StringEvaluator(Evaluator):
                     assert isinstance(value, list)
                     for must_value in value:
                         value_or = must_value.split(" |OR| ")
-                        for v in value_or:
-                            score *= self.must_include(ref=v, pred=pred)
+                        score *= any([self.must_include(ref=v, pred=pred) for v in value_or])
                 case "must_exclude":
                     assert isinstance(value, list)
                     for must_excl_value in value:
@@ -319,6 +318,8 @@ class URLExactEvaluator(Evaluator):
 
         def clean_url(url: str) -> str:
             url = str(url)
+            # Replace http://localhost with http://127.0.0.1 to keep things consistent across evals.
+            url = url.replace("localhost", "127.0.0.1")
             if url.endswith("/"):
                 url = url[:-1]
             return url

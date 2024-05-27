@@ -12,7 +12,7 @@ batch_size=30
 # Define the starting and ending indices
 start_idx=0
 end_idx=$((start_idx + batch_size))
-max_idx=209
+max_idx=210
 
 # Loop until the starting index is less than or equal to 466
 while [ $start_idx -le $max_idx ]

@@ -27,7 +27,7 @@
 
 ## Install
 ```bash
-# Python 3.10+
+# Python 3.10 (or 3.11, but not 3.12 cause 3.12 deprecated distutils needed here)
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt

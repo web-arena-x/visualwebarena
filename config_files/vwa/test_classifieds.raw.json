@@ -5784,7 +5784,7 @@
                     "locator": "func:get_query_text(__page__, '.desc')",
                     "required_contents": {
                         "must_include": [
-                            "no refund |OR| 0 refund |OR| zero refunds"
+                            "no refund |OR| no refunds |OR| 0 refund |OR| zero refunds"
                         ]
                     }
                 }

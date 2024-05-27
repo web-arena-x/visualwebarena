@@ -8,34 +8,48 @@ from itertools import combinations
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
+from browser_env.env_config import ACCOUNTS
 
-from browser_env.env_config import (
-    ACCOUNTS,
-    CLASSIFIEDS,
-    REDDIT,
-    SHOPPING,
-    GITLAB,
-    SHOPPING_ADMIN,
-)
+DATASET = os.environ["DATASET"]
+if DATASET == "webarena":
+    from browser_env.env_config import (
+        GITLAB,
+        REDDIT,
+        SHOPPING,
+        SHOPPING_ADMIN,
+    )
+    SITES = ["gitlab", "shopping", "shopping_admin", "reddit"]
+    URLS = [
+        f"{GITLAB}/-/profile",
+        f"{SHOPPING}/wishlist/",
+        f"{SHOPPING_ADMIN}/dashboard",
+        f"{REDDIT}/user/{ACCOUNTS['reddit']['username']}/account",
+    ]
+    EXACT_MATCH = [True, True, True, True]
+    KEYWORDS = ["", "", "Dashboard", "Delete"]
+
+elif DATASET == "visualwebarena":
+    from browser_env.env_config import (
+        CLASSIFIEDS,
+        REDDIT,
+        SHOPPING,
+        GITLAB,
+        SHOPPING_ADMIN,
+    )
+    SITES = ["shopping", "reddit", "classifieds"]
+    URLS = [
+        f"{SHOPPING}/wishlist/",
+        f"{REDDIT}/user/{ACCOUNTS['reddit']['username']}/account",
+        f"{CLASSIFIEDS}/index.php?page=user&action=items",
+    ]
+    EXACT_MATCH = [True, True, True]
+    KEYWORDS = ["", "Delete", "My listings"]
+else:
+    raise ValueError(f"Dataset not implemented: {DATASET}")
 
 HEADLESS = True
 SLOW_MO = 0
 
-
-SITES = ["shopping", "reddit", "classifieds"]
-URLS = [
-    f"{SHOPPING}/wishlist/",
-    f"{REDDIT}/user/{ACCOUNTS['reddit']['username']}/account",
-    f"{CLASSIFIEDS}/index.php?page=user&action=items",
-]
-EXACT_MATCH = [True, True, True]
-KEYWORDS = ["", "Delete", "My listings"]
-
-# If you want to test WebArena tasks, uncomment the following lines to add the configs:
-# SITES.extend(["shopping_admin", "gitlab"])
-# URLS.extend([f"{SHOPPING_ADMIN}/dashboard", f"{GITLAB}/-/profile"])
-# EXACT_MATCH.extend([True, True])
-# KEYWORDS.extend(["Dashboard", ""])
 assert len(SITES) == len(URLS) == len(EXACT_MATCH) == len(KEYWORDS)
 
 def is_expired(
@@ -117,6 +131,10 @@ def renew_comb(comb: list[str], auth_folder: str = "./.auth") -> None:
 
     context_manager.__exit__()
 
+def get_site_comb_from_filepath(file_path: str) -> list[str]:
+    comb = os.path.basename(file_path).rsplit("_", 1)[0].split(".")
+    return comb
+
 
 def main(auth_folder: str = "./.auth") -> None:
     pairs = list(combinations(SITES, 2))
@@ -134,15 +152,24 @@ def main(auth_folder: str = "./.auth") -> None:
 
         for site in SITES:
             executor.submit(renew_comb, [site], auth_folder=auth_folder)
+    
+    # parallel checking if the cookies are expired  
+    futures = []
+    cookie_files = list(glob.glob(f"{auth_folder}/*.json"))
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        for c_file in cookie_files:
+            comb = get_site_comb_from_filepath(c_file)
+            for cur_site in comb:
+                url = URLS[SITES.index(cur_site)]
+                keyword = KEYWORDS[SITES.index(cur_site)]
+                match = EXACT_MATCH[SITES.index(cur_site)]
+                future = executor.submit(
+                    is_expired, Path(c_file), url, keyword, match
+                )
+                futures.append(future)
 
-    for c_file in glob.glob(f"{auth_folder}/*.json"):
-        comb = c_file.split("/")[-1].rsplit("_", 1)[0].split(".")
-        for cur_site in comb:
-            url = URLS[SITES.index(cur_site)]
-            keyword = KEYWORDS[SITES.index(cur_site)]
-            match = EXACT_MATCH[SITES.index(cur_site)]
-            print(c_file, url, keyword, match)
-            assert not is_expired(Path(c_file), url, keyword, match), url
+    for i, future in enumerate(futures):
+        assert not future.result(), f"Cookie {cookie_files[i]} expired."
 
 
 if __name__ == "__main__":

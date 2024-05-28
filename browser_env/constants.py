@@ -1,3 +1,4 @@
+import re
 from typing import Literal
 
 ROLES = (
@@ -293,3 +294,31 @@ IGNORED_ACTREE_PROPERTIES = (
     "multiline",
     "invalid",
 )
+
+INJECTED_ATTR_NAME = "aria-roledescription"
+BID_ATTR = "bid" # the attribute name for extra meta data
+BID_EXPR = r"([-0-9]+)"
+FLOAT_EXPR = r"([+-]?(?:[0-9]*[.])?[0-9]+)"
+BOOL_EXPR = r"([01])"
+
+DATA_REGEXP = re.compile(
+    BID_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + FLOAT_EXPR
+    + r"_"
+    + BOOL_EXPR
+    + r"_"
+    + r"(.*)"
+)
+
+IN_VIEWPORT_RATIO_THRESHOLD = 0.6

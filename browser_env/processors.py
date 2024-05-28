@@ -1,4 +1,5 @@
 import json
+import pkgutil
 import re
 from collections import defaultdict
 from dataclasses import dataclass
@@ -20,13 +21,20 @@ from browser_env.constants import (
     ASCII_CHARSET,
     FREQ_UNICODE_CHARSET,
     IGNORED_ACTREE_PROPERTIES,
+    INJECTED_ATTR_NAME,
     UTTERANCE_MAX_LENGTH,
+    BID_ATTR,
+    DATA_REGEXP,
+    IN_VIEWPORT_RATIO_THRESHOLD
 )
 
 from .utils import (
     AccessibilityTree,
+    AccessibilityTreeNode,
     BrowserConfig,
     BrowserInfo,
+    DOMNode,
+    DOMTree,
     Observation,
     png_bytes_to_numpy,
 )
@@ -57,6 +65,74 @@ def create_empty_metadata() -> ObservationMetadata:
     }
 
 
+def extract_data_items_from_aria(string: str) -> tuple[list[str], str]:
+    """
+    Utility function to extract temporary data stored in the "aria-roledescription" attribute of a node
+    """
+
+    match = DATA_REGEXP.fullmatch(string)
+    if not match:
+        return [], string
+
+    groups = match.groups()
+    data_items = groups[:-1]
+    original_aria = groups[-1]
+    return data_items, original_aria
+
+
+def _pre_extract(page: Page) -> None:
+    """
+    pre-extraction routine, marks dom elements (set bid and dynamic attributes like value and checked)
+    adopted from BrowserGym
+    """
+    js_frame_mark_elements = pkgutil.get_data(__name__, "javascript/frame_mark_elements.js").decode(
+        "utf-8"
+    )
+
+    # we can't run this loop in JS due to Same-Origin Policy
+    # (can't access the content of an iframe from a another one)
+    def mark_frames_recursive(
+        frame,
+        global_iframe_position,
+        iframe_offset=None,
+    ):
+        # get the bid of the parent frame element
+        try:
+            parent_bid = frame.frame_element().get_attribute(BID_ATTR)
+        except:
+            parent_bid = ""
+        # mark all DOM elements in the frame (it will use the parent frame element's bid as a prefix)
+        super_iframe_offset = frame.evaluate(
+            js_frame_mark_elements,
+            [
+                parent_bid,
+                BID_ATTR,
+                global_iframe_position,
+                iframe_offset,
+            ],
+        )
+
+        # recursively mark all descendant frames
+        for _, sub_frame in enumerate(frame.child_frames):
+            if not sub_frame.is_detached():
+                is_frame_hidden = sub_frame.evaluate(
+                    """ () => {
+    const style = window.getComputedStyle(document.documentElement);
+    const is_null_size = document.documentElement.offsetWidth <= 0 || document.documentElement.offsetHeight <= 0;
+    return style.display === 'none' || style.visibility === 'hidden' || is_null_size;
+}"""
+                )
+                if not is_frame_hidden:
+                    sub_iframe_position = {
+                        key: sub_frame.frame_element().bounding_box()[key] for key in ["x", "y"]
+                    }
+                    mark_frames_recursive(sub_frame, sub_iframe_position, super_iframe_offset)
+
+    # mark all frames recursively
+    global_iframe_position = {"x": 0, "y": 0}
+
+    mark_frames_recursive(page.main_frame, global_iframe_position)
+        
 class TextObervationProcessor(ObservationProcessor):
     def __init__(
         self,
@@ -130,299 +206,456 @@ class TextObervationProcessor(ObservationProcessor):
         info: BrowserInfo = {"DOMTree": tree, "config": config}
 
         return info
-
-    @beartype
-    @staticmethod
-    def partially_in_viewport(
-        bound: list[float], config: BrowserConfig
-    ) -> bool:
-        [x, y, width, height] = bound
-        elem_left_bound = x
-        elem_top_bound = y
-        elem_right_bound = x + width
-        elem_lower_bound = y + height
-
-        not_in_viewport = (
-            elem_left_bound < config["win_right_bound"]
-            and elem_right_bound >= config["win_left_bound"]
-            and elem_top_bound < config["win_lower_bound"]
-            and elem_lower_bound >= config["win_upper_bound"]
-        )
-        return not_in_viewport
-
-    @beartype
-    def retrieve_viewport_info(self, info: BrowserInfo) -> None:
-        """Add viewport related information to the DOMTree
-        1. add union bound, which is a union of all the bounds of the nodes in the subtree
-        This is only used when current_viewport_only is enabled since it is quite slow
-        """
-        tree = info["DOMTree"]
-        document = tree["documents"][0]
-        nodes = document["nodes"]
-        parent = nodes["parentIndex"]
-        node_names = nodes["nodeName"]
-
-        layout = document["layout"]
-        layout_node_cursor = layout["nodeIndex"]
-        bounds = layout["bounds"]
-
-        graph = defaultdict(lambda: [])
-        assert len(node_names) == len(parent)
-        for node_idx in range(len(node_names)):
-            parent_idx = parent[node_idx]
-            if parent_idx != -1:
-                graph[parent_idx].append(node_idx)
-
-        union_bounds: list[list[float] | None] = [None for _ in bounds]
-
-        def valid_bbox(bound: list[float] | None) -> bool:
-            if bound is None:
-                return False
-            # no width or height
-            if np.isclose(bound[2], 0):
-                return False
-            if np.isclose(bound[3], 0):
-                return False
-            return True
-
-        def add_union_bound(idx: int) -> list[float] | None:
-            if idx in layout_node_cursor:
-                cursor = layout_node_cursor.index(idx)
-                node_bound = bounds[cursor].copy()
-                tree_bounds: list[Any] = [node_bound]
-                for child_idx in graph[idx]:
-                    child_bound = add_union_bound(child_idx)
-                    tree_bounds.append(
-                        child_bound.copy() if child_bound else None
-                    )
-
-                tree_bounds = [b for b in tree_bounds if valid_bbox(b)]
-                # convert to absolute coordinates
-                for i in range(len(tree_bounds)):
-                    tree_bounds[i][2] = tree_bounds[i][0] + tree_bounds[i][2]
-                    tree_bounds[i][3] = tree_bounds[i][1] + tree_bounds[i][3]
-
-                if len(tree_bounds) == 0:
-                    assert not valid_bbox(node_bound)
-                    node_union_bound = [0.0, 0.0, 0.0, 0.0]
-                else:
-                    left_bound = min([b[0] for b in tree_bounds])
-                    top_bound = min([b[1] for b in tree_bounds])
-                    right_bound = max([b[2] for b in tree_bounds])
-                    bottom_bound = max([b[3] for b in tree_bounds])
-                    node_union_bound = [
-                        left_bound,
-                        top_bound,
-                        right_bound - left_bound,
-                        bottom_bound - top_bound,
-                    ]
-
-                # update the list
-                union_bounds[cursor] = node_union_bound
-            else:
-                node_union_bound = None
-
-            return node_union_bound
-
-        add_union_bound(0)
-        info["DOMTree"]["documents"][0]["layout"]["unionBounds"] = union_bounds
-
-    @beartype
-    def current_viewport_html(self, info: BrowserInfo) -> str:
+    
+    def fetch_page_html(
+        self,
+        info: BrowserInfo,
+        page: Page,
+        client: CDPSession,
+        current_viewport_only: bool,
+    ) -> DOMTree:
         # adopted from [natbot](https://github.com/nat/natbot)
         tree = info["DOMTree"]
         strings = tree["strings"]
         document = tree["documents"][0]
         nodes = document["nodes"]
-        attributes = nodes["attributes"]
-        node_value = nodes["nodeValue"]
-        parent = nodes["parentIndex"]
-        node_names = nodes["nodeName"]
+        
+        # make a dom tree that is easier to navigate
+        dom_tree: DOMTree = []
+        graph = defaultdict(list)
+        for node_idx in range(len(nodes["nodeName"])):
+            cur_node: DOMNode = {
+                "nodeId": "",
+                "nodeType": "",
+                "nodeName": "",
+                "nodeValue": "",
+                "attributes": "",
+                "backendNodeId": "",
+                "parentId": "",
+                "childIds": [],
+                "cursor": 0,
+                "union_bound": None,
+            }
 
-        layout = document["layout"]
-        layout_node_cursor = layout["nodeIndex"]
-        union_bounds = layout["unionBounds"]
+            node_type_idx = nodes["nodeType"][node_idx]
+            node_type = "generic"
+            if node_type_idx >= 0 and node_type_idx < len(strings):
+                node_type = strings[node_type_idx]
 
-        graph = defaultdict(lambda: [])
-        for node_idx in range(len(node_names)):
-            parent_idx = parent[node_idx]
-            if parent_idx != -1:
-                graph[parent_idx].append(node_idx)
+            node_name = strings[nodes["nodeName"][node_idx]]
 
-        def dfs(idx: int) -> str:
-            node_name = strings[node_names[idx]].lower().strip()
-            can_skip = "#" in node_name or "::" in node_name
-
-            inner_text = ""
-            node_value_idx = node_value[idx]
+            node_value_idx = nodes["nodeValue"][node_idx]
+            node_value = ""
             if node_value_idx >= 0 and node_value_idx < len(strings):
-                inner_text = " ".join(strings[node_value_idx].split())
-            node_attributes = [strings[i] for i in attributes[idx]]
+                node_value = " ".join(strings[node_value_idx].split())
+
+            node_attributes = [
+                strings[i] for i in nodes["attributes"][node_idx]
+            ]
+
+            injected_attr_value = ""
             node_attributes_str = ""
             for i in range(0, len(node_attributes), 2):
                 a = node_attributes[i]
                 b = node_attributes[i + 1]
+                if a == INJECTED_ATTR_NAME: # not a real attribute
+                    injected_attr_value = b
+                    continue
+                elif a.startswith("bid") or a.startswith("browsergym"):
+                    continue
                 b = " ".join(b.split())
                 node_attributes_str += f'{a}="{b}" '
             node_attributes_str = node_attributes_str.strip()
 
-            html = ""
-            if not can_skip:
-                html += f"<{node_name}"
-                if {node_attributes_str}:
-                    html += f" {node_attributes_str}"
-                html += f">{inner_text}"
+            cur_node["nodeId"] = str(node_idx)
+            cur_node["nodeType"] = node_type
+            cur_node["nodeName"] = node_name
+            cur_node["nodeValue"] = node_value
+            cur_node["attributes"] = node_attributes_str
+            cur_node["backendNodeId"] = str(nodes["backendNodeId"][node_idx])
+            cur_node["parentId"] = str(nodes["parentIndex"][node_idx])
+
+            if cur_node["parentId"] != "-1":
+                graph[cur_node["parentId"]].append(str(cur_node["nodeId"]))
+
+            # get the bound
+            if cur_node["parentId"] == "-1":
+                cur_node["union_bound"] = [0.0, 0.0, 10.0, 10.0]
+                cur_node["center"] = [5.0, 5.0]
             else:
-                html += f"{inner_text}"
+                if injected_attr_value:
+                    data_items, _ = extract_data_items_from_aria(
+                        injected_attr_value
+                    )
+                    (
+                        _,
+                        left,
+                        top,
+                        center_x,
+                        center_y,
+                        right,
+                        bottom,
+                        _,
+                    ) = data_items
+                    cur_node["union_bound"] = [
+                        float(left),
+                        float(top),
+                        float(right) - float(left),
+                        float(bottom) - float(top),
+                    ]
+                    cur_node["center"] = (float(center_x), float(center_y))        
+                else:
+                    cur_node["union_bound"] = None
+                    cur_node["center"] = None
 
-            for child_idx in graph[idx]:
-                if child_idx in layout_node_cursor:
-                    cursor = layout_node_cursor.index(child_idx)
-                    union_bound = union_bounds[cursor]
-                    if not self.partially_in_viewport(
-                        union_bound, info["config"]
-                    ):
-                        continue
-                    html += dfs(child_idx)
+            dom_tree.append(cur_node)
+            
+        # special process to text field
+        for node in dom_tree:
+            if node['nodeName'].lower() == '#text':
+                _node = node
+                while True:
+                    parent_cursor = int(_node["parentId"])
+                    parent_node = dom_tree[parent_cursor]
+                    if parent_node["union_bound"]:
+                        node["union_bound"] = parent_node["union_bound"]
+                        node["center"] = parent_node["center"]
+                        break
+                    _node = parent_node
+                    if "parentId" not in _node:
+                        break
 
-            if not can_skip:
-                html += f"</{node_name}>"
+        # add parent children index to the node
+        for parent_id, child_ids in graph.items():
+            dom_tree[int(parent_id)]["childIds"] = child_ids
 
-            return html
+        # remove the nodes that are not in the current viewport
+        if current_viewport_only:
 
-        html = dfs(0)
-        return html
+            def remove_node_in_graph(node: DOMNode) -> None:
+                # update the node information in the accessibility tree
+                node_id = node["nodeId"]
+                parent_id = node["parentId"]
+                child_ids = node["childIds"]
+
+                # update the children of the parent node
+                assert dom_tree[int(parent_id)]["parentId"] != "[REMOVED]"
+                # remove the nodeid from parent
+                index = dom_tree[int(parent_id)]["childIds"].index(node_id)
+                dom_tree[int(parent_id)]["childIds"].pop(index)
+
+                # Insert children_nodeids in the same location
+                for child_id in child_ids:
+                    dom_tree[int(parent_id)]["childIds"].insert(
+                        index, child_id
+                    )
+                    index += 1
+
+                # update children node's parent
+                for child_id in child_ids:
+                    dom_tree[int(child_id)]["parentId"] = parent_id
+                # mark as removed
+                dom_tree[int(node_id)]["parentId"] = "[REMOVED]"
+
+            config = info["config"]
+            for cursor, node in enumerate(dom_tree):
+                if not node["union_bound"]:
+                    remove_node_in_graph(node)
+                    continue
+
+                [x, y, width, height] = node["union_bound"]
+
+                # invisible node
+                if width == 0.0 or height == 0.0:
+                    remove_node_in_graph(node)
+                    continue
+
+                in_viewport_ratio = self.get_element_in_viewport_ratio(
+                    elem_left_bound=float(x),
+                    elem_top_bound=float(y),
+                    width=float(width),
+                    height=float(height),
+                    config=config,
+                )
+
+                if in_viewport_ratio < IN_VIEWPORT_RATIO_THRESHOLD:
+                    remove_node_in_graph(node)
+
+            dom_tree = [
+                node
+                for node in dom_tree
+                if node.get("parentId", "-1") != "[REMOVED]"
+            ]
+
+        return dom_tree
+
+    @staticmethod
+    def parse_html(dom_tree: DOMTree) -> tuple[str, dict[str, Any]]:
+        """Parse the html tree into a string text"""
+
+        obs_nodes_info = {}
+        nodeid_to_cursor = {
+            node["nodeId"]: idx for idx, node in enumerate(dom_tree)
+        }
+
+        def dfs(node_cursor: int, depth: int) -> str:
+            tree_str = ""
+            node = dom_tree[node_cursor]
+            indent = "\t" * depth
+            valid_node = True
+            try:
+                node_str = f"[{node_cursor}] <{node['nodeName']}"
+                if node["attributes"]:
+                    node_str += f" {node['attributes']}"
+                node_str += f"> {node['nodeValue']}"
+                valid_node = bool(node["attributes"] or node["nodeValue"])
+
+                if valid_node:
+                    obs_nodes_info[str(node_cursor)] = {
+                        "backend_id": node["backendNodeId"],
+                        "union_bound": node["union_bound"],
+                        "text": node_str,
+                    }
+                    tree_str += f"{indent}{node_str}\n"
+
+            except Exception as e:
+                valid_node = False
+
+            for child_ids in node["childIds"]:
+                child_cursor = nodeid_to_cursor[child_ids]
+                child_depth = depth + 1 if valid_node else depth
+                child_str = dfs(child_cursor, child_depth)
+                tree_str += child_str
+
+            return tree_str
+
+        html = dfs(0, 0)
+        return html, obs_nodes_info
 
     @beartype
     def fetch_page_accessibility_tree(
-        self, info: BrowserInfo, client: CDPSession
-    ) -> AccessibilityTree:
-        accessibility_tree: AccessibilityTree = client.send(
-            "Accessibility.getFullAXTree", {}
-        )["nodes"]
-
-        # a few nodes are repeated in the accessibility tree
-        seen_ids = set()
-        _accessibility_tree = []
-        for node in accessibility_tree:
-            if node["nodeId"] not in seen_ids:
-                _accessibility_tree.append(node)
-                seen_ids.add(node["nodeId"])
-        accessibility_tree = _accessibility_tree
-
-        # add the bounding box of each node
-        tree = info["DOMTree"]
-        document = tree["documents"][0]
-        nodes = document["nodes"]
-        backend_node_id = nodes["backendNodeId"]
-        node_names = nodes["nodeName"]
-
-        layout = document["layout"]
-        layout_node_cursor = layout["nodeIndex"]
-        bounds = layout["bounds"]
-        union_bounds = layout["unionBounds"]
-        offsetrect_bounds = layout["offsetRects"]
-        backend_id_to_bound = {}
-
-        # get the mapping between backend node id and bounding box
-        for idx in range(len(node_names)):
-            if idx not in layout_node_cursor:
-                continue
-            cursor = layout_node_cursor.index(idx)
-            node_bound = bounds[cursor]
-            node_union_bound = union_bounds[cursor]
-            node_offsetrect_bound = offsetrect_bounds[cursor]
-            node_backend_id = backend_node_id[idx]
-            backend_id_to_bound[node_backend_id] = [
-                node_bound,
-                node_union_bound,
-                node_offsetrect_bound,
-            ]
-
-        parent_graph: dict[str, str] = {}
-        refine_node_ids: list[str] = []
-        for node in accessibility_tree:
-            if "parentId" in node:
-                parent_graph[node["nodeId"]] = node["parentId"]
-            if "backendDOMNodeId" not in node:
-                node["bound"] = None
-                node["union_bound"] = None
-                node["offsetrect_bound"] = None
-            elif node["backendDOMNodeId"] not in backend_id_to_bound:
-                refine_node_ids.append(node["nodeId"])
-            else:
-                node["bound"] = backend_id_to_bound[node["backendDOMNodeId"]][
-                    0
-                ]
-                node["union_bound"] = backend_id_to_bound[
-                    node["backendDOMNodeId"]
-                ][1]
-                node["offsetrect_bound"] = backend_id_to_bound[
-                    node["backendDOMNodeId"]
-                ][2]
-
-        # refine the bounding box for nodes which only appear in the accessibility tree
-        node_ids = [node["nodeId"] for node in accessibility_tree]
-        for refine_node_id in refine_node_ids:
-            child_id = refine_node_id
-            parent_idx: None | int = None
-            while child_id in parent_graph:
-                parent_id = parent_graph[child_id]
-                parent_idx = node_ids.index(parent_id)
-                child_id = parent_id
-                if accessibility_tree[parent_idx]["union_bound"] is not None:
-                    break
-
-            refine_node_idx = node_ids.index(refine_node_id)
-
-            if parent_idx is not None:
-                accessibility_tree[refine_node_idx][
-                    "bound"
-                ] = accessibility_tree[parent_idx]["bound"]
-                accessibility_tree[refine_node_idx][
-                    "union_bound"
-                ] = accessibility_tree[parent_idx]["union_bound"]
-                accessibility_tree[refine_node_idx][
-                    "offsetrect_bound"
-                ] = accessibility_tree[parent_idx]["offsetrect_bound"]
-            else:
-                accessibility_tree[refine_node_idx]["bound"] = None
-                accessibility_tree[refine_node_idx]["union_bound"] = None
-                accessibility_tree[refine_node_idx]["offsetrect_bound"] = None
-
-        return accessibility_tree
-
-    @beartype
-    def current_viewport_accessibility_tree(
         self,
+        client: CDPSession,
         info: BrowserInfo,
-        accessibility_tree: AccessibilityTree,
+        current_viewport_only: bool
     ) -> AccessibilityTree:
-        config = info["config"]
-        subtree = []
-        for node in accessibility_tree:
-            if not node["union_bound"]:
-                continue
+        """Fetch the accessibility tree of the current page"""
+        frame_tree = client.send(
+            "Page.getFrameTree",
+            {}
+        )
 
-            [x, y, width, height] = node["union_bound"]
-            elem_left_bound = x
-            elem_top_bound = y
-            elem_right_bound = x + width
-            elem_lower_bound = y + height
+        # extract all frame IDs into a list
+        # (breadth-first-search through the frame tree)
+        frame_ids = []
+        root_frame = frame_tree["frameTree"]
+        frames_to_process = [root_frame]
+        while frames_to_process:
+            frame = frames_to_process.pop()
+            frames_to_process.extend(frame.get("childFrames", []))
+            # extract the frame ID
+            frame_id = frame["frame"]["id"]
+            frame_ids.append(frame_id)
 
-            ok = (
-                elem_left_bound < config["win_right_bound"]
-                and elem_right_bound >= config["win_left_bound"]
-                and elem_top_bound < config["win_lower_bound"]
-                and elem_lower_bound >= config["win_upper_bound"]
+        # extract the AXTree of each frame
+        frame_axtrees = {
+            frame_id: client.send(
+                "Accessibility.getFullAXTree",
+                {"frameId": frame_id},
             )
+            for frame_id in frame_ids
+        }
 
-            if ok:
-                subtree.append(node)
+        # extract the properties of each node in the AXTree
+        for ax_tree in frame_axtrees.values():
+            processed_node_ids = set()
+            dup_node_idx = [] # some nodes are repeated in the AXTree
+            for n_idx, node in enumerate(ax_tree["nodes"]):
+                node_id = node["nodeId"]
+                if node_id in processed_node_ids:
+                    dup_node_idx.append(n_idx)
+                    continue
+                processed_node_ids.add(node_id)
 
-        return subtree
+                if node["role"]["value"] == "RootWebArea":
+                    # always inside the viewport
+                    node["union_bound"] = [0.0, 0.0, 10.0, 10.0]
+                    node["center"] = [5.0, 5.0]
+                    continue
 
-    @beartype
+                # default to None
+                node["union_bound"] = None
+                node["center"] = None
+                # look for the "roledescription" property
+                props = node.get("properties", [])
+                role_description_value = [(i, prop["value"]["value"]) for i, prop in enumerate(props) if prop["name"] == "roledescription"]
+
+                if role_description_value:
+                    prop_idx, role_value = role_description_value[0]
+                    data_items, new_value = extract_data_items_from_aria(role_value)
+                    node["properties"][prop_idx]["value"]["value"] = new_value
+                    # remove the "roledescription" property if empty
+                    if new_value == "":
+                        del node["properties"][prop_idx]
+                    # add all extracted "browsergym" properties to the AXTree
+                    if data_items:
+                        (
+                            _,
+                            left,
+                            top,
+                            center_x,
+                            center_y,
+                            right,
+                            bottom,
+                            _,
+                        ) = data_items
+                        
+                        node["union_bound"] = [
+                            float(left),
+                            float(top),
+                            float(right) - float(left),
+                            float(bottom) - float(top)
+                        ]
+                        node["center"] = (float(center_x), float(center_y))
+         
+            ax_tree["nodes"] = [node for i, node in enumerate(ax_tree["nodes"]) if i not in dup_node_idx]
+
+            # special process to statictext
+            nodeid_to_cursor = {}
+            for cursor, node in enumerate(ax_tree["nodes"]):
+                nodeid_to_cursor[node["nodeId"]] = cursor
+            
+            # inherent a union bound from a valid parent
+            for node in ax_tree["nodes"]:
+                if node["role"]["value"].lower() == "statictext":
+                    _node = node
+                    while True:
+                        parent_cursor = nodeid_to_cursor[_node["parentId"]]
+                        parent_node = ax_tree["nodes"][parent_cursor]
+                        if parent_node["union_bound"]:
+                            node["union_bound"] = parent_node["union_bound"]
+                            node["center"] = parent_node["center"]
+                            break
+                        _node = parent_node
+                        if "parentId" not in _node:
+                            break
+
+        def remove_node_in_graph(
+            ax_tree: AccessibilityTree,
+            node: AccessibilityTreeNode,
+            nodeid_to_cursor: dict[str, int],
+        ) -> None:
+            # update the node information in the accessibility tree
+            nodeid = node["nodeId"]
+            node_cursor = nodeid_to_cursor[nodeid]
+            parent_nodeid = node["parentId"]
+            children_nodeids = node["childIds"]
+            parent_cursor = nodeid_to_cursor[parent_nodeid]
+            # update the children of the parent node
+            assert (
+                ax_tree[parent_cursor].get("parentId", "Root")
+                is not None
+            )
+            # remove the nodeid from parent's childIds
+            index = ax_tree[parent_cursor]["childIds"].index(
+                nodeid
+            )
+            ax_tree[parent_cursor]["childIds"].pop(index)
+            # Insert children_nodeids in the same location
+            for child_nodeid in children_nodeids:
+                ax_tree[parent_cursor]["childIds"].insert(
+                    index, child_nodeid
+                )
+                index += 1
+            # update children node's parent
+            for child_nodeid in children_nodeids:
+                child_cursor = nodeid_to_cursor[child_nodeid]
+                ax_tree[child_cursor][
+                    "parentId"
+                ] = parent_nodeid
+            # mark as removed
+            ax_tree[node_cursor]["parentId"] = "[REMOVED]"
+        
+        merged_axtree: AccessibilityTree = []
+        # filter nodes that are not in the current viewport
+        if current_viewport_only:
+            config = info["config"]
+            
+            for frame_tree in frame_axtrees.values():
+                cur_ax_tree = frame_tree["nodes"]
+                nodeid_to_cursor = {}
+                for cursor, node in enumerate(cur_ax_tree):
+                    nodeid_to_cursor[node["nodeId"]] = cursor
+    
+                for node in cur_ax_tree:
+                    if not node["union_bound"]:
+                        remove_node_in_graph(cur_ax_tree, node, nodeid_to_cursor)
+                        continue
+
+                    [x, y, width, height] = node["union_bound"]
+
+                    # invisible node
+                    if width == 0 or height == 0:
+                        remove_node_in_graph(cur_ax_tree, node, nodeid_to_cursor)
+                        continue
+
+                    in_viewport_ratio = self.get_element_in_viewport_ratio(
+                        elem_left_bound=float(x),
+                        elem_top_bound=float(y),
+                        width=float(width),
+                        height=float(height),
+                        config=config,
+                    )
+
+                    if in_viewport_ratio < IN_VIEWPORT_RATIO_THRESHOLD:
+                        remove_node_in_graph(cur_ax_tree, node, nodeid_to_cursor)
+                        
+
+                cur_ax_tree = [
+                    node
+                    for node in cur_ax_tree
+                    if node.get("parentId", "Root") != "[REMOVED]"
+                ]
+                
+                merged_axtree.extend(cur_ax_tree)
+        else:
+            for frame_tree in frame_axtrees.values():
+                merged_axtree.extend(frame_tree["nodes"])
+            
+        return merged_axtree
+
+    @staticmethod
+    def get_element_in_viewport_ratio(
+        elem_left_bound: float,
+        elem_top_bound: float,
+        width: float,
+        height: float,
+        config: BrowserConfig,
+    ) -> float:
+        elem_right_bound = elem_left_bound + width
+        elem_lower_bound = elem_top_bound + height
+
+        win_left_bound = 0
+        win_right_bound = config["win_width"]
+        win_top_bound = 0
+        win_lower_bound = config["win_height"]
+
+        # Compute the overlap in x and y axes
+        overlap_width = max(
+            0,
+            min(elem_right_bound, win_right_bound)
+            - max(elem_left_bound, win_left_bound),
+        )
+        overlap_height = max(
+            0,
+            min(elem_lower_bound, win_lower_bound)
+            - max(elem_top_bound, win_top_bound),
+        )
+
+        # Compute the overlap area
+        ratio = overlap_width * overlap_height / width * height
+        return ratio
+
     @staticmethod
     def parse_accessibility_tree(
         accessibility_tree: AccessibilityTree,
@@ -485,9 +718,7 @@ class TextObervationProcessor(ObservationProcessor):
                     tree_str += f"{indent}{node_str}"
                     obs_nodes_info[obs_node_id] = {
                         "backend_id": node["backendDOMNodeId"],
-                        "bound": node["bound"],
                         "union_bound": node["union_bound"],
-                        "offsetrect_bound": node["offsetrect_bound"],
                         "text": node_str,
                     }
 
@@ -534,6 +765,132 @@ class TextObervationProcessor(ObservationProcessor):
                 clean_lines.append(line)
 
         return "\n".join(clean_lines)
+        
+    def fetch_image_related(
+        self, 
+        page: Page,
+        client: CDPSession,
+        browser_info: BrowserInfo
+    ) -> str:
+        # Check if the current page is an image url
+        if page.url.endswith((".jpg", ".jpeg", ".png")):
+            print("NOTE: We are on an image page!!!")
+            # Load image from current url and run captioning on it.
+            if page.url not in self.url2caption and self.captioning_fn is not None:
+                try:
+                    image = Image.open(
+                        requests.get(page.url, stream=True).raw
+                    )
+                    caption = self.captioning_fn([image])[0].strip()
+                    self.url2caption[page.url] = remove_unicode(caption)
+                except Exception as e:
+                    print("L579 WARNING: ", e)
+            content = self.url2caption.get(page.url, "Image")
+
+        else:
+            if self.captioning_fn is not None:
+                images = page.query_selector_all("img")
+                image_urls = []
+                for image in images:
+                    try:
+                        image_url = image.get_attribute("src")
+                        if not image_url.startswith(
+                            ("http://", "https://", "www.")
+                        ):
+                            image_url = urljoin(page.url, image_url)
+                        if image_url not in self.url2caption:
+                            image_urls.append(image_url)
+                    except Exception as e:
+                        print("L604 WARNING: ", e)
+
+                # Run image captioning on image_url pixels. This is for models which use captioning as a baseline.
+                if len(image_urls) > 0:
+                    image_pixels = []
+                    valid_urls = []
+                    for url in image_urls:
+                        if "data:image/svg" in url:
+                            continue
+                        else:
+                            try:
+                                image = Image.open(
+                                    requests.get(url, stream=True).raw
+                                )
+                                image_pixels.append(image)
+                                valid_urls.append(url)
+                            except Exception as e:
+                                print("L616 WARNING: ", e)
+
+                    # Caption images.
+                    if image_pixels:
+                        # Run in batches of 4.
+                        bs = 4
+                        captions = []
+                        for i in range(0, len(image_pixels), bs):
+                            try:
+                                captions.extend(
+                                    self.captioning_fn(
+                                        image_pixels[i : i + bs]
+                                    )
+                                )
+                            except Exception as e:
+                                print("L628 WARNING: ", e)
+                                captions.extend(
+                                    [""] * len(image_pixels[i : i + bs])
+                                )
+                        assert len(valid_urls) == len(
+                            captions
+                        ), f"len(images)={len(valid_urls)}, len(captions)={len(captions)}"
+                        for image_url, caption in zip(valid_urls, captions):
+                            self.url2caption[image_url] = remove_unicode(
+                                caption.strip()
+                            )
+
+                image_idx = 0
+                for image in images:
+                    try:
+                        original_alt = image.get_attribute("alt") or ""
+                        image_url = image.get_attribute("src")
+                        if not image_url.startswith(
+                            ("http://", "https://", "www.")
+                        ):
+                            image_url = urljoin(page.url, image_url)
+
+                        updated_alt = original_alt
+
+                        if image_url in self.url2caption:
+                            if self.url2caption[image_url] not in updated_alt:
+                                updated_alt = f"{updated_alt}, description: {self.url2caption[image_url]}"
+                        elif "data:image/svg" not in image_url:
+                            print(
+                                f"WARNING: {image_url} not in self.url2caption"
+                            )
+
+                        if "url:" not in updated_alt:
+                            updated_alt = f"{updated_alt}, url: {image_url}"
+
+                        safe_updated_alt = json.dumps(updated_alt)
+                        image.evaluate(
+                            f"node => node.alt = {safe_updated_alt}"
+                        )
+                    except Exception as e:
+                        print("L653 WARNING:", e)
+                        
+            if self.observation_type == "accessibility_tree_with_captioner":
+                accessibility_tree = self.fetch_page_accessibility_tree(
+                    client,
+                    browser_info,
+                    current_viewport_only=self.current_viewport_only
+                )
+                content, obs_nodes_info = self.parse_accessibility_tree(
+                    accessibility_tree
+                )
+                content = self.clean_accesibility_tree(content)
+                self.obs_nodes_info = obs_nodes_info
+                self.meta_data["obs_nodes_info"] = obs_nodes_info
+            else:
+                content = ""  # Not used for SoM
+
+        return content
 
     @beartype
     def process(self, page: Page, client: CDPSession) -> str:
@@ -554,6 +911,9 @@ class TextObervationProcessor(ObservationProcessor):
             tab_title_str = " | ".join(
                 ["Tab {idx}" for idx in range(len(open_tabs))]
             )
+            
+        # run pre extract to add meta information to nodes
+        _pre_extract(page)
 
         try:
             browser_info = self.fetch_browser_info(page, client)
@@ -561,159 +921,43 @@ class TextObervationProcessor(ObservationProcessor):
             page.wait_for_load_state("load", timeout=500)
             browser_info = self.fetch_browser_info(page, client)
 
-        if self.current_viewport_only:
-            self.retrieve_viewport_info(browser_info)
-
         if self.observation_type == "html":
-            if self.current_viewport_only:
-                html = self.current_viewport_html(browser_info)
-                content = html
-            else:
-                content = page.content()
-        elif self.observation_type == "":
-            content = ""
+            dom_tree = self.fetch_page_html(
+                browser_info,
+                page,
+                client,
+                self.current_viewport_only,
+            )
+            content, obs_nodes_info = self.parse_html(dom_tree)
+            self.obs_nodes_info = obs_nodes_info
+            self.meta_data["obs_nodes_info"] = obs_nodes_info
+
         elif self.observation_type == "accessibility_tree":
             accessibility_tree = self.fetch_page_accessibility_tree(
-                browser_info, client
+                client,
+                browser_info,
+                self.current_viewport_only,
             )
-            if self.current_viewport_only:
-                accessibility_tree = self.current_viewport_accessibility_tree(
-                    browser_info, accessibility_tree
-                )
             content, obs_nodes_info = self.parse_accessibility_tree(
                 accessibility_tree
             )
             content = self.clean_accesibility_tree(content)
             self.obs_nodes_info = obs_nodes_info
             self.meta_data["obs_nodes_info"] = obs_nodes_info
+
         elif self.observation_type in [
             "accessibility_tree_with_captioner",
             "image_som",
         ]:
-            # Check if the current page is an image url
-            if page.url.endswith((".jpg", ".jpeg", ".png")):
-                print("NOTE: We are on an image page!!!")
-                # Load image from current url and run captioning on it.
-                if page.url not in self.url2caption and self.captioning_fn is not None:
-                    try:
-                        image = Image.open(
-                            requests.get(page.url, stream=True).raw
-                        )
-                        caption = self.captioning_fn([image])[0].strip()
-                        self.url2caption[page.url] = remove_unicode(caption)
-                    except Exception as e:
-                        print("L579 WARNING: ", e)
+            content = self.fetch_image_related(
+                page,
+                client,
+                browser_info,
+            )
 
-                content = self.url2caption.get(page.url, "Image")
-            else:
-                if self.captioning_fn is not None:
-                    images = page.query_selector_all("img")
-                    image_urls = []
-                    for image in images:
-                        try:
-                            image_url = image.get_attribute("src")
-                            if not image_url.startswith(
-                                ("http://", "https://", "www.")
-                            ):
-                                image_url = urljoin(page.url, image_url)
-                            if image_url not in self.url2caption:
-                                image_urls.append(image_url)
-                        except Exception as e:
-                            print("L604 WARNING: ", e)
+        elif self.observation_type == "":
+            content = ""
 
-                    # Run image captioning on image_url pixels. This is for models which use captioning as a baseline.
-                    if len(image_urls) > 0:
-                        image_pixels = []
-                        valid_urls = []
-                        for url in image_urls:
-                            if "data:image/svg" in url:
-                                continue
-                            else:
-                                try:
-                                    image = Image.open(
-                                        requests.get(url, stream=True).raw
-                                    )
-                                    image_pixels.append(image)
-                                    valid_urls.append(url)
-                                except Exception as e:
-                                    print("L616 WARNING: ", e)
-
-                        # Caption images.
-                        if image_pixels:
-                            # Run in batches of 4.
-                            bs = 4
-                            captions = []
-                            for i in range(0, len(image_pixels), bs):
-                                try:
-                                    captions.extend(
-                                        self.captioning_fn(
-                                            image_pixels[i : i + bs]
-                                        )
-                                    )
-                                except Exception as e:
-                                    print("L628 WARNING: ", e)
-                                    captions.extend(
-                                        [""] * len(image_pixels[i : i + bs])
-                                    )
-                            assert len(valid_urls) == len(
-                                captions
-                            ), f"len(images)={len(valid_urls)}, len(captions)={len(captions)}"
-                            for image_url, caption in zip(valid_urls, captions):
-                                self.url2caption[image_url] = remove_unicode(
-                                    caption.strip()
-                                )
-
-                    image_idx = 0
-                    for image in images:
-                        try:
-                            original_alt = image.get_attribute("alt") or ""
-                            image_url = image.get_attribute("src")
-                            if not image_url.startswith(
-                                ("http://", "https://", "www.")
-                            ):
-                                image_url = urljoin(page.url, image_url)
-
-                            updated_alt = original_alt
-
-                            if image_url in self.url2caption:
-                                if self.url2caption[image_url] not in updated_alt:
-                                    updated_alt = f"{updated_alt}, description: {self.url2caption[image_url]}"
-                            elif "data:image/svg" not in image_url:
-                                print(
-                                    f"WARNING: {image_url} not in self.url2caption"
-                                )
-
-                            if "url:" not in updated_alt:
-                                updated_alt = f"{updated_alt}, url: {image_url}"
-
-                            safe_updated_alt = json.dumps(updated_alt)
-                            image.evaluate(
-                                f"node => node.alt = {safe_updated_alt}"
-                            )
-                        except Exception as e:
-                            print("L653 WARNING:", e)
-
-                if (
-                    self.observation_type
-                    == "accessibility_tree_with_captioner"
-                ):
-                    accessibility_tree = self.fetch_page_accessibility_tree(
-                        browser_info, client
-                    )
-                    if self.current_viewport_only:
-                        accessibility_tree = (
-                            self.current_viewport_accessibility_tree(
-                                browser_info, accessibility_tree
-                            )
-                        )
-                    content, obs_nodes_info = self.parse_accessibility_tree(
-                        accessibility_tree
-                    )
-                    content = self.clean_accesibility_tree(content)
-                    self.obs_nodes_info = obs_nodes_info
-                    self.meta_data["obs_nodes_info"] = obs_nodes_info
-                else:
-                    content = ""  # Not used for SoM
         else:
             raise ValueError(
                 f"Invalid observation type: {self.observation_type}"

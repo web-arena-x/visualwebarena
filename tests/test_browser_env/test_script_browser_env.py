@@ -1,8 +1,8 @@
 import asyncio
 import collections
 import json
+import os
 import tempfile
-import time
 from typing import Callable, Dict, Optional, Tuple, Type, Union, cast
 
 import pytest
@@ -274,18 +274,19 @@ def test_accessibility_tree_observation_update(
 
 
 def test_click_open_new_tab(
-    accessibility_tree_current_viewport_script_browser_env: ScriptBrowserEnv,
+    accessibility_tree_script_browser_env_with_sleep: ScriptBrowserEnv,
 ) -> None:
-    env = accessibility_tree_current_viewport_script_browser_env
+    env = accessibility_tree_script_browser_env_with_sleep
     env.reset()
     env.step(
         create_playwright_action(
-            "page.goto('https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_open')"
+            f"page.goto('file:///{os.getcwd()}/tests/test_browser_env/sites/new_tab.html')"
         )
     )
     obs, *_, info = env.step(
         create_playwright_action(
-            'page.frame_locator("iframe[name=\\"iframeResult\\"]").get_by_role("button", name="Try it").click()'
+            'page.get_by_role("link", name="Visit Example.com").click()'
         )
     )
-    assert info["page"].url == "https://www.w3schools.com/"
+    assert "heading 'Example Domain'" in obs["text"]
+    assert "www.example.com" in info['page'].url

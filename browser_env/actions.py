@@ -1169,10 +1169,11 @@ def execute_action(
     page: Page,
     browser_ctx: BrowserContext,
     obseration_processor: ObservationProcessor,
+    sleep_after_execution: float = 0.0,
 ) -> Page:
     """Execute the action on the ChromeDriver."""
     action_type = action["action_type"]
-
+    num_tabs_before = len(browser_ctx.pages)
     match action_type:
         case ActionTypes.NONE:
             pass
@@ -1190,11 +1191,9 @@ def execute_action(
             execute_mouse_hover(action["coords"][0], action["coords"][1], page)
         case ActionTypes.KEYBOARD_TYPE:
             execute_type(action["text"], page)
-
         case ActionTypes.CLICK:
             # check each kind of locator in order
             # TODO[shuyanzh]: order is temp now
-            num_tabs_before = len(browser_ctx.pages)
             if action["element_id"]:
                 element_id = action["element_id"]
                 element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
@@ -1212,13 +1211,6 @@ def execute_action(
                 execute_playwright_click(locator_code=locator_code, page=page)
             else:
                 raise ValueError("No proper locator found for click action")
-            num_tabs_now = len(browser_ctx.pages)
-            # if a new tab is opened by clicking, switch to the new tab
-            if num_tabs_now > num_tabs_before:
-                page = browser_ctx.pages[-1]
-                page.bring_to_front()
-                page.client = page.context.new_cdp_session(page)  # type: ignore[attr-defined]
-
         case ActionTypes.HOVER:
             if action["element_id"]:
                 element_id = action["element_id"]
@@ -1268,7 +1260,6 @@ def execute_action(
             page.bring_to_front()
         case ActionTypes.NEW_TAB:
             page = browser_ctx.new_page()
-            page.client = page.context.new_cdp_session(page)  # type: ignore[attr-defined]
         case ActionTypes.GO_BACK:
             page.go_back()
         case ActionTypes.GO_FORWARD:
@@ -1303,6 +1294,13 @@ def execute_action(
 
         case _:
             raise ValueError(f"Unknown action type: {action_type}")
+
+    page.wait_for_timeout(int(sleep_after_execution * 1000))
+    num_tabs_now = len(browser_ctx.pages)
+    # if a new tab is opened by clicking, switch to the new tab
+    if num_tabs_now > num_tabs_before:
+        page = browser_ctx.pages[-1]
+        page.bring_to_front()
 
     return page
 

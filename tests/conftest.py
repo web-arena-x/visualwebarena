@@ -50,6 +50,20 @@ def accessibility_tree_script_browser_env() -> Generator[
 
 
 @pytest.fixture(scope="function")
+def accessibility_tree_script_browser_env_with_sleep() -> Generator[
+    ScriptBrowserEnv, None, None
+]:
+    env = ScriptBrowserEnv(
+        headless=HEADLESS,
+        slow_mo=SLOW_MO,
+        observation_type="accessibility_tree",
+        sleep_after_execution=1.0
+    )
+    yield env
+    env.close()
+
+
+@pytest.fixture(scope="function")
 def accessibility_tree_current_viewport_script_browser_env() -> Generator[
     ScriptBrowserEnv, None, None
 ]:

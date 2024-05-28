@@ -253,8 +253,7 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
             self.setup()
         self.reset_finished = True
 
-        if self.sleep_after_execution > 0:
-            time.sleep(self.sleep_after_execution)
+        self.page.wait_for_timeout(int(self.sleep_after_execution * 1000))
 
         observation = self._get_obs()
         observation_metadata = self._get_obs_metadata()
@@ -290,14 +289,11 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
                 self.page,
                 self.context,
                 self.observation_handler.action_processor,
+                self.sleep_after_execution,
             )
             success = True
         except Exception as e:
             fail_error = str(e)
-
-        # hard sleep TODO[shuyanzh] suboptimal, may need to check network
-        if self.sleep_after_execution > 0:
-            time.sleep(self.sleep_after_execution)
 
         observation = self._get_obs()
         observation_metadata = self._get_obs_metadata()

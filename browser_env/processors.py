@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import numpy.typing as npt
 import pandas as pd
+import playwright
 import requests
 from beartype import beartype
 from gymnasium import spaces
@@ -132,7 +133,23 @@ def _pre_extract(page: Page) -> None:
     global_iframe_position = {"x": 0, "y": 0}
 
     mark_frames_recursive(page.main_frame, global_iframe_position)
-        
+
+def _post_extract(page: Page):
+    js_frame_unmark_elements = pkgutil.get_data(
+        __name__, "javascript/frame_unmark_elements.js"
+    ).decode("utf-8")
+
+    # we can't run this loop in JS due to Same-Origin Policy
+    # (can't access the content of an iframe from a another one)
+    for frame in page.frames:
+        try:
+            frame.evaluate(js_frame_unmark_elements)
+        except playwright.sync_api.Error as e:
+            if "Frame was detached" in str(e):
+                pass
+            else:
+                raise e
+
 class TextObervationProcessor(ObservationProcessor):
     def __init__(
         self,
@@ -414,6 +431,7 @@ class TextObervationProcessor(ObservationProcessor):
                     obs_nodes_info[str(node_cursor)] = {
                         "backend_id": node["backendNodeId"],
                         "union_bound": node["union_bound"],
+                        "center": node["center"],
                         "text": node_str,
                     }
                     tree_str += f"{indent}{node_str}\n"
@@ -719,6 +737,7 @@ class TextObervationProcessor(ObservationProcessor):
                     obs_nodes_info[obs_node_id] = {
                         "backend_id": node["backendDOMNodeId"],
                         "union_bound": node["union_bound"],
+                        "center": node["center"],
                         "text": node_str,
                     }
 
@@ -965,20 +984,15 @@ class TextObervationProcessor(ObservationProcessor):
 
         self.browser_config = browser_info["config"]
         content = f"{tab_title_str}\n\n{content}"
+        
+        # clean up the DOM tree
+        _post_extract(page)
         return content
 
     @beartype
     def get_element_center(self, element_id: str) -> tuple[float, float]:
         node_info = self.obs_nodes_info[element_id]
-        node_bound = node_info["bound"]
-        x, y, width, height = node_bound
-        browser_config = self.browser_config
-        b_x, b_y = (
-            browser_config["win_left_bound"],
-            browser_config["win_upper_bound"],
-        )
-        center_x = (x - b_x) + width / 2
-        center_y = (y - b_y) + height / 2
+        center_x, center_y = node_info["center"]
         return (
             center_x / self.viewport_size["width"],
             center_y / self.viewport_size["height"],

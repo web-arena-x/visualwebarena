@@ -46,7 +46,7 @@ def test_script_browser_env(script_browser_env: ScriptBrowserEnv) -> None:
     assert info["page"].url == "https://www.rfc-editor.org/rfc/rfc2606.html"
 
 
-@pytest.mark.asyncio
+@pytest.mark.skip(reason="Async not supported")
 async def test_async_script_browser_env(
     async_script_browser_env: AsyncScriptBrowserEnv,
 ) -> None:

@@ -191,42 +191,35 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
         )
         if self.save_trace_enabled:
             self.context.tracing.start(screenshots=True, snapshots=True)
+
         if start_url:
             start_urls = start_url.split(" |AND| ")
             for url in start_urls:
                 page = self.context.new_page()
-                client = page.context.new_cdp_session(
-                    page
-                )  # talk to chrome devtools
                 if self.text_observation_type in [
                     "accessibility_tree",
                     "accessibility_tree_with_captioner",
                 ]:
+                    client = page.context.new_cdp_session(page)
                     client.send("Accessibility.enable")
-                page.client = client  # type: ignore
+                    client.detach()
                 page.goto(url)
             # set the first page as the current page
             self.page = self.context.pages[0]
             self.page.bring_to_front()
         else:
             self.page = self.context.new_page()
-            client = self.page.context.new_cdp_session(self.page)
             if self.text_observation_type in [
                 "accessibility_tree",
                 "accessibility_tree_with_captioner",
             ]:
+                client = self.page.context.new_cdp_session(self.page)
                 client.send("Accessibility.enable")
-            self.page.client = client  # type: ignore
-
-    @beartype
-    def get_page_client(self, page: Page) -> CDPSession:
-        return page.client  # type: ignore
+                client.detach()
 
     @beartype
     def _get_obs(self) -> dict[str, Observation]:
-        obs = self.observation_handler.get_observation(
-            self.page, self.get_page_client(self.page)
-        )
+        obs = self.observation_handler.get_observation(self.page)
         return obs
 
     @beartype

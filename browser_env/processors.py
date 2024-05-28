@@ -52,7 +52,7 @@ def remove_unicode(input_string):
 
 
 class ObservationProcessor:
-    def process(self, page: Page, client: CDPSession) -> Observation:
+    def process(self, page: Page) -> Observation:
         raise NotImplementedError
 
 
@@ -178,9 +178,9 @@ class TextObervationProcessor(ObservationProcessor):
     def fetch_browser_info(
         self,
         page: Page,
-        client: CDPSession,
     ) -> BrowserInfo:
         # extract domtree
+        client = page.context.new_cdp_session(page)
         tree = client.send(
             "DOMSnapshot.captureSnapshot",
             {
@@ -189,6 +189,7 @@ class TextObervationProcessor(ObservationProcessor):
                 "includePaintOrder": True,
             },
         )
+        client.detach()
 
         # calibrate the bounds, in some cases, the bounds are scaled somehow
         bounds = tree["documents"][0]["layout"]["bounds"]
@@ -228,7 +229,6 @@ class TextObervationProcessor(ObservationProcessor):
         self,
         info: BrowserInfo,
         page: Page,
-        client: CDPSession,
         current_viewport_only: bool,
     ) -> DOMTree:
         # adopted from [natbot](https://github.com/nat/natbot)
@@ -453,11 +453,12 @@ class TextObervationProcessor(ObservationProcessor):
     @beartype
     def fetch_page_accessibility_tree(
         self,
-        client: CDPSession,
+        page: Page,
         info: BrowserInfo,
         current_viewport_only: bool
     ) -> AccessibilityTree:
         """Fetch the accessibility tree of the current page"""
+        client = page.context.new_cdp_session(page)
         frame_tree = client.send(
             "Page.getFrameTree",
             {}
@@ -483,7 +484,7 @@ class TextObervationProcessor(ObservationProcessor):
             )
             for frame_id in frame_ids
         }
-
+        client.detach()
         # extract the properties of each node in the AXTree
         for ax_tree in frame_axtrees.values():
             processed_node_ids = set()
@@ -786,9 +787,8 @@ class TextObervationProcessor(ObservationProcessor):
         return "\n".join(clean_lines)
         
     def fetch_image_related(
-        self, 
+        self,
         page: Page,
-        client: CDPSession,
         browser_info: BrowserInfo
     ) -> str:
         # Check if the current page is an image url
@@ -896,7 +896,7 @@ class TextObervationProcessor(ObservationProcessor):
                         
             if self.observation_type == "accessibility_tree_with_captioner":
                 accessibility_tree = self.fetch_page_accessibility_tree(
-                    client,
+                    page,
                     browser_info,
                     current_viewport_only=self.current_viewport_only
                 )
@@ -912,7 +912,7 @@ class TextObervationProcessor(ObservationProcessor):
         return content
 
     @beartype
-    def process(self, page: Page, client: CDPSession) -> str:
+    def process(self, page: Page) -> str:
         # get the tab info
         open_tabs = page.context.pages
         try:
@@ -935,16 +935,15 @@ class TextObervationProcessor(ObservationProcessor):
         _pre_extract(page)
 
         try:
-            browser_info = self.fetch_browser_info(page, client)
+            browser_info = self.fetch_browser_info(page)
         except Exception:
             page.wait_for_load_state("load", timeout=500)
-            browser_info = self.fetch_browser_info(page, client)
+            browser_info = self.fetch_browser_info(page)
 
         if self.observation_type == "html":
             dom_tree = self.fetch_page_html(
                 browser_info,
                 page,
-                client,
                 self.current_viewport_only,
             )
             content, obs_nodes_info = self.parse_html(dom_tree)
@@ -953,7 +952,7 @@ class TextObervationProcessor(ObservationProcessor):
 
         elif self.observation_type == "accessibility_tree":
             accessibility_tree = self.fetch_page_accessibility_tree(
-                client,
+                page,
                 browser_info,
                 self.current_viewport_only,
             )
@@ -970,7 +969,6 @@ class TextObervationProcessor(ObservationProcessor):
         ]:
             content = self.fetch_image_related(
                 page,
-                client,
                 browser_info,
             )
 
@@ -1319,12 +1317,12 @@ class ImageObservationProcessor(ObservationProcessor):
             or rect1[3] < rect2[1] + padding
         )
 
-    def process(self, page: Page, client: CDPSession) -> npt.NDArray[np.uint8]:
+    def process(self, page: Page) -> npt.NDArray[np.uint8]:
         try:
-            browser_info = self.fetch_browser_info(page, client)
+            browser_info = self.fetch_browser_info(page)
         except Exception:
             page.wait_for_load_state("load", timeout=500)
-            browser_info = self.fetch_browser_info(page, client)
+            browser_info = self.fetch_browser_info(page)
 
         self.browser_config = browser_info["config"]
 
@@ -1368,9 +1366,9 @@ class ImageObservationProcessor(ObservationProcessor):
     @beartype
     def fetch_browser_info(
         self,
-        page: Page,
-        client: CDPSession,
+        page: Page
     ) -> BrowserInfo:
+        client = page.context.new_cdp_session(page)
         # extract domtree
         tree = client.send(
             "DOMSnapshot.captureSnapshot",
@@ -1380,7 +1378,7 @@ class ImageObservationProcessor(ObservationProcessor):
                 "includePaintOrder": True,
             },
         )
-
+        client.detach()
         # calibrate the bounds, in some cases, the bounds are scaled somehow
         bounds = tree["documents"][0]["layout"]["bounds"]
         b = bounds[0]
@@ -1479,11 +1477,9 @@ class ObservationHandler:
         return spaces.Dict({"text": text_space, "image": image_space})
 
     @beartype
-    def get_observation(
-        self, page: Page, client: CDPSession
-    ) -> dict[str, Observation]:
-        text_obs = self.text_processor.process(page, client)
-        image_obs, content_str = self.image_processor.process(page, client)
+    def get_observation(self, page: Page) -> dict[str, Observation]:
+        text_obs = self.text_processor.process(page)
+        image_obs, content_str = self.image_processor.process(page)
         if content_str != "":
             text_obs = content_str
         return {"text": text_obs, "image": image_obs}

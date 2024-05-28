@@ -65,7 +65,7 @@ def test_string_match_success(
 
     evalutor = StringEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
 
     assert score == 1.0
@@ -84,7 +84,7 @@ def test_string_match_fail(script_browser_env: ScriptBrowserEnv) -> None:
 
     evalutor = StringEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
 
     assert score == 0.0
@@ -105,7 +105,7 @@ def test_url_exact_match_success(script_browser_env: ScriptBrowserEnv) -> None:
 
     evalutor = URLExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -125,7 +125,7 @@ def test_url_exact_match_fail(script_browser_env: ScriptBrowserEnv) -> None:
 
     evalutor = URLExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     print(env.page.url)
     assert score == 0.0
@@ -149,7 +149,7 @@ def test_html_content_match_success(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -170,7 +170,7 @@ def test_html_content_match_fail(script_browser_env: ScriptBrowserEnv) -> None:
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 0.0
 
@@ -195,7 +195,7 @@ def test_html_content_element_match_success(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -220,7 +220,7 @@ def test_html_content_element_match_fail(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 0.0
 
@@ -247,7 +247,7 @@ def test_html_content_url_comb_success(
         [URLExactEvaluator(), HTMLContentExactEvaluator()]
     )
     score = evaluators(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -270,7 +270,7 @@ def test_func_success(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -293,7 +293,7 @@ def test_func_fail(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 0.0
 
@@ -314,7 +314,7 @@ def test_func_url_func_last_success(
 
     evalutor = HTMLContentExactEvaluator()
     score = evalutor(
-        trajectory, config_file, env.page, env.get_page_client(env.page)
+        trajectory, config_file, env.page
     )
     assert score == 1.0
 
@@ -349,7 +349,7 @@ def test_html_required_values_success(
 
         evalutor = HTMLContentExactEvaluator()
         score = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
         os.remove(tmp_config)
         assert score == 1.0
@@ -393,14 +393,14 @@ def test_page_image_evaluator(
         captioning_fn = lambda images, *args, **kwargs: ["yes"] * len(images)
         evalutor = PageImageEvaluator(captioning_fn)
         score = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
 
         # Create a dummy captioning function that always returns "yes"
         captioning_fn = lambda images, *args, **kwargs: ["no"] * len(images)
         evalutor = PageImageEvaluator(captioning_fn)
         score_no = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
         os.remove(tmp_config)
         assert score == 1.0
@@ -442,7 +442,7 @@ def test_page_image_evaluator_yes_no(
     captioning_fn = lambda images, *args, **kwargs: ["yes"] * len(images)
     evalutor = PageImageEvaluator(captioning_fn)
     score = evalutor(
-        trajectory, tmp_config, env.page, env.get_page_client(env.page)
+        trajectory, tmp_config, env.page
     )
     assert score == 0.0
 
@@ -477,7 +477,7 @@ def test_html_required_values_failure(
 
         evalutor = HTMLContentExactEvaluator()
         score = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
         os.remove(tmp_config)
         assert score == 0.0
@@ -528,7 +528,7 @@ def test_exact_image(
         )  # Unused for this task
         evalutor = PageImageEvaluator(captioning_fn)
         score = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
         assert score == expected_score, config_file
         os.remove(tmp_config)
@@ -589,7 +589,7 @@ def test_exact_image_resize_success(
         )  # Unused for this task
         evalutor = PageImageEvaluator(captioning_fn)
         score = evalutor(
-            trajectory, tmp_config, env.page, env.get_page_client(env.page)
+            trajectory, tmp_config, env.page
         )
         assert score == expected_score, config_file
         os.remove(tmp_config)

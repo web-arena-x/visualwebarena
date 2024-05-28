@@ -456,8 +456,9 @@ class TextObervationProcessor(ObservationProcessor):
         page: Page,
         info: BrowserInfo,
         current_viewport_only: bool
-    ) -> AccessibilityTree:
-        """Fetch the accessibility tree of the current page"""
+    ) -> list[AccessibilityTree]:
+        """Fetch the accessibility tree of the current page
+        Return a list of accessibility trees, one for each frame"""
         client = page.context.new_cdp_session(page)
         frame_tree = client.send(
             "Page.getFrameTree",
@@ -595,7 +596,7 @@ class TextObervationProcessor(ObservationProcessor):
             # mark as removed
             ax_tree[node_cursor]["parentId"] = "[REMOVED]"
         
-        merged_axtree: AccessibilityTree = []
+        frame_ax_trees: AccessibilityTree = []
         # filter nodes that are not in the current viewport
         if current_viewport_only:
             config = info["config"]
@@ -636,12 +637,12 @@ class TextObervationProcessor(ObservationProcessor):
                     if node.get("parentId", "Root") != "[REMOVED]"
                 ]
                 
-                merged_axtree.extend(cur_ax_tree)
+                frame_ax_trees.append(cur_ax_tree)
         else:
             for frame_tree in frame_axtrees.values():
-                merged_axtree.extend(frame_tree["nodes"])
-            
-        return merged_axtree
+                frame_ax_trees.append(frame_tree["nodes"])
+
+        return frame_ax_trees
 
     @staticmethod
     def get_element_in_viewport_ratio(
@@ -677,18 +678,21 @@ class TextObervationProcessor(ObservationProcessor):
 
     @staticmethod
     def parse_accessibility_tree(
-        accessibility_tree: AccessibilityTree,
+        frame_ax_trees: list[AccessibilityTree],
     ) -> tuple[str, dict[str, Any]]:
         """Parse the accessibility tree into a string text"""
-        node_id_to_idx = {}
-        for idx, node in enumerate(accessibility_tree):
-            node_id_to_idx[node["nodeId"]] = idx
 
         obs_nodes_info = {}
 
-        def dfs(idx: int, obs_node_id: str, depth: int) -> str:
+        def dfs(
+            ax_tree: AccessibilityTree,
+            idx: int,
+            obs_node_id: str,
+            depth: int,
+            node_id_to_idx: dict[str, int]
+        ) -> str:
             tree_str = ""
-            node = accessibility_tree[idx]
+            node = ax_tree[idx]
             indent = "\t" * depth
             valid_node = True
             try:
@@ -751,7 +755,11 @@ class TextObervationProcessor(ObservationProcessor):
                 # mark this to save some tokens
                 child_depth = depth + 1 if valid_node else depth
                 child_str = dfs(
-                    node_id_to_idx[child_node_id], child_node_id, child_depth
+                    ax_tree,
+                    node_id_to_idx[child_node_id],
+                    child_node_id,
+                    child_depth,
+                    node_id_to_idx
                 )
                 if child_str.strip():
                     if tree_str.strip():
@@ -760,7 +768,18 @@ class TextObervationProcessor(ObservationProcessor):
 
             return tree_str
 
-        tree_str = dfs(0, accessibility_tree[0]["nodeId"], 0)
+        tree_str = ""
+        for ax_tree in frame_ax_trees:
+            node_id_to_idx = {}
+            for idx, node in enumerate(ax_tree):
+                node_id_to_idx[node["nodeId"]] = idx
+            tree_str += "\n" + dfs(
+                ax_tree=ax_tree,
+                idx=0,
+                obs_node_id=ax_tree[0]["nodeId"],
+                depth=0,
+                node_id_to_idx=node_id_to_idx
+            )
         return tree_str, obs_nodes_info
 
     @beartype
@@ -895,13 +914,13 @@ class TextObervationProcessor(ObservationProcessor):
                         print("L653 WARNING:", e)
                         
             if self.observation_type == "accessibility_tree_with_captioner":
-                accessibility_tree = self.fetch_page_accessibility_tree(
+                frame_ax_trees = self.fetch_page_accessibility_tree(
                     page,
                     browser_info,
                     current_viewport_only=self.current_viewport_only
                 )
                 content, obs_nodes_info = self.parse_accessibility_tree(
-                    accessibility_tree
+                    frame_ax_trees
                 )
                 content = self.clean_accesibility_tree(content)
                 self.obs_nodes_info = obs_nodes_info
@@ -951,13 +970,13 @@ class TextObervationProcessor(ObservationProcessor):
             self.meta_data["obs_nodes_info"] = obs_nodes_info
 
         elif self.observation_type == "accessibility_tree":
-            accessibility_tree = self.fetch_page_accessibility_tree(
+            frame_ax_trees = self.fetch_page_accessibility_tree(
                 page,
                 browser_info,
                 self.current_viewport_only,
             )
             content, obs_nodes_info = self.parse_accessibility_tree(
-                accessibility_tree
+                frame_ax_trees
             )
             content = self.clean_accesibility_tree(content)
             self.obs_nodes_info = obs_nodes_info

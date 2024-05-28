@@ -150,6 +150,8 @@ def action2str(
                 action_str = "go_forward"
             case ActionTypes.PAGE_FOCUS:
                 action_str = f"page_focus [{action['page_number']}]"
+            case ActionTypes.CLEAR:
+                action_str = f"clear [{element_id}] where [{element_id}] is {semantic_element}"
             case ActionTypes.STOP:
                 action_str = f"stop [{action['answer']}]"
             case ActionTypes.NONE:
@@ -164,6 +166,8 @@ def action2str(
             case ActionTypes.CLICK:
                 # [ID=X] xxxxx
                 action_str = f"click [{element_id}] where [{element_id}]"
+            case ActionTypes.CLEAR:
+                action_str = f"clear [{element_id}] where [{element_id}] is {semantic_element}"
             case ActionTypes.TYPE:
                 text = "".join([_id2key[i] for i in action["text"]])
                 action_str = (
@@ -244,6 +248,16 @@ def action2create_function(action: Action) -> str:
             args.append(f"pw_code={repr(action['pw_code'])}")
             args_str = ", ".join(args)
             return f"create_click_action({args_str})"
+        case ActionTypes.CLEAR:
+            args = []
+            args.append(f"element_id={repr(action['element_id'])}")
+            args.append(
+                f"element_role={repr(_id2role[action['element_role']])}"
+            )
+            args.append(f"element_name={repr(action['element_name'])}")
+            args.append(f"pw_code={repr(action['pw_code'])}")
+            args_str = ", ".join(args)
+            return f"create_clear_action({args_str})"
         case ActionTypes.HOVER:
             args = []
             args.append(f"element_id={repr(action['element_id'])}")
@@ -308,6 +322,7 @@ class ActionTypes(IntEnum):
     CHECK = 15
     SELECT_OPTION = 16
 
+    CLEAR = 16
     STOP = 17
 
     def __str__(self) -> str:
@@ -639,6 +654,28 @@ def create_mouse_click_action(
         )
     else:
         raise ValueError("left and top must be both None or both not None")
+    return action
+
+
+@beartype
+def create_clear_action(
+    element_id: str = "",
+    element_role: RolesType = "link",
+    element_name: str = "",
+    pw_code: str = "",
+    nth: int = 0,
+) -> Action:
+    action = create_none_action()
+    action.update(
+        {
+            "action_type": ActionTypes.CLEAR,
+            "element_id": element_id,
+            "element_role": _role2id[element_role],
+            "element_name": element_name,
+            "nth": nth,
+            "pw_code": pw_code,
+        }
+    )
     return action
 
 
@@ -1186,6 +1223,12 @@ def execute_action(
 
         case ActionTypes.MOUSE_CLICK:
             execute_mouse_click(action["coords"][0], action["coords"][1], page)
+        case ActionTypes.CLEAR:
+            element_id = action["element_id"]
+            element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
+            execute_mouse_click(element_center[0], element_center[1], page)
+            execute_key_press("Meta+A", page)
+            execute_key_press('Backspace', page)
         case ActionTypes.MOUSE_HOVER:
             execute_mouse_hover(action["coords"][0], action["coords"][1], page)
         case ActionTypes.KEYBOARD_TYPE:
@@ -1316,6 +1359,16 @@ async def aexecute_action(
             await aexecute_key_press(keys, page)
 
         case ActionTypes.MOUSE_CLICK:
+            await aexecute_mouse_click(
+                action["coords"][0], action["coords"][1], page
+            )
+        case ActionTypes.CLEAR:
+            element_id = action["element_id"]
+            element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
+            execute_mouse_click(element_center[0], element_center[1], page)
+            execute_key_press("Meta+A", page)
+            execute_key_press('Backspace', page)
+        case ActionTypes.CLEAR:
             await aexecute_mouse_click(
                 action["coords"][0], action["coords"][1], page
             )
@@ -1519,6 +1572,8 @@ def create_playwright_action(playwright_code: str) -> Action:
             return create_scroll_action(direction=direction)
         case "click":
             return create_click_action(pw_code=playwright_code)
+        case "clear":
+            return create_clear_action(pw_code=playwright_code)
         case "hover":
             return create_hover_action(pw_code=playwright_code)
         case "type" | "fill":
@@ -1590,6 +1645,12 @@ def create_id_based_action(action_str: str) -> Action:
                 raise ActionParsingError(f"Invalid click action {action_str}")
             element_id = match.group(1)
             return create_click_action(element_id=element_id)
+        case "clear":
+            match = re.search(r"clear ?\[(\d+)\]", action_str)
+            if not match:
+                raise ActionParsingError(f"Invalid clear action {action_str}")
+            element_id = match.group(1)
+            return create_clear_action(element_id=element_id)
         case "hover":
             match = re.search(r"hover ?\[(\d+)\]", action_str)
             if not match:

@@ -33,8 +33,6 @@ elif DATASET == "visualwebarena":
         CLASSIFIEDS,
         REDDIT,
         SHOPPING,
-        GITLAB,
-        SHOPPING_ADMIN,
     )
     SITES = ["shopping", "reddit", "classifieds"]
     URLS = [

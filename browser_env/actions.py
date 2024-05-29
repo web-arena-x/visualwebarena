@@ -322,8 +322,8 @@ class ActionTypes(IntEnum):
     CHECK = 15
     SELECT_OPTION = 16
 
-    CLEAR = 16
     STOP = 17
+    CLEAR = 18
 
     def __str__(self) -> str:
         return f"ACTION_TYPES.{self.name}"

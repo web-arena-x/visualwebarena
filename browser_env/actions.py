@@ -1368,10 +1368,6 @@ async def aexecute_action(
             execute_mouse_click(element_center[0], element_center[1], page)
             execute_key_press("Meta+A", page)
             execute_key_press('Backspace', page)
-        case ActionTypes.CLEAR:
-            await aexecute_mouse_click(
-                action["coords"][0], action["coords"][1], page
-            )
         case ActionTypes.MOUSE_HOVER:
             await aexecute_mouse_hover(
                 action["coords"][0], action["coords"][1], page

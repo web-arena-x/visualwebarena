@@ -732,6 +732,7 @@ class TextObervationProcessor(ObservationProcessor):
                             "LabelText",
                             "Legend",
                             "listitem",
+                            "image"
                         ]:
                             valid_node = False
                     elif role in ["listitem"]:

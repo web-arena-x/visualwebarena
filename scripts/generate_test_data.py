@@ -9,6 +9,14 @@ from browser_env.env_config import *
 def main() -> None:
     DATASET = os.environ["DATASET"]
     if DATASET == "webarena":
+        print("DATASET: webarena")
+        print(f"REDDIT: {REDDIT}")
+        print(f"SHOPPING: {SHOPPING}")
+        print(f"SHOPPING_ADMIN: {SHOPPING_ADMIN}")
+        print(f"GITLAB: {GITLAB}")
+        print(f"WIKIPEDIA: {WIKIPEDIA}")
+        print(f"MAP: {MAP}")
+        
         inp_paths = ["config_files/wa/test_webarena.raw.json"]
         replace_map = {
             "__REDDIT__": REDDIT,
@@ -19,6 +27,10 @@ def main() -> None:
             "__MAP__": MAP,
         }
     elif DATASET == "visualwebarena":
+        print("DATASET: visualwebarena")
+        print(f"CLASSIFIEDS: {CLASSIFIEDS}")
+        print(f"REDDIT: {REDDIT}")
+        print(f"SHOPPING: {SHOPPING}")
         inp_paths = [
             "config_files/vwa/test_classifieds.raw.json", "config_files/vwa/test_shopping.raw.json", "config_files/vwa/test_reddit.raw.json",
         ]

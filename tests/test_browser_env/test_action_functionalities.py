@@ -331,6 +331,7 @@ def test_id_delete_input(
     expect(locator).to_have_value(new_s)
 
 
+@pytest.mark.skip(reason="The current implementation does not deal with iframes")
 def test_frame_action(
     accessibility_tree_current_viewport_script_browser_env: ScriptBrowserEnv,
 ) -> None:

@@ -49,7 +49,6 @@ class PlaywrightScript:
     value: str | None = None  # avatar movie, Enter
 
 
-@beartype
 def parse_action(action: str) -> PlaywrightScript:
     splitted = action.strip().split(" ")
     assert len(splitted) >= 2
@@ -217,12 +216,10 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
                 client.send("Accessibility.enable")
                 client.detach()
 
-    @beartype
     def _get_obs(self) -> dict[str, Observation]:
         obs = self.observation_handler.get_observation(self.page)
         return obs
 
-    @beartype
     def _get_obs_metadata(self) -> dict[str, ObservationMetadata]:
         metadata = self.observation_handler.get_observation_metadata()
         return metadata
@@ -265,12 +262,10 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
 
         return (observation, info)
 
-    @beartype
     def save_trace(self, trace_path: str | Path) -> None:
         if self.save_trace_enabled:
             self.context.tracing.stop(path=trace_path)
 
-    @beartype
     def close(self) -> None:
         if self.reset_finished:
             self.context_manager.__exit__()

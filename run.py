@@ -17,7 +17,6 @@ from typing import List
 import openai
 import requests
 import torch
-from beartype import beartype
 from PIL import Image
 
 from agent import (
@@ -196,7 +195,6 @@ def config() -> argparse.Namespace:
     return args
 
 
-@beartype
 def early_stop(
     trajectory: Trajectory, max_steps: int, thresholds: dict[str, int]
 ) -> tuple[bool, str]:
@@ -253,7 +251,6 @@ def early_stop(
     return False, ""
 
 
-@beartype
 def test(
     args: argparse.Namespace,
     config_file_list: list[str]
@@ -507,7 +504,6 @@ def get_unfinished(config_files: list[str], result_dir: str) -> list[str]:
     return unfinished_configs
 
 
-@beartype
 def dump_config(args: argparse.Namespace) -> None:
     config_file = Path(args.result_dir) / "config.json"
     if not config_file.exists():

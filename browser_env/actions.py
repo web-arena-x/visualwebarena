@@ -1365,9 +1365,9 @@ async def aexecute_action(
         case ActionTypes.CLEAR:
             element_id = action["element_id"]
             element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
-            execute_mouse_click(element_center[0], element_center[1], page)
-            execute_key_press("Meta+A", page)
-            execute_key_press('Backspace', page)
+            await execute_mouse_click(element_center[0], element_center[1], page)
+            await execute_key_press("Meta+A", page)
+            await execute_key_press('Backspace', page)
         case ActionTypes.MOUSE_HOVER:
             await aexecute_mouse_hover(
                 action["coords"][0], action["coords"][1], page

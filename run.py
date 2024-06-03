@@ -516,7 +516,7 @@ if __name__ == "__main__":
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     args = config()
-    args.sleep_after_execution = 1.0
+    args.sleep_after_execution = 2.5
     prepare(args)
 
     test_config_base_dir = args.test_config_base_dir

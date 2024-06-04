@@ -3,7 +3,9 @@ This REAME file host the instructions for our Docker images and quick start guid
 
 ## Classifieds Website
 
-Download the image zip from https://drive.google.com/file/d/1m79lp84yXfqdTBHr6IS7_1KkL4sDSemR/view.
+Download the image zip from one of the following:
+- https://drive.google.com/file/d/1m79lp84yXfqdTBHr6IS7_1KkL4sDSemR/view
+- https://archive.org/download/classifieds_docker_compose
 
 ```
 unzip classifieds_docker_compose.zip
@@ -52,7 +54,7 @@ Now you can visit `http://<your-server-hostname>:7770`.
 
 The Wikipedia Website follows the same setup procedure as the environment used in WebArena. Download the image tar from the following mirrors:
 - https://drive.google.com/file/d/17Qpp1iu_mPqzgO_73Z9BnFjHrzmX9DGf/view?usp=sharing
-- https://archive.org/download/webarena-env-forum-image
+- https://archive.org/download/postmill-populated-exposed-withimg
 - http://metis.lti.cs.cmu.edu/webarena-images/postmill-populated-exposed-withimg.tar
 
 ```

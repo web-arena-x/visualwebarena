@@ -1,4 +1,6 @@
 """Implements helper functions to assist evaluation cases where other evaluators are not suitable."""
+import base64
+from io import BytesIO
 import json
 from datetime import datetime, timezone
 from typing import Any, Union
@@ -7,13 +9,10 @@ from urllib.parse import urlparse
 import requests
 from beartype import beartype
 from beartype.typing import Dict, List
-from playwright.sync_api import CDPSession, Page
-
-from browser_env.env_config import (
+from playwright.sync_api import Page
+from evaluation_harness.env_config import (
     ACCOUNTS,
-    REDDIT,
-    SHOPPING,
-    WIKIPEDIA,
+    SHOPPING
 )
 from llms.providers.openai_utils import (
     generate_from_openai_chat_completion,
@@ -21,16 +20,32 @@ from llms.providers.openai_utils import (
 
 
 class PseudoPage:
-    def __init__(self, original_page: Page, url: str):
+    def __init__(self, original_page: Page | None, url: str):
         self.url = url
         self.original_page = original_page
 
+    def from_dict(self, data: dict[str, Any]):
+        for key, value in data.items():
+            if key == "image_str_cache":
+                image_cache = []
+                for cur_image_str in value:
+                    cur_image_cache = []
+                    for image_str in cur_image_str:
+                        cur_image_cache.append(Image.open(BytesIO(base64.b64decode(image_str))))
+                    image_cache.append(cur_image_cache)
+                setattr(self, "image_cache", image_cache)
+            else:
+                setattr(self, key, value)
+
     def __getattr__(self, attr: str) -> Any:
-        # Delegate attribute access to the original page object
-        if attr not in ["url"]:
-            return getattr(self.original_page, attr)
-        else:
+        if self.original_page is None:
             return getattr(self, attr)
+
+        # Delegate attribute access to the original page object
+        if attr in ["url"]:
+            return getattr(self, attr)
+        else:
+            return getattr(self.original_page, attr)
 
 
 @beartype

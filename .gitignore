@@ -144,6 +144,7 @@ config_files/vwa/test_reddit.json
 config_files/vwatest_shopping.json
 config_files/wa/test_webarena.json
 config_files/wa/test_webarena/*
+log_files/*
 
 cache/*
 agents/prompts/jsons/*

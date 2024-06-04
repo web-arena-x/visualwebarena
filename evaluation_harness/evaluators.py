@@ -1,56 +1,62 @@
 """base class for evaluation"""
 # answer string match
-import importlib
+import base64
+from io import BytesIO
 import json
-import re
-import time
-import urllib
+import os
 from pathlib import Path
-from typing import Any, Optional, Tuple, Union
+from typing import Any, Optional, TypedDict, Union, Dict
 from urllib.parse import urljoin
 
-import evaluate  # type: ignore[import]
+import numpy.typing as npt
+import numpy as np
 import requests
 from beartype import beartype
 from beartype.door import is_bearable
 from nltk.tokenize import word_tokenize  # type: ignore
 from PIL import Image
-from playwright.sync_api import CDPSession, Page
-
-from browser_env.actions import Action
-from browser_env.utils import StateInfo
+from playwright.sync_api import Page
 from evaluation_harness import image_utils
 from evaluation_harness.helper_functions import (
-    PseudoPage,
-    get_query_text,
-    get_query_text_lowercase,
-    gitlab_get_project_memeber_role,
     llm_fuzzy_match,
     llm_ua_match,
-    reddit_get_latest_comment_content_by_username,
-    reddit_get_latest_comment_obj_by_username,
-    reddit_get_parent_comment_username_of_latest_comment_by_username,
-    reddit_get_post_url,
-    shopping_get_latest_order_url,
-    shopping_get_num_reviews,
-    shopping_get_order_product_name_list,
-    shopping_get_order_product_option,
-    shopping_get_order_product_quantity,
-    shopping_get_product_attributes,
-    shopping_get_product_price,
-    shopping_get_rating_as_percentage,
-    shopping_get_sku_latest_review_author,
-    shopping_get_sku_latest_review_rating,
-    shopping_get_sku_latest_review_text,
+    PseudoPage,
 )
+
+
+class Action(TypedDict):
+    action_type: int
+    coords: npt.NDArray[np.float32]
+    element_role: int
+    element_name: str
+    text: list[int]
+    page_number: int
+    url: str
+    nth: int
+    element_id: str
+    direction: str
+    key_comb: str
+    pw_code: str
+    answer: str
+    raw_prediction: str  # raw prediction from the model
+
+
+Observation = str | npt.NDArray[np.uint8]
+
+
+class StateInfo(TypedDict):
+    observation: dict[str, Observation]
+    info: Dict[str, Any]
+
 
 Trajectory = list[Union[Action, StateInfo]]
 
 
 @beartype
 class Evaluator(object):
-    def __init__(self, eval_tag: str = "") -> None:
+    def __init__(self, eval_tag: str = "", log_file: str = "") -> None:
         self.eval_tag = eval_tag
+        self.log_file = log_file
 
     def __call__(
         self,
@@ -165,12 +171,16 @@ class StringEvaluator(Evaluator):
 
     @staticmethod
     @beartype
-    def must_include(ref: str, pred: str) -> float:
+    def must_include(ref: str, pred: str, tokenize: bool = False) -> float:
         clean_ref = StringEvaluator.clean_answer(ref)
         clean_pred = StringEvaluator.clean_answer(pred)
         # tokenize the answer if the ref is a single word
         # prevent false positive (e.g, 0)
-        if len(word_tokenize(clean_ref)) == 1:
+        if (
+            tokenize
+            and len(clean_ref) == 1
+            and len(word_tokenize(clean_ref)) == 1
+        ):
             tok_pred = word_tokenize(clean_pred)
             return float(clean_ref in tok_pred)
         else:
@@ -200,6 +210,27 @@ class StringEvaluator(Evaluator):
     def ua_match(ref: str, pred: str, intent: str) -> float:
         return llm_ua_match(pred, ref, intent)
 
+    @beartype
+    def cache_pred(
+        self,
+        last_action: Action,
+        config_file: Path | str
+    ) -> None:
+        if not self.log_file:
+            return
+
+        d = {
+                'trajectory': [{
+                        'raw_prediction': last_action["raw_prediction"],
+                        'answer': last_action["answer"]
+                    }],
+                'config_file': os.path.basename(config_file),
+                'page': None
+            }
+
+        with open(self.log_file, "a") as f:
+            f.write(json.dumps(d) + "\n")
+
     def __call__(
         self,
         trajectory: Trajectory,
@@ -211,6 +242,7 @@ class StringEvaluator(Evaluator):
 
         last_action = self.get_last_action(trajectory)
         pred = self.clean_answer(last_action["answer"])
+        self.cache_pred(last_action, config_file)
 
         score = 1.0
         for approach, value in configs["eval"]["reference_answers"].items():
@@ -238,7 +270,11 @@ class StringEvaluator(Evaluator):
                     assert isinstance(value, list)
                     for must_value in value:
                         value_or = must_value.split(" |OR| ")
-                        score *= any([self.must_include(ref=v, pred=pred) for v in value_or])
+                        score *= any([self.must_include(
+                            ref=v,
+                            pred=pred,
+                            tokenize=(len(value) == 1)
+                        ) for v in value_or])
                 case "must_exclude":
                     assert isinstance(value, list)
                     for must_excl_value in value:
@@ -278,31 +314,24 @@ class StringEvaluator(Evaluator):
 
 
 @beartype
-class StringSoftEvaluator(Evaluator):
-    """Use text generation metrics such as BLEU, ROUGE, etc. to evaluate the answer"""
-
-    def __call__(
-        self,
-        trajectory: Trajectory,
-        config_file: Path | str,
-        page: Page | PseudoPage | None = None
-    ) -> float:
-        with open(config_file, "r") as f:
-            configs = json.load(f)
-
-        last_action = self.get_last_action(trajectory)
-        pred = last_action["answer"]
-        ref = configs["eval"]["reference_answers"]
-        # rouge
-        m = evaluate.load("rouge")
-        rouge = m.compute(predictions=[pred], references=[ref])
-        return float(rouge["rouge1"])
-
-
-@beartype
 class URLExactEvaluator(Evaluator):
     """Check whether the URL is exactly the same as of the reference URLs"""
 
+    def cache_pred(self, url: str, config_file: Path | str) -> None:
+        if not self.log_file:
+            return
+
+        d = {
+                'trajectory': [],
+                'config_file': os.path.basename(config_file),
+                'page': {
+                    'url': url
+                }
+            }
+
+        with open(self.log_file, "a") as f:
+            f.write(json.dumps(d) + "\n")
+            
     def __call__(
         self,
         trajectory: Trajectory,
@@ -321,6 +350,8 @@ class URLExactEvaluator(Evaluator):
             return url
 
         pred = clean_url(page.url)
+        self.cache_pred(url=pred, config_file=config_file)
+
         ref_urls = configs["eval"]["reference_url"].split(" |OR| ")
         ref_urls = [clean_url(url) for url in ref_urls]
         matching_rule = configs["eval"].get("url_note", "EXACT")
@@ -342,6 +373,20 @@ class URLExactEvaluator(Evaluator):
 class HTMLContentExactEvaluator(Evaluator):
     """Check whether the contents appear in the page"""
 
+    def cache_pred(self, selected_element_cache: list[str], config_file: Path | str) -> None:
+        if not self.log_file:
+            return
+        d = {
+                'trajectory': [],
+                'config_file': os.path.basename(config_file),
+                'page': {
+                    'selected_element_cache': selected_element_cache
+                }
+        }
+
+        with open(self.log_file, "a") as f:
+            f.write(json.dumps(d) + "\n")
+
     def __call__(
         self,
         trajectory: Trajectory,
@@ -353,63 +398,75 @@ class HTMLContentExactEvaluator(Evaluator):
 
         targets = configs["eval"]["program_html"]
 
+        cache_flag = getattr(page, "selected_element_cache", None)
+        selected_element_cache = page.selected_element_cache if cache_flag else []
+
         score = 1.0
-        for target in targets:
-            target_url: str = target["url"]  # which url to check
-            if target_url.startswith("func"):
-                func = target_url.split("func:")[1]
-                func = func.replace("__last_url__", page.url)
-                target_url = eval(func)
-
-            locator: str = target["locator"]  # js element locator
-
-            # navigate to that url
-            if target_url != "last":
-                page.goto(target_url)
-                time.sleep(3)  # TODO [shuyanzh]: fix this hard-coded sleep
-
-            # empty, use the full page
-            if not locator.strip():
-                selected_element = page.content()
-            # use JS to select the element
-            elif locator.startswith("document.") or locator.startswith(
-                "[...document."
-            ):
-                if "prep_actions" in target:
-                    try:
-                        for prep_action in target["prep_actions"]:
-                            page.evaluate(f"() => {prep_action}")
-                    except Exception:
-                        pass
-                try:
-                    selected_element = str(page.evaluate(f"() => {locator}"))
-                    if not selected_element:
-                        selected_element = ""
-                except Exception:
-                    # the page is wrong, return empty
-                    selected_element = ""
-            elif locator.startswith("lambda:"):
-                try:
-                    locator = locator.lstrip("lambda:")
-                    selected_element = page.evaluate(locator)
-                    if not selected_element:
-                        selected_element = None
-                except Exception:
-                    # the page is wrong, return empty
-                    selected_element = None
-            # run program to call API
-            elif locator.startswith("func:"):  # a helper function
-                func = locator.split("func:")[1]
-                func = func.replace("__page__", "page")
-                selected_element = eval(func)
+        for t_idx, target in enumerate(targets):
+            # get element to compare with the current target
+            # for cache scenario, we directly get the selected element
+            if cache_flag:
+                selected_element = selected_element_cache[t_idx]
+            # regular online scenario
             else:
-                raise ValueError(f"Unknown locator: {locator}")
+                target_url: str = target["url"]  # which url to check
+                if target_url.startswith("func"):
+                    func = target_url.split("func:")[1]
+                    func = func.replace("__last_url__", page.url)
+                    target_url = eval(func)
+
+                locator: str = target["locator"]  # js element locator
+                # navigate to that url
+                if target_url != "last":
+                    page.goto(target_url)
+                    page.wait_for_timeout(3000)  # TODO [shuyanzh]: fix this hard-coded sleep
+
+                # empty, use the full page
+                if not locator.strip():
+                    selected_element = page.content()
+                # use JS to select the element
+                elif locator.startswith("document.") or locator.startswith(
+                    "[...document."
+                ):
+                    # some locators are hidden, operate the page to make it visible
+                    if "prep_actions" in target:
+                        try:
+                            for prep_action in target["prep_actions"]:
+                                page.evaluate(f"() => {prep_action}")
+                        except Exception:
+                            pass
+                    try:
+                        selected_element = str(page.evaluate(f"() => {locator}"))
+                        if not selected_element:
+                            selected_element = ""
+                    except Exception:
+                        # the page is wrong, return empty
+                        selected_element = ""
+                elif locator.startswith("lambda:"):
+                    try:
+                        locator = locator.lstrip("lambda:")
+                        selected_element = page.evaluate(locator)
+                        if not selected_element:
+                            selected_element = None
+                    except Exception:
+                        # the page is wrong, return empty
+                        selected_element = None
+                # run program to call API
+                elif locator.startswith("func:"):  # a helper function
+                    func = locator.split("func:")[1]
+                    func = func.replace("__page__", "page")
+                    selected_element = eval(func)
+                else:
+                    raise ValueError(f"Unknown locator: {locator}")
+
+                selected_element_cache.append(selected_element)
 
             # If the selected element is None, then the page is wrong
             if selected_element is None:
                 score = 0.0
                 break
 
+            # compare
             if "exact_match" in target["required_contents"]:
                 required_contents = target["required_contents"]["exact_match"]
                 score *= StringEvaluator.exact_match(
@@ -423,7 +480,9 @@ class HTMLContentExactEvaluator(Evaluator):
                     score *= any(
                         [
                             StringEvaluator.must_include(
-                                ref=content, pred=selected_element
+                                ref=content,
+                                pred=selected_element,
+                                tokenize=False
                             )
                             for content in content_or
                         ]
@@ -477,6 +536,7 @@ class HTMLContentExactEvaluator(Evaluator):
                     f"Unknown required_contents: {target['required_contents'].keys()}"
                 )
 
+        self.cache_pred(selected_element_cache, config_file)
         return score
 
 
@@ -484,11 +544,42 @@ class HTMLContentExactEvaluator(Evaluator):
 class PageImageEvaluator(Evaluator):
     """Check whether the answer is correct by querying a vision model."""
 
-    def __init__(self, captioning_fn):
+    def __init__(self, captioning_fn, eval_tag: str = "", log_file: str = ""):
+        super().__init__(eval_tag, log_file)
         self.captioning_fn = captioning_fn
         # Default to 0.8 as the threshold for similarity to account for compression, resizing, etc
         # This might be too generous but we bias towards minimizing false negatives.
         self.ssim_threshold = 0.8
+
+    def cache_pred(
+        self,
+        image_cache: list[list[Image.Image]],
+        config_file: Path | str
+    ) -> None:
+        if not self.log_file:
+            return
+
+        # image to base64
+        image_strs = []
+
+        for images in image_cache:
+            cur_image_strs = []
+            for image in images:
+                buffer = BytesIO()
+                image.save(buffer, format=image.format or "JPEG")
+                cur_image_strs.append(base64.b64encode(buffer.getvalue()).decode("utf-8"))
+            image_strs.append(cur_image_strs)
+
+        d = {
+                'trajectory': [],
+                'config_file': os.path.basename(config_file),
+                'page': {
+                    'image_str_cache': image_strs
+                }
+            }
+
+        with open(self.log_file, "a") as f:
+            f.write(json.dumps(d) + "\n")
 
     def __call__(
         self,
@@ -499,60 +590,72 @@ class PageImageEvaluator(Evaluator):
         with open(config_file, "r") as f:
             configs = json.load(f)
 
-        for query in configs["eval"]["page_image_query"]:
-            locator: str = query["eval_image_class"]
-            target_url: str = query["eval_image_url"]
-            if target_url.startswith("func"):
-                func = target_url.split("func:")[1]
-                func = func.replace("__last_url__", page.url)
-                target_url = eval(func)
+        cache_flag = getattr(page, "image_cache", None)
+        image_cache = page.image_cache if cache_flag else []
 
-            # navigate to that url
-            if target_url != "last":
-                page.goto(target_url)
-                time.sleep(3)  # TODO(jykoh): fix this hard-coded sleep
-
-            # empty, use the full page
-            if not locator.strip():
-                images = page.get_by_role("img").all()
-            # use JS to select the element
-            elif locator.startswith("."):
-                # Get all img children under the locator
-                elements = page.query_selector_all(locator)
-                images = []
-                for element in elements:
-                    is_img = element.evaluate(
-                        'element => element.tagName === "IMG"'
-                    )
-                    if is_img:
-                        images.append(element)
-                    else:
-                        images.extend(element.query_selector_all("img"))
+        score = 1.0
+        for q_idx, query in enumerate(configs["eval"]["page_image_query"]):
+            # load the image from the cache
+            if cache_flag:
+                all_image_pixels = image_cache[q_idx]
+            # regular online scenario
             else:
-                raise ValueError(f"Unknown locator: {locator}")
+                locator: str = query["eval_image_class"]
+                target_url: str = query["eval_image_url"]
+                if target_url.startswith("func"):
+                    func = target_url.split("func:")[1]
+                    func = func.replace("__last_url__", page.url)
+                    target_url = eval(func)
 
-            if images == []:
-                return 0.0
+                # navigate to that url
+                if target_url != "last":
+                    page.goto(target_url)
+                    page.wait_for_timeout(3000)  # TODO(jykoh): fix this hard-coded sleep
 
-            all_image_pixels = []
-            for image in images:
-                try:
-                    # Get image from URL.
-                    image_url = image.get_attribute("src")
-                    if not image_url.startswith(
-                        ("http://", "https://", "www.")
-                    ):
-                        image_url = urljoin(page.url, image_url)
-                    image = Image.open(
-                        requests.get(image_url, stream=True).raw
-                    )
-                    all_image_pixels.append(image)
-                except Exception as e:
-                    print("[WARNING]: ", e)
+                # empty, use the full page
+                if not locator.strip():
+                    images = page.get_by_role("img").all()
+                # use JS to select the element
+                elif locator.startswith("."):
+                    # Get all img children under the locator
+                    elements = page.query_selector_all(locator)
+                    images = []
+                    for element in elements:
+                        is_img = element.evaluate(
+                            'element => element.tagName === "IMG"'
+                        )
+                        if is_img:
+                            images.append(element)
+                        else:
+                            images.extend(element.query_selector_all("img"))
+                else:
+                    raise ValueError(f"Unknown locator: {locator}")
 
-            score = 1.0
+                if images == []:
+                    score = 0.0
+                    break
+
+                all_image_pixels = []
+                for image in images:
+                    try:
+                        # Get image from URL.
+                        image_url = image.get_attribute("src")
+                        if not image_url.startswith(
+                            ("http://", "https://", "www.")
+                        ):
+                            image_url = urljoin(page.url, image_url)
+                        image = Image.open(
+                            requests.get(image_url, stream=True).raw
+                        )
+                        all_image_pixels.append(image)
+                    except Exception as e:
+                        print("[WARNING]: ", e)
+
+                image_cache.append(all_image_pixels)
+
             if all_image_pixels == []:
-                return 0.0
+                score = 0.0
+                break
             else:
                 # Run the VQA eval on the image elements.
                 eval_vqas = query.get("eval_vqa", [])
@@ -601,6 +704,7 @@ class PageImageEvaluator(Evaluator):
                                 break
                     score *= float(found_exact_match)
 
+        self.cache_pred(image_cache, config_file)
         return score
 
 
@@ -625,24 +729,26 @@ class EvaluatorComb:
 
 @beartype
 def evaluator_router(
-    config_file: Path | str, captioning_fn=None
+    config_file: Path | str,
+    captioning_fn=None,
+    log_file: str = ""
 ) -> EvaluatorComb:
     """Router to get the evaluator class"""
     with open(config_file, "r") as f:
         configs = json.load(f)
 
     eval_types = configs["eval"]["eval_types"]
-    evaluators: list[Evaluator | EvaluatorPartial] = []
+    evaluators: list[Evaluator] = []
     for eval_type in eval_types:
         match eval_type:
             case "string_match":
-                evaluators.append(StringEvaluator())
+                evaluators.append(StringEvaluator(log_file=log_file))
             case "url_match":
-                evaluators.append(URLExactEvaluator())
+                evaluators.append(URLExactEvaluator(log_file=log_file))
             case "program_html":
-                evaluators.append(HTMLContentExactEvaluator())
+                evaluators.append(HTMLContentExactEvaluator(log_file=log_file))
             case "page_image_query":
-                evaluators.append(PageImageEvaluator(captioning_fn))
+                evaluators.append(PageImageEvaluator(captioning_fn, log_file=log_file))
             case _:
                 raise ValueError(f"eval_type {eval_type} is not supported")
 

@@ -50,6 +50,7 @@ SLOW_MO = 0
 
 assert len(SITES) == len(URLS) == len(EXACT_MATCH) == len(KEYWORDS)
 
+
 def is_expired(
     storage_state: Path, url: str, keyword: str, url_exact: bool = True
 ) -> bool:
@@ -63,7 +64,7 @@ def is_expired(
     context = browser.new_context(storage_state=storage_state)
     page = context.new_page()
     page.goto(url)
-    time.sleep(1)
+    page.wait_for_timeout(1000)
     d_url = page.url
     content = page.content()
     context_manager.__exit__()

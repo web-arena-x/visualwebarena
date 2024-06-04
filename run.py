@@ -45,6 +45,7 @@ DATASET = os.environ["DATASET"]
 LOG_FOLDER = "log_files"
 Path(LOG_FOLDER).mkdir(parents=True, exist_ok=True)
 LOG_FILE_NAME = f"{LOG_FOLDER}/log_{time.strftime('%Y%m%d%H%M%S', time.localtime())}_{random.randint(0, 10000)}.log"
+EVAL_CACHE_FILE = LOG_FILE_NAME.replace(".log", "_eval_cache.jsonl")
 
 logger = logging.getLogger("logger")
 logger.setLevel(logging.INFO)
@@ -428,7 +429,9 @@ def test(
 
             # NOTE: eval_caption_image_fn is used for running eval_vqa functions.
             evaluator = evaluator_router(
-                config_file, captioning_fn=eval_caption_image_fn
+                config_file,
+                captioning_fn=eval_caption_image_fn,
+                log_file=EVAL_CACHE_FILE
             )
             score = evaluator(
                 trajectory=trajectory,

@@ -1,6 +1,6 @@
 """Implements helper functions to assist evaluation cases where other evaluators are not suitable."""
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Union
 from urllib.parse import urlparse
 
@@ -454,7 +454,7 @@ def reddit_get_latest_comment_obj_by_username(
 ) -> Dict[str, Any]:
     try:
         comment_tree = reddit_get_post_comment_tree(page)
-        latest_time = datetime.min
+        latest_time = datetime.min.replace(tzinfo=timezone.utc)
         comment = {}
 
         def dfs(node):
@@ -477,7 +477,6 @@ def reddit_get_latest_comment_obj_by_username(
 
     except Exception as e:
         comment = {}
-
     return comment
 
 
@@ -501,7 +500,7 @@ def reddit_get_parent_comment_obj_of_latest_comment_by_username(
 ) -> Dict[str, Any]:
     try:
         comment_tree = reddit_get_post_comment_tree(page)
-        latest_time = datetime.min
+        latest_time = datetime.min.replace(tzinfo=timezone.utc)
         comment = {}
 
         def dfs(node):
@@ -524,7 +523,6 @@ def reddit_get_parent_comment_obj_of_latest_comment_by_username(
 
     except Exception:
         comment = {}
-
     return comment
 
 
@@ -602,7 +600,6 @@ def llm_fuzzy_match(pred: str, reference: str, question: str) -> float:
         top_p=1.0,
         context_length=0,
     ).lower()
-    print(response)
     if "partially correct" in response or "incorrect" in response:
         return 0.0
     else:

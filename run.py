@@ -8,6 +8,8 @@ import json
 import logging
 import os
 import random
+import subprocess
+import tempfile
 import time
 from pathlib import Path
 from typing import List
@@ -15,7 +17,6 @@ from typing import List
 import openai
 import requests
 import torch
-from beartype import beartype
 from PIL import Image
 
 from agent import (
@@ -32,6 +33,7 @@ from browser_env import (
     create_stop_action,
 )
 from browser_env.actions import is_equivalent
+from browser_env.auto_login import get_site_comb_from_filepath
 from browser_env.helper_functions import (
     RenderHelper,
     get_action_description,
@@ -193,7 +195,6 @@ def config() -> argparse.Namespace:
     return args
 
 
-@beartype
 def early_stop(
     trajectory: Trajectory, max_steps: int, thresholds: dict[str, int]
 ) -> tuple[bool, str]:
@@ -250,7 +251,6 @@ def early_stop(
     return False, ""
 
 
-@beartype
 def test(
     args: argparse.Namespace,
     config_file_list: list[str]
@@ -296,6 +296,7 @@ def test(
     else:
         caption_image_fn = None
         eval_caption_image_fn = None
+
     agent = construct_agent(
         args,
         captioning_fn=caption_image_fn
@@ -333,6 +334,29 @@ def test(
                 image_paths = _c.get("image", None)
                 images = []
 
+                # automatically login
+                if _c["storage_state"]:
+                    cookie_file_name = os.path.basename(_c["storage_state"])
+                    comb = get_site_comb_from_filepath(cookie_file_name)
+                    temp_dir = tempfile.mkdtemp()
+                    # subprocess to renew the cookie
+                    subprocess.run(
+                        [
+                            "python",
+                            "browser_env/auto_login.py",
+                            "--auth_folder",
+                            temp_dir,
+                            "--site_list",
+                            *comb,
+                        ]
+                    )
+                    _c["storage_state"] = f"{temp_dir}/{cookie_file_name}"
+                    assert os.path.exists(_c["storage_state"])
+                    # update the config file
+                    config_file = f"{temp_dir}/{os.path.basename(config_file)}"
+                    with open(config_file, "w") as f:
+                        json.dump(_c, f)
+
                 # Load input images for the task, if any.
                 if image_paths is not None:
                     if isinstance(image_paths, str):
@@ -343,7 +367,7 @@ def test(
                             input_image = Image.open(requests.get(image_path, stream=True).raw)
                         else:
                             input_image = Image.open(image_path)
-                        
+
                         images.append(input_image)
 
             logger.info(f"[Config file]: {config_file}")
@@ -409,8 +433,7 @@ def test(
             score = evaluator(
                 trajectory=trajectory,
                 config_file=config_file,
-                page=env.page,
-                client=env.get_page_client(env.page),
+                page=env.page
             )
 
             scores.append(score)
@@ -439,7 +462,8 @@ def test(
         render_helper.close()
 
     env.close()
-    logger.info(f"Average score: {sum(scores) / len(scores)}")
+    if len(scores):
+        logger.info(f"Average score: {sum(scores) / len(scores)}")
 
 
 def prepare(args: argparse.Namespace) -> None:
@@ -480,7 +504,6 @@ def get_unfinished(config_files: list[str], result_dir: str) -> list[str]:
     return unfinished_configs
 
 
-@beartype
 def dump_config(args: argparse.Namespace) -> None:
     config_file = Path(args.result_dir) / "config.json"
     if not config_file.exists():

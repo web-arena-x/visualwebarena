@@ -49,6 +49,20 @@ def pil_to_vertex(img: Image.Image) -> str:
     return img_vertex
 
 
+class DOMNode(TypedDict):
+    nodeId: str
+    nodeType: str
+    nodeName: str
+    nodeValue: str
+    attributes: str
+    backendNodeId: str
+    parentId: str
+    childIds: list[str]
+    cursor: int
+    union_bound: list[float] | None
+    center: list[float] | None
+
+
 class AccessibilityTreeNode(TypedDict):
     nodeId: str
     ignored: bool
@@ -63,6 +77,7 @@ class AccessibilityTreeNode(TypedDict):
     bound: list[float] | None
     union_bound: list[float] | None
     offsetrect_bound: list[float] | None
+    center: list[float] | None
 
 
 class BrowserConfig(TypedDict):
@@ -81,7 +96,7 @@ class BrowserInfo(TypedDict):
 
 
 AccessibilityTree = list[AccessibilityTreeNode]
-
+DOMTree = list[DOMNode]
 
 Observation = str | npt.NDArray[np.uint8]
 

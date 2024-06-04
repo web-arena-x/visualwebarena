@@ -56,8 +56,7 @@ class Evaluator(object):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage,
-        client: CDPSession,
+        page: Page | PseudoPage
     ) -> float:
         raise NotImplementedError
 
@@ -205,8 +204,7 @@ class StringEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage | None = None,
-        client: CDPSession | None = None,
+        page: Page | PseudoPage | None = None
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -287,8 +285,7 @@ class StringSoftEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage | None = None,
-        client: CDPSession | None = None,
+        page: Page | PseudoPage | None = None
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -310,8 +307,7 @@ class URLExactEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage,
-        client: CDPSession | None = None,
+        page: Page | PseudoPage
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -350,8 +346,7 @@ class HTMLContentExactEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage,
-        client: CDPSession | None = None,
+        page: Page | PseudoPage
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -499,8 +494,7 @@ class PageImageEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage | None = None,
-        client: CDPSession | None = None,
+        page: Page | PseudoPage | None = None
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -618,13 +612,12 @@ class EvaluatorComb:
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage,
-        client: CDPSession,
+        page: Page | PseudoPage
     ) -> float:
 
         score = 1.0
         for evaluator in self.evaluators:
-            cur_score = evaluator(trajectory, config_file, page, client)
+            cur_score = evaluator(trajectory, config_file, page)
             score *= cur_score
 
         return score

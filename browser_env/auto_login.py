@@ -129,6 +129,7 @@ def renew_comb(comb: list[str], auth_folder: str = "./.auth") -> None:
 
     context_manager.__exit__()
 
+
 def get_site_comb_from_filepath(file_path: str) -> list[str]:
     comb = os.path.basename(file_path).rsplit("_", 1)[0].split(".")
     return comb
@@ -171,4 +172,11 @@ def main(auth_folder: str = "./.auth") -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--site_list", nargs="+", default=[])
+    parser.add_argument("--auth_folder", type=str, default="./.auth")
+    args = parser.parse_args()
+    if not args.site_list:
+        main()
+    else:
+        renew_comb(args.site_list, auth_folder=args.auth_folder)

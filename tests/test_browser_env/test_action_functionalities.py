@@ -329,3 +329,27 @@ def test_id_delete_input(
     )
     locator = env.page.get_by_label("Full name")
     expect(locator).to_have_value(new_s)
+
+
+@pytest.mark.skip(reason="The current implementation does not deal with iframes")
+def test_frame_action(
+    accessibility_tree_current_viewport_script_browser_env: ScriptBrowserEnv,
+) -> None:
+    """Test when multiple frames are present on the page"""
+    env = accessibility_tree_current_viewport_script_browser_env
+    env.reset()
+    obs, success, _, _, info = env.step(
+        create_playwright_action(
+            'page.goto("https://www.in-n-out.com/locations")'
+        )
+    )
+    assert success
+    assert "textbox 'Search by Address or Zip'" in obs["text"]
+    element_id = re.search(r"\[(\d+)\] textbox 'Search by Address or Zip'", obs["text"]).group(1)  # type: ignore
+
+    s = "random location"
+    obs, success, _, _, info = env.step(
+        create_id_based_action(f"type [{element_id}] [{s}]")
+    )
+    assert success
+    assert s in obs["text"]

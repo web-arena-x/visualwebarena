@@ -8,7 +8,9 @@ from browser_env.env_config import *
 
 def main() -> None:
     DATASET = os.environ["DATASET"]
+    
     if DATASET == "webarena":
+        WEBAREANA_VERSION = os.getenv("WEBARENA_VERSION", "v1")
         print("DATASET: webarena")
         print(f"REDDIT: {REDDIT}")
         print(f"SHOPPING: {SHOPPING}")
@@ -16,8 +18,14 @@ def main() -> None:
         print(f"GITLAB: {GITLAB}")
         print(f"WIKIPEDIA: {WIKIPEDIA}")
         print(f"MAP: {MAP}")
-        
-        inp_paths = ["config_files/wa/test_webarena.raw.json"]
+        print(f"WEBAREANA_VERSION: {WEBAREANA_VERSION}")
+
+        if WEBAREANA_VERSION == "v1":
+            inp_paths = ["config_files/wa/test_webarena.raw.json"]
+        elif WEBAREANA_VERSION == "v2":
+            inp_paths = ["config_files/wa/test_webarena_v2.raw.json"]
+        else:
+            raise ValueError(f"Unknow WebArena version: {WEBAREANA_VERSION}")
         replace_map = {
             "__REDDIT__": REDDIT,
             "__SHOPPING__": SHOPPING,

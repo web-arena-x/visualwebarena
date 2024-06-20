@@ -1,4 +1,5 @@
 """Implements helper functions to assist evaluation cases where other evaluators are not suitable."""
+
 import base64
 from io import BytesIO
 import json
@@ -10,13 +11,12 @@ import requests
 from beartype import beartype
 from beartype.typing import Dict, List
 from playwright.sync_api import Page
-from evaluation_harness.env_config import (
-    ACCOUNTS,
-    SHOPPING
-)
+from evaluation_harness.env_config import ACCOUNTS, SHOPPING
 from llms.providers.openai_utils import (
     generate_from_openai_chat_completion,
 )
+
+GPT_MODEL = "gpt-4-1106-preview"
 
 
 class PseudoPage:
@@ -31,7 +31,9 @@ class PseudoPage:
                 for cur_image_str in value:
                     cur_image_cache = []
                     for image_str in cur_image_str:
-                        cur_image_cache.append(Image.open(BytesIO(base64.b64decode(image_str))))
+                        cur_image_cache.append(
+                            Image.open(BytesIO(base64.b64decode(image_str)))
+                        )
                     image_cache.append(cur_image_cache)
                 setattr(self, "image_cache", image_cache)
             else:
@@ -79,9 +81,7 @@ def shopping_get_latest_order_url() -> str:
         "searchCriteria[pageSize]": "1",
     }
 
-    response = requests.get(
-        f"{SHOPPING}/rest/V1/orders", params=params, headers=header
-    )
+    response = requests.get(f"{SHOPPING}/rest/V1/orders", params=params, headers=header)
     assert response.status_code == 200
     response_obj = response.json()["items"][0]
     order_id = int(response_obj["increment_id"])
@@ -169,9 +169,7 @@ def shopping_get_sku_product_page_url(sku: str) -> str:
         "Authorization": f"Bearer {shopping_get_auth_token()}",
         "Content-Type": "application/json",
     }
-    response = requests.get(
-        f"{SHOPPING}/rest/V1/products/{sku}", headers=header
-    )
+    response = requests.get(f"{SHOPPING}/rest/V1/products/{sku}", headers=header)
     assert response.status_code == 200
     response_obj = response.json()
     if len(response_obj) == 0:
@@ -260,9 +258,7 @@ def shopping_get_order_product_name_list(page: Page | PseudoPage) -> str:
 
 
 @beartype
-def shopping_get_order_product_quantity(
-    page: Page | PseudoPage, sku: str
-) -> int:
+def shopping_get_order_product_quantity(page: Page | PseudoPage, sku: str) -> int:
     try:
         if "|OR|" in sku:
             skus = sku.split(" |OR| ")
@@ -295,9 +291,7 @@ def shopping_get_order_product_option(
 
 
 @beartype
-def shopping_get_product_attributes(
-    page: Page | PseudoPage, attribute: str
-) -> str:
+def shopping_get_product_attributes(page: Page | PseudoPage, attribute: str) -> str:
     # Get the values of all cells in the table for the given attribute
     try:
         result = page.evaluate(
@@ -558,9 +552,7 @@ def reddit_get_parent_comment_username_of_latest_comment_by_username(
 
 
 @beartype
-def gitlab_get_project_memeber_role(
-    page: Page | PseudoPage, account_name: str
-) -> str:
+def gitlab_get_project_memeber_role(page: Page | PseudoPage, account_name: str) -> str:
     # get the account index
     try:
         account_idx = page.evaluate(
@@ -608,10 +600,10 @@ def llm_fuzzy_match(pred: str, reference: str, question: str) -> float:
     ]
 
     response = generate_from_openai_chat_completion(
-        model="gpt-4-1106-preview",
+        model=GPT_MODEL,
         messages=messages,
         temperature=0,
-        max_tokens=768,
+        max_tokens=512,
         top_p=1.0,
         context_length=0,
     ).lower()
@@ -643,7 +635,7 @@ def llm_ua_match(pred: str, reference: str, question: str) -> float:
     ]
 
     response = generate_from_openai_chat_completion(
-        model="gpt-4-1106-preview",
+        model=GPT_MODEL,
         messages=messages,
         temperature=0,
         max_tokens=768,
@@ -655,3 +647,188 @@ def llm_ua_match(pred: str, reference: str, question: str) -> float:
     else:
         assert "same" in response
         return 1.0
+
+
+def llm_fuzzy_exact_match(pred: str, reference: str, task: str) -> tuple[str, float]:
+    user_message = f"""Determine if the prediction is correct by comparing it with the reference answer.
+- The reference answer presents the correct answer in its minimal form.
+- When the reference answer is about time duration, distance, or quantity, the prediction can be in a different format, but the information should be equivalent.
+
+Task: {task}
+Reference answer: {reference}
+Prediction: {pred}
+
+After the examination (do not repeat the sentences below):
+- Briefly justify your answer.
+- Conclude with the score using the format: "Answer: Correct"/"Answer: Incorrect"
+""".strip()
+
+    messages: list[dict[str, Any]] = []
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": user_message.strip()},
+    ]
+
+    response = generate_from_openai_chat_completion(
+        model=GPT_MODEL,
+        messages=messages,
+        temperature=0,
+        max_tokens=256,
+        top_p=1.0,
+        context_length=0,
+    ).lower()
+
+    if "answer: correct" in response:
+        return response, 1.0
+    else:
+        assert "answer: incorrect" in response, response
+        return response, 0.0
+
+
+def llm_fuzzy_must_include(pred: str, reference: str, task: str) -> tuple[str, float]:
+    user_message = f"""Determine if the prediction contains the required information.
+- The prediction is considered as containing the required information if it can entail the required information.
+- The prediction can contain additional information.
+- When the information is about time duration, distance, or quantity, the prediction can be in a different format, but the information should be equivalent.
+
+Task: {task}
+Required information: {reference}
+Prediction: {pred}
+
+After the examination (do not repeat the sentences below):
+- Briefly justify your answer.
+- Conclude with the score using the format: "Answer: Contain"/"Answer: Not contain"
+""".strip()
+
+    messages: list[dict[str, Any]] = []
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": user_message.strip()},
+    ]
+
+    response = generate_from_openai_chat_completion(
+        model=GPT_MODEL,
+        messages=messages,
+        temperature=0,
+        max_tokens=256,
+        top_p=1.0,
+        context_length=0,
+    ).lower()
+
+    if "answer: contain" in response:
+        return response, 1.0
+    else:
+        assert "answer: not contain" in response, response
+        return response, 0.0
+
+
+def llm_fuzzy_na_match(pred: str, reference: str, task: str) -> tuple[str, float]:
+    user_message = f"""Determine if the predicted reason given for why the task cannot be completed is correct.
+- The prediction is only considered as correct if the reference and the prediction can entail each other.
+- Make sure you understand the task and the reason presented in the reference. Do not be loose with the interpretation.
+
+Task: {task}
+Reference: {reference}
+Prediction: {pred}
+
+After the examination (do not repeat the sentences below):
+- Briefly justify your answer.
+- Conclude using the format: "Answer: Correct"/"Answer: Incorrect".
+""".strip()
+
+    messages: list[dict[str, Any]] = []
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": user_message.strip()},
+    ]
+
+    response = generate_from_openai_chat_completion(
+        model=GPT_MODEL,
+        messages=messages,
+        temperature=0,
+        max_tokens=256,
+        top_p=1.0,
+        context_length=0,
+    ).lower()
+
+    if "answer: correct" in response:
+        return response, 1.0
+    else:
+        assert "answer: incorrect" in response, response
+        return response, 0.0
+
+
+@beartype
+def llm_question_answering(
+    question: str, answer: str, passage: str
+) -> tuple[str, float]:
+    user_message = f"""Provide a binary answer to the question given the passage.
+- Carefully read the passage,
+- Make sure you understand the question and do not be loose with the interpretation.
+
+Passage: {passage}
+Question: {question}
+
+After the examination (do not repeat the sentences below):
+- Briefly justify your answer.
+- Conclude using the format: "Answer: Yes"/"Answer: No".
+""".strip()
+
+    messages: list[dict[str, Any]] = []
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": user_message.strip()},
+    ]
+
+    response = generate_from_openai_chat_completion(
+        model=GPT_MODEL,
+        messages=messages,
+        temperature=0,
+        max_tokens=256,
+        top_p=1.0,
+        context_length=0,
+    ).lower()
+
+    if f"answer: {answer.lower()}" in response:
+        return response, 1.0
+    else:
+        return response, 0.0
+
+
+@beartype
+def llm_context_aware_question_answering(
+    question: str, answer: str, passage: str, context: str
+) -> tuple[str, float]:
+    user_message = f"""Provide a binary answer to the question given the passage.
+- `Task` indicates the context in which the passage is presented.
+- Carefully read the passage.
+- Make sure you understand the question and do not be loose with the interpretation.
+
+Task: {context}
+Passage: {passage}
+Question: {question}
+
+After the examination (do not repeat the sentences below):
+- Briefly justify your answer.
+- Conclude using the format: "Answer: Yes"/"Answer: No".
+""".strip()
+
+    messages: list[dict[str, Any]] = []
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content": user_message.strip()},
+    ]
+
+    response = generate_from_openai_chat_completion(
+        model=GPT_MODEL,
+        messages=messages,
+        temperature=0,
+        max_tokens=256,
+        top_p=1.0,
+        context_length=0,
+    ).lower()
+
+    if f"answer: {answer.lower()}" in response:
+        return response, 1.0
+    else:
+        return response, 0.0

@@ -415,7 +415,7 @@ class StringEvaluator(Evaluator):
                             'score': cur_score
                         })
                 case "fuzzy_na_match":
-                    response, score = 1.0 * self.fuzzy_na_match(
+                    response, score = self.fuzzy_na_match(
                         intent=configs["intent"], reference=value, pred=pred
                     )
                     metadata['string_eval'].append({

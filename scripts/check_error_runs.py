@@ -75,7 +75,10 @@ def merge_eval_cache(
 
     id_to_cache = {}
     for file in log_files:
-        with open(file.strip().replace(".log", "_eval_cache.jsonl"), "r") as f:
+        eval_log_file = file.strip().replace(".log", "_eval_cache.jsonl")
+        if not os.path.exists(eval_log_file):
+            continue
+        with open(eval_log_file, "r") as f:
             for line in f:
                 data = json.loads(line)
                 id = data["config_file"].split(".")[0]

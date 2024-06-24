@@ -8684,7 +8684,7 @@
                 "string_match"
             ],
             "reference_answers": {
-                "must_include":[
+                "must_include": [
                     "SONY WH1000XM3 Bluetooth Wireless Noise Canceling Headphones Silver WH-1000XM3/S (Renewed)",
                     "Sony WH-CH710N/H Wireless Bluetooth Noise Cancelling Headphones",
                     "Sony WH-1000XM3B Wireless Bluetooth Noise-Canceling Over-Ear Headphones (Black) Basic Headphone Bundle Kit with Stylus",
@@ -8744,7 +8744,7 @@
                         "answer": "Yes"
                     }
                 ],
-                "must_include":[
+                "must_include": [
                     "Anker USB C Charger 30W, 711 Charger, Compact Fast Charger (Not Foldable) for MacBook Air/iPhone 13/13 Mini/13 Pro/13 Pro Max/12, Galaxy S21, Note 20, iPad Pro, Pixel, and More",
                     "Anker USB C Charger 40W, 521 Charger (Nano Pro), PIQ 3.0 Durable Compact Fast Charger (Not Foldable) for iPhone 13/13 Mini/13 Pro/13 Pro Max/12, Galaxy, Pixel 4/3, iPad/iPad Mini (Cable Not Included)",
                     "Anker PowerCore Speed 20000, 20000mAh Qualcomm Quick Charge 3.0 & PowerIQ Portable Charger, with Quick Charge Recharging, Power Bank for Samsung, iPhone, iPad and More, Black (A1278)",
@@ -8794,7 +8794,7 @@
                         "answer": "Yes"
                     }
                 ],
-                "must_include":[
+                "must_include": [
                     "Oral-B Kids Extra Soft Replacement Brush Heads featuring STAR WARS, 2 count",
                     "Kids By Oral-b Stages Power Star Wars Replacement Heads 4 Pack"
                 ]
@@ -8834,7 +8834,7 @@
                         "answer": "Yes"
                     }
                 ],
-                "must_include":[
+                "must_include": [
                     "Nike Men's Air Max Camden Slide Sandal",
                     "Nike Men's Benassi JDI Fanny Pack Slides",
                     "Nike Victori One Mens Comfort Slide Cn9675-003 (Midnight Navy/Midnight Navy/White, Numeric_10)",
@@ -9758,12 +9758,12 @@
         "storage_state": "./.auth/gitlab_state.json",
         "start_url": "__GITLAB__",
         "geolocation": null,
-        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo, ranked by the number of commits?",
+        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo.",
         "instantiation_dict": {
             "repo": "prime/design",
             "attribute": "name"
         },
-        "intent": "List the name of the top 3 contributors to prime/design repo, ranked by the number of commits?",
+        "intent": "List the name of the top 3 contributors to prime/design repo.",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -9781,10 +9781,6 @@
                     },
                     {
                         "question": "Does the passage include the contributor whose name is Aurora Pleguezuelo?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does this passage clearly state that the order of contributors, from the most commits to the least, is Shawn Allen, Inayaili Le\u00f3n, and Aurora Pleguezuelo?",
                         "answer": "Yes"
                     }
                 ]
@@ -9805,35 +9801,22 @@
         "storage_state": "./.auth/gitlab_state.json",
         "start_url": "__GITLAB__",
         "geolocation": null,
-        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo, ranked by the number of commits?",
+        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo.",
         "instantiation_dict": {
             "repo": "Pytorch GAN",
             "attribute": "email address"
         },
-        "intent": "List the email address of the top 3 contributors to Pytorch GAN repo, ranked by the number of commits?",
+        "intent": "List the email address of the top 3 contributors to Pytorch GAN repo.",
         "require_reset": false,
         "eval": {
             "eval_types": [
                 "string_match"
             ],
             "reference_answers": {
-                "context_qa": [
-                    {
-                        "question": "Does the passage include email eriklindernoren@live.se?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does the passage include email eriklindernoren@gmail.com?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does the passage include emaileriklindernoren@gmail.com?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does this passage clearly state that the emails of the contributors, ordered from the most commits to the least, are eriklindernoren@live.se, eriklindernoren@gmail.com, and pinnacle.chen@qq.com??",
-                        "answer": "Yes"
-                    }
+                "must_include": [
+                    "eriklindernoren@live.se",
+                    "eriklindernoren@gmail.com",
+                    "pinnacle.chen@qq.com"
                 ]
             },
             "reference_url": "",
@@ -9852,12 +9835,12 @@
         "storage_state": "./.auth/gitlab_state.json",
         "start_url": "__GITLAB__",
         "geolocation": null,
-        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo, ranked by the number of commits?",
+        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo.",
         "instantiation_dict": {
             "repo": "facebook's guide on building react apps",
             "attribute": "name"
         },
-        "intent": "List the name of the top 3 contributors to facebook's guide on building react apps repo, ranked by the number of commits?",
+        "intent": "List the name of the top 3 contributors to facebook's guide on building react apps repo.",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -9875,10 +9858,6 @@
                     },
                     {
                         "question": "Does the passage include the contributor whose name is Dan Abramov?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does this passage clearly state that the order of contributors, from the most commits to the least, is Ian Sutherland, Joe Hadda, and Dan Abramov?",
                         "answer": "Yes"
                     }
                 ]
@@ -9899,12 +9878,12 @@
         "storage_state": "./.auth/gitlab_state.json",
         "start_url": "__GITLAB__",
         "geolocation": null,
-        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo, ranked by the number of commits?",
+        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo.",
         "instantiation_dict": {
             "repo": "metaseq",
             "attribute": "name and number of commits"
         },
-        "intent": "List the name and number of commits of the top 3 contributors to metaseq repo, ranked by the number of commits?",
+        "intent": "List the name and number of commits of the top 3 contributors to metaseq repo.",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -9954,12 +9933,12 @@
         "storage_state": "./.auth/gitlab_state.json",
         "start_url": "__GITLAB__",
         "geolocation": null,
-        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo, ranked by the number of commits?",
+        "intent_template": "List the {{attribute}} of the top 3 contributors to {{repo}} repo.",
         "instantiation_dict": {
             "repo": "2019-nCov",
             "attribute": "last names"
         },
-        "intent": "List the last names of the top 3 contributors to 2019-nCov repo, ranked by the number of commits?",
+        "intent": "List the last names of the top 3 contributors to 2019-nCov repo.",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -9977,10 +9956,6 @@
                     },
                     {
                         "question": "Does the passage include the contributor whose last name is Chu?",
-                        "answer": "Yes"
-                    },
-                    {
-                        "question": "Does this passage clearly state that the last name of the contributors, ordered from the most commits to the least, is Lo, Chen, and Chu?",
                         "answer": "Yes"
                     }
                 ]
@@ -11697,7 +11672,7 @@
                 "string_match"
             ],
             "reference_answers": {
-                "fuzzy_na_match": "There is no review for this product"
+                "fuzzy_na_match": "Amazon Echo Dot 3rd generation does not have any reviews."
             },
             "reference_url": "",
             "program_html": [],

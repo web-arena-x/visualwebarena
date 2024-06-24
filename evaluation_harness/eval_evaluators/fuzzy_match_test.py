@@ -210,7 +210,7 @@ def add_predictions(dataset_file: str, result_file: str, method: str, prediction
         json.dump(d, f, indent=2)
 
 
-def test_evaluator(data_file: str, method: str) -> float:
+def run_evaluator(data_file: str, method: str) -> float:
     with open(data_file, "r") as f:
         d = json.load(f)[method]
     requests = []
@@ -264,6 +264,9 @@ def test_evaluator(data_file: str, method: str) -> float:
         else:
             raise ValueError(f"Unknown method: {method}")
         
+        if 'metadata' in example:
+            extra_metadata = example['metadata']
+
         for message in messages:
             requests.append({
                 "model": "gpt-4o",
@@ -271,7 +274,7 @@ def test_evaluator(data_file: str, method: str) -> float:
                 "temperature": 0.0,
                 "max_tokens": 256,
                 "top_p": 1.0,
-                "metadata": {"e_id": e_id, "method": method, "label": label.lower() if isinstance(label, str) else label}
+                "metadata": {"e_id": e_id, "method": method, "label": label.lower() if isinstance(label, str) else label, **(extra_metadata or {})},
             })
         
     print(f"Total requests: {len(requests)}")
@@ -337,17 +340,13 @@ def parse_evaluator_result(data_file, save_file: str, method: str, print_errors:
             e_id_to_pred[e_id] = "Error"
             continue
         if method in ["fuzzy_exact_match", "fuzzy_na_match"]:
-            if "answer: correct" in pred:
-                e_id_to_pred[e_id] = True
-            else:
+            if "answer: incorrect" in pred:
                 e_id_to_pred[e_id] = False
         elif method == "fuzzy_must_include":
             if "answer: not contain" in pred:
                 e_id_to_pred[e_id] = False
         elif method in ["context_qa", "qa"]:
-            if "answer: yes" in pred:
-                e_id_to_pred[e_id] = True
-            else:
+            if "answer: no" in pred:
                 e_id_to_pred[e_id] = False
         else:
             raise ValueError(f"Unknown method: {method}")
@@ -387,6 +386,12 @@ def parse_evaluator_result(data_file, save_file: str, method: str, print_errors:
 
 
 if __name__ == "__main__":
+    dataset_file = "tmp_best_models.json"
+    for method in ["fuzzy_must_include", 'fuzzy_na_match', "fuzzy_exact_match", "context_qa"][:]:
+        run_evaluator(dataset_file, method)
+        calc_openai_cost(dataset_file.replace(".json", f"_{method}_eval_results.jsonl"))
+    exit()
+    
     overwrite = False
     print_errors = True
     # generate data
@@ -415,6 +420,6 @@ if __name__ == "__main__":
             result_file = f"./tmp_data/fuzzy_match_dataset_{method}_results.jsonl"
             add_predictions(dataset_file, result_file, method, prediction_start_index=params_map[method]['prediction_start_index'])
         
-        test_evaluator(dataset_file, method)
+        run_evaluator(dataset_file, method)
         parse_evaluator_result(dataset_file, dataset_file.replace(".json", f"_{method}_eval_results.jsonl"), method, print_errors=print_errors)
         calc_openai_cost(dataset_file.replace(".json", f"_{method}_eval_results.jsonl"))

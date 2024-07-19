@@ -16,7 +16,7 @@ def main() -> None:
         print(f"GITLAB: {GITLAB}")
         print(f"WIKIPEDIA: {WIKIPEDIA}")
         print(f"MAP: {MAP}")
-        
+        print(f"HOMEPAGE: {HOMEPAGE}")
         inp_paths = ["config_files/wa/test_webarena.raw.json"]
         replace_map = {
             "__REDDIT__": REDDIT,
@@ -25,12 +25,14 @@ def main() -> None:
             "__GITLAB__": GITLAB,
             "__WIKIPEDIA__": WIKIPEDIA,
             "__MAP__": MAP,
+            "__HOMEPAGE__": HOMEPAGE,
         }
     elif DATASET == "visualwebarena":
         print("DATASET: visualwebarena")
         print(f"CLASSIFIEDS: {CLASSIFIEDS}")
         print(f"REDDIT: {REDDIT}")
         print(f"SHOPPING: {SHOPPING}")
+        print(f"HOMEPAGE: {HOMEPAGE}")
         inp_paths = [
             "config_files/vwa/test_classifieds.raw.json", "config_files/vwa/test_shopping.raw.json", "config_files/vwa/test_reddit.raw.json",
         ]
@@ -39,6 +41,7 @@ def main() -> None:
             "__SHOPPING__": SHOPPING,
             "__WIKIPEDIA__": WIKIPEDIA,
             "__CLASSIFIEDS__": CLASSIFIEDS,
+            "__HOMEPAGE__": HOMEPAGE,
         }
     else:
         raise ValueError(f"Dataset not implemented: {DATASET}")

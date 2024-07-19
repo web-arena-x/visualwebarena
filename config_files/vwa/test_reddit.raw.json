@@ -10,7 +10,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to find this post. Navigate to the comment section for it.",
         "intent": "I'm trying to find this post. Navigate to the comment section for it.",
-        "image": "__REDDIT__/submission_images/a731d0dd8da7f9db30c5b1aa2caddc79237f23b63d01181fa394458536d30cd4.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/0/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -39,7 +39,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to find this post. Navigate to the comment section for it.",
         "intent": "I'm trying to find this post. Navigate to the comment section for it.",
-        "image": "__REDDIT__/submission_images/e012f0528f58c57240a4530b9c04f07f9828053c5202d97306d528048fc002c0.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/1/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -68,7 +68,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to find this post. Navigate to the comment section for it.",
         "intent": "I'm trying to find this post. Navigate to the comment section for it.",
-        "image": "__REDDIT__/submission_images/91ba8efd310cfbb3dd72dcd58183713fe00378019b90ee05555fe62cbae8d46c.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/2/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -97,7 +97,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to do some research about the post with this image. Tell me how many comments mention the word \"{{word}}\".",
         "intent": "I'm trying to do some research about the post with this image. Tell me how many comments mention the word \"spicy\".",
-        "image": "__REDDIT__/submission_images/24793bc78359a112286f5a18e72b3eb4bf74f1ecc1518ebdce6b201c728b1b44.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/3/input_0.png",
         "instantiation_dict": {
             "word": "spicy"
         },
@@ -133,7 +133,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to do some research about the post with this image. Tell me how many comments mention the word \"{{word}}\".",
         "intent": "I'm trying to do some research about the post with this image. Tell me how many comments mention the word \"wheat\".",
-        "image": "__REDDIT__/submission_images/303ce4a44cd98a77a1d3ed99511e21fcc9973fc8aa5e0382f42f3ed3c598ac2a.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/4/input_0.png",
         "instantiation_dict": {
             "word": "wheat"
         },
@@ -169,7 +169,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to do some research about the post with this image. Tell me how many comments this post has.",
         "intent": "I'm trying to do some research about the post with this image. Tell me how many comments this post has.",
-        "image": "__REDDIT__/submission_images/1dca2e0d195036fd9d5bb3416cef4cc061796b48dc8b7a8b4d4d14229340a45e.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/5/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -203,7 +203,7 @@
         "geolocation": null,
         "intent_template": "I'm trying to do some research about the post with this image. Tell me how many comments this post has.",
         "intent": "I'm trying to do some research about the post with this image. Tell me how many comments this post has.",
-        "image": "__REDDIT__/submission_images/ac7dbdd1f4053d2603a4e72e7eac53a35d1cf80c665889fbf4c2affe4415c996.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/6/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -237,7 +237,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/e1eaca118ba95fee4a25afbba5bda97e46f53b6abfffba484a79961e2058f9bd.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/7/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -269,7 +269,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/24793bc78359a112286f5a18e72b3eb4bf74f1ecc1518ebdce6b201c728b1b44.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/8/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -298,7 +298,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/f85e45ccbb6417ca67872694cb4e9906fb5d52415517b5a82ccd4be43df2bce5.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/9/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -327,7 +327,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the comment url of the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/95279e58f603d7bc121dd49b061440053ebe8c29496c36487cb9005ba7b37515.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/10/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -356,7 +356,7 @@
         "geolocation": null,
         "intent_template": "Can you help me find and navigate to the comments section of the post with this image?",
         "intent": "Can you help me find and navigate to the comments section of the post with this image?",
-        "image": "__REDDIT__/submission_images/534655c4f627b6bfc41f279290a8f0dec6616d24ed7baa2a7b7054326fdd4269.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/11/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -385,7 +385,7 @@
         "geolocation": null,
         "intent_template": "Can you help me find and navigate to the comments section of the post with this image?",
         "intent": "Can you help me find and navigate to the comments section of the post with this image?",
-        "image": "__REDDIT__/submission_images/756ea348e1bbd91001c7dc43f1c0f5f1bcd744691f12eaf535e08b680a5a8f37.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/12/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -414,7 +414,7 @@
         "geolocation": null,
         "intent_template": "Can you help me find and navigate to the comments section of the post with this image?",
         "intent": "Can you help me find and navigate to the comments section of the post with this image?",
-        "image": "__REDDIT__/submission_images/dc079dc0eafe6bf8dbf1493fb9d59f6868c65ac5c3fafb71f4e6e8748d85b71b.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/13/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -443,7 +443,7 @@
         "geolocation": null,
         "intent_template": "Can you help me find and navigate to the comments section of an image post that has something like this image?",
         "intent": "Can you help me find and navigate to the comments section of an image post that has something like this image?",
-        "image": "__REDDIT__/submission_images/4b2b1b0890ee42f1cc7447e925bcc50d37de165254e268c1e792ef8cb30ac338.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/14/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -488,7 +488,7 @@
         "geolocation": null,
         "intent_template": "Can you help me find and navigate to the comments section of an image post that has something like this image?",
         "intent": "Can you help me find and navigate to the comments section of an image post that has something like this image?",
-        "image": "coco_images/000000000285.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/15/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -529,7 +529,7 @@
         "geolocation": null,
         "intent_template": "What {{question}} {{modifier}}?",
         "intent": "What month and year (in mm-yyyy format) was this image posted in the /f/pics subreddit?",
-        "image": "__REDDIT__/submission_images/00d2341392f787ba15960934bea08a81090053c0ac17458c37c743a2eacb9f66.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/16/input_0.png",
         "instantiation_dict": {
             "question": "month and year (in mm-yyyy format)",
             "modifier": "was this image posted in the /f/pics subreddit"
@@ -566,7 +566,7 @@
         "geolocation": null,
         "intent_template": "Navigate to a subreddit where I can find the most similar content to this image.",
         "intent": "Navigate to a subreddit where I can find the most similar content to this image.",
-        "image": "__REDDIT__/submission_images/43a7a1ca5d08b16fcb11926a7bcc4b16476ed8e62a55bdd917b1020f2510f2e2.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/17/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -595,7 +595,7 @@
         "geolocation": null,
         "intent_template": "Navigate to a subreddit where I can find the most similar content to this image.",
         "intent": "Navigate to a subreddit where I can find the most similar content to this image.",
-        "image": "__REDDIT__/submission_images/7a1e98e9fa4016d835815a04aa9375d82955931805163defaa185c8cf8217b47.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/18/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -624,7 +624,7 @@
         "geolocation": null,
         "intent_template": "Find and upvote this post. I think it was posted in {{forum}}.",
         "intent": "Find and upvote this post. I think it was posted in /f/GetMotivated.",
-        "image": "__REDDIT__/submission_images/1c42177287fc4285f7ff6755c520e8484b35aaf63e764f2aaa93764195cdcde0.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/19/input_0.png",
         "instantiation_dict": {
             "forum": "/f/GetMotivated"
         },
@@ -664,7 +664,7 @@
         "geolocation": null,
         "intent_template": "Find and upvote this post. I think it was posted in {{forum}}.",
         "intent": "Find and upvote this post. I think it was posted in /f/space.",
-        "image": "__REDDIT__/media/cache/resolve/submission_thumbnail_1x/a1920694edca7656fc929bab1166d2d667181e3aa495147cbe319dbadcd6cccb.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/20/input_0.png",
         "instantiation_dict": {
             "forum": "/f/space"
         },
@@ -704,7 +704,7 @@
         "geolocation": null,
         "intent_template": "Find and upvote this post. I think it was posted in {{forum}}.",
         "intent": "Find and upvote this post. I think it was posted in /f/OldSchoolCool.",
-        "image": "__REDDIT__/submission_images/97414d47ab9fe6c197aaa93f5157a80d59db4df0cbc9b683c7cb5aa9ad326e0e.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/21/input_0.png",
         "instantiation_dict": {
             "forum": "/f/OldSchoolCool"
         },
@@ -744,7 +744,7 @@
         "geolocation": null,
         "intent_template": "Find this post and tell me what the top comment says.",
         "intent": "Find this post and tell me what the top comment says.",
-        "image": "__REDDIT__/submission_images/38fa7f08e147044f478f01b6a5a01d0798abf168016a3b38d2cc84779cb210e1.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/22/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -778,7 +778,7 @@
         "geolocation": null,
         "intent_template": "Find this post and tell me what the top comment says.",
         "intent": "Find this post and tell me what the top comment says.",
-        "image": "__REDDIT__/submission_images/2319bc580d861d7543159a48d1bc6085b1e62bfddb0673b35c09f924fec3e9ba.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/23/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -812,7 +812,7 @@
         "geolocation": null,
         "intent_template": "Find this post and tell me what the top comment says.",
         "intent": "Find this post and tell me what the top comment says.",
-        "image": "__REDDIT__/submission_images/c00998a8eba2c76e09451d6a01f93052f2aebd87808db67e451151aa22467578.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/24/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -847,7 +847,7 @@
         "geolocation": null,
         "intent_template": "Find this post and tell me what the top comment says.",
         "intent": "Find this post and tell me what the top comment says.",
-        "image": "__REDDIT__/submission_images/bf9827860b0a877f292bbc9082ecadada26d3a8757982478c30c1a121de15bcd.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/25/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -881,7 +881,7 @@
         "geolocation": null,
         "intent_template": "Find this post and tell me what the top comment says.",
         "intent": "Find this post and tell me what the top comment says.",
-        "image": "https://images.pexels.com/photos/9782305/pexels-photo-9782305.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/26/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -913,7 +913,7 @@
         "geolocation": null,
         "intent_template": "Make a Reddit post with this image ({{image_url}}) in the most relevant subreddit, and navigate to its comments section.",
         "intent": "Make a Reddit post with this image (https://images.pexels.com/photos/14267038/pexels-photo-14267038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) in the most relevant subreddit, and navigate to its comments section.",
-        "image": "https://images.pexels.com/photos/14267038/pexels-photo-14267038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "__HOMEPAGE__/static/input_images/reddit/27/input_0.png",
         "instantiation_dict": {
             "image_url": "https://images.pexels.com/photos/14267038/pexels-photo-14267038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
@@ -951,7 +951,7 @@
         "geolocation": null,
         "intent_template": "Write a story about this picture and post it in the most relevant subreddit.",
         "intent": "Write a story about this picture and post it in the most relevant subreddit.",
-        "image": "coco_images/000000515982.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/28/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1015,7 +1015,7 @@
         "geolocation": null,
         "intent_template": "Write a story about this picture and post it in the most relevant subreddit.",
         "intent": "Write a story about this picture and post it in the most relevant subreddit.",
-        "image": "https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/29/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1079,7 +1079,7 @@
         "geolocation": null,
         "intent_template": "Find the user who posted this and navigate to the comments section of one of their other posts.",
         "intent": "Find the user who posted this and navigate to the comments section of one of their other posts.",
-        "image": "__REDDIT__/submission_images/4f93a8def3912dd323c901b33d9ee862138f15152632d91f6f2fff0d2ff0a9e6.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/30/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1108,7 +1108,7 @@
         "geolocation": null,
         "intent_template": "Find the user who posted this and navigate to the comments section of one of their other posts.",
         "intent": "Find the user who posted this and navigate to the comments section of one of their other posts.",
-        "image": "__REDDIT__/submission_images/d3333ad4839961f9f765b514279fc0730c9c7fee194ecd3fd069e3f15ef86234.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/31/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1140,7 +1140,7 @@
         "geolocation": null,
         "intent_template": "Find the user who posted this and navigate to the comments section of one of their other posts.",
         "intent": "Find the user who posted this and navigate to the comments section of one of their other posts.",
-        "image": "__REDDIT__/submission_images/bd60b4847804344faecd02aaaa6cb280024a63cd3610283ab2de3406f3f75cf8.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/32/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1169,7 +1169,7 @@
         "geolocation": null,
         "intent_template": "Find the user who posted this and navigate to the comments section of one of their other posts.",
         "intent": "Find the user who posted this and navigate to the comments section of one of their other posts.",
-        "image": "__REDDIT__/submission_images/7a0c19ac8feaf6539c069a1ddbdda91e491fdacd6980a34d205d94b4fcc08ebb.gif",
+        "image": "__HOMEPAGE__/static/input_images/reddit/33/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1330,7 +1330,7 @@
         "geolocation": null,
         "intent_template": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
         "intent": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
-        "image": "https://images.pexels.com/photos/11355109/pexels-photo-11355109.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/38/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1359,7 +1359,7 @@
         "geolocation": null,
         "intent_template": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
         "intent": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
-        "image": "https://images.pexels.com/photos/208745/pexels-photo-208745.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/39/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1391,7 +1391,7 @@
         "geolocation": null,
         "intent_template": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
         "intent": "I'd like to find the subreddit for the city this photo was taken in. Can you navigate to it?",
-        "image": "https://images.pexels.com/photos/18221027/pexels-photo-18221027/free-photo-of-aerial-photo-of-pittsburgh-downtown-skyline.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/40/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -2589,7 +2589,7 @@
         "intent_template": "Find me {{description}} of {{object}}. Then, {{action}}.",
         "intent": "Find me a keyboard version of what the man is wearing in the picture. Then, count how many white key is on it and post it in the comment section of that post with the following format: \"It has <number of keys> white keys!!\" (not including the double inverted commas), replacing <number of keys> with the actual number of white keys in the picture. Remember that partially occluded keycaps need to be counted also.",
         "image": [
-            "https://images.pexels.com/photos/2955376/pexels-photo-2955376.jpeg"
+            "__HOMEPAGE__/static/input_images/reddit/74/input_0.png"
         ],
         "instantiation_dict": {
             "description": "a keyboard version",
@@ -4252,8 +4252,8 @@
         "intent_template": "Subscribe to a forum that contains {{picture}}.",
         "intent": "Subscribe to a forum that contains one of the following pictures.",
         "image": [
-            "__REDDIT__/submission_images/73dc8340f062f2514d681f058f166291f996308c853b0991b1d70aeec290bc3f.png",
-            "__REDDIT__/submission_images/c3e0f19b9c34fb663c059e6001b96c416d67f95e74ef923c3814effe734d1ffe.jpg"
+            "__HOMEPAGE__/static/input_images/reddit/105/input_0.png",
+            "__HOMEPAGE__/static/input_images/reddit/105/input_1.png"
         ],
         "instantiation_dict": {
             "picture": "one of the following pictures"
@@ -4292,7 +4292,7 @@
         "geolocation": null,
         "intent_template": "Subscribe to a forum that contains {{picture}}.",
         "intent": "Subscribe to a forum that contains the following picture.",
-        "image": "__REDDIT__/submission_images/1479b251ab514f120dc5049645aebb24c1ffb22c6a7c358322f8f7e901caa330.png",
+        "image": "__HOMEPAGE__/static/input_images/reddit/106/input_0.png",
         "instantiation_dict": {
             "picture": "the following picture"
         },
@@ -4331,7 +4331,7 @@
         "intent_template": "Subscribe to a forum that contains {{picture}}.",
         "intent": "Subscribe to a forum that contains the following picture.",
         "image": [
-            "__REDDIT__/submission_images/c35e8ec31c5d6749de609413a87e2cacc00a5b5173fdd2c32bee563539c95349.jpg"
+            "__HOMEPAGE__/static/input_images/reddit/107/input_0.png"
         ],
         "instantiation_dict": {
             "picture": "the following picture"
@@ -4371,7 +4371,7 @@
         "intent_template": "Send a direct message to the user that created the post that contains the following picture.",
         "intent": "Send a direct message to the user that created the post that contains the following picture.",
         "image": [
-            "__REDDIT__/submission_images/56770deac1bc216e20097184d3b5710708cc72cc3bb8ed00883066f2815020cd.jpg"
+            "__HOMEPAGE__/static/input_images/reddit/108/input_0.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4409,7 +4409,7 @@
         "intent_template": "Send a direct message to the user that created the post that contains the following picture.",
         "intent": "Send a direct message to the user that created the post that contains the following picture.",
         "image": [
-            "__REDDIT__/submission_images/e44dc6ea011d1876ea96210b4aae47f8dc334dd975f53b6fa902535a0748bee4.jpg"
+            "__HOMEPAGE__/static/input_images/reddit/109/input_0.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4447,7 +4447,7 @@
         "intent_template": "Send a direct message to the user that created the post that contains the following picture.",
         "intent": "Send a direct message to the user that created the post that contains the following picture.",
         "image": [
-            "__REDDIT__/submission_images/0e2afc6ce7d06b708f04ece3b0481d64aed4deab399c13e6eb9343525c730993.png"
+            "__HOMEPAGE__/static/input_images/reddit/110/input_0.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4485,8 +4485,8 @@
         "intent_template": "Create a post for each of the following image in the most related forum.",
         "intent": "Create a post for each of the following image in the most related forum.",
         "image": [
-            "https://images.pexels.com/photos/2539395/pexels-photo-2539395.jpeg",
-            "https://images.pexels.com/photos/16194823/pexels-photo-16194823/free-photo-of-people-in-front-of-quincy-market-in-usa.jpeg"
+            "__HOMEPAGE__/static/input_images/reddit/111/input_0.png",
+            "__HOMEPAGE__/static/input_images/reddit/111/input_1.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4528,8 +4528,8 @@
         "intent_template": "Create a post for each of the following image in the most related forum.",
         "intent": "Create a post for each of the following image in the most related forum.",
         "image": [
-            "https://images.pexels.com/photos/2150/sky-space-dark-galaxy.jpg",
-            "https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg"
+            "__HOMEPAGE__/static/input_images/reddit/112/input_0.png",
+            "__HOMEPAGE__/static/input_images/reddit/112/input_1.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4571,9 +4571,9 @@
         "intent_template": "Create a post for each of the following image in the most related forum.",
         "intent": "Create a post for each of the following image in the most related forum.",
         "image": [
-            "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://images.pexels.com/photos/2706653/pexels-photo-2706653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            "https://images.pexels.com/photos/7947958/pexels-photo-7947958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            "__HOMEPAGE__/static/input_images/reddit/113/input_0.png",
+            "__HOMEPAGE__/static/input_images/reddit/113/input_1.png",
+            "__HOMEPAGE__/static/input_images/reddit/113/input_2.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -4862,7 +4862,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/026347b13e015519ffdb759fdb368c33ba7ada80b66e4ff8947fcc9cd3c41433.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/121/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4891,7 +4891,7 @@
         "geolocation": null,
         "intent_template": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
         "intent": "I'm doing some research about the post with this image. Navigate to the recipe posted by the OP in the comments.",
-        "image": "__REDDIT__/submission_images/44269ef7e842aaa07cbe1de220cd59dd2161be3f445f6ca913da8fee650e438f.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/122/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5030,7 +5030,7 @@
         "geolocation": null,
         "intent_template": "Can you navigate me to the most commented post by the author of this image? {{hint}}",
         "intent": "Can you navigate me to the most commented post by the author of this image? I think it is in the /f/memes forum.",
-        "image": "__REDDIT__/submission_images/84eb6034d17330ca0f528293ed68c9106639a5e616c5d88b80503da22bf5ab24.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/126/input_0.png",
         "instantiation_dict": {
             "hint": "I think it is in the /f/memes forum."
         },
@@ -5061,7 +5061,7 @@
         "geolocation": null,
         "intent_template": "Can you navigate me to the most commented post by the author of this image? {{hint}}",
         "intent": "Can you navigate me to the most commented post by the author of this image? I think it is in the /f/memes forum.",
-        "image": "__REDDIT__/submission_images/7dff99a65aa39d065b1fb284182be5fd60403d42c5fcac48ac89ff04426cf2b3.png",
+        "image": "__HOMEPAGE__/static/input_images/reddit/127/input_0.png",
         "instantiation_dict": {
             "hint": "I think it is in the /f/memes forum."
         },
@@ -5092,7 +5092,7 @@
         "geolocation": null,
         "intent_template": "Can you navigate me to the most commented post by the author of this image? {{hint}}",
         "intent": "Can you navigate me to the most commented post by the author of this image? I think it is in the /f/pics forum.",
-        "image": "__REDDIT__/submission_images/39d43f006044f9ec1642678ceaa0eb97cd45e4dc6132a34c8a3c7497f5b97670.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/128/input_0.png",
         "instantiation_dict": {
             "hint": "I think it is in the /f/pics forum."
         },
@@ -5123,7 +5123,7 @@
         "geolocation": null,
         "intent_template": "Subscribe to the forum which is most likely to include discussions related to the image.",
         "intent": "Subscribe to the forum which is most likely to include discussions related to the image.",
-        "image": "https://images.pexels.com/photos/671629/pexels-photo-671629.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/129/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5159,7 +5159,7 @@
         "geolocation": null,
         "intent_template": "Subscribe to the forum which is most likely to include discussions related to the image.",
         "intent": "Subscribe to the forum which is most likely to include discussions related to the image.",
-        "image": "__REDDIT__/submission_images/e9e9da852e390b2f350dba55990f012352679d753034b3a3cb084f9eb9f9d44c.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/130/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5195,7 +5195,7 @@
         "geolocation": null,
         "intent_template": "Subscribe to the forum which is most likely to include discussions related to the image.",
         "intent": "Subscribe to the forum which is most likely to include discussions related to the image.",
-        "image": "https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/131/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5231,7 +5231,7 @@
         "geolocation": null,
         "intent_template": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of {{forum}}.",
         "intent": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of /f/nyc.",
-        "image": "__REDDIT__/submission_images/a6728cae79355e9d47e9f6531c5af8c2801ae976a7c62c73a3bd1711bb44ac17.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/132/input_0.png",
         "instantiation_dict": {
             "forum": "/f/nyc"
         },
@@ -5263,7 +5263,7 @@
         "geolocation": null,
         "intent_template": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of {{forum}}.",
         "intent": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of /f/ColumbiaMD.",
-        "image": "__REDDIT__/submission_images/16da5c8bc5b5a22446d5f8a8d10776ea9b99cb89a215f61d7fb806eb8b0cd28e.png",
+        "image": "__HOMEPAGE__/static/input_images/reddit/133/input_0.png",
         "instantiation_dict": {
             "forum": "/f/ColumbiaMD"
         },
@@ -5295,7 +5295,7 @@
         "geolocation": null,
         "intent_template": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of {{forum}}.",
         "intent": "How many comments did the post with this image receive? I remember it being one of the top 50 hot posts of /f/Maine.",
-        "image": "__REDDIT__/submission_images/3d8439cefc3104ad519424a4f5d7df87b67abfdbcbdd9151b826538d6438d5e2.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/134/input_0.png",
         "instantiation_dict": {
             "forum": "/f/Maine"
         },
@@ -5426,7 +5426,7 @@
         "geolocation": null,
         "intent_template": "Change my username to the first name of the recipient in the image.",
         "intent": "Change my username to the first name of the recipient in the image.",
-        "image": "https://images.pexels.com/photos/6347512/pexels-photo-6347512.jpeg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/138/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5462,7 +5462,7 @@
         "geolocation": null,
         "intent_template": "I {{interaction}}. Can you help me {{action}}?",
         "intent": "I don't like the author of this image from one of the hot posts in /f/memes. Can you help me block them?",
-        "image": "__REDDIT__/submission_images/43a7a1ca5d08b16fcb11926a7bcc4b16476ed8e62a55bdd917b1020f2510f2e2.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/139/input_0.png",
         "instantiation_dict": {
             "interaction": "don't like the author of this image from one of the hot posts in /f/memes",
             "action": "block them"
@@ -5501,7 +5501,7 @@
         "geolocation": null,
         "intent_template": "I {{interaction}}. Can you help me {{action}}?",
         "intent": "I would like to know the author of this image, from one of the top posts in /f/pics. Can you help me send them a dm with \"Hello\"?",
-        "image": "__REDDIT__/submission_images/6bfbf1280d28d84a9261695f0cac5a90addaaff1174807a2b381fdc159f3ed00.jpg",
+        "image": "__HOMEPAGE__/static/input_images/reddit/140/input_0.png",
         "instantiation_dict": {
             "interaction": "would like to know the author of this image, from one of the top posts in /f/pics",
             "action": "send them a dm with \"Hello\""
@@ -5985,7 +5985,7 @@
         "geolocation": null,
         "intent_template": "Is there a version of this post with the final results? If so, navigate to the comment section for it.",
         "intent": "Is there a version of this post with the final results? If so, navigate to the comment section for it.",
-        "image": "__REDDIT__/submission_images/a1ee91708d8c09894668f30cf64c963d05993a9dcda1a3f38107868475b3abb2.png",
+        "image": "__HOMEPAGE__/static/input_images/reddit/153/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -6053,7 +6053,7 @@
         "geolocation": null,
         "intent_template": "{{intro}}. Can you navigate to the comments section of a post {{description}}?",
         "intent": "I saw a really funny movie last week (the image is the movie poster). Can you navigate to the comments section of a post that has the picture that was the inspiration for the IRS scene?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Everything_Everywhere_All_at_Once.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/155/input_0.png",
         "instantiation_dict": {
             "intro": "I saw a really funny movie last week (the image is the movie poster)",
             "description": "that has the picture that was the inspiration for the IRS scene"
@@ -6122,7 +6122,7 @@
         "geolocation": null,
         "intent_template": "Can you take me to the comments section of {{post}} {{condition}}?",
         "intent": "Can you take me to the comments section of the post in this subreddit that talks about how the person who wrote this symphony died?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Eroica_Beethoven_title.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/157/input_0.png",
         "instantiation_dict": {
             "post": "the post in this subreddit",
             "condition": "that talks about how the person who wrote this symphony died"
@@ -6292,7 +6292,7 @@
         "geolocation": null,
         "intent_template": "Take me to the post for the joke on this page that is most likely to take place in the following image?",
         "intent": "Take me to the post for the joke on this page that is most likely to take place in the following image?",
-        "image": "https://images.pexels.com/photos/4969841/pexels-photo-4969841.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/161/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -6425,7 +6425,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you find {{post}} and message the poster '{{message}}'?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Fallingwater3.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/165/input_0.png",
         "instantiation_dict": {
             "post": "art of the building in the picture",
             "message": "I really like this picture! Can I print it out and hang it on my wall?"
@@ -6652,7 +6652,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe to the forum {{condition}}?",
-        "image": "https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/170/input_0.png",
         "instantiation_dict": {
             "condition": "that is most likely to contain posts like this"
         },
@@ -6692,7 +6692,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe to the forum {{condition}}?",
-        "image": "https://images.pexels.com/photos/2115257/pexels-photo-2115257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/171/input_0.png",
         "instantiation_dict": {
             "condition": "that is most likely to contain posts like this"
         },
@@ -6897,7 +6897,7 @@
             "description": "\ud83c\udf5c",
             "comment": "Sooo tasty!"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Extreme_points_japan_map.png.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/176/input_0.png",
         "intent": "Can you comment on the food from the country in the image and about \ud83c\udf5c saying 'Sooo tasty!'?",
         "require_reset": true,
         "eval": {
@@ -6939,7 +6939,7 @@
             "description": "a dog in the background",
             "comment": "Someone is looking for a bite \ud83d\udc36"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/South_Korea_(orthographic_projection).svg.png.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/177/input_0.png",
         "intent": "Can you comment on the food from the country in the image and about a dog in the background saying 'Someone is looking for a bite \ud83d\udc36'?",
         "require_reset": true,
         "eval": {
@@ -6977,7 +6977,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe to the forum {{condition}}?",
-        "image": "https://images.pexels.com/photos/7435463/pexels-photo-7435463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "image": "__HOMEPAGE__/static/input_images/reddit/178/input_0.png",
         "instantiation_dict": {
             "condition": "for this city"
         },
@@ -7021,7 +7021,7 @@
             "sorting": "the page that shows the most controversial posts of the past month",
             "location": "a city located in the state pictured in the image"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Map_of_USA_MO.svg.png.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/179/input_0.png",
         "intent": "Can you take me to the page that shows the most controversial posts of the past month in the forum for a city located in the state pictured in the image?",
         "require_reset": false,
         "eval": {
@@ -7053,7 +7053,7 @@
             "sorting": "the newest posts",
             "location": "the highlighted county in the image"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Map_of_Virginia_highlighting_Arlington_County.svg.png.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/180/input_0.png",
         "intent": "Can you take me to the newest posts in the forum for the highlighted county in the image?",
         "require_reset": false,
         "eval": {
@@ -7084,7 +7084,7 @@
         "instantiation_dict": {
             "location": "pizza"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Yale_family_chrest.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/181/input_0.png",
         "intent": "I am a student at the school in the image. Can you make a post asking for the best pizza in the forum for the city my school is in and navigate to it?",
         "require_reset": false,
         "eval": {
@@ -7126,7 +7126,7 @@
         "instantiation_dict": {
             "location": "Indian food"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Stanstadium_view.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/182/input_0.png",
         "intent": "I am a student at the school in the image. Can you make a post asking for the best Indian food in the forum for the city my school is in and navigate to it?",
         "require_reset": true,
         "eval": {
@@ -7413,7 +7413,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Apple_iPhone_12_Pro_-_Cameras_(50535314721).jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/188/input_0.png",
         "instantiation_dict": {},
         "intent": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
         "require_reset": true,
@@ -7451,7 +7451,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Typical_cnn.png.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/189/input_0.png",
         "instantiation_dict": {},
         "intent": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
         "require_reset": true,
@@ -7489,7 +7489,7 @@
         "start_url": "__REDDIT__",
         "geolocation": null,
         "intent_template": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Pieter_Aertsen_-_Market_Scene_-_Google_Art_ProjectFXD.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/190/input_0.png",
         "instantiation_dict": {},
         "intent": "Can you subscribe me to the most suitable forum where I can find more posts like in the image?",
         "require_reset": true,
@@ -7780,7 +7780,7 @@
             "comment": "\ud80c\udc20\ud80c\udc20",
             "forum": "f/history"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/M\u00e5rten_Eskil_Winge_-_Tor's_Fight_with_the_Giants_-_Google_Art_Project.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/198/input_0.png",
         "intent": "Can you comment '\ud80c\udc20\ud80c\udc20' on the top post (of all time) in f/history that relates to the image?",
         "require_reset": false,
         "eval": {
@@ -7819,7 +7819,7 @@
             "comment": "I remember seeing him in person, one of the best nights of my life.",
             "forum": "f/music"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Michael_Jackson_first_moonwalk_1983.gif",
+        "image": "__HOMEPAGE__/static/input_images/reddit/199/input_0.png",
         "intent": "Can you comment 'I remember seeing him in person, one of the best nights of my life.' on the top post (of all time) in f/music that relates to the image?",
         "require_reset": false,
         "eval": {
@@ -7855,7 +7855,7 @@
         "geolocation": null,
         "intent_template": "Can you take me to the post on this page that is most related to the picture on this page?",
         "instantiation_dict": {},
-        "image": "https://images.pexels.com/photos/8599635/pexels-photo-8599635.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "__HOMEPAGE__/static/input_images/reddit/200/input_0.png",
         "intent": "Can you take me to the post on this page that is most related to the picture on this page?",
         "require_reset": false,
         "eval": {
@@ -7884,7 +7884,7 @@
         "geolocation": null,
         "intent_template": "Can you take me to the post on this page that is most related to the picture on this page?",
         "instantiation_dict": {},
-        "image": "https://images.pexels.com/photos/4045606/pexels-photo-4045606.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "image": "__HOMEPAGE__/static/input_images/reddit/201/input_0.png",
         "intent": "Can you take me to the post on this page that is most related to the picture on this page?",
         "require_reset": false,
         "eval": {
@@ -8044,7 +8044,7 @@
         "instantiation_dict": {
             "condition": "the company founded by the guy in the image"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/2019-06-11-tesla-shareholder-meeting-elon-musk.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/205/input_0.png",
         "intent": "What is the top comment on the post about the company founded by the guy in the image?",
         "require_reset": false,
         "eval": {
@@ -8080,7 +8080,7 @@
         "instantiation_dict": {
             "condition": "the thing that looks like the image"
         },
-        "image": "__WIKIPEDIA__/wikipedia_en_all_maxi_2022-05/I/Crystal_skull_british_museum_random9834672.jpg.webp",
+        "image": "__HOMEPAGE__/static/input_images/reddit/206/input_0.png",
         "intent": "What is the top comment on the post about the thing that looks like the image?",
         "require_reset": false,
         "eval": {

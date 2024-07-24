@@ -3275,7 +3275,7 @@
         "geolocation": null,
         "intent_template": "Add all the items I need to make this to my shopping cart.",
         "intent": "Add all the items I need to make this to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/86/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_86/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -3314,7 +3314,7 @@
         "geolocation": null,
         "intent_template": "Add all the items I need to make this to my shopping cart.",
         "intent": "Add all the items I need to make this to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/87/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_87/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -3354,7 +3354,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{item}}, but {{attribute}}, from this page to my wish list.",
         "intent": "Add something like the shirt the person on the right is wearing, but in green, from this page to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/88/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_88/input_0.png",
         "instantiation_dict": {
             "item": "the shirt the person on the right is wearing",
             "attribute": "in green"
@@ -3395,7 +3395,7 @@
         "geolocation": null,
         "intent_template": "Add something like the {{item}} to my shopping cart.",
         "intent": "Add something like the thing at the top of this image to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/89/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_89/input_0.png",
         "instantiation_dict": {
             "item": "thing at the top of this image"
         },
@@ -3435,7 +3435,7 @@
         "geolocation": null,
         "intent_template": "Add something like the {{item}} to my shopping cart.",
         "intent": "Add something like the colorful thing in the sky to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/90/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_90/input_0.png",
         "instantiation_dict": {
             "item": "colorful thing in the sky"
         },
@@ -3469,7 +3469,7 @@
         "geolocation": null,
         "intent_template": "Add something like the {{item}} to my shopping cart.",
         "intent": "Add something like the thing the person is carrying (in the same color) to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/91/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_91/input_0.png",
         "instantiation_dict": {
             "item": "thing the person is carrying (in the same color)"
         },
@@ -3503,7 +3503,7 @@
         "geolocation": null,
         "intent_template": "Add something like the {{item}} to my shopping cart.",
         "intent": "Add something like the blue one to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/92/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_92/input_0.png",
         "instantiation_dict": {
             "item": "blue one"
         },
@@ -3537,7 +3537,7 @@
         "geolocation": null,
         "intent_template": "Add something like the {{item}} to my shopping cart.",
         "intent": "Add something like the one in the bottom right to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/93/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_93/input_0.png",
         "instantiation_dict": {
             "item": "one in the bottom right"
         },
@@ -3577,7 +3577,7 @@
         "geolocation": null,
         "intent_template": "I like {{attribute}}. Can you add something like that {{condition}} to my wishlist, if there's one?",
         "intent": "I like what the person on the left is wearing. Can you add something like that from this page to my wishlist, if there's one?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/94/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_94/input_0.png",
         "instantiation_dict": {
             "attribute": "what the person on the left is wearing",
             "condition": "from this page"
@@ -3618,7 +3618,7 @@
         "geolocation": null,
         "intent_template": "I like {{attribute}}. Can you add something like that {{condition}} to my wishlist, if there's one?",
         "intent": "I like this person's outfit. Can you add something like that from this page in the same colors to my wishlist, if there's one?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/95/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_95/input_0.png",
         "instantiation_dict": {
             "attribute": "this person's outfit",
             "condition": "from this page in the same colors"
@@ -3659,7 +3659,7 @@
         "geolocation": null,
         "intent_template": "I need something like this for my apartment. Can you add one to my wishlist?",
         "intent": "I need something like this for my apartment. Can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/96/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_96/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -3697,7 +3697,7 @@
         "geolocation": null,
         "intent_template": "I need something like this for my apartment. Can you add one to my wishlist?",
         "intent": "I need something like this for my apartment. Can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/97/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_97/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -3735,7 +3735,7 @@
         "geolocation": null,
         "intent_template": "I need something like this for my apartment. Can you add one to my wishlist?",
         "intent": "I need something like this for my apartment. Can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/98/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_98/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -3773,7 +3773,7 @@
         "geolocation": null,
         "intent_template": "I really like the {{item}}, but I'm not a fan of the color. Can you see if there's one in {{attribute}} on this page, and if so, add the cheapest one to my wishlist?",
         "intent": "I really like the purple item, but I'm not a fan of the color. Can you see if there's one in brown on this page, and if so, add the cheapest one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/99/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_99/input_0.png",
         "instantiation_dict": {
             "item": "purple item",
             "attribute": "brown"
@@ -3814,7 +3814,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add one to my wishlist?",
         "intent": "I like the shirt this person is wearing, can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/100/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_100/input_0.png",
         "instantiation_dict": {
             "description": "I like the shirt this person is wearing"
         },
@@ -3854,7 +3854,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add one to my wishlist?",
         "intent": "I'd like to hang this on my christmas tree too, can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/101/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_101/input_0.png",
         "instantiation_dict": {
             "description": "I'd like to hang this on my christmas tree too"
         },
@@ -3894,7 +3894,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add one to my wishlist?",
         "intent": "I need one of what its wearing for the winter, can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/102/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_102/input_0.png",
         "instantiation_dict": {
             "description": "I need one of what its wearing for the winter"
         },
@@ -3934,7 +3934,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add one to my wishlist?",
         "intent": "This looks fun and I'd like to buy this system too, can you add one to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/103/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_103/input_0.png",
         "instantiation_dict": {
             "description": "This looks fun and I'd like to buy this system too"
         },
@@ -3974,7 +3974,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add the most similar one on this page to my wishlist?",
         "intent": "I love the color and style of this, can you add the most similar one on this page to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/104/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_104/input_0.png",
         "instantiation_dict": {
             "description": "I love the color and style of this"
         },
@@ -4014,7 +4014,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add the most similar one on this page to my wishlist?",
         "intent": "The material of this looks quite good, can you add the most similar one on this page to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/105/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_105/input_0.png",
         "instantiation_dict": {
             "description": "The material of this looks quite good"
         },
@@ -4054,7 +4054,7 @@
         "geolocation": null,
         "intent_template": "{{description}}, can you add the most similar one on this page to my wishlist?",
         "intent": "I like this painting, can you add the most similar one on this page to my wishlist?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/106/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_106/input_0.png",
         "instantiation_dict": {
             "description": "I like this painting"
         },
@@ -4094,7 +4094,7 @@
         "geolocation": null,
         "intent_template": "I need something to store {{item}}. Add one to my shopping cart.",
         "intent": "I need something to store the item on the right. Add one to my shopping cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/107/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_107/input_0.png",
         "instantiation_dict": {
             "item": "the item on the right"
         },
@@ -4135,7 +4135,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{attribute}} to my wish list.",
         "intent": "Add something like what the man is wearing to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/108/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_108/input_0.png",
         "instantiation_dict": {
             "attribute": "what the man is wearing"
         },
@@ -4182,7 +4182,7 @@
         "geolocation": null,
         "intent_template": "Can you add {{items}} to the comparison page?",
         "intent": "Can you add these items to the comparison page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/109/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_109/input_0.png",
         "instantiation_dict": {
             "items": "these items"
         },
@@ -4223,7 +4223,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Smartwatch Accessories\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/110/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_110/input_0.png",
         "instantiation_dict": {
             "category": "Smartwatch Accessories"
         },
@@ -4263,7 +4263,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Herbs, Spices & Seasonings\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/111/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_111/input_0.png",
         "instantiation_dict": {
             "category": "Herbs, Spices & Seasonings"
         },
@@ -4303,7 +4303,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Dining & Entertaining\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/112/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_112/input_0.png",
         "instantiation_dict": {
             "category": "Dining & Entertaining"
         },
@@ -4343,7 +4343,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Women Accessories\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/113/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_113/input_0.png",
         "instantiation_dict": {
             "category": "Women Accessories"
         },
@@ -4383,7 +4383,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Makeup\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/114/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_114/input_0.png",
         "instantiation_dict": {
             "category": "Makeup"
         },
@@ -4423,7 +4423,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my shopping cart. I think it is in the \"{{category}}\" category.",
         "intent": "Add this exact product to my shopping cart. I think it is in the \"Patio Furniture & Accessories\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/115/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_115/input_0.png",
         "instantiation_dict": {
             "category": "Patio Furniture & Accessories"
         },
@@ -4463,7 +4463,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my wish list. I think it might be in the \"{{category}}\" category but I'm not certain.",
         "intent": "Add this exact product to my wish list. I think it might be in the \"PlayStation 4\" category but I'm not certain.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/116/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_116/input_0.png",
         "instantiation_dict": {
             "category": "PlayStation 4"
         },
@@ -4503,7 +4503,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my wish list. I think it might be in the \"{{category}}\" category but I'm not certain.",
         "intent": "Add this exact product to my wish list. I think it might be in the \"Office Furniture & Lighting > Chairs & Sofas\" category but I'm not certain.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/117/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_117/input_0.png",
         "instantiation_dict": {
             "category": "Office Furniture & Lighting > Chairs & Sofas"
         },
@@ -4543,7 +4543,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my wish list. I think it might be in the \"{{category}}\" category but I'm not certain.",
         "intent": "Add this exact product to my wish list. I think it might be in the \"Men > Clothing\" category but I'm not certain.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/118/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_118/input_0.png",
         "instantiation_dict": {
             "category": "Men > Clothing"
         },
@@ -4583,7 +4583,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my wish list. I think it might be in the \"{{category}}\" category but I'm not certain.",
         "intent": "Add this exact product to my wish list. I think it might be in the \"Home D\u00e9cor Products\" category but I'm not certain.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/119/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_119/input_0.png",
         "instantiation_dict": {
             "category": "Home D\u00e9cor Products"
         },
@@ -4623,7 +4623,7 @@
         "geolocation": null,
         "intent_template": "Add this exact product to my wish list. I think it might be in the \"{{category}}\" category but I'm not certain.",
         "intent": "Add this exact product to my wish list. I think it might be in the \"Home D\u00e9cor Products\" category but I'm not certain.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/120/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_120/input_0.png",
         "instantiation_dict": {
             "category": "Home D\u00e9cor Products"
         },
@@ -4663,7 +4663,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/121/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_121/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4697,7 +4697,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/122/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_122/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4731,7 +4731,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/123/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_123/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4765,7 +4765,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/124/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_124/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4799,7 +4799,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/125/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_125/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -4831,7 +4831,7 @@
         "geolocation": null,
         "intent_template": "Tell me how much this exact item costs on OneStopMarket.",
         "intent": "Tell me how much this exact item costs on OneStopMarket.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/126/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_126/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5704,7 +5704,7 @@
         "geolocation": null,
         "intent_template": "I remembered that I ordered something like this, can you show me the corresponding order page?",
         "intent": "I remembered that I ordered something like this, can you show me the corresponding order page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/150/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_150/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5733,7 +5733,7 @@
         "geolocation": null,
         "intent_template": "I remembered that I ordered something like this, can you show me the corresponding order page?",
         "intent": "I remembered that I ordered something like this, can you show me the corresponding order page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/151/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_151/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5762,7 +5762,7 @@
         "geolocation": null,
         "intent_template": "I remembered that I ordered something like this, can you show me the corresponding order page?",
         "intent": "I remembered that I ordered something like this, can you show me the corresponding order page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/152/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_152/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5791,7 +5791,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} of the same brand as the product in this picture.",
         "intent": "Find me a game console of the same brand as the product in this picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/153/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_153/input_0.png",
         "instantiation_dict": {
             "category": "a game console"
         },
@@ -5844,7 +5844,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} of the same brand as the product in this picture.",
         "intent": "Find me a set of headphones of the same brand as the product in this picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/154/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_154/input_0.png",
         "instantiation_dict": {
             "category": "a set of headphones"
         },
@@ -5897,7 +5897,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} of the same brand as the product in this picture. It needs to {{description}}.",
         "intent": "Find me a set of headphones of the same brand as the product in this picture. It needs to be silver colored and have at least 10 reviews with an average rating greater than 4.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/155/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_155/input_0.png",
         "instantiation_dict": {
             "category": "a set of headphones",
             "description": "be silver colored and have at least 10 reviews with an average rating greater than 4"
@@ -5929,7 +5929,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} of the same brand as the product in this picture. It needs to {{description}}.",
         "intent": "Find me a printer of the same brand as the product in this picture. It needs to be white and have at least 11 reviews with an average rating greater than 4.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/156/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_156/input_0.png",
         "instantiation_dict": {
             "category": "a printer",
             "description": "be white and have at least 11 reviews with an average rating greater than 4"
@@ -5961,7 +5961,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} of the same brand as the product in this picture. It needs to {{description}}.",
         "intent": "Find me protein bars of the same brand as the product in this picture. It needs to have price between $30 and $50.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/157/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_157/input_0.png",
         "instantiation_dict": {
             "category": "protein bars",
             "description": "have price between $30 and $50"
@@ -5994,8 +5994,8 @@
         "intent_template": "Find me {{category}} that is of the same brand as products in one of the following pictures. It needs to {{description}}.",
         "intent": "Find me a digital camera that is of the same brand as products in one of the following pictures. It needs to be black and have at least 12 reviews. Furthermore, it cannot be too expensive - it needs to have price less than $700.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/158/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/158/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_158/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_158/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a digital camera",
@@ -6072,7 +6072,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{attribute}} to my wish list.",
         "intent": "Add something like what the person is covered with in a similar color to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/159/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_159/input_0.png",
         "instantiation_dict": {
             "attribute": "what the person is covered with in a similar color"
         },
@@ -6119,7 +6119,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{attribute}} to my wish list.",
         "intent": "Add something like what the girl is holding to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/160/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_160/input_0.png",
         "instantiation_dict": {
             "attribute": "what the girl is holding"
         },
@@ -6162,7 +6162,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{item}}, but {{attribute}}, from this page to my wish list.",
         "intent": "Add something like the picture shown, but in sketching style, from this page to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/161/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_161/input_0.png",
         "instantiation_dict": {
             "item": "the picture shown",
             "attribute": "in sketching style"
@@ -6203,7 +6203,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{item}}, but {{attribute}}, from this page to my wish list.",
         "intent": "Add something like what is used to protect the phone in the picture, but one with a ring kickstand, from this page to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/162/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_162/input_0.png",
         "instantiation_dict": {
             "item": "what is used to protect the phone in the picture",
             "attribute": "one with a ring kickstand"
@@ -6244,7 +6244,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{attribute}} to my wish list.",
         "intent": "Add something like this to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/163/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_163/input_0.png",
         "instantiation_dict": {
             "attribute": "this"
         },
@@ -6292,8 +6292,8 @@
         "intent_template": "Find me {{category}} that is of the same brand as products in one of the following pictures. It needs to {{description}}.",
         "intent": "Find me a television that is of the same brand as products in one of the following pictures. It needs to have price at least $600.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/164/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/164/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_164/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_164/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a television",
@@ -6358,8 +6358,8 @@
         "intent_template": "Find me {{category}} that is of the same brand as products in one of the following pictures. It needs to {{description}}.",
         "intent": "Find me a men's tennis shoe that is of the same brand as products in one of the following pictures. It needs to have price between $60 and $120 with at least 11 reviews.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/165/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/165/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_165/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_165/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a men's tennis shoe",
@@ -6431,9 +6431,9 @@
         "intent_template": "Find me {{category}} that {{relation1}} first picture and has {{relation2}} second picture. It needs to have {{relation3}} third picture.",
         "intent": "Find me a shoe that is designed for the sport depicted in the first picture and has the same brand as products in the second picture. It needs to have the same color as the flower in the third picture.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/166/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/166/input_1.png",
-            "__HOMEPAGE__/static/input_images/shopping/166/input_2.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_166/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_166/input_1.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_166/input_2.png"
         ],
         "instantiation_dict": {
             "category": "a shoe",
@@ -6501,9 +6501,9 @@
         "intent_template": "Find me {{category}} that {{relation1}} first picture and has {{relation2}} second picture. It needs to have {{relation3}} third picture.",
         "intent": "Find me a shoe that is designed for the sport depicted in the first picture and has the same brand as products in the second picture. It needs to have the same color as the third picture.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/167/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/167/input_1.png",
-            "__HOMEPAGE__/static/input_images/shopping/167/input_2.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_167/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_167/input_1.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_167/input_2.png"
         ],
         "instantiation_dict": {
             "category": "a shoe",
@@ -6542,7 +6542,7 @@
         "intent_template": "I really like {{stuff}}. Can you find me {{product}} and add it to my shopping cart?",
         "intent": "I really like this drink. Can you find me mochi that have flavor of this drink and add it to my shopping cart?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/168/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_168/input_0.png"
         ],
         "instantiation_dict": {
             "stuff": "this drink",
@@ -6583,8 +6583,8 @@
         "intent_template": "Can you find me {{category}} that combines the {{attribute}} of the items in the following images?",
         "intent": "Can you find me a product that combines the functions of the items in the following images?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/169/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/169/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_169/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_169/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a product",
@@ -6628,8 +6628,8 @@
         "intent_template": "Can you find me {{category}} that combines the {{attributes}} of the items in the following images?",
         "intent": "Can you find me a product that combines the functions of the items in the following images?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/170/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/170/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_170/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_170/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a product",
@@ -6672,8 +6672,8 @@
         "intent_template": "Can you find me {{category}} that combines the {{attributes}} of the items in the following images?",
         "intent": "Can you find me a taiwanese snack that combines the flavors of the items in the following images?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/171/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/171/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_171/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_171/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a taiwanese snack",
@@ -6716,7 +6716,7 @@
         "intent_template": "I really like {{stuff}}. Can you find me {{product}} and add it to my shopping cart?",
         "intent": "I really like this animal's pattern. Can you find me a queen size bedding set that has the same pattern and add it to my shopping cart?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/172/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_172/input_0.png"
         ],
         "instantiation_dict": {
             "stuff": "this animal's pattern",
@@ -6757,7 +6757,7 @@
         "intent_template": "I really like {{stuff}}. Can you find me {{product}} and add it to my shopping cart?",
         "intent": "I really like this fruit. Can you find me a 1 fl oz fragrance that has the same smell and add it to my shopping cart?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/173/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_173/input_0.png"
         ],
         "instantiation_dict": {
             "stuff": "this fruit",
@@ -6798,8 +6798,8 @@
         "intent_template": "Can you find me {{category}} that combines the {{attributes}} of the items in the following images and buy it for me?",
         "intent": "Can you find me a product that combines the functions of the items in the following images and buy it for me?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/174/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/174/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_174/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_174/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a product",
@@ -6841,7 +6841,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this picture and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a wireless white game controller that is of the same brand as the product in this picture and buy it for me. It needs to have at 10 reviews and be priced between $110-$120.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/175/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_175/input_0.png",
         "instantiation_dict": {
             "category": "a wireless white game controller",
             "description": "have at 10 reviews and be priced between $110-$120",
@@ -6883,7 +6883,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this picture and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a black headphone that is of the same brand as the product in this picture and buy it for me. It needs to be priced more than $1000.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/176/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_176/input_0.png",
         "instantiation_dict": {
             "category": "a black headphone",
             "description": "be priced more than $1000",
@@ -6925,7 +6925,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this picture and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a headphone that is of the same brand as the product in this picture and buy it for me. It needs to have color sliver and have at least 10 reviews with an average rating greater than 4.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/177/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_177/input_0.png",
         "instantiation_dict": {
             "category": "a headphone",
             "description": "have color sliver and have at least 10 reviews with an average rating greater than 4",
@@ -6967,7 +6967,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this picture and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a multifunction printer (copy/scan/fax/print) that is of the same brand as the product in this picture and buy \ud83d\udd1f of them for me. It needs to have color black and have at least 5 reviews with an average rating greater than 3.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/178/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_178/input_0.png",
         "instantiation_dict": {
             "category": "a multifunction printer (copy/scan/fax/print)",
             "quantity": "\ud83d\udd1f of them",
@@ -7009,7 +7009,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this picture and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me all of the protein bars that is of the same brand as the product in this picture and buy 12 bars of each (at the lowest possible per unit price) for me. It needs to have per unit price between $1.66 and $4.08.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/179/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_179/input_0.png",
         "instantiation_dict": {
             "category": "all of the protein bars",
             "quantity": "12 bars of each (at the lowest possible per unit price)",
@@ -7070,7 +7070,7 @@
         "intent_template": "Find me {{category}} that is of the same brand as products in one of the following pictures and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a digital camera with warranty that is of the same brand as products in one of the following pictures and buy one for me. It needs to be black and have at least 12 reviews. Furthermore, it cannot be too expensive - it needs to have price less than $700.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/180/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_180/input_0.png"
         ],
         "instantiation_dict": {
             "category": "a digital camera with warranty",
@@ -7113,7 +7113,7 @@
         "geolocation": null,
         "intent_template": "Buy me something like {{item}}, but {{attribute}}, from this page.",
         "intent": "Buy me something like the picture shown, but in sketching style, from this page.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/181/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_181/input_0.png",
         "instantiation_dict": {
             "item": "the picture shown",
             "attribute": "in sketching style"
@@ -7154,7 +7154,7 @@
         "geolocation": null,
         "intent_template": "Buy me something like {{item}}, but {{attribute}}, from this page.",
         "intent": "Buy me something like what is used to protect the phone in the picture, but one with a soldier figure, from this page.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/182/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_182/input_0.png",
         "instantiation_dict": {
             "item": "what is used to protect the phone in the picture",
             "attribute": "one with a soldier figure"
@@ -7196,8 +7196,8 @@
         "intent_template": "Find me {{category}} that is of the same brand as products in one of the following pictures and buy {{quantity}} for me. It needs to {{description}}.",
         "intent": "Find me a \ud83d\udcfa that is of the same brand as products in one of the following pictures and buy 3\ufe0f\u20e3 for me. It needs to have price between $4000 and $10000.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/183/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/183/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_183/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_183/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a \ud83d\udcfa",
@@ -7241,7 +7241,7 @@
         "intent_template": "I really like {{stuff}}. Can you find me {{product}} and buy {{quantity}} for me?",
         "intent": "I really like this drink. Can you find me mochi that have flavor of this drink and buy 4*2 of them for me?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/184/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_184/input_0.png"
         ],
         "instantiation_dict": {
             "stuff": "this drink",
@@ -7294,7 +7294,7 @@
         "intent_template": "I really like {{stuff}}. Can you find me {{product}} and buy {{quantity}} for me?",
         "intent": "I really like this animal's pattern. Can you find me a twin xl size bedding set that have the same pattern and buy two for me?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/185/input_0.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_185/input_0.png"
         ],
         "instantiation_dict": {
             "stuff": "this animal's pattern",
@@ -7347,8 +7347,8 @@
         "intent_template": "Can you find me {{category}} that is the combination of the following images and buy it for me?",
         "intent": "Can you find me a sport equipment that is the combination of the following images and buy it for me?",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/186/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/186/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_186/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_186/input_1.png"
         ],
         "instantiation_dict": {
             "category": "a sport equipment"
@@ -8799,7 +8799,7 @@
             "information": "I did this activity last weekend",
             "items": "the amiibo most likely to do this"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/224/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_224/input_0.png",
         "require_reset": true,
         "eval": {
             "eval_types": [
@@ -9659,7 +9659,7 @@
             "information": "I am going to this place soon",
             "items": "the most practical item for my trip on this page"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/244/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_244/input_0.png",
         "require_reset": true,
         "eval": {
             "eval_types": [
@@ -9700,7 +9700,7 @@
             "information": "I am going to this place soon",
             "items": "the most practical footwear for my trip on this page"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/245/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_245/input_0.png",
         "require_reset": true,
         "eval": {
             "eval_types": [
@@ -10466,7 +10466,7 @@
         "start_url": "__SHOPPING__/electronics/computers-accessories/computer-accessories-peripherals.html?product_list_order=name&product_list_limit=36",
         "geolocation": null,
         "intent_template": "Can you order the {{item}} {{condition}}?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/261/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_261/input_0.png",
         "instantiation_dict": {
             "item": "charger protectors",
             "condition": "if it includes this thing I found on the beach in the pack"
@@ -10661,7 +10661,7 @@
         "start_url": "__SHOPPING__",
         "geolocation": null,
         "intent_template": "Can you order the cheapest thing {{item}}?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/265/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_265/input_0.png",
         "instantiation_dict": {
             "item": "like the thing on her shoulder (in the same color)"
         },
@@ -10702,7 +10702,7 @@
         "start_url": "__SHOPPING__",
         "geolocation": null,
         "intent_template": "Can you order the cheapest thing {{item}}?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/266/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_266/input_0.png",
         "instantiation_dict": {
             "item": "from the \"GPS System Accessories\" category to protect the display touch screen on my car (which is in the picture)"
         },
@@ -11074,7 +11074,7 @@
             "item": "on a phone case"
         },
         "intent": "Can you take me to the page that has this character on a phone case?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/275/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_275/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11106,7 +11106,7 @@
             "item": "on a PS4 controller"
         },
         "intent": "Can you take me to the page that has this character on a PS4 controller?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/276/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_276/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11138,7 +11138,7 @@
             "item": "on a blanket"
         },
         "intent": "Can you take me to the page that has this animal on a blanket?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/277/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_277/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11170,7 +11170,7 @@
             "item": "as a flash drive"
         },
         "intent": "Can you take me to the page that has this top left character as a flash drive?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/278/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_278/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11202,7 +11202,7 @@
             "item": "on slippers"
         },
         "intent": "Can you take me to the page that has this video game character on slippers?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/279/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_279/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11236,7 +11236,7 @@
             "item": "on a short sleeved t-shirt"
         },
         "intent": "Can you take me to the page that has this cute character on a short sleeved t-shirt?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/280/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_280/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -11268,7 +11268,7 @@
         "instantiation_dict": {
             "size": ""
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/281/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_281/input_0.png",
         "intent": "Can you order the shoes on this page that I would most likely wear if I was in the image?",
         "require_reset": false,
         "reference_url": "",
@@ -11308,7 +11308,7 @@
         "instantiation_dict": {
             "size": ""
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/282/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_282/input_0.png",
         "intent": "Can you order the shoes on this page that I would most likely wear if I was in the image?",
         "require_reset": false,
         "reference_url": "",
@@ -11348,7 +11348,7 @@
         "instantiation_dict": {
             "size": " in a size 8"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/283/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_283/input_0.png",
         "intent": "Can you order the shoes on this page that I would most likely wear if I was in the image in a size 8?",
         "require_reset": false,
         "reference_url": "",
@@ -11433,7 +11433,7 @@
             "restriction": "vegan",
             "category": "Meat Substitutes"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/285/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_285/input_0.png",
         "intent": "I want to eat this food, but I am vegan. Can you order the closest thing to this from the \"Meat Substitutes\" category that fits my dietary requirements?",
         "require_reset": false,
         "reference_url": "",
@@ -11471,7 +11471,7 @@
         "geolocation": null,
         "intent_template": "Can you add {{items}} to the comparison page?",
         "intent": "Can you add a product like what the person is sitting on to the comparison page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/286/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_286/input_0.png",
         "instantiation_dict": {
             "items": "a product like what the person is sitting on"
         },
@@ -11552,7 +11552,7 @@
         "geolocation": null,
         "intent_template": "Add something like {{item}}, but {{attribute}}, from this page to my wish list.",
         "intent": "Add something like the picture shown, but with rose scent, from this page to my wish list.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/288/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_288/input_0.png",
         "instantiation_dict": {
             "item": "the picture shown",
             "attribute": "with rose scent"
@@ -11711,7 +11711,7 @@
         "geolocation": null,
         "intent_template": "What is the {{attribute}} of {{item}} that has the most similar pattern as {{property}} in the picture in this page?",
         "intent": "What is the price of the shirt that has the most similar pattern as the man is wearing in the picture in this page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/292/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_292/input_0.png",
         "instantiation_dict": {
             "attribute": "price",
             "item": "the shirt",
@@ -11749,7 +11749,7 @@
         "geolocation": null,
         "intent_template": "What is the {{attribute}} of {{item}} that has the most similar pattern as {{property}} in the picture in this page?",
         "intent": "What is the weight in ounces of the bag that has the most similar pattern as the women is wearing in the picture in this page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/293/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_293/input_0.png",
         "instantiation_dict": {
             "attribute": "weight in ounces",
             "item": "the bag",
@@ -11787,7 +11787,7 @@
         "geolocation": null,
         "intent_template": "What is the {{attribute}} of {{item}} that has the most similar pattern as {{property}} in the picture in this page?",
         "intent": "What is the price of the shirt that has the most similar pattern as the pillow in the picture in this page?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/294/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_294/input_0.png",
         "instantiation_dict": {
             "attribute": "price",
             "item": "the shirt",
@@ -11825,7 +11825,7 @@
         "geolocation": null,
         "intent_template": "Find me {{item}} that {{attribute}} the picture.",
         "intent": "Find me a rug that has the simliar pattern as the animal in the picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/295/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_295/input_0.png",
         "instantiation_dict": {
             "item": "a rug",
             "attribute": "has the simliar pattern as the animal in"
@@ -11873,7 +11873,7 @@
         "geolocation": null,
         "intent_template": "Find me {{item}} that {{attribute}} the picture.",
         "intent": "Find me powder to make the beverage that is the same as the picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/296/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_296/input_0.png",
         "instantiation_dict": {
             "item": "powder to make the beverage",
             "attribute": "is the same as"
@@ -11915,7 +11915,7 @@
         "geolocation": null,
         "intent_template": "Find me {{item}} that {{attribute}} the picture.",
         "intent": "Find me a hoodie that has the same brand as the one the man is wearing in the picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/297/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_297/input_0.png",
         "instantiation_dict": {
             "item": "a hoodie",
             "attribute": "has the same brand as the one the man is wearing in"
@@ -12218,7 +12218,7 @@
         "geolocation": null,
         "intent_template": "Find me {{item}} that {{attribute}} the picture.",
         "intent": "Find me the item in this page that has simliar packaging boxes to the ones in the picture.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/305/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_305/input_0.png",
         "instantiation_dict": {
             "item": "the item in this page",
             "attribute": "has simliar packaging boxes to the ones in"
@@ -12527,8 +12527,8 @@
         "intent_template": "Find me {{item}}.",
         "intent": "Find me an adapter to connect these devices from the two images from this page.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/314/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/314/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_314/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_314/input_1.png"
         ],
         "instantiation_dict": {
             "item": "an adapter to connect these devices from the two images from this page"
@@ -12561,8 +12561,8 @@
         "intent_template": "Find me {{item}}.",
         "intent": "Find me an adapter to connect these devices from the two images from this page.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/315/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/315/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_315/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_315/input_1.png"
         ],
         "instantiation_dict": {
             "item": "an adapter to connect these devices from the two images from this page"
@@ -12661,8 +12661,8 @@
         "intent_template": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "intent": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/318/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/318/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_318/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_318/input_1.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -12704,8 +12704,8 @@
         "intent_template": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "intent": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/319/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/319/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_319/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_319/input_1.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -12742,7 +12742,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/grocery-gourmet-food/breads-bakery/cookies.html",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/320/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_320/input_0.png",
         "intent_template": "Add {{quantity}} of {{item}} from this page to my shopping cart.",
         "intent": "Add enough to have 48 bars of the item that most looks like the image from this page to my shopping cart.",
         "instantiation_dict": {
@@ -12783,7 +12783,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/grocery-gourmet-food/breads-bakery/cookies.html",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/321/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_321/input_0.png",
         "intent_template": "Add {{quantity}} of {{item}} from this page to my shopping cart.",
         "intent": "Add enough to have 400 of the cookies that most looks like the image from this page to my shopping cart.",
         "instantiation_dict": {
@@ -12824,7 +12824,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/?q=vacuum",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/322/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_322/input_0.png",
         "intent_template": "I want to buy this specific item, but only if it's brand new. Can you add one from this page to my cart?",
         "intent": "I want to buy this specific item, but only if it's brand new. Can you add one from this page to my cart?",
         "instantiation_dict": {},
@@ -12889,7 +12889,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/index/?q=screen+protector",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/324/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_324/input_0.png",
         "intent_template": "Tell me the price of the {{product}}.",
         "intent": "Tell me the price of the items on this page that are compatible with this phone brand.",
         "instantiation_dict": {
@@ -12924,7 +12924,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/325/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_325/input_0.png",
         "intent_template": "Purchase the cheapest {{item}}, in {{color}}.",
         "intent": "Purchase the cheapest item that closely resembles the item on the right in the image, in blue.",
         "instantiation_dict": {
@@ -12966,7 +12966,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/326/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_326/input_0.png",
         "intent_template": "Purchase the cheapest {{item}}, in {{color}}.",
         "intent": "Purchase the cheapest headphones that has the same brand as the one in the image, in blue.",
         "instantiation_dict": {
@@ -13008,7 +13008,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/327/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_327/input_0.png",
         "intent_template": "Purchase the cheapest {{item}}, in {{color}}.",
         "intent": "Purchase the cheapest item that has the same functionality as this, in black.",
         "instantiation_dict": {
@@ -13050,7 +13050,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/328/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_328/input_0.png",
         "intent_template": "Buy {{item}} while minimizing costs.",
         "intent": "Buy eight batteries of the same type as shown in the image while minimizing costs.",
         "instantiation_dict": {
@@ -13091,7 +13091,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/329/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_329/input_0.png",
         "intent_template": "Buy {{item}} while minimizing costs.",
         "intent": "Buy 40 sheet of films as shown in the image while minimizing costs.",
         "instantiation_dict": {
@@ -13132,7 +13132,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/330/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_330/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy the cheapest camera of the exact same model as the image, in the same color.",
         "instantiation_dict": {
@@ -13174,7 +13174,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/331/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_331/input_0.png",
         "intent_template": "Purchase the exact item shown in the image.",
         "intent": "Purchase the exact item shown in the image.",
         "instantiation_dict": {},
@@ -13213,7 +13213,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/332/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_332/input_0.png",
         "intent_template": "Purchase the exact item shown in the image.",
         "intent": "Purchase the exact item shown in the image.",
         "instantiation_dict": {},
@@ -13252,7 +13252,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/333/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_333/input_0.png",
         "intent_template": "Purchase the exact item shown in the image.",
         "intent": "Purchase the exact item shown in the image.",
         "instantiation_dict": {},
@@ -13283,7 +13283,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/334/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_334/input_0.png",
         "intent_template": "Purchase the exact item shown in the image.",
         "intent": "Purchase the exact item shown in the image.",
         "instantiation_dict": {},
@@ -13314,7 +13314,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/335/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_335/input_0.png",
         "intent_template": "Buy me {{item}} to {{address}}.",
         "intent": "Buy me a chocolate ice cream to the address same as the label shown in the image. My phone number is also (650) 555-0111 in case it is needed.",
         "instantiation_dict": {
@@ -13366,7 +13366,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/336/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_336/input_0.png",
         "intent_template": "Buy me {{item}} to {{address}}.",
         "intent": "Buy me the cheapest color photo printer (from the \"Printers & Accessories\") category to Emily's place as shown in the image. My phone number is also (650) 555-0111 in case it is needed..",
         "instantiation_dict": {
@@ -13418,7 +13418,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/337/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_337/input_0.png",
         "intent_template": "Buy me {{item}} to {{address}}.",
         "intent": "Buy me the cheapest bike to Mars's place as shown in the image. My phone number is also (650) 555-0111 in case it is needed..",
         "instantiation_dict": {
@@ -13452,7 +13452,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/338/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_338/input_0.png",
         "intent_template": "Change my default shipping address to the place shown in the image.",
         "intent": "Change my default shipping address to the place shown in the image.",
         "instantiation_dict": {},
@@ -13492,7 +13492,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/339/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_339/input_0.png",
         "intent_template": "Change my default shipping address to the place shown in the image.",
         "intent": "Change my default shipping address to the place shown in the image.",
         "instantiation_dict": {},
@@ -13532,7 +13532,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/340/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_340/input_0.png",
         "intent_template": "Change my default shipping address to the place shown in the image.",
         "intent": "Change my default shipping address to the place shown in the image.",
         "instantiation_dict": {},
@@ -13563,7 +13563,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/341/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_341/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy a CPU which is compatible with the motherboard in the image.",
         "instantiation_dict": {
@@ -13614,7 +13614,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/342/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_342/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy a motherboard which has the same CPU socket as the motherboard in the image.",
         "instantiation_dict": {
@@ -13656,7 +13656,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/343/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_343/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy a desktop computer which has a CPU of the same brand as the CPU in the image.",
         "instantiation_dict": {
@@ -13698,7 +13698,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/344/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_344/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy the cheapest battery which is the same type as the boy is holding in the image.",
         "instantiation_dict": {
@@ -13781,7 +13781,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/346/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_346/input_0.png",
         "intent_template": "Prepend the country code of {{country}} to the phone number of my account profile.",
         "intent": "Prepend the country code of the country shown in the image to the phone number of my account profile.",
         "instantiation_dict": {
@@ -13821,7 +13821,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/347/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_347/input_0.png",
         "intent_template": "Prepend the country code of {{country}} to the phone number of my account profile.",
         "intent": "Prepend the country code of the country of the map show in the image to the phone number of my account profile.",
         "instantiation_dict": {
@@ -13861,7 +13861,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/index/?q=travel+adapter",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/348/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_348/input_0.png",
         "intent_template": "Empty my cart first and add all the items (in any color) from this page to my shopping cart which {{condition}}.",
         "intent": "Empty my cart first and add all the items (in any color) from this page to my shopping cart which is compatible with the socket in the image.",
         "instantiation_dict": {
@@ -13906,7 +13906,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/index/?q=travel+adapter",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/349/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_349/input_0.png",
         "intent_template": "Empty my cart first and add all the items (in any color) from this page to my shopping cart which {{condition}}.",
         "intent": "Empty my cart first and add all the items (in any color) from this page to my shopping cart which is compatible with the socket in the image.",
         "instantiation_dict": {
@@ -13949,7 +13949,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/?q=+screwdriver#",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/350/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_350/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy a screwdriver which is compatible with the screw in the image from this page.",
         "instantiation_dict": {
@@ -13990,7 +13990,7 @@
         "storage_state": "./.auth/shopping_state.json",
         "start_url": "__SHOPPING__/catalogsearch/result/?q=+screwdriver#",
         "geolocation": null,
-        "image": "__HOMEPAGE__/static/input_images/shopping/351/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_351/input_0.png",
         "intent_template": "Buy {{item}} {{condition}}.",
         "intent": "Buy a battery with the same size and voltage as the image.",
         "instantiation_dict": {
@@ -14034,8 +14034,8 @@
         "intent_template": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "intent": "Please add to my shopping cart all the items from this page that can connect these devices from the two images.",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/352/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/352/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_352/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_352/input_1.png"
         ],
         "instantiation_dict": {},
         "require_reset": false,
@@ -14074,7 +14074,7 @@
         "geolocation": null,
         "intent_template": "I really like these {{product}}, but I am not satisfied with the color. Could you find me an item on this page for these {{product}} with a {{shadeChoice}} shade or color?",
         "intent": "I really like these shoes, but I am not satisfied with the color. Could you find me an item on this page for these shoes with a darker shade or color?",
-        "image": "__HOMEPAGE__/static/input_images/shopping/353/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_353/input_0.png",
         "instantiation_dict": {
             "product": "shoes",
             "shadeChoice": "darker"
@@ -14106,7 +14106,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that are of the same brand as the product in this picture. It needs to {{description}}.",
         "intent": "Find me shoes that are of the same brand as the product in this picture. It needs to be less than 70 dollars.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/354/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_354/input_0.png",
         "instantiation_dict": {
             "category": "shoes",
             "description": "be less than 70 dollars"
@@ -14192,7 +14192,7 @@
         "geolocation": null,
         "intent_template": "Find me {{category}} that is of the same brand as the product in this image. It needs to {{description}}.",
         "intent": "Find me a hoodie that is of the same brand as the product in this image. It needs to have the brand logo in multicolor.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/356/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_356/input_0.png",
         "instantiation_dict": {
             "category": "a hoodie",
             "description": "have the brand logo in multicolor"
@@ -14464,7 +14464,7 @@
         "instantiation_dict": {
             "product": "shorts"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/363/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_363/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -14539,7 +14539,7 @@
             "product": "TV",
             "detail": "the animal from the image on its display"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/365/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_365/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -14696,7 +14696,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that {{relation}} in the image{{detail}}.",
         "intent": "Buy me a phone (from the \"Cell Phones\" category) that looks the most like the items in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/369/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_369/input_0.png",
         "instantiation_dict": {
             "product": "phone (from the \"Cell Phones\" category)",
             "relation": "looks the most like the items",
@@ -14738,7 +14738,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that {{relation}} in the image{{detail}}.",
         "intent": "Buy me a phone (from the \"Cell Phones\" category) that looks the most like the items in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/370/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_370/input_0.png",
         "instantiation_dict": {
             "product": "phone (from the \"Cell Phones\" category)",
             "relation": "looks the most like the items",
@@ -14821,7 +14821,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that {{relation}} in the image{{detail}}.",
         "intent": "Buy me a charging cable (from the \"Chargers & Power Adapters\" category) in any color that looks the most like the items in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/372/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_372/input_0.png",
         "instantiation_dict": {
             "product": "charging cable (from the \"Chargers & Power Adapters\" category) in any color",
             "relation": "looks the most like the items",
@@ -15874,7 +15874,7 @@
         "instantiation_dict": {
             "product": "item on this page (in any style)"
         },
-        "image": "__HOMEPAGE__/static/input_images/shopping/398/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_398/input_0.png",
         "require_reset": false,
         "eval": {
             "eval_types": [
@@ -16139,7 +16139,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that {{relation}} in the image{{detail}}.",
         "intent": "Buy me a product that has the same function as the items in the image from the \"Cereals\" category.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/405/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_405/input_0.png",
         "instantiation_dict": {
             "product": "product",
             "relation": "has the same function as the items",
@@ -16261,7 +16261,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that has a skyline of the city shown in this image.",
         "intent": "Buy me a pair of large shorts that has a skyline of the city shown in this image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/408/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_408/input_0.png",
         "instantiation_dict": {
             "product": "pair of large shorts"
         },
@@ -16302,7 +16302,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that has a skyline of the city shown in this image.",
         "intent": "Buy me a large hoodie that has a skyline of the city shown in this image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/409/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_409/input_0.png",
         "instantiation_dict": {
             "product": "large hoodie"
         },
@@ -16343,7 +16343,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that references a sports team from this city.",
         "intent": "Buy me a video game controller that references a sports team from this city.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/410/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_410/input_0.png",
         "instantiation_dict": {
             "product": "video game controller"
         },
@@ -16383,7 +16383,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that references the city in the image.",
         "intent": "Buy me a size small shirt under 20 dollars that references the city in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/411/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_411/input_0.png",
         "instantiation_dict": {
             "product": "size small shirt under 20 dollars"
         },
@@ -16432,7 +16432,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that references a sports team from this city.",
         "intent": "Buy me a pair of shorts over 50 dollars (in any size) that references a sports team from this city.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/412/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_412/input_0.png",
         "instantiation_dict": {
             "product": "pair of shorts over 50 dollars (in any size)"
         },
@@ -16472,7 +16472,7 @@
         "geolocation": null,
         "intent_template": "Buy me a {{product}} that references the city in the image.",
         "intent": "Buy me a pair of small shorts under 30 dollars that references the city in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/413/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_413/input_0.png",
         "instantiation_dict": {
             "product": "pair of small shorts under 30 dollars"
         },
@@ -17179,7 +17179,7 @@
         "geolocation": null,
         "intent_template": "Help me find all items between {{lower}} and {{upper}} that look like the image below and put them in my cart.",
         "intent": "Help me find all items between $40 and $50 that look like the image below and put them in my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/430/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_430/input_0.png",
         "instantiation_dict": {
             "lower": "$40",
             "upper": "$50"
@@ -17229,7 +17229,7 @@
         "geolocation": null,
         "intent_template": "Help me find all items between {{lower}} and {{upper}} that look like the image below and put them in my cart.",
         "intent": "Help me find all items between $10 and $20 that look like the image below and put them in my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/431/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_431/input_0.png",
         "instantiation_dict": {
             "lower": "$10",
             "upper": "$20"
@@ -17271,7 +17271,7 @@
         "geolocation": null,
         "intent_template": "Help me find all items between {{lower}} and {{upper}} that look like the image below and put them in my cart.",
         "intent": "Help me find all items between $30 and $40 that look like the image below and put them in my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/432/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_432/input_0.png",
         "instantiation_dict": {
             "lower": "$30",
             "upper": "$40"
@@ -17313,7 +17313,7 @@
         "geolocation": null,
         "intent_template": "Find me the cheapest {{property}} version of the thing in this image and add it to my cart please.",
         "intent": "Find me the cheapest small-packet version of the thing in this image and add it to my cart please.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/433/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_433/input_0.png",
         "instantiation_dict": {
             "property": "small-packet"
         },
@@ -17353,7 +17353,7 @@
         "geolocation": null,
         "intent_template": "Find me the cheapest {{property}} version of the thing in this image and add it to my cart please.",
         "intent": "Find me the cheapest thick, original version of the thing in this image and add it to my cart please.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/434/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_434/input_0.png",
         "instantiation_dict": {
             "property": "thick, original"
         },
@@ -17393,7 +17393,7 @@
         "geolocation": null,
         "intent_template": "Find me the cheapest {{property}} version of the thing in this image and add it to my cart please.",
         "intent": "Find me the cheapest strawberry version of the thing in this image and add it to my cart please.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/435/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_435/input_0.png",
         "instantiation_dict": {
             "property": "strawberry"
         },
@@ -17433,7 +17433,7 @@
         "geolocation": null,
         "intent_template": "Find me the cheapest item that costs {{range}} and can {{function}} like in the image shown and add it to my cart.",
         "intent": "Find me the cheapest item that costs more than $6 and can project onto a screen like in the image shown and add it to my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/436/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_436/input_0.png",
         "instantiation_dict": {
             "range": "more than $6",
             "function": "project onto a screen"
@@ -17474,7 +17474,7 @@
         "geolocation": null,
         "intent_template": "Find me the cheapest item that costs {{range}} and can {{function}} like in the image shown and add it to my cart.",
         "intent": "Find me the cheapest item that costs between $3-4 and can hold up a phone like in the image shown and add it to my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/437/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_437/input_0.png",
         "instantiation_dict": {
             "range": "between $3-4",
             "function": "hold up a phone"
@@ -17515,7 +17515,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the category where this image is most likely to be found. Then, find me the cheapest item that costs {{range}} and can {{function}} like in the image shown and add it to my cart.",
         "intent": "Navigate to the category where this image is most likely to be found. Then, find me the cheapest item that costs more than $5 and can charge multiple devices like in the image shown and add it to my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/438/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_438/input_0.png",
         "instantiation_dict": {
             "range": "more than $5",
             "function": "charge multiple devices"
@@ -17556,7 +17556,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the category where I can find {{item}} that can help me {{function}}. Add the cheapest one to my cart.",
         "intent": "Navigate to the category where I can find camera that can help me take photos like this. Add the cheapest one to my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/439/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_439/input_0.png",
         "instantiation_dict": {
             "item": "camera",
             "function": "take photos like this"
@@ -17597,7 +17597,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the category where I can find {{item}} that can help me {{function}}. Add the cheapest one to my cart.",
         "intent": "Navigate to the category where I can find the ingredient that can help me make the drink in the photo. Add the cheapest one to my cart.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/440/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_440/input_0.png",
         "instantiation_dict": {
             "item": "the ingredient",
             "function": "make the drink in the photo"
@@ -17638,7 +17638,7 @@
         "geolocation": null,
         "intent_template": "My kid loves horses, and I want a topper for this. Help me add the least expensive one to my wishlist.",
         "intent": "My kid loves horses, and I want a topper for this. Help me add the least expensive one to my wishlist.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/441/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_441/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -17677,8 +17677,8 @@
         "intent_template": "Put the least expensive item that has the thing in the first image {{relationship}} the thing in the second image in my wishlist",
         "intent": "Put the least expensive item that has the thing in the first image in the shape of the thing in the second image in my wishlist",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/442/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/442/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_442/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_442/input_1.png"
         ],
         "instantiation_dict": {
             "relationship": "in the shape of"
@@ -17720,8 +17720,8 @@
         "intent_template": "Put the least expensive item that has the thing in the first image {{relationship}} the thing in the second image in my wishlist",
         "intent": "Put the least expensive item that has the thing in the first image imprinted on the thing in the second image in my wishlist",
         "image": [
-            "__HOMEPAGE__/static/input_images/shopping/443/input_0.png",
-            "__HOMEPAGE__/static/input_images/shopping/443/input_1.png"
+            "__HOMEPAGE__/static/input_images/shopping/task_443/input_0.png",
+            "__HOMEPAGE__/static/input_images/shopping/task_443/input_1.png"
         ],
         "instantiation_dict": {
             "relationship": "imprinted on"
@@ -18451,7 +18451,7 @@
         "geolocation": null,
         "intent_template": "Add to my cart {{item}} {{condition}}.",
         "intent": "Add to my cart a wig that costs between $50 and $100 and can help me cosplay the character in the image.",
-        "image": "__HOMEPAGE__/static/input_images/shopping/461/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/shopping/task_461/input_0.png",
         "instantiation_dict": {
             "item": "a wig that costs between $50 and $100",
             "condition": "and can help me cosplay the character in the image"

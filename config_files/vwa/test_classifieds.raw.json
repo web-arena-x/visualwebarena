@@ -317,7 +317,7 @@
         "geolocation": null,
         "intent_template": "Help me make a post selling this item and navigate to it. Price it at $10 cheaper than the most similar item on the site {{range}} (of the same color). If there are multiple similar items, use the most recent posting.",
         "intent": "Help me make a post selling this item and navigate to it. Price it at $10 cheaper than the most similar item on the site between $250-300 (of the same color). If there are multiple similar items, use the most recent posting.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/8/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_8/input_0.png",
         "instantiation_dict": {
             "range": "between $250-300"
         },
@@ -364,7 +364,7 @@
         "geolocation": null,
         "intent_template": "Help me make a post selling this item and navigate to it. Price it at $10 cheaper than the most similar item on the site {{range}} (of the same color). If there are multiple similar items, use the most recent posting.",
         "intent": "Help me make a post selling this item and navigate to it. Price it at $10 cheaper than the most similar item on the site between $750-800 (of the same color). If there are multiple similar items, use the most recent posting.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/9/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_9/input_0.png",
         "instantiation_dict": {
             "range": "between $750-800"
         },
@@ -1259,7 +1259,7 @@
         "geolocation": null,
         "intent_template": "Find {{item}} and post a comment offering $10 less than their asking price.",
         "intent": "Find this exact bike that's listed for $300-500 and post a comment offering $10 less than their asking price.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/32/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_32/input_0.png",
         "instantiation_dict": {
             "item": "this exact bike that's listed for $300-500"
         },
@@ -1418,7 +1418,7 @@
         "geolocation": null,
         "intent_template": "Find all listings for this exact item on OSClass and compare its price to the cheapest listing on OneStopMarket. Return the link of {{target}}.",
         "intent": "Find all listings for this exact item on OSClass and compare its price to the cheapest listing on OneStopMarket. Return the link of the cheaper item.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/36/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_36/input_0.png",
         "instantiation_dict": {
             "target": "the cheaper item"
         },
@@ -1454,7 +1454,7 @@
         "geolocation": null,
         "intent_template": "Find all listings for this exact item on OSClass and compare its price to the cheapest listing on OneStopMarket. Return the link of {{target}}.",
         "intent": "Find all listings for this exact item on OSClass and compare its price to the cheapest listing on OneStopMarket. Return the link of the cheapest item on both sites.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/37/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_37/input_0.png",
         "instantiation_dict": {
             "target": "the cheapest item on both sites"
         },
@@ -1718,7 +1718,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/44/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_44/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1747,7 +1747,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/45/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_45/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1776,7 +1776,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/46/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_46/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -1805,7 +1805,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall that it was very expensive.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/47/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_47/input_0.png",
         "instantiation_dict": {
             "hint": "that it was very expensive"
         },
@@ -1836,7 +1836,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall seeing it in either the Collectibles or Antiques section.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/48/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_48/input_0.png",
         "instantiation_dict": {
             "hint": "seeing it in either the Collectibles or Antiques section"
         },
@@ -1938,7 +1938,7 @@
         "geolocation": null,
         "intent_template": "Find me the most recent {{type}} in the \"{{category}}\" category of {{item}}.",
         "intent": "Find me the most recent painting in the \"Arts + crafts\" category of a town that looks like this.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/51/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_51/input_0.png",
         "instantiation_dict": {
             "type": "painting",
             "category": "Arts + crafts",
@@ -1971,7 +1971,7 @@
         "geolocation": null,
         "intent_template": "Find me the most recent {{type}} in the \"{{category}}\" category of {{item}}.",
         "intent": "Find me the most recent painting in the \"Arts + crafts\" category of something that looks close to this.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/52/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_52/input_0.png",
         "instantiation_dict": {
             "type": "painting",
             "category": "Arts + crafts",
@@ -2004,7 +2004,7 @@
         "geolocation": null,
         "intent_template": "Search for \"{{phrase}}\" and find the {{product}}.",
         "intent": "Search for \"gnome\" and find the item that would make the best gift for someone who goes to this school.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/53/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_53/input_0.png",
         "instantiation_dict": {
             "phrase": "gnome",
             "product": "item that would make the best gift for someone who goes to this school"
@@ -2036,7 +2036,7 @@
         "geolocation": null,
         "intent_template": "Find the most recently listed item in the \"{{category}}\" category that {{condition}}.",
         "intent": "Find the most recently listed item in the \"Video gaming\" category that is related to this game I used to play.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/54/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_54/input_0.png",
         "instantiation_dict": {
             "category": "Video gaming",
             "condition": "is related to this game I used to play"
@@ -2068,7 +2068,7 @@
         "geolocation": null,
         "intent_template": "Find the most recently listed item in the \"{{category}}\" category that {{condition}}.",
         "intent": "Find the most recently listed item in the \"Collectibles\" category that depicts the inventors of this.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/55/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_55/input_0.png",
         "instantiation_dict": {
             "category": "Collectibles",
             "condition": "depicts the inventors of this"
@@ -2234,7 +2234,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} with {{detail}} from the image {{location}}.",
         "intent": "Find the cheapest video game item with the animal from the image on its display.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/59/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_59/input_0.png",
         "instantiation_dict": {
             "product": "cheapest video game item",
             "detail": "the animal",
@@ -2267,7 +2267,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the most expensive video game item where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/60/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_60/input_0.png",
         "instantiation_dict": {
             "product": "most expensive video game item",
             "detail": "I can roleplay the situation in the image"
@@ -2299,7 +2299,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the most expensive video game item where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/61/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_61/input_0.png",
         "instantiation_dict": {
             "product": "most expensive video game item",
             "detail": "I can roleplay the situation in the image"
@@ -2331,7 +2331,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} with {{detail}} from the image {{location}}.",
         "intent": "Find the most expensive video game item with the character from the image on its display.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/62/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_62/input_0.png",
         "instantiation_dict": {
             "product": "most expensive video game item",
             "detail": "the character",
@@ -2364,7 +2364,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} with {{detail}} from the image {{location}}.",
         "intent": "Find the most expensive video game item with the character from the image on its display.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/63/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_63/input_0.png",
         "instantiation_dict": {
             "product": "most expensive video game item",
             "detail": "the character",
@@ -2397,7 +2397,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the video game item that costs exactly $500 where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/64/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_64/input_0.png",
         "instantiation_dict": {
             "product": "video game item that costs exactly $500",
             "detail": "I can roleplay the situation in the image"
@@ -2429,7 +2429,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the cheapest video game item where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/65/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_65/input_0.png",
         "instantiation_dict": {
             "product": "cheapest video game item",
             "detail": "I can roleplay the situation in the image"
@@ -2461,7 +2461,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the cheapest video game item where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/66/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_66/input_0.png",
         "instantiation_dict": {
             "product": "cheapest video game item",
             "detail": "I can roleplay the situation in the image"
@@ -2493,7 +2493,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} where {{detail}}.",
         "intent": "Find the cheapest video game item where I can roleplay the situation in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/67/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_67/input_0.png",
         "instantiation_dict": {
             "product": "cheapest video game item",
             "detail": "I can roleplay the situation in the image"
@@ -2557,7 +2557,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} which {{detail}}.",
         "intent": "Find the most expensive item posted from Delaware which is related to the brand on the hat in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/69/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_69/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item posted from Delaware",
             "detail": "is related to the brand on the hat in the image"
@@ -2622,7 +2622,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} which {{detail}}.",
         "intent": "Find the most expensive item posted from Delaware which is of the same item as in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/71/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_71/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item posted from Delaware",
             "detail": "is of the same item as in the image"
@@ -2654,7 +2654,7 @@
         "geolocation": null,
         "intent_template": "I like {{attribute}}. Can you find the {{detail}} where I can buy similar items, if there's one?",
         "intent": "I like the products in the image. Can you find the cheapest posting from Delaware where I can buy similar items, if there's one?",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/72/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_72/input_0.png",
         "instantiation_dict": {
             "attribute": "the products in the image",
             "detail": "cheapest posting from Delaware"
@@ -2686,7 +2686,7 @@
         "geolocation": null,
         "intent_template": "Find me {{product}} that {{condition}} in the image.",
         "intent": "Find me the cheapest posting from Delaware that has the same brand as the product in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/73/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_73/input_0.png",
         "instantiation_dict": {
             "condition": "has the same brand as the product",
             "product": "the cheapest posting from Delaware"
@@ -2928,7 +2928,7 @@
         "geolocation": null,
         "intent_template": "Find me {{product}} that {{condition}} in the image.",
         "intent": "Find me an item on this page that references the city in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/78/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_78/input_0.png",
         "instantiation_dict": {
             "product": "an item on this page",
             "condition": "references the city"
@@ -2960,7 +2960,7 @@
         "geolocation": null,
         "intent_template": "Find me {{product}} that {{condition}} in the image.",
         "intent": "Find me an item on this page that references the person in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/79/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_79/input_0.png",
         "instantiation_dict": {
             "product": "an item on this page",
             "condition": "references the person"
@@ -3239,7 +3239,7 @@
         "geolocation": null,
         "intent_template": "Find the {{item}} on this page {{condition}}.",
         "intent": "Find the most similar item on this page as shown in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/87/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_87/input_0.png",
         "instantiation_dict": {
             "item": "most similar item",
             "condition": "as shown in this image"
@@ -3434,7 +3434,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} which {{detail}}.",
         "intent": "Find the electronics item on the page which is compatible with this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/93/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_93/input_0.png",
         "instantiation_dict": {
             "product": "electronics item on the page",
             "detail": "is compatible with this image"
@@ -3552,7 +3552,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}}, and tell me how much it costs in dollars.",
         "intent": "Find the most similar item on this page as given in the image, and tell me how much it costs in dollars.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/96/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_96/input_0.png",
         "instantiation_dict": {
             "product": "most similar item on this page as given in the image"
         },
@@ -3728,7 +3728,7 @@
         "geolocation": null,
         "intent_template": "Explore the \"{{category}}\" category, and find the {{item}} in this image.",
         "intent": "Explore the \"Art + crafts\" category, and find the most expensive painting of the city in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/101/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_101/input_0.png",
         "instantiation_dict": {
             "category": "Art + crafts",
             "item": "most expensive painting of the city"
@@ -3760,7 +3760,7 @@
         "geolocation": null,
         "intent_template": "Tell me the {{product}}.",
         "intent": "Tell me the height in inches of the most recently listed item in Art + crafts section portraying the person in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/102/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_102/input_0.png",
         "instantiation_dict": {
             "product": "height in inches of the most recently listed item in Art + crafts section portraying the person in the image"
         },
@@ -3795,7 +3795,7 @@
         "geolocation": null,
         "intent_template": "Explore the \"{{category}}\" category, and find the {{item}} in this image.",
         "intent": "Explore the \"Arts + crafts\" category, and find the most recently listed item portraying the person in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/103/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_103/input_0.png",
         "instantiation_dict": {
             "category": "Arts + crafts",
             "item": "most recently listed item portraying the person"
@@ -4225,7 +4225,7 @@
         "geolocation": null,
         "intent_template": "Search for \"{{phrase}}\" and navigate to the {{product}} that matches the body part in this image.",
         "intent": "Search for \"brace\" and navigate to the most recently listed item that matches the body part in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/115/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_115/input_0.png",
         "instantiation_dict": {
             "phrase": "brace",
             "product": "most recently listed item"
@@ -4257,7 +4257,7 @@
         "geolocation": null,
         "intent_template": "Search for \"{{phrase}}\" and navigate to the {{product}} that matches the body part in this image.",
         "intent": "Search for \"brace\" and navigate to the cheapest item that matches the body part in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/116/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_116/input_0.png",
         "instantiation_dict": {
             "phrase": "brace",
             "product": "cheapest item"
@@ -4289,7 +4289,7 @@
         "geolocation": null,
         "intent_template": "Find the cheapest {{item}} {{condition}}.",
         "intent": "Find the cheapest bike which is of a similar color as the person's outfit.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/117/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_117/input_0.png",
         "instantiation_dict": {
             "item": "bike",
             "condition": "which is of a similar color as the person's outfit"
@@ -4506,7 +4506,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page {{condition}}.",
         "intent": "Navigate to the item on this page which matches the color of the object being used by the person in the given image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/123/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_123/input_0.png",
         "instantiation_dict": {
             "item": "item",
             "condition": "which matches the color of the object being used by the person in the given image"
@@ -4600,7 +4600,7 @@
         "geolocation": null,
         "intent_template": "Find me {{product}} that {{condition}} in the image.",
         "intent": "Find me the most recently listed item in the \"Books\" category that references the person in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/126/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_126/input_0.png",
         "instantiation_dict": {
             "product": "the most recently listed item in the \"Books\" category",
             "condition": "references the person"
@@ -4885,7 +4885,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} which {{condition}} in this image.",
         "intent": "Navigate to the listing on this page whose image includes a jersey which is the same color as the item in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/134/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_134/input_0.png",
         "instantiation_dict": {
             "product": "listing on this page whose image includes a jersey",
             "condition": "is the same color as the item"
@@ -4917,7 +4917,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} on this page {{condition}}.",
         "intent": "Navigate to the listing on this page with an item of the exact same color as the one in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/135/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_135/input_0.png",
         "instantiation_dict": {
             "product": "listing",
             "condition": "with an item of the exact same color as the one in this image"
@@ -4952,7 +4952,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, tell me the email of the lister of the item. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, tell me the email of the lister of the item. I recall that it was pretty cheap.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/136/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_136/input_0.png",
         "instantiation_dict": {
             "hint": "that it was pretty cheap"
         },
@@ -4987,7 +4987,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall that it cost $20.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/137/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_137/input_0.png",
         "instantiation_dict": {
             "hint": "that it cost $20"
         },
@@ -5022,7 +5022,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall it was in the Art + crafts section and between $600-$1000.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/138/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_138/input_0.png",
         "instantiation_dict": {
             "hint": "it was in the Art + crafts section and between $600-$1000"
         },
@@ -5057,7 +5057,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall it was in the Antiques section.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/139/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_139/input_0.png",
         "instantiation_dict": {
             "hint": "it was in the Antiques section"
         },
@@ -5088,7 +5088,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, tell me the email of the most recent lister of the item. I recall it was a Nascar jacket in the Collectibles section.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/140/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_140/input_0.png",
         "instantiation_dict": {
             "hint": "it was a Nascar jacket in the Collectibles section"
         },
@@ -5123,7 +5123,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall {{hint}}.",
         "intent": "I recall seeing this exact item on the site, help me find the most recent post of it. I recall it was in the Farm + garden section.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/141/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_141/input_0.png",
         "instantiation_dict": {
             "hint": "it was in the Farm + garden section"
         },
@@ -5154,7 +5154,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact item for under $20 on the site, tell me the state where this listing is located.",
         "intent": "I recall seeing this exact item for under $20 on the site, tell me the state where this listing is located.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/142/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_142/input_0.png",
         "instantiation_dict": {},
         "require_reset": false,
         "eval": {
@@ -5187,7 +5187,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact {{item}} on the site, add a comment on its listing with the title \"{{title}}\" and text \"{{comment}}\".",
         "intent": "I recall seeing this exact item for under $15 in the Arts+ crafts section on the site, add a comment on its listing with the title \"Inquiry\" and text \"I need this!\".",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/143/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_143/input_0.png",
         "instantiation_dict": {
             "item": "item for under $15 in the Arts+ crafts section",
             "title": "Inquiry",
@@ -5238,7 +5238,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact {{item}} on the site, add a comment on its listing with the title \"{{title}}\" and text \"{{comment}}\".",
         "intent": "I recall seeing this exact item of pillows in the Household section on the site, add a comment on its listing with the title \"Commentary\" and text \"How funky...\".",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/144/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_144/input_0.png",
         "instantiation_dict": {
             "item": "item of pillows in the Household section",
             "title": "Commentary",
@@ -5289,7 +5289,7 @@
         "geolocation": null,
         "intent_template": "I recall seeing this exact {{item}} on the site, add a comment on its listing with the title \"{{title}}\" and text \"{{comment}}\".",
         "intent": "I recall seeing this exact expensive item in the Video Gaming category on the site, add a comment on its listing with the title \"Urgent\" and text \"Need this for my bowling alley.\".",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/145/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_145/input_0.png",
         "instantiation_dict": {
             "item": "expensive item in the Video Gaming category",
             "title": "Urgent",
@@ -5574,7 +5574,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page {{condition}}.",
         "intent": "Navigate to the item on this page that most similarly depicts the setting in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/153/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_153/input_0.png",
         "instantiation_dict": {
             "item": "item",
             "condition": "that most similarly depicts the setting in the image"
@@ -5963,7 +5963,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page whose image {{condition}} as the item in the image provided.",
         "intent": "Navigate to the listing on this page whose image includes a car the same color as the item in the image provided.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/164/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_164/input_0.png",
         "instantiation_dict": {
             "item": "listing",
             "condition": "includes a car the same color"
@@ -5998,7 +5998,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page whose image {{condition}} as the item in the image provided.",
         "intent": "Navigate to the listing on this page whose image includes a car the same color as the item in the image provided.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/165/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_165/input_0.png",
         "instantiation_dict": {
             "item": "listing",
             "condition": "includes a car the same color"
@@ -6030,7 +6030,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page whose image {{condition}} as the item in the image provided.",
         "intent": "Navigate to the listing on this page whose image includes an instrument the same color as the item in the image provided.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/166/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_166/input_0.png",
         "instantiation_dict": {
             "item": "listing",
             "condition": "includes an instrument the same color"
@@ -6062,7 +6062,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{item}} on this page whose image {{condition}} as the item in the image provided.",
         "intent": "Navigate to the listing on this page whose image includes an instrument the same color as the item in the image provided.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/167/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_167/input_0.png",
         "instantiation_dict": {
             "item": "listing",
             "condition": "includes an instrument the same color"
@@ -6097,7 +6097,7 @@
         "geolocation": null,
         "intent_template": "Find the cheapest {{item}} {{condition}}.",
         "intent": "Find the cheapest motorcycle which is of the same color as the item in the image provided.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/168/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_168/input_0.png",
         "instantiation_dict": {
             "item": "motorcycle",
             "condition": "which is of the same color as the item in the image provided"
@@ -6161,7 +6161,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} which {{condition}} in this image.",
         "intent": "Navigate to the most expensive item in the \"Cell phones\" category which includes in its design the character in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/170/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_170/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item in the \"Cell phones\" category",
             "condition": "includes in its design the character"
@@ -6396,7 +6396,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} from {{location}} that {{condition}}.",
         "intent": "Navigate to the cheapest listing in the \"Cars + trucks\" category from Ohio or Maryland that is the same color as the objects in this image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/177/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_177/input_0.png",
         "instantiation_dict": {
             "product": "cheapest listing in the \"Cars + trucks\" category",
             "location": "Ohio or Maryland",
@@ -6465,7 +6465,7 @@
         "geolocation": null,
         "intent_template": "Find the {{product}} with {{detail}} from the image {{location}}.",
         "intent": "Find the most expensive item in the \"Video gaming\" category with the character on the shirt from the image on its decal.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/179/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_179/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item in the \"Video gaming\" category",
             "detail": "the character on the shirt",
@@ -6552,7 +6552,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} with {{detail}} from the image.",
         "intent": "Navigate to the most expensive item in the \"Video gaming\" category with the same item from the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/181/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_181/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item in the \"Video gaming\" category",
             "detail": "the same item"
@@ -6615,7 +6615,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} with {{detail}} from the image.",
         "intent": "Navigate to the most recently listed item in the \"Collectibles\" category with the same character from the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/183/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_183/input_0.png",
         "instantiation_dict": {
             "product": "most recently listed item in the \"Collectibles\" category",
             "detail": "the same character"
@@ -6647,7 +6647,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} with {{detail}} from the image.",
         "intent": "Navigate to the most expensive item in the \"Collectibles\" category with the same exact item from the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/184/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_184/input_0.png",
         "instantiation_dict": {
             "product": "most expensive item in the \"Collectibles\" category",
             "detail": "the same exact item"
@@ -6679,7 +6679,7 @@
         "geolocation": null,
         "intent_template": "Find me {{product}} that {{condition}} in the image.",
         "intent": "Find me the most expensive Collectibles listing that has a listing image that references a sports team for the city in the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/185/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_185/input_0.png",
         "instantiation_dict": {
             "product": "the most expensive Collectibles listing",
             "condition": "has a listing image that references a sports team for the city"
@@ -6846,7 +6846,7 @@
         "geolocation": null,
         "intent_template": "Navigate to the {{product}} with {{detail}} from the image {{location}}.",
         "intent": "Navigate to the cheapest video game item on this page with the character on the shirt from the image in its listing image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/190/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_190/input_0.png",
         "instantiation_dict": {
             "product": "cheapest video game item on this page",
             "detail": "the character on the shirt",
@@ -7709,7 +7709,7 @@
         "geolocation": null,
         "intent_template": "Show me the {{attribute}} {{item}} {{condition}}.",
         "intent": "Show me the most expensive phone with a theme matching that of the image.",
-        "image": "__HOMEPAGE__/static/input_images/classifieds/214/input_0.png",
+        "image": "__HOMEPAGE__/static/input_images/classifieds/task_214/input_0.png",
         "instantiation_dict": {
             "attribute": "most expensive",
             "item": "phone",

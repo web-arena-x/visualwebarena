@@ -21,7 +21,8 @@
 - [x] Add demo to run multimodal agents on any arbitrary webpage.
 
 ## News
-- [03/8/2024]: Added the [agent trajectories](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing) of our GPT-4V + SoM agent on the full set of 910 VWA tasks.
+- [08/05/2024]: Added an [Amazon Machine Image](environment_docker/README.md#pre-installed-amazon-machine-image) that pre-installed all VWA (and WA) websites so that you don't have to!
+- [03/08/2024]: Added the [agent trajectories](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing) of our GPT-4V + SoM agent on the full set of 910 VWA tasks.
 - [02/14/2024]: Added a [demo script](run_demo.py) for running the GPT-4V + SoM agent on any task on an arbitrary website.
 - [01/25/2024]: GitHub repo released with tasks and scripts for setting up the VWA environments.
 

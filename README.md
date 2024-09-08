@@ -1,29 +1,18 @@
-# VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks
-<!-- <p align="center">
-<a href="https://www.python.org/downloads/release/python-3109/"><img src="https://img.shields.io/badge/python-3.10-blue.svg" alt="Python 3.10"></a>
-<a href="https://pre-commit.com/"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white" alt="pre-commit"></a>
-<a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"></a>
-<a href="https://mypy-lang.org/"><img src="https://www.mypy-lang.org/static/mypy_badge.svg" alt="Checked with mypy"></a>
-<a href="https://beartype.readthedocs.io"><img src="https://raw.githubusercontent.com/beartype/beartype-assets/main/badge/bear-ified.svg" alt="bear-ified"></a>
-</p> -->
-
-[<a href="https://jykoh.com/vwa">Website</a>] 
-[<a href="https://arxiv.org/abs/2401.13649">Paper</a>]
-
-<i>VisualWebArena</i> is a realistic and diverse benchmark for evaluating multimodal autonomous language agents. It comprises of a set of diverse and complex web-based visual tasks that evaluate various capabilities of autonomous multimodal agents. It builds off the reproducible, execution based evaluation introduced in <a href="https://webarena.dev" target="_blank">WebArena</a>.
-
-![Overview](media/overview.png)
-
-## TODOs
-- [x] Add human trajectories.
-- [x] Add GPT-4V + SoM trajectories from our paper.
-- [x] Add scripts for end-to-end training and reset of environments.
-- [x] Add demo to run multimodal agents on any arbitrary webpage.
+# X-WebArena: The Unified Repository for WebArena and VisualWebArena
 
 ## News
-- [03/8/2024]: Added the [agent trajectories](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing) of our GPT-4V + SoM agent on the full set of 910 VWA tasks.
-- [02/14/2024]: Added a [demo script](run_demo.py) for running the GPT-4V + SoM agent on any task on an arbitrary website.
-- [01/25/2024]: GitHub repo released with tasks and scripts for setting up the VWA environments.
+* [08/05/2024]: Added an [Amazon Machine Image](environment_docker/README.md#pre-installed-amazon-machine-image) that pre-installed all VWA (and WA) websites so that you don't have to!
+* [03/08/2024]: Added the [agent trajectories](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing) of our GPT-4V + SoM agent on the full set of 910 VWA tasks.
+* [02/14/2024]: Added a [demo script](run_demo.py) for running the GPT-4V + SoM agent on any task on an arbitrary website.
+* [01/25/2024]: GitHub repo released with tasks and scripts for setting up the VWA environments.
+* [12/21/2023] We release the recording of trajectories performed by human annotators on ~170 tasks. Check out the [resource page](./resources/README.md#12212023-human-trajectories) for more details.
+* [11/3/2023] Multiple features!
+  * Uploaded newest [execution trajectories](./resources/README.md#1132023-execution-traces-from-our-experiments-v2)
+  * Added [Amazon Machine Image](./environment_docker/README.md#pre-installed-amazon-machine-image) that pre-installed all websites so that you don't have to!
+  * [Zeno](https://zenoml.com/) x WebArena which allows you to analyze your agents on WebArena without pain. Check out this [notebook](./scripts/webarena-zeno.ipynb) to upload your own data to Zeno, and [this](https://hub.zenoml.com/project/9db3e1cf-6e28-4cfc-aeec-1670cac01872/WebArena%20Tester/explore?params=eyJtb2RlbCI6ImdwdDM1LWRpcmVjdCIsIm1ldHJpYyI6eyJpZCI6NzQ5MiwibmFtZSI6InN1Y2Nlc3MiLCJ0eXBlIjoibWVhbiIsImNvbHVtbnMiOlsic3VjY2VzcyJdfSwiY29tcGFyaXNvbk1vZGVsIjoiZ3B0NC1jb3QiLCJjb21wYXJpc29uQ29sdW1uIjp7ImlkIjoiYTVlMDFiZDUtZTg0NS00M2I4LTllNDgtYTU4NzRiNDJjNjNhIiwibmFtZSI6ImNvbnRleHQiLCJjb2x1bW5UeXBlIjoiT1VUUFVUIiwiZGF0YVR5cGUiOiJOT01JTkFMIiwibW9kZWwiOiJncHQzNS1kaXJlY3QifSwiY29tcGFyZVNvcnQiOltudWxsLHRydWVdLCJtZXRyaWNSYW5nZSI6WzAsMV0sInNlbGVjdGlvbnMiOnsibWV0YWRhdGEiOnt9LCJzbGljZXMiOltdLCJ0YWdzIjpbXX19) page for browsing our existing results!
+* [10/24/2023] We re-examined the whole dataset and fixed the spotted annotation bugs. The current version ([v0.2.0](https://github.com/web-arena-x/webarena/releases/tag/v0.2.0)) is relatively stable and we don't expect major updates on the annotation in the future. The new results with better prompts and the comparison with human performance can be found in our [paper](https://arxiv.org/abs/2307.13854)
+* [8/4/2023] Added the instructions and the docker resources to host your own WebArena Environment. Check out [this page](environment_docker/README.md) for details.
+* [7/29/2023] Added [a well commented script](minimal_example.py) to walk through the environment setup.
 
 ## Install
 ```bash
@@ -40,46 +29,15 @@ You can also run the unit tests to ensure that VisualWebArena is installed corre
 pytest -x
 ```
 
+## Setup Environment
+> [!IMPORTANT]
+> The demo sites are only for browsing purpose to help you better understand how the websites look like. To ensure the correct evaluation, please setup your own websites.
+Since WebArena and VisualWebArena uses a different set of websites, the concrete commands are slightly different. 
+- [WebArena environment setup](README_WA.md#webarena-environment-setup)
+- [VisualWebArena environment setup](README_VWA.md#visualwebarena-environment-setup)
 
-## End-to-end Evaluation
-1. Setup the standalone environments.
-Please check out [this page](environment_docker/README.md) for details.
-
-2. Configurate the urls for each website.
-First, export the `DATASET` to be `visualwebarena`:
-```bash
-export DATASET=visualwebarena
-```
-Then, set the URL for the websites
-
-```bash
-export CLASSIFIEDS="<your_classifieds_domain>:9980"
-export CLASSIFIEDS_RESET_TOKEN="4b61655535e7ed388f0d40a93600254c"  # Default reset token for classifieds site, change if you edited its docker-compose.yml
-export SHOPPING="<your_shopping_site_domain>:7770"
-export REDDIT="<your_reddit_domain>:9999"
-export WIKIPEDIA="<your_wikipedia_domain>:8888"
-export HOMEPAGE="<your_homepage_domain>:4399"
-```
-
-In addition, if you want to run on the original WebArena tasks, make sure to also set up the [CMS](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#e-commerce-content-management-system-cms), [GitLab](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#gitlab-website), and [map](https://github.com/web-arena-x/webarena/blob/main/environment_docker/README.md#map) environments, and then set their respective environment variables:
-```bash
-export SHOPPING_ADMIN="<your_e_commerce_cms_domain>:7780/admin"
-export GITLAB="<your_gitlab_domain>:8023"
-export MAP="<your_map_domain>:3000"
-```
-
-3. Generate config files for each test example:
-```bash
-python scripts/generate_test_data.py
-```
-You will see `*.json` files generated in the [config_files](./config_files) folder. Each file contains the configuration for one test example.
-
-4. Obtain and save the auto-login cookies for all websites:
-```
-bash prepare.sh
-```
-
-5. Set up API keys.
+## End-to-End Evaluation
+1. Set up API keys.
 
 If using OpenAI models, set a valid OpenAI API key (starting with `sk-`) as the environment variable:
 ```
@@ -91,57 +49,21 @@ If using Gemini, first install the [gcloud CLI](https://cloud.google.com/sdk/doc
 gcloud auth login
 gcloud config set project <your_project_name>
 ```
-
-6. Launch the evaluation. For example, to reproduce our GPT-3.5 captioning baseline:
+2. Launch the evaluation. 
+For example, to run WebArena CoT
 ```bash
 python run.py \
-  --instruction_path agent/prompts/jsons/p_cot_id_actree_3s.json \
-  --test_start_idx 0 \
-  --test_end_idx 1 \
-  --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/vwa/test_classifieds \
-  --model gpt-3.5-turbo-1106 \
-  --observation_type accessibility_tree_with_captioner
+  --instruction_path agent/prompts/jsons/p_cot_id_actree_2s.json \ # this is the reasoning agent prompt we used in the paper
+  --test_start_idx 25 \
+  --test_end_idx 26 \
+  --model gpt-3.5-turbo \
+  --test_config_base_dir=config_files/wa/test_webarena \
+  --result_dir <your_result_dir>
 ```
-This script will run the first Classifieds example with the GPT-3.5 caption-augmented agent. The trajectory will be saved in `<your_result_dir>/0.html`. Note that the baselines that include a captioning model run on GPU by default (e.g., BLIP-2-T5XL as the captioning model will take up approximately 12GB of GPU VRAM).
+This script will run the 25th example in WebArena with GPT-3.5 agent. The trajectory will be saved in <your_result_dir>/25.html
 
-## GPT-4V + SoM Agent
-![SoM](media/som_figure.png)
+To reproduce the other baselines from VisualWebArena, please check these a few commands [1](README_VWA.md#gpt-35-captioning-baseline)[2](README_VWA.md#gpt-4v--som-agent).
 
-To run the GPT-4V + SoM agent we proposed in our paper, you can run evaluation with the following flags:
-```bash
-python run.py \
-  --instruction_path agent/prompts/jsons/p_som_cot_id_actree_3s.json \
-  --test_start_idx 0 \
-  --test_end_idx 1 \
-  --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/vwa/test_classifieds \
-  --model gpt-4-vision-preview \
-  --action_set_tag som  --observation_type image_som
-```
-
-To run Gemini models, you can change the provider, model, and the max_obs_length (as Gemini uses characters instead of tokens for inputs):
-```bash
-python run.py \
-  --instruction_path agent/prompts/jsons/p_som_cot_id_actree_3s.json \
-  --test_start_idx 0 \
-  --test_end_idx 1 \
-  --max_steps 1 \
-  --result_dir <your_result_dir> \
-  --test_config_base_dir=config_files/vwa/test_classifieds \
-  --provider google  --model gemini --mode completion  --max_obs_length 15360 \
-  --action_set_tag som  --observation_type image_som
-```
-
-If you'd like to reproduce the results from our paper, we have also provided scripts in `scripts/` to run the full evaluation pipeline on each of the VWA environments. For example, to reproduce the results from the Classifieds environment, you can run:
-
-```bash
-bash scripts/run_classifieds_som.sh
-```
-
-### Agent Trajectories
-
-To facilitate analysis and evals, we have also released the trajectories of the GPT-4V + SoM agent on the full set of 910 VWA tasks [here](https://drive.google.com/file/d/1-tKz5ByWa1-jwtejiFgxli8fZcBPZgAE/view?usp=sharing). It consists of .html files that record the agent's observations and output at each step of the trajectory.
 
 ### Demo
 ![Demo](media/find_restaurant.gif)
@@ -164,10 +86,9 @@ python run_demo.py \
 This tasks the agent to find a shirt that looks like the provided image (the "This is fine" dog) from Amazon. Have fun!
 
 
-## Human Evaluations
-
-We collected human trajectories on 233 tasks (one from each template type) and the Playwright recording files are provided [here](https://drive.google.com/drive/folders/1S_fDzB1VUTwUphWPKZ0DdjJOAXjGz94g). These are the same tasks reported in our paper (with a human success rate of ~89%). You can view the HTML pages, actions, etc., by running `playwright show-trace <example_id>.zip`. The `example_id` follows the same structure as the examples from the corresponding site in `config_files/`.
-
+## Related Repositories 
+* [BrowserGym](https://github.com/ServiceNow/BrowserGym): a gym environment for web task automation in the Chromium browser. It supports the evaluation of WebArena and VisualWebArena. The repository features robust web observation processing and supports multiple web-based task benchmarks. 
+* [OpenHands](https://github.com/All-Hands-AI/OpenHands): a platform for software development agents powered by AI. It supports the evaluation of WebArena. More details can be found [here](https://github.com/All-Hands-AI/OpenHands/blob/5100d12cea2cd35c30a22e25fbac376b72ed0981/evaluation/webarena/README.md?plain=1)
 
 ## Citation
 If you find our environment or our models useful, please consider citing <a href="https://jykoh.com/vwa" target="_blank">VisualWebArena</a> as well as <a href="https://webarena.dev/" target="_blank">WebArena</a>:
@@ -186,7 +107,3 @@ If you find our environment or our models useful, please consider citing <a href
   year={2024}
 }
 ```
-
-## Acknowledgements
-
-Our code is heavily based off the <a href="https://github.com/web-arena-x/webarena">WebArena codebase</a>.

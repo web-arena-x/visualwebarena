@@ -151,3 +151,4 @@ log_files/*
 cache/*
 agents/prompts/jsons/*
 local_*
+demo_trajs/*

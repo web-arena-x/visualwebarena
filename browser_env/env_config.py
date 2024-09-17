@@ -7,13 +7,13 @@ if DATASET not in ["webarena", "visualwebarena"]:
 
 # WebArena
 if DATASET == "webarena":
-    REDDIT = os.environ.get("REDDIT", "")
-    SHOPPING = os.environ.get("SHOPPING", "")
-    SHOPPING_ADMIN = os.environ.get("SHOPPING_ADMIN", "")
-    GITLAB = os.environ.get("GITLAB", "")
-    WIKIPEDIA = os.environ.get("WIKIPEDIA", "")
-    MAP = os.environ.get("MAP", "")
-    HOMEPAGE = os.environ.get("HOMEPAGE", "")
+    REDDIT = os.environ.get("REDDIT", "http://localhost:9999")
+    SHOPPING = os.environ.get("SHOPPING", "http://localhost:7770")
+    SHOPPING_ADMIN = os.environ.get("SHOPPING_ADMIN", "http://localhost:7780/admin")
+    GITLAB = os.environ.get("GITLAB", "http://localhost:8023")
+    WIKIPEDIA = os.environ.get("WIKIPEDIA", "http://localhost:8888/wikipedia_en_all_maxi_2022-05/A/User:The_other_Kiwix_guy/Landing")
+    MAP = os.environ.get("MAP", "http://localhost:3000")
+    HOMEPAGE = os.environ.get("HOMEPAGE", "http://localhost:4399")
     assert (
         REDDIT
         and SHOPPING
@@ -44,12 +44,12 @@ if DATASET == "webarena":
     }
     
 elif DATASET == "visualwebarena":
-    REDDIT = os.environ.get("REDDIT", "")
-    SHOPPING = os.environ.get("SHOPPING", "")
-    WIKIPEDIA = os.environ.get("WIKIPEDIA", "")
-    HOMEPAGE = os.environ.get("HOMEPAGE", "")
-    CLASSIFIEDS = os.environ.get("CLASSIFIEDS", "")
-    CLASSIFIEDS_RESET_TOKEN = os.environ.get("CLASSIFIEDS_RESET_TOKEN", "")
+    REDDIT = os.environ.get("REDDIT", "http://localhost:9999")
+    SHOPPING = os.environ.get("SHOPPING", "http://localhost:7770")
+    WIKIPEDIA = os.environ.get("WIKIPEDIA", "http://localhost:8888/wikipedia_en_all_maxi_2022-05/A/User:The_other_Kiwix_guy/Landing")
+    HOMEPAGE = os.environ.get("HOMEPAGE", "http://localhost:4399")
+    CLASSIFIEDS = os.environ.get("CLASSIFIEDS", "http://localhost:9980")
+    CLASSIFIEDS_RESET_TOKEN = os.environ.get("CLASSIFIEDS_RESET_TOKEN", "4b61655535e7ed388f0d40a93600254c")
     REDDIT_RESET_URL = os.environ.get("REDDIT_RESET_URL", "")
 
     assert (

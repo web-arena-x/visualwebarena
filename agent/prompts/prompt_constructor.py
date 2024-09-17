@@ -20,6 +20,14 @@ class Instruction(TypedDict):
     template: str
     meta_data: dict[str, Any]
 
+## Message template for yadong_model
+USER_MESSAGE = '''Here is the screenshot image: <|image_1|>\n
+      The instruction is to {}. 
+      History actions:
+      {}\n\n
+      Here is the screen information:
+      {}\n\n
+      Think about what you need to do with current screen, and output the action in the required format in the end. '''
 
 class PromptConstructor(object):
     def __init__(
@@ -37,7 +45,7 @@ class PromptConstructor(object):
         self.tokenizer = tokenizer
 
     def get_lm_api_input(
-        self, intro: str, examples: list[tuple[str, str]], current: str
+        self, intro: str, examples: list[tuple[str, str]], current: str, acc_tree: str = "", previous_actions: list[str] = [], intent: str = ""
     ) -> APIInput:
 
         """Return the require format for an API"""
@@ -107,6 +115,13 @@ class PromptConstructor(object):
                 raise ValueError(
                     f"Huggingface models do not support model_tag {self.lm_config.gen_config['model_tag']}"
                 )
+        elif self.lm_config.provider == "yadong_model":
+            action_history = '\n'.join(previous_actions)
+            prompt_message = {
+                'role': 'user',
+                'content': USER_MESSAGE.format(intent, action_history, acc_tree),
+            }
+            return prompt_message
         else:
             raise NotImplementedError(
                 f"Provider {self.lm_config.provider} not implemented"
@@ -233,6 +248,15 @@ class CoTPromptConstructor(PromptConstructor):
         state_info: StateInfo = trajectory[-1]  # type: ignore[assignment]
 
         obs = state_info["observation"][self.obs_modality]
+        
+        # Add image data
+        image_array = state_info["observation"]['image']
+        image = Image.fromarray(image_array)
+        image.save("/home/gbassman/LAM/visualwebarena/vwebarena_image/current_image.png")
+        
+        # Get acc_tree in yadongs format
+        acc_tree = obs
+        
         max_obs_length = self.lm_config.gen_config["max_obs_length"]
         if max_obs_length:
             if self.lm_config.provider == "google":
@@ -253,7 +277,7 @@ class CoTPromptConstructor(PromptConstructor):
 
         assert all([f"{{k}}" not in current for k in keywords])
 
-        prompt = self.get_lm_api_input(intro, examples, current)
+        prompt = self.get_lm_api_input(intro, examples, current, acc_tree, meta_data["action_history"], intent)
         return prompt
 
     def _extract_action(self, response: str) -> str:

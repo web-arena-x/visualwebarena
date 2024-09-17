@@ -16,6 +16,9 @@ class Tokenizer(object):
             self.tokenizer.add_eos_token = False  # type: ignore[attr-defined]
         elif provider == "google":
             self.tokenizer = None  # Not used for input length computation, as Gemini is based on characters
+        elif provider == "yadong_model":
+            ### JUST COPY OPENAI CONFIG FOR NOW
+            self.tokenizer = tiktoken.encoding_for_model(model_name)
         else:
             raise NotImplementedError
 

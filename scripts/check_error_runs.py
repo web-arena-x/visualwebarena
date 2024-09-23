@@ -1,18 +1,22 @@
 """Some executions may failed.
 This script checks the recordings, print the task ids.
 It deletes the recordings if needed."""
+
 import argparse
 import glob
+import json
 import os
-import shutil
 import sys
 
 
-def merge_logs(result_folder: str, args: argparse.Namespace) -> str:
-    if not os.path.exists(f"{result_folder}/log_files.txt"):
+def merge_logs(
+    args: argparse.Namespace,
+    save_file: str = "tmp_merged_log.txt",
+) -> tuple[str, dict[str, list[str]]]:
+    if not os.path.exists(f"{args.result_folder}/log_files.txt"):
         sys.exit(1)
 
-    with open(f"{result_folder}/log_files.txt", "r") as f:
+    with open(f"{args.result_folder}/log_files.txt", "r") as f:
         log_files = f.readlines()
 
     merged_results = {}
@@ -27,7 +31,7 @@ def merge_logs(result_folder: str, args: argparse.Namespace) -> str:
                 if (
                     cur_log
                     and index
-                    and os.path.exists(f"{result_folder}/render_{index}.html")
+                    and os.path.exists(f"{args.result_folder}/render_{index}.html")
                     and len(cur_log) >= 3
                 ):
                     merged_results[index] = cur_log
@@ -40,28 +44,63 @@ def merge_logs(result_folder: str, args: argparse.Namespace) -> str:
         if (
             cur_log
             and index
-            and os.path.exists(f"{result_folder}/render_{index}.html")
+            and os.path.exists(f"{args.result_folder}/render_{index}.html")
             and len(cur_log) >= 3
         ):
 
             merged_results[index] = cur_log
 
     # sort by the key
-    merged_results = dict(
-        sorted(merged_results.items(), key=lambda x: int(x[0]))
-    )
+    merged_results = dict(sorted(merged_results.items(), key=lambda x: int(x[0])))
 
-    merged_log_path = f"{result_folder}/tmp_merged_log.txt"
+    merged_log_path = f"{args.result_folder}/{save_file}"
     with open(merged_log_path, "w") as f:
         for k, v in merged_results.items():
             for line in v:
                 f.write(line)
     print(f"Number of examples: {len(merged_results)}")
 
+    return merged_log_path, merged_results
+
+
+def merge_eval_cache(
+    args: argparse.Namespace,
+    save_file: str = "tmp_merged_eval_cache.jsonl"
+) -> None:
+    if not os.path.exists(f"{args.result_folder}/log_files.txt"):
+        sys.exit(1)
+
+    with open(f"{args.result_folder}/log_files.txt", "r") as f:
+        log_files = f.readlines()
+
+    id_to_cache = {}
+    for file in log_files:
+        eval_log_file = file.strip().replace(".log", "_eval_cache.jsonl")
+        if not os.path.exists(eval_log_file):
+            continue
+        with open(eval_log_file, "r") as f:
+            for line in f:
+                data = json.loads(line)
+                id = data["config_file"].split(".")[0]
+                # later will overwrite the previous data
+                id_to_cache[id] = data
+
+    merged_cache_path = f"{args.result_folder}/{save_file}"
+    # sort by the key
+    id_to_cache = dict(sorted(id_to_cache.items(), key=lambda x: int(x[0])))
+    with open(merged_cache_path, "w") as f:
+        for k, v in id_to_cache.items():
+            f.write(json.dumps(v) + "\n")
+
+
+def check_unlogged(
+    args: argparse.Namespace,
+    merged_results: dict[str, list],
+) -> None:
     unlog_examples = []
     for i in range(812):
         if (
-            os.path.exists(f"{result_folder}/render_{i}.html")
+            os.path.exists(f"{args.result_folder}/render_{i}.html")
             and str(i) not in merged_results
         ):
             unlog_examples.append(i)
@@ -75,17 +114,14 @@ def merge_logs(result_folder: str, args: argparse.Namespace) -> str:
         for idx in unlog_examples:
             os.remove(f"{args.result_folder}/render_{idx}.html")
 
-    unifinished_examples = [
-        i for i in range(0, 812) if str(i) not in merged_results
-    ]
+
+def check_unfinished(merged_results: dict[str, list]) -> None:
+    unifinished_examples = [i for i in range(0, 812) if str(i) not in merged_results]
     print(f"Number of unfinished examples: {len(unifinished_examples)}")
     print(unifinished_examples)
 
-    return merged_log_path
 
-
-def check_unhandled_errors(args: argparse.Namespace) -> int:
-    log_path = merge_logs(args.result_folder, args)
+def check_unhandled_errors(args: argparse.Namespace, log_path: str) -> int:
     with open(log_path, "r") as f:
         logs = f.read()
 
@@ -124,9 +160,7 @@ def check_unexpected_logout(args: argparse.Namespace) -> int:
         with open(render_file, "r") as f:
             contents = f.read()
             if any([s in contents for s in target_strings]):
-                task_id = int(
-                    render_file.split("/")[-1].split(".")[0].split("_")[-1]
-                )
+                task_id = int(render_file.split("/")[-1].split(".")[0].split("_")[-1])
                 error_examples.append(task_id)
     print(f"Number of unexpected logout: {len(error_examples)}")
     print(error_examples)
@@ -149,7 +183,11 @@ if __name__ == "__main__":
     parser.add_argument("--tolerance", type=int, default=0)
 
     args = parser.parse_args()
-    n1 = check_unhandled_errors(args)
+    log_path, merged_results = merge_logs(args)
+    merge_eval_cache(args)
+    check_unlogged(args, merged_results)
+    check_unfinished(merged_results)
+    n1 = check_unhandled_errors(args, log_path)
     n2 = check_unexpected_logout(args)
     if n1 + n2 > args.tolerance:
         sys.exit(1)

@@ -1,5 +1,19 @@
-# Docker for WebArena Websites
+# Docker for WebArena and VisualWebArena Websites
 This REAME file host the instructions for our Docker images and quick start guide for starting up websites used in VisualWebArena.
+
+# Table of Content
+- [Pre-installed Amazon Machine Image (Recommended)](#pre-installed-amazon-machine-image-recommended)
+   * [Environment reset](#environment-reset)
+- [Individual Wewbsite Setup](#individual-wewbsite-setup)
+   * [[VWA] Classifieds Website](#vwa-classifieds-website)
+   * [[Both] Shopping Website (OneStopShop)](#both-shopping-website-onestopshop)
+   * [[WA] E-commerce Content Management System (CMS)](#wa-e-commerce-content-management-system-cms)
+   * [[Both] Social Forum Website (Reddit)](#both-social-forum-website-reddit)
+   * [[WA] Gitlab Website](#wa-gitlab-website)
+   * [[Both] Wikipedia Website](#both-wikipedia-website)
+   * [[Both] Homepage](#both-homepage)
+   * [[WA] Map](#wa-map)
+   * [[Both] Documentation sites](#both-documentation-sites)
 
 ## Pre-installed Amazon Machine Image (Recommended)
 
@@ -74,11 +88,13 @@ However, if you are unable to use AWS AMI, read below to set up on your own mach
 ### Environment reset
 After evaluating the examples, reset the environment to the initial state
 ```bash
-### For VWA:
+### For VisualWebArena:
 bash scripts/reset_reddit.sh
 bash reset_shopping.sh
 curl -X POST http://<your-server-hostname>:9980/index.php?page=reset -d "token=4b61655535e7ed388f0d40a93600254c"
+```
 
+```bash
 ### For WebArena:
 docker stop shopping_admin gitlab
 docker remove shopping_admin gitlab
@@ -87,7 +103,10 @@ docker run --name gitlab -d -p 8023:8023 gitlab-populated-final-port8023 /opt/gi
 <repeat the commands in step 5 above>
 ```
 
-## Classifieds Website
+## Individual Wewbsite Setup
+We highly recommend setting up the environments with AMI introduced above, but we also list the steps to setting up individual websites below. This allows you to setup selected websites *locally*.
+
+### [VWA] Classifieds Website
 
 Download the image zip from one of the following:
 - https://drive.google.com/file/d/1m79lp84yXfqdTBHr6IS7_1KkL4sDSemR/view
@@ -104,9 +123,9 @@ docker exec classifieds_db mysql -u root -ppassword osclass -e 'source docker-en
 Now you can visit `http://<your-server-hostname>:9980`.
 
 
-## Shopping Website (OneStopShop)
+### [Both] Shopping Website (OneStopShop)
 
-The Shopping Website follows the same setup as the same environment used in WebArena. Download the image tar from the following mirrors:
+Download the image tar from the following mirrors:
 - https://drive.google.com/file/d/1gxXalk9O0p9eu1YkIJcmZta1nvvyAJpA/view?usp=sharing
 - https://archive.org/download/webarena-env-shopping-image
 - http://metis.lti.cs.cmu.edu/webarena-images/shopping_final_0712.tar
@@ -119,28 +138,34 @@ docker run --name shopping -p 7770:80 -d shopping_final_0712
 docker exec shopping /var/www/magento2/bin/magento setup:store-config:set --base-url="http://<your-server-hostname>:7770" # no trailing slash
 docker exec shopping mysql -u magentouser -pMyPassword magentodb -e  'UPDATE core_config_data SET value="http://<your-server-hostname>:7770/" WHERE path = "web/secure/base_url";'
 docker exec shopping /var/www/magento2/bin/magento cache:flush
-
-# Disable re-indexing of products
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalogrule_product
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalogrule_rule
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalogsearch_fulltext
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalog_category_product
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule customer_grid
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule design_config_grid
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule inventory
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalog_product_category
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalog_product_attribute
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule catalog_product_price
-docker exec shopping /var/www/magento2/bin/magento indexer:set-mode schedule cataloginventory_stock
 ```
 Now you can visit `http://<your-server-hostname>:7770`.
 
 
-## Social Forum Website (Reddit)
+### [WA] E-commerce Content Management System (CMS)
 
-The Wikipedia Website follows the same setup procedure as the environment used in WebArena. Download the image tar from the following mirrors:
+Download the image tar from the following mirrors:
+- https://drive.google.com/file/d/1See0ZhJRw0WTTL9y8hFlgaduwPZ_nGfd/view?usp=sharing
+- https://archive.org/download/webarena-env-shopping-admin-image
+- http://metis.lti.cs.cmu.edu/webarena-images/shopping_admin_final_0719.tar
+
+```
+docker load --input shopping_admin_final_0719.tar
+docker run --name shopping_admin -p 7780:80 -d shopping_admin_final_0719
+# wait ~1 min to wait all services to start
+
+docker exec shopping_admin /var/www/magento2/bin/magento setup:store-config:set --base-url="http://<your-server-hostname>:7780" # no trailing slash
+docker exec shopping_admin mysql -u magentouser -pMyPassword magentodb -e  'UPDATE core_config_data SET value="http://<your-server-hostname>:7780/" WHERE path = "web/secure/base_url";'
+docker exec shopping_admin /var/www/magento2/bin/magento cache:flush
+```
+Now you can visit `http://<your-server-hostname>:7780/admin`.
+
+
+### [Both] Social Forum Website (Reddit)
+
+Download the image tar from the following mirrors:
 - https://drive.google.com/file/d/17Qpp1iu_mPqzgO_73Z9BnFjHrzmX9DGf/view?usp=sharing
-- https://archive.org/download/postmill-populated-exposed-withimg
+- https://archive.org/download/webarena-env-forum-image
 - http://metis.lti.cs.cmu.edu/webarena-images/postmill-populated-exposed-withimg.tar
 
 ```
@@ -150,9 +175,26 @@ docker run --name forum -p 9999:80 -d postmill-populated-exposed-withimg
 Now you can visit `http://<your-server-hostname>:9999/`.
 
 
-## Wikipedia Website
+### [WA] Gitlab Website
 
-The Wikipedia Website follows the same setup procedure as the environment used in WebArena. Download the data from the following mirrors:
+Download the image tar from the following mirrors:
+- https://drive.google.com/file/d/19W8qM0DPyRvWCLyQe0qtnCWAHGruolMR/view?usp=sharing
+- https://archive.org/download/webarena-env-gitlab-image
+- http://metis.lti.cs.cmu.edu/webarena-images/gitlab-populated-final-port8023.tar
+
+```
+docker load --input gitlab-populated-final-port8023.tar
+docker run --name gitlab -d -p 8023:8023 gitlab-populated-final-port8023 /opt/gitlab/embedded/bin/runsvdir-start
+
+# wait at least 5 mins for services to boot
+docker exec gitlab sed -i "s|^external_url.*|external_url 'http://<your-server-hostname>:8023'|" /etc/gitlab/gitlab.rb
+docker exec gitlab gitlab-ctl reconfigure
+```
+It might take 5 mins to start and then you can visit `http://<your-server-hostname>:8023/explore`.
+
+### [Both] Wikipedia Website
+
+Download the data from the following mirrors:
 - https://drive.google.com/file/d/1Um4QLxi_bGv5bP6kt83Ke0lNjuV9Tm0P/view?usp=sharing
 - https://archive.org/download/webarena-env-wiki-image
 - http://metis.lti.cs.cmu.edu/webarena-images/wikipedia_en_all_maxi_2022-05.zim
@@ -162,13 +204,12 @@ docker run -d --name=wikipedia --volume=<your-path-to-downloaded-folder>/:/data 
 ```
 Now you can visit `http://<your-server-hostname>:8888/wikipedia_en_all_maxi_2022-05/A/User:The_other_Kiwix_guy/Landing`.
 
-
-## Homepage
+### [Both] Homepage
 
 The homepage lists all available websites which the agent can use to navigate to different sites.
 ![Homepage](../media/homepage_demo.png)
 
-To host the homepage, first change `<your-server-hostname>` to the corresponding server hostnames in [webarena-homepage/templates/index.html](webarena-homepage/templates/index.html)
+To host the homepage, first change `<your-server-hostname>` to the corresponding server hostnames in [webarena_homepage/templates/index.html](webarena-homepage/templates/index.html)
 ```bash
 # Define your actual server hostname
 YOUR_ACTUAL_HOSTNAME=""
@@ -180,7 +221,13 @@ perl -pi -e "s|<your-server-hostname>|${YOUR_ACTUAL_HOSTNAME}|g" webarena-homepa
 
 Then run
 ```
-cd webarena_homepage
+cd webarena-homepage
 flask run --host=0.0.0.0 --port=4399
 ```
 The homepage will be available at `http://<your-server-hostname>:4399`.
+
+### [WA] Map
+Please refer to the AMI setup for the map.
+
+### [Both] Documentation sites
+We are still working on dockerizing the documentation sites. As they are read-only sites and they usually don't change rapidly. It is safe to use their live sites for test purpose right now.

@@ -502,7 +502,7 @@ class HTMLContentExactEvaluator(Evaluator):
 
     def cache_pred(
         self,
-        selected_element_cache: list[str],
+        selected_element_cache: list[Any],
         config_file: Path | str,
         metadata: dict[str, Any]
     ) -> None:

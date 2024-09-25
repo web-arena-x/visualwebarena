@@ -364,7 +364,8 @@ def test(
                     for image_path in image_paths:
                         # Load image either from the web or from a local path.
                         if image_path.startswith("http"):
-                            input_image = Image.open(requests.get(image_path, stream=True).raw)
+                            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+                            input_image = Image.open(requests.get(image_path, stream=True, headers = headers).raw)
                         else:
                             input_image = Image.open(image_path)
 

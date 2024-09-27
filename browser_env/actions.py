@@ -152,6 +152,8 @@ def action2str(
                 action_str = f"page_focus [{action['page_number']}]"
             case ActionTypes.CLEAR:
                 action_str = f"clear [{element_id}] where [{element_id}] is {semantic_element}"
+            case ActionTypes.UPLOAD:
+                action_str = f"upload [{action['text']}] to [{element_id}]"
             case ActionTypes.STOP:
                 action_str = f"stop [{action['answer']}]"
             case ActionTypes.NONE:
@@ -193,6 +195,8 @@ def action2str(
                 action_str = f"page_focus [{action['page_number']}]"
             case ActionTypes.STOP:
                 action_str = f"stop [{action['answer']}]"
+            case ActionTypes.UPLOAD:
+                action_str = f"upload [{action['text']}] to [{element_id}]"
             case ActionTypes.NONE:
                 action_str = "none"
             case _:
@@ -258,6 +262,18 @@ def action2create_function(action: Action) -> str:
             args.append(f"pw_code={repr(action['pw_code'])}")
             args_str = ", ".join(args)
             return f"create_clear_action({args_str})"
+        case ActionTypes.UPLOAD:
+            args = []
+            text = "".join(map(lambda x: _id2key[x], action["text"]))
+            args.append(f"text={repr(text)}")
+            args.append(f"element_id={repr(action['element_id'])}")
+            args.append(
+                f"element_role={repr(_id2role[action['element_role']])}"
+            )
+            args.append(f"element_name={repr(action['element_name'])}")
+            args.append(f"pw_code={repr(action['pw_code'])}")
+            args_str = ", ".join(args)
+            return f"create_upload_action({args_str})"
         case ActionTypes.HOVER:
             args = []
             args.append(f"element_id={repr(action['element_id'])}")
@@ -324,7 +340,7 @@ class ActionTypes(IntEnum):
 
     STOP = 17
     CLEAR = 18
-
+    UPLOAD = 19
     def __str__(self) -> str:
         return f"ACTION_TYPES.{self.name}"
 
@@ -498,7 +514,6 @@ def create_none_action() -> Action:
         "answer": "",
         "raw_prediction": "",
     }
-
 
 @beartype
 def create_stop_action(answer: str) -> Action:
@@ -678,6 +693,28 @@ def create_clear_action(
     )
     return action
 
+@beartype
+def create_upload_action(
+    text: str,
+    element_id: str = "",
+    element_role: RolesType = "link",
+    element_name: str = "",
+    pw_code: str = "",
+    nth: int = 0,
+) -> Action:
+    action = create_none_action()
+    action.update(
+        {
+            "action_type": ActionTypes.TYPE,
+            "element_id": element_id,
+            "element_role": _role2id[element_role],
+            "element_name": element_name,
+            "nth": nth,
+            "text": _keys2ids(text),
+            "pw_code": pw_code,
+        }
+    )
+    return action
 
 @beartype
 def create_keyboard_type_action(keys: list[int | str] | str) -> Action:
@@ -931,6 +968,32 @@ async def aexecute_mouse_click(left: float, top: float, page: APage) -> None:
     await page.mouse.click(
         left * viewport_size["width"], top * viewport_size["height"]
     )
+
+
+def execute_upload(left: float, top: float, path: str, page: Page) -> None:
+    """Click at coordinates (left, top)."""
+    viewport_size = page.viewport_size
+    assert viewport_size
+    with page.expect_file_chooser() as fc_info:
+        page.mouse.click(
+            left * viewport_size["width"], top * viewport_size["height"]
+        )
+    file_chooser = fc_info.value
+    file_chooser.set_files(path)
+
+
+@beartype
+async def aexecute_upload(left: float, top: float, path: str, page: APage) -> None:
+    """Click at coordinates (left, top)."""
+    viewport_size = page.viewport_size
+    assert viewport_size
+    async with page.expect_file_chooser() as fc_info:
+        await page.mouse.click(
+            left * viewport_size["width"], top * viewport_size["height"]
+        )
+    file_chooser = fc_info.value
+    await file_chooser.set_files(path)
+
 
 
 @beartype
@@ -1299,7 +1362,7 @@ def execute_action(
                 )
 
         case ActionTypes.PAGE_FOCUS:
-            page = browser_ctx.pages[action["page_number"]]
+            page = browser_ctx.pages[int(action["page_number"])]
             page.bring_to_front()
         case ActionTypes.NEW_TAB:
             page = browser_ctx.new_page()
@@ -1334,7 +1397,10 @@ def execute_action(
                 raise NotImplementedError(
                     "No proper locator found for select option action"
                 )
-
+        case ActionTypes.UPLOAD:
+            element_id = action["element_id"]
+            element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
+            execute_upload(element_center[0], element_center[1], action["text"], page)
         case _:
             raise ValueError(f"Unknown action type: {action_type}")
 
@@ -1478,7 +1544,10 @@ async def aexecute_action(
                 raise NotImplementedError(
                     "No proper locator found for select option action"
                 )
-
+        case ActionTypes.UPLOAD:
+            element_id = action["element_id"]
+            element_center = obseration_processor.get_element_center(element_id)  # type: ignore[attr-defined]
+            await aexecute_upload(element_center[0], element_center[1], action["text"], page)        
         case _:
             raise ValueError(f"Unknown action type: {action_type}")
 
@@ -1576,6 +1645,8 @@ def create_playwright_action(playwright_code: str) -> Action:
             return create_click_action(pw_code=playwright_code)
         case "clear":
             return create_clear_action(pw_code=playwright_code)
+        case "upload":
+            return create_upload_action(pw_code=playwright_code)
         case "hover":
             return create_hover_action(pw_code=playwright_code)
         case "type" | "fill":
@@ -1653,6 +1724,24 @@ def create_id_based_action(action_str: str) -> Action:
                 raise ActionParsingError(f"Invalid clear action {action_str}")
             element_id = match.group(1)
             return create_clear_action(element_id=element_id)
+        case "upload":
+            # add default enter flag
+            if not (action_str.endswith("[0]") or action_str.endswith("[1]")):
+                action_str += " [1]"
+
+            match = re.search(
+                r"type ?\[(\d+)\] ?\[(.+)\] ?\[(\d+)\]", action_str
+            )
+            if not match:
+                raise ActionParsingError(f"Invalid type action {action_str}")
+            element_id, text, enter_flag = (
+                match.group(1),
+                match.group(2),
+                match.group(3),
+            )
+            if enter_flag == "1":
+                text += "\n"
+            return create_upload_action(text=text, element_id=element_id)
         case "hover":
             match = re.search(r"hover ?\[(\d+)\]", action_str)
             if not match:

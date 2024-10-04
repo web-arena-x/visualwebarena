@@ -5689,7 +5689,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/566",
       "program_html": [],
@@ -5719,7 +5719,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/1517",
       "program_html": [],
@@ -5749,7 +5749,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "No"
+        "fuzzy_match": ["No, it is open"]
       },
       "reference_url": "__GITLAB__/byteblaze/empathy-prompts/-/issues/18",
       "program_html": [],
@@ -5779,7 +5779,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "No"
+        "fuzzy_match": ["No, it is open"]
       },
       "reference_url": "__GITLAB__/byteblaze/a11y-syntax-highlighting/-/issues/1",
       "program_html": [],
@@ -5809,7 +5809,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/719",
       "program_html": [],
@@ -9281,12 +9281,12 @@
         "string_match"
       ],
       "reference_answers": {
-        "exact_match": "ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
+        "exact_match": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
       },
       "reference_url": "",
       "program_html": [],
       "string_note": "",
-      "reference_answer_raw_annotation": "ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
+      "reference_answer_raw_annotation": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
     },
     "intent_template_id": 329
   },
@@ -9310,12 +9310,12 @@
         "string_match"
       ],
       "reference_answers": {
-        "exact_match": "ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
+        "exact_match": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
       },
       "reference_url": "",
       "program_html": [],
       "string_note": "",
-      "reference_answer_raw_annotation": "ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
+      "reference_answer_raw_annotation": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
     },
     "intent_template_id": 329
   },

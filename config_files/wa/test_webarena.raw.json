@@ -3289,7 +3289,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__GITLAB__/byteblaze/a11y-syntax-highlighting/-/issues/?label_name%5B%5D=help%20wanted",
+      "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/?label_name%5B%5D=help%20wanted",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -5689,7 +5689,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/566",
       "program_html": [],
@@ -5719,7 +5719,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/1517",
       "program_html": [],
@@ -5749,7 +5749,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "No"
+        "fuzzy_match": ["No, it is open"]
       },
       "reference_url": "__GITLAB__/byteblaze/empathy-prompts/-/issues/18",
       "program_html": [],
@@ -5779,7 +5779,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "No"
+        "fuzzy_match": ["No, it is open"]
       },
       "reference_url": "__GITLAB__/byteblaze/a11y-syntax-highlighting/-/issues/1",
       "program_html": [],
@@ -5809,7 +5809,7 @@
         "url_match"
       ],
       "reference_answers": {
-        "exact_match": "Yes"
+        "fuzzy_match": ["Yes, it is closed"]
       },
       "reference_url": "__GITLAB__/a11yproject/a11yproject.com/-/issues/719",
       "program_html": [],
@@ -8245,7 +8245,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/electronics/headphones.html",
+      "reference_url": "__SHOPPING__/electronics/headphones.html |OR| __SHOPPING__/electronics.html?cat=60",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8271,7 +8271,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/men/shoes.html",
+      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/men/shoes.html |OR| __SHOPPING__/clothing-shoes-jewelry/men.html?cat=145",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8297,7 +8297,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/women/clothing.html",
+      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/women/clothing.html |OR| __SHOPPING__/clothing-shoes-jewelry/women.html?cat=143",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8323,7 +8323,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/office-products/office-furniture-lighting/cabinets-racks-shelves.html",
+      "reference_url": "__SHOPPING__/office-products/office-furniture-lighting/cabinets-racks-shelves.html |OR| __SHOPPING__/office-products.html?cat=187",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -9281,12 +9281,12 @@
         "string_match"
       ],
       "reference_answers": {
-        "exact_match": "ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
+        "exact_match": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
       },
       "reference_url": "",
       "program_html": [],
       "string_note": "",
-      "reference_answer_raw_annotation": "ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
+      "reference_answer_raw_annotation": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/eriklindernoren/PyTorch-GAN.git"
     },
     "intent_template_id": 329
   },
@@ -9310,12 +9310,12 @@
         "string_match"
       ],
       "reference_answers": {
-        "exact_match": "ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
+        "exact_match": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
       },
       "reference_url": "",
       "program_html": [],
       "string_note": "",
-      "reference_answer_raw_annotation": "ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
+      "reference_answer_raw_annotation": "git clone ssh://git@metis.lti.cs.cmu.edu:2222/yjlou/2019-nCov.git"
     },
     "intent_template_id": 329
   },

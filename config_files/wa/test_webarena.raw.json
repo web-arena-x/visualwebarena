@@ -8245,7 +8245,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/electronics/headphones.html",
+      "reference_url": "__SHOPPING__/electronics/headphones.html |OR| __SHOPPING__/electronics.html?cat=60",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8271,7 +8271,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/men/shoes.html",
+      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/men/shoes.html |OR| __SHOPPING__/clothing-shoes-jewelry/men.html?cat=145",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8297,7 +8297,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/women/clothing.html",
+      "reference_url": "__SHOPPING__/clothing-shoes-jewelry/women/clothing.html |OR| __SHOPPING__/clothing-shoes-jewelry/women.html?cat=143",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },
@@ -8323,7 +8323,7 @@
         "url_match"
       ],
       "reference_answers": null,
-      "reference_url": "__SHOPPING__/office-products/office-furniture-lighting/cabinets-racks-shelves.html",
+      "reference_url": "__SHOPPING__/office-products/office-furniture-lighting/cabinets-racks-shelves.html |OR| __SHOPPING__/office-products.html?cat=187",
       "program_html": [],
       "url_note": "GOLD in PRED"
     },

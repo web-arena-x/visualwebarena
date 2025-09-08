@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "visualwebarena"
+version = "0.1.0"
+description = "Evaluating Multimodal Agents on Realistic Visual Web Tasks"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "VisualWebArena Team"},
+]
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Researchers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "beartype>=0.12.0",
+    "beautifulsoup4>=4.12.2",
+    "gymnasium>=0.29.1",
+    "numpy>=1.25.2",
+    "pillow>=10.0.1",
+    "playwright>=1.37.0",
+    "pydantic>=2.4.2",
+    "requests>=2.31.0",
+    "openai>=1.3.5",
+    "torch>=2.0.1",
+    "transformers>=4.34.0",
+    "nltk>=3.8.1",
+    "scikit-image>=0.22.0",
+    "tiktoken>=0.4.0",
+    "matplotlib>=3.8.0",
+    "text-generation>=0.6.1",
+    "aiolimiter>=1.1.0",
+    "evaluate>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit==3.0.1",
+    "pytest==7.1.2",
+    "mypy==0.991",
+    "nbmake",
+    "pytest-asyncio",
+    "types-requests",
+]
+
+[project.urls]
+Homepage = "https://jykoh.com/vwa"
+Repository = "https://github.com/web-arena-x/visualwebarena"
+Issues = "https://github.com/web-arena-x/visualwebarena/issues"
+
+[tool.setuptools.packages.find]
+include = ["visualwebarena*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+[tool.mypy]
+strict = true

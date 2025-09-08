@@ -21,7 +21,7 @@ from playwright.async_api import Locator as ALocator
 from playwright.async_api import Page as APage
 from playwright.sync_api import BrowserContext, Locator, Page
 
-from browser_env.constants import (
+from visualwebarena.browser_env.constants import (
     ASCII_CHARSET,
     FREQ_UNICODE_CHARSET,
     MAX_ANSWER_LENGTH,
@@ -40,7 +40,7 @@ from browser_env.constants import (
     URL_MAX_LENGTH,
     RolesType,
 )
-from browser_env.processors import ObservationProcessor
+from visualwebarena.browser_env.processors import ObservationProcessor
 
 
 class ParsedPlaywrightCode(TypedDict):
@@ -49,7 +49,7 @@ class ParsedPlaywrightCode(TypedDict):
     keywords: dict[str, Any]
 
 
-from browser_env.processors import (
+from visualwebarena.browser_env.processors import (
     ObservationProcessor,
     TextObervationProcessor,
 )

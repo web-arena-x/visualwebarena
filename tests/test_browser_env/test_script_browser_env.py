@@ -9,7 +9,7 @@ import pytest
 from gymnasium.vector import AsyncVectorEnv
 from playwright.sync_api import Page
 
-from browser_env import (
+from visualwebarena.browser_env import (
     Action,
     AsyncScriptBrowserEnv,
     DetachedPage,
@@ -20,8 +20,8 @@ from browser_env import (
     create_playwright_action,
     create_scroll_action,
 )
-from browser_env.actions import create_id_based_action
-from browser_env.env_config import ACCOUNTS, REDDIT, SHOPPING
+from visualwebarena.browser_env.actions import create_id_based_action
+from visualwebarena.browser_env.env_config import ACCOUNTS, REDDIT, SHOPPING
 
 @pytest.mark.skip(reason="The actions are deprecated")
 def test_script_browser_env(script_browser_env: ScriptBrowserEnv) -> None:

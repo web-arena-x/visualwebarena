@@ -27,17 +27,34 @@
 - [01/25/2024]: GitHub repo released with tasks and scripts for setting up the VWA environments.
 
 ## Install
+
+**Option 1: pip install from GitHub (Recommended)**
 ```bash
 # Python 3.10 (or 3.11, but not 3.12 cause 3.12 deprecated distutils needed here)
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+pip install git+https://github.com/web-arena-x/visualwebarena.git
 playwright install
-pip install -e .
 ```
 
-You can also run the unit tests to ensure that VisualWebArena is installed correctly:
+**Option 2: Install from Source**
+```bash
+# Python 3.10 (or 3.11, but not 3.12 cause 3.12 deprecated distutils needed here)
+git clone https://github.com/web-arena-x/visualwebarena.git
+cd visualwebarena
+pip install .
+playwright install
 ```
+
+**Option 3: Development Installation**
+```bash
+# Python 3.10 (or 3.11, but not 3.12 cause 3.12 deprecated distutils needed here)
+git clone https://github.com/web-arena-x/visualwebarena.git
+cd visualwebarena
+pip install -e .
+playwright install
+```
+
+You can run the unit tests to ensure that VisualWebArena is installed correctly:
+```bash
 pytest -x
 ```
 

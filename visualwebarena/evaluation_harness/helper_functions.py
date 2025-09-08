@@ -9,13 +9,13 @@ from beartype import beartype
 from beartype.typing import Dict, List
 from playwright.sync_api import CDPSession, Page
 
-from browser_env.env_config import (
+from visualwebarena.browser_env.env_config import (
     ACCOUNTS,
     REDDIT,
     SHOPPING,
     WIKIPEDIA,
 )
-from llms.providers.openai_utils import (
+from visualwebarena.llms.providers.openai_utils import (
     generate_from_openai_chat_completion,
 )
 

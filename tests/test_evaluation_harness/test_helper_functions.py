@@ -1,9 +1,9 @@
 import json
 import os
 
-from browser_env import ScriptBrowserEnv
-from browser_env.env_config import *
-from evaluation_harness.helper_functions import (
+from visualwebarena.browser_env import ScriptBrowserEnv
+from visualwebarena.browser_env.env_config import *
+from visualwebarena.evaluation_harness.helper_functions import (
     get_query_text,
     get_query_text_lowercase,
     reddit_get_latest_comment_content_by_username,

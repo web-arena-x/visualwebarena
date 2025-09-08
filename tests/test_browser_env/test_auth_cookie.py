@@ -1,7 +1,7 @@
 import asyncio
 import json
 
-from browser_env import *
+from visualwebarena.browser_env import *
 
 auth_json = {
     "cookies": [

@@ -3,7 +3,7 @@ from typing import AsyncGenerator, Generator
 import pytest
 import pytest_asyncio
 
-from browser_env import AsyncScriptBrowserEnv, ScriptBrowserEnv
+from visualwebarena.browser_env import AsyncScriptBrowserEnv, ScriptBrowserEnv
 
 HEADLESS = True
 SLOW_MO = 0

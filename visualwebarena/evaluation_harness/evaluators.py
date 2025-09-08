@@ -17,10 +17,10 @@ from nltk.tokenize import word_tokenize  # type: ignore
 from PIL import Image
 from playwright.sync_api import CDPSession, Page
 
-from browser_env.actions import Action
-from browser_env.utils import StateInfo
-from evaluation_harness import image_utils
-from evaluation_harness.helper_functions import (
+from visualwebarena.browser_env.actions import Action
+from visualwebarena.browser_env.utils import StateInfo
+from visualwebarena.evaluation_harness import image_utils
+from visualwebarena.evaluation_harness.helper_functions import (
     PseudoPage,
     get_query_text,
     get_query_text_lowercase,

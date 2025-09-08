@@ -17,7 +17,7 @@ from gymnasium import spaces
 from PIL import Image, ImageDraw, ImageFont
 from playwright.sync_api import CDPSession, Page, ViewportSize
 
-from browser_env.constants import (
+from visualwebarena.browser_env.constants import (
     ASCII_CHARSET,
     FREQ_UNICODE_CHARSET,
     IGNORED_ACTREE_PROPERTIES,

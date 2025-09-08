@@ -8,11 +8,11 @@ from itertools import combinations
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
-from browser_env.env_config import ACCOUNTS
+from visualwebarena.browser_env.env_config import ACCOUNTS
 
 DATASET = os.environ["DATASET"]
 if DATASET == "webarena":
-    from browser_env.env_config import (
+    from visualwebarena.browser_env.env_config import (
         GITLAB,
         REDDIT,
         SHOPPING,
@@ -29,7 +29,7 @@ if DATASET == "webarena":
     KEYWORDS = ["", "", "Dashboard", "Delete"]
 
 elif DATASET == "visualwebarena":
-    from browser_env.env_config import (
+    from visualwebarena.browser_env.env_config import (
         CLASSIFIEDS,
         REDDIT,
         SHOPPING,

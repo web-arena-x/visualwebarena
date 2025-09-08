@@ -7,8 +7,8 @@ from typing import Any
 
 from PIL import Image
 
-from agent.prompts import *
-from browser_env import (
+from visualwebarena.agent.prompts import *
+from visualwebarena.browser_env import (
     Action,
     ActionTypes,
     ObservationMetadata,

@@ -10,17 +10,17 @@ import requests
 from PIL import Image
 from py import test
 
-from agent import Agent, TeacherForcingAgent
-from browser_env import ActionTypes, ScriptBrowserEnv
-from browser_env.env_config import *
-from evaluation_harness import (
+from visualwebarena.agent import Agent, TeacherForcingAgent
+from visualwebarena.browser_env import ActionTypes, ScriptBrowserEnv
+from visualwebarena.browser_env.env_config import *
+from visualwebarena.evaluation_harness import (
     HTMLContentExactEvaluator,
     PageImageEvaluator,
     StringEvaluator,
     URLExactEvaluator,
     image_utils,
 )
-from evaluation_harness.evaluators import EvaluatorComb
+from visualwebarena.evaluation_harness.evaluators import EvaluatorComb
 
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 HEADLESS = True

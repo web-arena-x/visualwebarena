@@ -3,7 +3,7 @@ Generate the test data"""
 import json
 import os
 
-from browser_env.env_config import *
+from visualwebarena.browser_env.env_config import *
 
 
 def main() -> None:

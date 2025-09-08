@@ -17,12 +17,12 @@ import torch
 from beartype import beartype
 from PIL import Image
 
-from agent import (
+from visualwebarena.agent import (
     PromptAgent,
     construct_agent,
 )
-from agent.prompts import *
-from browser_env import (
+from visualwebarena.agent.prompts import *
+from visualwebarena.browser_env import (
     Action,
     ActionTypes,
     ScriptBrowserEnv,
@@ -30,12 +30,12 @@ from browser_env import (
     Trajectory,
     create_stop_action,
 )
-from browser_env.actions import is_equivalent
-from browser_env.helper_functions import (
+from visualwebarena.browser_env.actions import is_equivalent
+from visualwebarena.browser_env.helper_functions import (
     RenderHelper,
     get_action_description,
 )
-from evaluation_harness import image_utils
+from visualwebarena.evaluation_harness import image_utils
 
 LOG_FOLDER = "log_files"
 Path(LOG_FOLDER).mkdir(parents=True, exist_ok=True)
@@ -395,7 +395,7 @@ def test(
 
 def prepare(args: argparse.Namespace) -> None:
     # convert prompt python files to json
-    from agent.prompts import to_json
+    from visualwebarena.agent.prompts import to_json
 
     to_json.run()
 

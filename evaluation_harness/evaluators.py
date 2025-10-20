@@ -18,7 +18,7 @@ from PIL import Image
 from playwright.sync_api import CDPSession, Page
 
 from browser_env.actions import Action
-from browser_env.utils import StateInfo
+from browser_env.utils import StateInfo, DetachedPage
 from evaluation_harness import image_utils
 from evaluation_harness.helper_functions import (
     PseudoPage,
@@ -45,6 +45,7 @@ from evaluation_harness.helper_functions import (
 )
 
 Trajectory = list[Union[Action, StateInfo]]
+from llms.ais_requestor import AISRequestor
 
 
 @beartype
@@ -56,7 +57,7 @@ class Evaluator(object):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage
+        page: Page | PseudoPage | None
     ) -> float:
         raise NotImplementedError
 
@@ -143,6 +144,8 @@ class StringEvaluator(Evaluator):
     must include: each phrase in the reference answer must be included in the answer
     fuzzy match: the answer is similar to the reference answer, using LLM judge
     """
+    def __init__(self, kq_config):
+        self.kq = AISRequestor(kq_config)
 
     @staticmethod
     @beartype
@@ -172,6 +175,7 @@ class StringEvaluator(Evaluator):
         # prevent false positive (e.g, 0)
         if len(word_tokenize(clean_ref)) == 1:
             tok_pred = word_tokenize(clean_pred)
+            tok_pred = ''.join(tok_pred)
             return float(clean_ref in tok_pred)
         else:
             return float(clean_ref in clean_pred)
@@ -192,19 +196,19 @@ class StringEvaluator(Evaluator):
 
     @staticmethod
     @beartype
-    def fuzzy_match(ref: str, pred: str, intent: str) -> float:
-        return llm_fuzzy_match(pred, ref, intent)
+    def fuzzy_match(ref: str, pred: str, intent: str, llm) -> float:
+        return llm_fuzzy_match(pred, ref, intent, llm)
 
     @staticmethod
     @beartype
-    def ua_match(ref: str, pred: str, intent: str) -> float:
-        return llm_ua_match(pred, ref, intent)
+    def ua_match(ref: str, pred: str, intent: str, llm) -> float:
+        return llm_ua_match(pred, ref, intent, llm)
 
     def __call__(
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage | None = None
+        page: Page | PseudoPage | DetachedPage | None = None
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -238,7 +242,8 @@ class StringEvaluator(Evaluator):
                     assert isinstance(value, list)
                     for must_value in value:
                         value_or = must_value.split(" |OR| ")
-                        score *= any([self.must_include(ref=v, pred=pred) for v in value_or])
+                        lst = [self.must_include(ref=v, pred=pred) for v in value_or]
+                        score *= any(lst)
                 case "must_exclude":
                     assert isinstance(value, list)
                     for must_excl_value in value:
@@ -267,12 +272,14 @@ class StringEvaluator(Evaluator):
                                 intent=configs["intent"],
                                 ref=configs["eval"]["string_note"],
                                 pred=pred,
+                                llm = self.kq.infer_messages
                             )
                     else:
                         assert isinstance(value, list)
                         for reference in value:
                             score *= self.fuzzy_match(
-                                ref=reference, pred=pred, intent=intent
+                                ref=reference, pred=pred, intent=intent,
+                                llm=self.kq.infer_messages
                             )
         return score
 
@@ -307,7 +314,7 @@ class URLExactEvaluator(Evaluator):
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage
+        page: Page | PseudoPage | DetachedPage
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -342,11 +349,14 @@ class URLExactEvaluator(Evaluator):
 class HTMLContentExactEvaluator(Evaluator):
     """Check whether the contents appear in the page"""
 
+    def __init__(self, kq_config):
+        self.kq = AISRequestor(kq_config)
+
     def __call__(
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage
+        page: Page | PseudoPage | None
     ) -> float:
         with open(config_file, "r") as f:
             configs = json.load(f)
@@ -365,6 +375,7 @@ class HTMLContentExactEvaluator(Evaluator):
 
             # navigate to that url
             if target_url != "last":
+                print(target_url)
                 page.goto(target_url)
                 time.sleep(3)  # TODO [shuyanzh]: fix this hard-coded sleep
 
@@ -469,6 +480,7 @@ class HTMLContentExactEvaluator(Evaluator):
                                 ref=target,
                                 pred=selected_element,
                                 intent="NOT USED",
+                                llm = self.kq.infer_messages
                             )
                         ]
                     )
@@ -612,7 +624,7 @@ class EvaluatorComb:
         self,
         trajectory: Trajectory,
         config_file: Path | str,
-        page: Page | PseudoPage
+        page: Page | PseudoPage | None
     ) -> float:
 
         score = 1.0
@@ -624,23 +636,16 @@ class EvaluatorComb:
 
 
 @beartype
-def evaluator_router(
-    config_file: Path | str, captioning_fn=None
-) -> EvaluatorComb:
-    """Router to get the evaluator class"""
-    with open(config_file, "r") as f:
-        configs = json.load(f)
-
-    eval_types = configs["eval"]["eval_types"]
-    evaluators: list[Evaluator | EvaluatorPartial] = []
+def evaluator_router(eval_types, kq_config, captioning_fn=None) -> EvaluatorComb:
+    evaluators: list[Evaluator] = []
     for eval_type in eval_types:
         match eval_type:
             case "string_match":
-                evaluators.append(StringEvaluator())
+                evaluators.append(StringEvaluator(kq_config))
             case "url_match":
                 evaluators.append(URLExactEvaluator())
             case "program_html":
-                evaluators.append(HTMLContentExactEvaluator())
+                evaluators.append(HTMLContentExactEvaluator(kq_config))
             case "page_image_query":
                 evaluators.append(PageImageEvaluator(captioning_fn))
             case _:

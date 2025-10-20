@@ -127,7 +127,6 @@ def test_url_exact_match_fail(script_browser_env: ScriptBrowserEnv) -> None:
     score = evalutor(
         trajectory, config_file, env.page
     )
-    print(env.page.url)
     assert score == 0.0
 
 

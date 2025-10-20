@@ -41,7 +41,6 @@ def get_observation(
     for action in action_seq:
         action = action.strip()
         obs, success, _, _, info = env.step(create_playwright_action(action))
-        print(obs["text"])
         _ = input("Press enter to continue")
 
 

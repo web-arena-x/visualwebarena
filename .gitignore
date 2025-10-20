@@ -147,3 +147,4 @@ config_files/wa/test_webarena/*
 
 cache/*
 agents/prompts/jsons/*
+log.txt

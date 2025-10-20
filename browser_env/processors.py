@@ -1,3 +1,4 @@
+import os
 import json
 import pkgutil
 import re
@@ -838,6 +839,17 @@ class ImageObservationProcessor(ObservationProcessor):
                 const classList = element.className || '';
                 const id = element.id || '';
                 let textContent = element.textContent || '';
+
+                if (element.tagName === 'INPUT') {
+                    const inputType = element.getAttribute('type') || 'text';
+                    const inputValue = element.value || '';
+                    textContent = `type=${inputType}${inputValue ? `, value=${inputValue}` : ''}`;
+                } else if (element.tagName === 'TEXTAREA') {
+                    textContent = element.value || '';
+                } else {
+                    textContent = element.textContent || '';
+                }
+
                 textContent = textContent.replace(/"/g, ''); // Escape double quotes in textContent
 
                 // Determine if the element is interactable
@@ -901,8 +913,8 @@ class ImageObservationProcessor(ObservationProcessor):
         draw = ImageDraw.Draw(img)
 
         # Load a TTF font with a larger size
-        font_path = "media/SourceCodePro-SemiBold.ttf"
-        font_size, padding = 16, 2
+        font_path = f"{os.path.expanduser('~')}/data/font/Arial_Unicode.ttf"
+        font_size, padding = 20, 2
         font = ImageFont.truetype(font_path, font_size)
 
         # Create a color cycle using one of the categorical color palettes in matplotlib
@@ -916,6 +928,7 @@ class ImageObservationProcessor(ObservationProcessor):
         # Provide [id] textContent inputs to the model as text.
         text_content_elements = []
         text_content_text = set()  # Store text of interactable elements
+        rectangles = {}
 
         # Iterate through each row in the CSV and draw bounding boxes
         for _, row in df.iterrows():
@@ -966,16 +979,13 @@ class ImageObservationProcessor(ObservationProcessor):
             if width >= min_width and height >= min_height:
                 # Get the next color in the cycle
                 color = bbox_color or color_cycle[index % len(color_cycle)]
-                draw.rectangle(
-                    [
-                        left - bbox_padding,
-                        top - bbox_padding,
-                        right + bbox_padding,
-                        bottom + bbox_padding,
-                    ],
-                    outline=color,
-                    width=bbox_border,
-                )
+                rectangles[unique_id] = \
+                [
+                    left - bbox_padding,
+                    top - bbox_padding,
+                    right + bbox_padding,
+                    bottom + bbox_padding,
+                ]
                 bbox_id2desc[row["ID"]] = color
 
                 # Draw the text on top of the rectangle
@@ -1076,7 +1086,8 @@ class ImageObservationProcessor(ObservationProcessor):
                             :200
                         ]  # Limit to 200 characters
                     text_content_elements.append(
-                        f"[{unique_id}] [{row['Element']}] [{content}]"
+                        f"[{unique_id}] [{row['Element']}] [{content}] [element_name = {row['Id']}]"
+                        # f"[{unique_id}] [{row['Element']}] [{content}]"
                     )
                     if content in text_content_text:
                         # Remove text_content_elements with content
@@ -1089,12 +1100,25 @@ class ImageObservationProcessor(ObservationProcessor):
 
             index += 1
 
+        filtered_text_content_elements = {}
+        for i in range(len(text_content_elements)):
+            __text_content = text_content_elements[i]
+            if __text_content.startswith('[]'): continue
+            if '[StaticText]' in __text_content: continue
+            if '[DIV]' in __text_content: continue
+            __text_content = __text_content.replace('  ', '')
+            __text_content = __text_content.replace('\n', '')
+            first_bracket = __text_content.split(']')[0]
+            unique_id = int(first_bracket[1:])
+            filtered_text_content_elements[unique_id] = __text_content
+
         for text_rectangle, text_position, unique_id, color in text_to_draw:
-            # Draw a background rectangle for the text
+            if int(unique_id) not in filtered_text_content_elements.keys(): continue
+            draw.rectangle(rectangles[unique_id], outline=color, width=bbox_border)
             draw.rectangle(text_rectangle, fill=color)
             draw.text(text_position, unique_id, font=font, fill="white")
 
-        content_str = "\n".join(text_content_elements)
+        content_str = "\n".join(filtered_text_content_elements.values())
         return img, id2center, content_str
 
     def rectangles_overlap(self, rect1, rect2, padding):
@@ -1118,42 +1142,33 @@ class ImageObservationProcessor(ObservationProcessor):
 
         self.browser_config = browser_info["config"]
 
-        if self.observation_type == "image_som":
-            # Produce the SoM image, with bounding boxes
-            try:
-                screenshot_bytes = page.screenshot()
-                som_bboxes = self.get_page_bboxes(page)
-                screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
-                    som_bboxes,
-                    screenshot_img,
-                    viewport_size=self.viewport_size,
-                )
-                self.som_id_info = id2center
-                self.meta_data["obs_nodes_info"] = id2center
-                screenshot_som = np.array(bbox_img)
-                return screenshot_som, content_str
-            except:
-                page.wait_for_event("load")
-                screenshot_bytes = page.screenshot()
-                som_bboxes = self.get_page_bboxes(page)
-                screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
-                    som_bboxes,
-                    screenshot_img,
-                    viewport_size=self.viewport_size,
-                )
-                self.som_id_info = id2center
-                self.meta_data["obs_nodes_info"] = id2center
-                screenshot_som = np.array(bbox_img)
-                return screenshot_som, content_str
-        else:
-            try:
-                screenshot = png_bytes_to_numpy(page.screenshot())
-            except:
-                page.wait_for_event("load")
-                screenshot = png_bytes_to_numpy(page.screenshot())
-            return screenshot, ""
+        try:
+            screenshot_bytes = page.screenshot()
+            screenshot = png_bytes_to_numpy(screenshot_bytes)
+            som_bboxes = self.get_page_bboxes(page)
+            screenshot_img = Image.open(BytesIO(screenshot_bytes))
+            bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                som_bboxes,
+                screenshot_img,
+                viewport_size=self.viewport_size,
+            )
+            self.som_id_info = id2center
+            self.meta_data["obs_nodes_info"] = id2center
+            screenshot_som = np.array(bbox_img)
+        except:
+            page.wait_for_event("load", timeout=120000)
+            screenshot_bytes = page.screenshot()
+            som_bboxes = self.get_page_bboxes(page)
+            screenshot_img = Image.open(BytesIO(screenshot_bytes))
+            bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                som_bboxes,
+                screenshot_img,
+                viewport_size=self.viewport_size,
+            )
+            self.som_id_info = id2center
+            self.meta_data["obs_nodes_info"] = id2center
+            screenshot_som = np.array(bbox_img)
+        return screenshot, screenshot_som, content_str
 
     def fetch_browser_info(self, page: Page) -> BrowserInfo:
         client = page.context.new_cdp_session(page)
@@ -1202,11 +1217,6 @@ class ImageObservationProcessor(ObservationProcessor):
         return info
 
     def get_element_center(self, element_id: str) -> tuple[float, float]:
-        if not self.observation_type == "image_som":
-            raise ValueError(
-                "get_element_center() is only supported for 'image_som' observation type."
-            )
-
         browser_config = self.browser_config
         center_x, center_y, width, height = self.som_id_info[element_id]
         return (
@@ -1264,10 +1274,10 @@ class ObservationHandler:
 
     def get_observation(self, page: Page) -> dict[str, Observation]:
         text_obs = self.text_processor.process(page)
-        image_obs, content_str = self.image_processor.process(page)
+        ori_img, image_obs, content_str = self.image_processor.process(page)
         if content_str != "":
             text_obs = content_str
-        return {"text": text_obs, "image": image_obs}
+        return {"text": text_obs, 'ori_image': ori_img, "image": image_obs}
 
     def get_observation_metadata(self) -> dict[str, ObservationMetadata]:
         return {

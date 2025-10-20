@@ -1,0 +1,29 @@
+{
+  "sites": [
+    ""
+  ],
+  "task_id": 0,
+  "require_login": true,
+  "storage_state": "",
+  "start_url": "",
+  "geolocation": null,
+  "intent_template": "",
+  "intent": "",
+  "image": "",
+  "instantiation_dict": {},
+  "require_reset": false,
+  "eval": {
+    "eval_types": [
+      ""
+    ],
+    "reference_answers": null,
+    "reference_url": "",
+    "program_html": [],
+    "url_note": ""
+  },
+  "reasoning_difficulty": "easy",
+  "visual_difficulty": "easy",
+  "overall_difficulty": "easy",
+  "comments": "",
+  "intent_template_id": 0
+}

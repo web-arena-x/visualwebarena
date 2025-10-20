@@ -1,3 +1,4 @@
+import os
 import json
 import re
 from pathlib import Path
@@ -32,7 +33,13 @@ class PromptConstructor(object):
         self.obs_modality = "text"
         self.lm_config = lm_config
         instruction = json.load(open(self.instruction_path))
-        instruction["examples"] = [tuple(e) for e in instruction["examples"]]
+        instruction["examples"] = [list(e) for e in instruction["examples"]]
+
+        self.example_path = os.path.dirname(os.path.abspath(__file__)) + '/json/'
+        self.example_path = self.example_path[:self.example_path.find('visualwebarena')] + '/visualwebarena/'
+        for i in range(len(instruction["examples"])):
+            instruction["examples"][i][-1] = self.example_path + instruction["examples"][i][-1]
+
         self.instruction: Instruction = instruction
         self.tokenizer = tokenizer
 
@@ -306,7 +313,10 @@ class MultimodalCoTPromptConstructor(CoTPromptConstructor):
 
         page = state_info["info"]["page"]
         url = page.url
-        previous_action_str = meta_data["action_history"][-1]
+        if meta_data["action_history"]:
+            previous_action_str = '\n'.join(meta_data["action_history"])
+        else:
+            previous_action_str = "None"
         current = template.format(
             objective=intent,
             url=self.map_url_to_real(url),
@@ -331,116 +341,68 @@ class MultimodalCoTPromptConstructor(CoTPromptConstructor):
     ) -> APIInput:
         """Return the require format for an API"""
         message: list[dict[str, str]] | str | list[str | Image.Image]
-        if "openai" in self.lm_config.provider:
-            if self.lm_config.mode == "chat":
-                message = [
-                    {
-                        "role": "system",
-                        "content": [{"type": "text", "text": intro}],
-                    }
-                ]
-                for (x, y, z) in examples:
-                    example_img = Image.open(z)
-                    message.append(
+        # if "openai" in self.lm_config.provider:
+            # if self.lm_config.mode == "chat":
+        message = [
+            {
+                "role": "system",
+                "content": [{"type": "text", "text": intro}],
+            }
+        ]
+        for (x, y, z) in examples:
+            example_img = Image.open(z)
+            message.append(
+                {
+                    "role": "user",
+                    "name": "example_user",
+                    "content": [
+                        {"type": "text", "text": x},
                         {
-                            "role": "system",
-                            "name": "example_user",
-                            "content": [
-                                {"type": "text", "text": x},
-                                {
-                                    "type": "text",
-                                    "text": "IMAGES: (1) current page screenshot",
-                                },
-                                {
-                                    "type": "image_url",
-                                    "image_url": {
-                                        "url": pil_to_b64(example_img)
-                                    },
-                                },
-                            ],
-                        }
-                    )
-                    message.append(
+                            "type": "text",
+                            "text": "IMAGES: (1) current page screenshot",
+                        },
                         {
-                            "role": "system",
-                            "name": "example_assistant",
-                            "content": [{"type": "text", "text": y}],
-                        }
-                    )
+                            "type": "image_url",
+                            "image_url": {
+                                "url": pil_to_b64(example_img)
+                            },
+                        },
+                    ],
+                }
+            )
+            message.append(
+                {
+                    "role": "system",
+                    "name": "example_assistant",
+                    "content": [{"type": "text", "text": y}],
+                }
+            )
 
-                # Encode images and page_screenshot_img as base64 strings.
-                current_prompt = current
-                content = [
+        # Encode images and page_screenshot_img as base64 strings.
+        current_prompt = current
+        content = [
+            {
+                "type": "text",
+                "text": "IMAGES: (1) current page screenshot",
+            },
+            {
+                "type": "image_url",
+                "image_url": {"url": pil_to_b64(page_screenshot_img)},
+            },
+        ]
+        for image_i, image in enumerate(images):
+            content.extend(
+                [
                     {
                         "type": "text",
-                        "text": "IMAGES: (1) current page screenshot",
+                        "text": f"({image_i+2}) input image {image_i+1}",
                     },
                     {
                         "type": "image_url",
-                        "image_url": {"url": pil_to_b64(page_screenshot_img)},
+                        "image_url": {"url": pil_to_b64(image)},
                     },
                 ]
-                for image_i, image in enumerate(images):
-                    content.extend(
-                        [
-                            {
-                                "type": "text",
-                                "text": f"({image_i+2}) input image {image_i+1}",
-                            },
-                            {
-                                "type": "image_url",
-                                "image_url": {"url": pil_to_b64(image)},
-                            },
-                        ]
-                    )
-                content = [{"type": "text", "text": current_prompt}] + content
-
-                message.append({"role": "user", "content": content})
-                return message
-            else:
-                raise ValueError(
-                    f"GPT-4V models do not support mode {self.lm_config.mode}"
-                )
-        elif "google" in self.lm_config.provider:
-            if self.lm_config.mode == "completion":
-                message = [
-                    intro,
-                    "Here are a few examples:",
-                ]
-                for (x, y, z) in examples:
-                    example_img = Image.open(z)
-                    message.append(f"Observation\n:{x}\n")
-                    message.extend(
-                        [
-                            "IMAGES:",
-                            "(1) current page screenshot:",
-                            pil_to_vertex(example_img),
-                        ]
-                    )
-                    message.append(f"Action: {y}")
-                message.append("Now make prediction given the observation")
-                message.append(f"Observation\n:{current}\n")
-                message.extend(
-                    [
-                        "IMAGES:",
-                        "(1) current page screenshot:",
-                        pil_to_vertex(page_screenshot_img),
-                    ]
-                )
-                for image_i, image in enumerate(images):
-                    message.extend(
-                        [
-                            f"({image_i+2}) input image {image_i+1}",
-                            pil_to_vertex(image),
-                        ]
-                    )
-                message.append("Action:")
-                return message
-            else:
-                raise ValueError(
-                    f"Gemini models do not support mode {self.lm_config.mode}"
-                )
-        else:
-            raise NotImplementedError(
-                f"Provider {self.lm_config.provider} not implemented"
             )
+        content = [{"type": "text", "text": current_prompt}] + content
+        message.append({"role": "user", "content": content})
+        return message

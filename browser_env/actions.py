@@ -56,6 +56,20 @@ from browser_env.processors import (
 )
 
 
+def extract_text(text, from_text, to_text = None) -> list:
+    if to_text == None:
+        return [text[text.find(from_text):]]
+
+    if from_text == None:
+        return [text[:text.find(to_text)]]
+
+    pattern = re.escape(from_text) + r'(.*?)' + re.escape(to_text)
+    matches = re.findall(pattern, text, re.DOTALL)
+    if matches:
+        return [match.strip() for match in matches]
+
+    return []
+
 @beartype
 def is_in_viewport(
     element: Locator, viewport: ViewportSize, threshold: float = 0.3
@@ -100,7 +114,7 @@ class Action(TypedDict):
     coords: npt.NDArray[np.float32]
     element_role: int
     element_name: str
-    text: list[int]
+    text: list
     page_number: int
     url: str
     nth: int
@@ -155,6 +169,10 @@ def action2str(
                 action_str = f"clear [{element_id}] where [{element_id}] is {semantic_element}"
             case ActionTypes.UPLOAD:
                 action_str = f"upload [{action['text']}] to [{element_id}]"
+            case ActionTypes.WAIT:
+                action_str = f"wait"
+            case ActionTypes.DRAG:
+                action_str = f"drag [{element_id}] [{action['text'][0]}]"
             case ActionTypes.STOP:
                 action_str = f"stop [{action['answer']}]"
             case ActionTypes.NONE:
@@ -198,10 +216,12 @@ def action2str(
                 action_str = f"stop [{action['answer']}]"
             case ActionTypes.UPLOAD:
                 action_str = f"upload [{action['text']}] to [{element_id}]"
-            case ActionTypes.NONE:
-                action_str = "none"
             case ActionTypes.WAIT:
                 action_str = "wait"
+            case ActionTypes.DRAG:
+                action_str = f"drag [{element_id}] [{action['text'][0]}]"
+            case ActionTypes.NONE:
+                action_str = "none"
             case _:
                 raise ValueError(
                     f"Unknown action type {action['action_type']}"
@@ -345,6 +365,7 @@ class ActionTypes(IntEnum):
     CLEAR = 18
     UPLOAD = 19
     WAIT = 20
+    DRAG = 21
     def __str__(self) -> str:
         return f"ACTION_TYPES.{self.name}"
 
@@ -397,6 +418,8 @@ def is_equivalent(a: Action, b: Action) -> bool:
             return a["answer"] == b["answer"]
         case ActionTypes.WAIT:
             return True
+        case ActionTypes.DRAG:
+            return a['element_id'] == b['element_id'] and a['text'][0] == b['text'][0]
         case _:
             raise ValueError(f"Unknown action type: {a['action_type']}")
 
@@ -525,6 +548,24 @@ def create_none_action() -> Action:
 def create_stop_action(answer: str) -> Action:
     action = create_none_action()
     action.update({"action_type": ActionTypes.STOP, "answer": answer})
+    pred_action_history = [] # TODO
+    pred_action_description = ''
+    pred_action = ''
+    pred_action_type = 'UNKNOWN'
+    pred_bbox = [0, 0, 0, 0]
+    pred_type_value = ''
+    pred_click_point = [0, 0]
+    res = {
+        'pred_action_history': pred_action_history,
+        'pred_action_description': pred_action_description,
+        'pred_action': pred_action,
+        'pred_action_type': pred_action_type,
+        'pred_bbox': pred_bbox,
+        'pred_type_value': pred_type_value,
+        'pred_click_point': pred_click_point,
+        'parse_error_msg': '',
+    }
+    action['action_info'] = res
     return action
 
 
@@ -650,6 +691,21 @@ def create_wait_action() -> Action:
             "action_type": ActionTypes.WAIT,
         }
     )
+    return action
+
+@beartype
+def create_drag_action(element_id: int, value: str, element_name) -> Action:
+    """Return a valid action object with type WAIT."""
+    action = create_none_action()
+    action["action_type"] = ActionTypes.DRAG
+    action['element_id'] = str(element_id)
+    def to_int_if_possible(s: str):
+        s = s.strip()
+        if re.fullmatch(r'[+-]?\d+', s):
+            return int(s) # Python 的 int 无溢出问题
+        return None # 不是整数
+    action['text'].append(to_int_if_possible(value))
+    action['element_name'] = element_name
     return action
 
 @beartype
@@ -1072,7 +1128,9 @@ def execute_focus(
     """Click the specified DOM element."""
     element_role_str = _id2role[element_role]
     if page.viewport_size is None:
-        raise ValueError("Viewport size is not set for the current page")
+        # raise ValueError("Viewport size is not set for the current page")
+        print("Viewport size is not set for the current page")
+        return False
     element_location_list: list[tuple[Locator, float, float]] = []
     for frame in page.frames:
         match element_role_str:
@@ -1095,9 +1153,12 @@ def execute_focus(
                     (locator, bounding_box["x"], bounding_box["y"])
                 )
     if len(element_location_list) <= nth:
-        raise ValueError(
-            f"There are only {len(element_location_list)} elements found in viewport, but {nth + 1} is requested"
-        )
+        # raise ValueError(
+        #     f"There are only {len(element_location_list)} elements found in viewport, but {nth + 1} is requested"
+        # )
+        print(f'ExecuteFocus: There are only {len(element_location_list)} elements found in viewport, but {nth + 1} is requested')
+        return False
+    
     if len(element_location_list) > 5: return False
     element_location_list.sort(key=lambda x: (x[2], x[1]))  # row major order
     element_location_list[nth][0].focus()
@@ -1280,6 +1341,21 @@ async def aexecute_playwright_check(
     # perform the action
     await locator.check()
 
+def execute_drag(start_x: float, start_y: float, end_x: float, end_y: float, page: Page):
+    page.mouse.move(start_x, start_y)
+    page.mouse.down()
+    # steps 越大越平滑，某些 UI 框架更稳定
+    page.mouse.move(end_x, end_y, steps=20)
+    page.mouse.up()
+
+def set_range_value(locator_code: str, value: float, page: Page):
+    locator = eval(locator_code)
+    locator.scroll_into_view_if_needed()
+    locator.evaluate("""(el, val) => {
+        el.value = val;
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+    }""", value)
 
 @beartype
 def execute_action(
@@ -1297,6 +1373,9 @@ def execute_action(
     element_name = action['element_name']
     pw_code = action['pw_code']
     nth = action['nth']
+    text = action['text']
+    print(100 * '-')
+    print(f'execute_action in actions.py: \naction_type = {action_type}\nelement_id = {element_id}\nelement_role = {element_role}\nelement_name = {element_name}\npw_code = {pw_code}\nnth = {nth}\ntext = {text}')
 
     action_method = 'normal'
 
@@ -1330,7 +1409,7 @@ def execute_action(
 
             flag = False
 
-            if action['domain'] != 'reddit' and action["element_role"] and action["element_name"]:
+            if action['domain'] != 'reddit' and action['domain'] != 'shopping' and action["element_role"] and action["element_name"]:
                 element_role = int(action["element_role"])
                 element_name = action["element_name"]
                 nth = action["nth"]
@@ -1338,14 +1417,14 @@ def execute_action(
                     flag = execute_focus(element_role, element_name, nth, page)
                 except Exception as e:
                     flag = False
-                    print(e)
+                    print(f'execute_action in actions.py: {e}')
                 if flag: 
                     try:
                         execute_click_current(page)
                         action_method = 'role, name, focus, click'
                     except Exception as e:
                         flag = False
-                        print(e)
+                        print(f'execute_action in actions.py: {e}')
 
             if action["element_id"] and not flag:
                 element_id = action["element_id"]
@@ -1393,14 +1472,14 @@ def execute_action(
                     flag = execute_focus(element_role, element_name, nth, page)
                 except Exception as e:
                     flag = False
-                    print(e)
+                    print(f'execute_action in actions.py: {e}')
                 if flag: 
                     try:
                         execute_type(action["text"], page)
                         action_method = 'role, name, focus, type'
                     except Exception as e:
                         flag = False
-                        print(e)
+                        print(f'execute_action in actions.py: {e}')
 
             if action["element_id"] and not flag:
                 element_id = action["element_id"]
@@ -1462,6 +1541,16 @@ def execute_action(
             execute_upload(element_center[0], element_center[1], action["text"], page)
         case ActionTypes.WAIT:
             time.sleep(1)
+        case ActionTypes.DRAG:
+            value = action['text'][0]
+            element_name = action["element_name"]
+            slider = page.locator(f'#{element_name}')
+            slider.evaluate(
+f"""(el) => {{
+    el.value = {value};
+    el.dispatchEvent(new Event('input', {{ bubbles: true }}));
+    el.dispatchEvent(new Event('change', {{ bubbles: true }}));
+}}""")
         case _:
             raise ValueError(f"Unknown action type: {action_type}")
 
@@ -1472,6 +1561,8 @@ def execute_action(
         page = browser_ctx.pages[-1]
         page.bring_to_front()
 
+    print(f'execute_action in actions.py: action method = {action_method}')
+    print(100 * '-')
     return page
 
 
@@ -1765,11 +1856,14 @@ def create_mas_action(action_str: str, obs) -> Action:
     obs_list = obs.split('\n')
     obs_dict = {}
     for content in obs_list:
-        idx = int(content[1:content.find(']')])
-        matches = re.findall(r'\[(.*?)\]', content)
-        if len(matches) == 3:
-            content = matches[2]
-        obs_dict[idx] = content
+        try:
+            idx = int(content[1:content.find(']')])
+            matches = re.findall(r'\[(.*?)\]', content)
+            if len(matches) == 3:
+                content = matches[2]
+            obs_dict[idx] = content
+        except Exception as e:
+            print(f'create_mas_action in actions.py: {e}')
     
     action_str = action_str.strip()
     if "[" in action_str:
@@ -1785,7 +1879,8 @@ def create_mas_action(action_str: str, obs) -> Action:
         case "click":
             match = re.search(r"click ?\[(\d+)\]", action_str)
             if not match:
-                raise ActionParsingError(f"Invalid click action {action_str}")
+                print(f'create_mas_action in actions.py: invalid click action {action_str}')
+                return create_none_action()
             element_id = match.group(1)
             if int(element_id) > len(obs_list): 
                 last_element_id = obs_list[-1]
@@ -1793,7 +1888,11 @@ def create_mas_action(action_str: str, obs) -> Action:
                 last_element_id = int(last_element_id)
                 if int(element_id) > last_element_id:
                     return create_none_action()
-            return create_click_action(element_id=element_id, element_name=obs_dict[int(element_id)])
+
+            element_name = obs_dict[int(element_id)]
+            element_name = extract_text(element_name, 'element_name = ', ']')[0]
+            element_name = f'#{element_name}'
+            return create_click_action(element_id=element_id, element_name=element_name)
         case "clear":
             match = re.search(r"clear ?\[(\d+)\]", action_str)
             if not match:
@@ -1879,6 +1978,20 @@ def create_mas_action(action_str: str, obs) -> Action:
             return create_page_close_action()
         case "wait":
             return create_wait_action()
+        case "drag":
+            match = re.search(r"drag ?\[(\d+)\] ?\[(\d+)\]", action_str)
+            if not match:
+                print(f'create_mas_action in actions.py: invalid drag action {action_str}')
+                return create_none_action()
+            element_id, text = (
+                int(match.group(1)),
+                match.group(2),
+            )
+            if element_id not in obs_dict.keys():
+                return create_none_action()
+            element_name = obs_dict[element_id]
+            element_name = extract_text(element_name, 'element_name = ', ']')[0]
+            return create_drag_action(element_id, text, element_name)
         case "stop":  # stop answer
             match = re.search(r"stop ?\[(.+)\]", action_str)
             if not match:  # some tasks don't require an answer
@@ -1998,5 +2111,76 @@ def create_id_based_action(action_str: str) -> Action:
             else:
                 answer = match.group(1)
             return create_stop_action(answer)
+
+    raise ActionParsingError(f"Invalid action {action_str}")
+
+def get_element_id(click_point, bboxes, th = 5):
+    for box_idx, box in bboxes.items():
+        x, y = click_point
+        if isinstance(box, dict):
+            x1 = box['left']
+            y1 = box['top']
+            x2 = box['right']
+            y2 = box['bottom']
+            width = box['width']
+            height = box['height']
+            left, right = min(x1, x2), max(x1, x2)
+            top, bottom = min(y1, y2), max(y1, y2)
+            # print(box_idx, x, y, left, right, top, bottom, width, height)
+            if left <= x <= right and top <= y <= bottom:
+                return str(box_idx)
+            for box_idx, box in bboxes.items():
+                dx = max(left - x, 0, x - right)
+                dy = max(top - y, 0, y - bottom)
+                distance = (dx ** 2 + dy ** 2) ** 0.5
+                if distance < th: return str(box_idx)
+        else:
+            x1 = box[0]
+            y1 = box[1]
+            x2 = box[0] + box[2]
+            y2 = box[1] + box[3]
+            left, right = min(x1, x2), max(x1, x2)
+            top, bottom = min(y1, y2), max(y1, y2)
+            if left <= x <= right and top <= y <= bottom:
+                return str(int(box_idx) + 1)
+            for box_idx, box in bboxes.items():
+                dx = max(left - x, 0, x - right)
+                dy = max(top - y, 0, y - bottom)
+                distance = (dx ** 2 + dy ** 2) ** 0.5
+                if distance < th: return str(int(box_idx) + 1)
+
+    return "-1"
+
+@beartype
+def create_vision_action(action_info: dict, bboxes: dict) -> Action:
+    action_str = action_info['pred_action']
+    action_type = action_info['pred_action_type']
+    type_value = action_info['pred_type_value']
+    click_point = action_info['pred_click_point']
+
+    match action_type:
+        case "CLICK":
+            element_id = get_element_id(click_point, bboxes)
+            if element_id == '-1': return create_none_action()
+            return create_click_action(element_id=element_id)
+        case "SELECT":
+            element_id = get_element_id(click_point, bboxes)
+            if element_id == '-1': return create_none_action()
+            return create_click_action(element_id=element_id)
+        case "TYPE":
+            element_id = get_element_id(click_point, bboxes)
+            if element_id == '-1': return create_none_action()
+            type_value += "\n"
+            return create_type_action(text=type_value, element_id=element_id)
+        case "SCROLL":
+            return create_scroll_action(direction=type_value)
+        case "GOTO":
+            return create_goto_url_action(url=type_value)
+        case "BACK":
+            return create_go_back_action()
+        case "FINISH":  # stop answer
+            return create_stop_action(type_value)
+        case "WAIT":
+            return create_none_action()
 
     raise ActionParsingError(f"Invalid action {action_str}")

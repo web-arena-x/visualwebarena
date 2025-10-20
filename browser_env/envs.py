@@ -7,7 +7,9 @@ from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Union
+from io import BytesIO, StringIO
 
+import pandas as pd
 import numpy as np
 import numpy.typing as npt
 import requests
@@ -228,6 +230,84 @@ class ScriptBrowserEnv(Env[dict[str, Observation], Action]):
     def _get_obs_metadata(self) -> dict[str, ObservationMetadata]:
         metadata = self.observation_handler.get_observation_metadata()
         return metadata
+
+    def get_som_img(self):
+        return self.observation_handler.action_processor.get_som_img(self.page)
+
+    def get_bboxes(self) -> dict:
+        browser_info = self.observation_handler.action_processor.fetch_browser_info(self.page)
+        browser_config = browser_info["config"]
+        data_string = self.observation_handler.action_processor.get_page_bboxes(self.page)
+        df = pd.read_csv(StringIO(data_string), delimiter=",", quotechar='"')
+        df["Area"] = df["Width"] * df["Height"]
+        # Remove bounding boxes that are clipped.
+        b_x, b_y = (browser_config["win_left_bound"], browser_config["win_upper_bound"])
+        df = df[
+            (df["Bottom"] - b_y >= 0)
+            & (df["Top"] - b_y <= self.viewport_size["height"])
+            & (df["Right"] - b_x >= 0)
+            & (df["Left"] - b_x <= self.viewport_size["width"])
+        ]
+        viewport_area = self.viewport_size["width"] * self.viewport_size["height"]
+        # Filter out bounding boxes that too large (more than 80% of the viewport)
+        df = df[df["Area"] <= 0.8 * viewport_area]
+
+        bboxes = {}
+        index = 0
+        for _, row in df.iterrows():
+            if not row["Interactable"]:
+                content = ""
+                # Add image alt-text to the text representation.
+                if row["Element"] == "IMG" and pd.notna(row["Alt"]):
+                    content += row["Alt"]
+                # Add HTML textContent (if any) to the text representation.
+                if pd.notna(row["TextContent"]):
+                    content += (
+                        row["TextContent"].strip().replace("\n", "").replace("\t", "")
+                    )[
+                        :200
+                    ]  # Limit to 200 characters to avoid having too much text
+                continue
+
+            unique_id = str(index + 1)
+            top, right, bottom, left, width, height = (
+                row["Top"],
+                row["Right"],
+                row["Bottom"],
+                row["Left"],
+                row["Width"],
+                row["Height"],
+            )
+            left, right, top, bottom = left - b_x, right - b_x, top - b_y, bottom - b_y
+
+            ori_idx = row['ID']
+            element = row['Element']
+            alt = row['Alt']
+            cls = row['Class']
+            idx2 = row['Id']
+            text_content = row['TextContent']
+            interactable = row['Interactable']
+            area = row['Area']
+
+            bboxes[unique_id] = {
+                'idx': ori_idx,
+                'element': element,
+                'top': top,
+                'right': right,
+                'bottom': bottom,
+                'left': left,
+                'width': width,
+                'height': height,
+                'alt': alt,
+                'cls': cls,
+                'idx2': idx2,
+                'text_content': text_content,
+                'interactable': interactable,
+                'area': area,
+            }
+
+            index += 1
+        return bboxes
 
     @beartype
     def reset(

@@ -1,8 +1,16 @@
+import os
+import sys
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+up_dir = parent_dir
+for i in range(3):
+    sys.path.append(up_dir)
+    up_dir = os.path.dirname(up_dir)
+from kutils import DEBUG, INFO, WARN, ERROR
+import utils as u
 import argparse
 import json
+import importlib
 from typing import Any, Optional
-
-import tiktoken
 from beartype import beartype
 from PIL import Image
 
@@ -14,36 +22,23 @@ from browser_env.actions import (
     create_id_based_action,
     create_none_action,
     create_playwright_action,
+    create_vision_action,
+    create_mas_action,
 )
 from browser_env.utils import Observation, StateInfo
 from llms import (
-    call_llm,
-    generate_from_huggingface_completion,
-    generate_from_openai_chat_completion,
-    generate_from_openai_completion,
+    # call_llm,
+    # generate_from_huggingface_completion,
+    # generate_from_openai_chat_completion,
+    # generate_from_openai_completion,
     lm_config,
 )
 from llms.tokenizers import Tokenizer
-
-
-class Agent:
-    """Base class for the agent"""
-
-    def __init__(self, *args: Any) -> None:
-        pass
-
-    def next_action(
-        self, trajectory: Trajectory, intent: str, meta_data: Any
-    ) -> Action:
-        """Predict the next action given the observation"""
-        raise NotImplementedError
-
-    def reset(
-        self,
-        test_config_file: str,
-    ) -> None:
-        raise NotImplementedError
-
+from prompts.prompt_constructor import MultimodalCoTPromptConstructor, MultimodalCoTPromptConstructor
+from llms.ais_requestor import get_lm_requestor
+from base_agent import Agent
+from multi_agent import MultiAgent
+from vision_agent import VisionAgent
 
 class TeacherForcingAgent(Agent):
     """Agent that follows a pre-defined action sequence"""
@@ -106,7 +101,7 @@ class PromptAgent(Agent):
         self,
         action_set_tag: str,
         lm_config: lm_config.LMConfig,
-        prompt_constructor: PromptConstructor,
+        prompt_constructor: PromptConstructor | MultimodalCoTPromptConstructor | MultimodalCoTPromptConstructor,
         captioning_fn = None,
     ) -> None:
         super().__init__()
@@ -114,19 +109,19 @@ class PromptAgent(Agent):
         self.prompt_constructor = prompt_constructor
         self.action_set_tag = action_set_tag
         self.captioning_fn = captioning_fn
-
-        # Check if the model is multimodal.
-        if ("gemini" in lm_config.model or "gpt-4" in lm_config.model and "vision" in lm_config.model) and type(prompt_constructor) == MultimodalCoTPromptConstructor:
-            self.multimodal_inputs = True
-        else:
-            self.multimodal_inputs = False
+        self.multimodal_inputs = True
+        self.kq = get_lm_requestor(lm_config.model)
 
     def set_action_set_tag(self, tag: str) -> None:
         self.action_set_tag = tag
 
     @beartype
     def next_action(
-        self, trajectory: Trajectory, intent: str, meta_data: dict[str, Any], images: Optional[list[Image.Image]] = None,
+        self, 
+        trajectory: Trajectory, 
+        intent: str, 
+        meta_data: dict[str, Any], 
+        images: Optional[list[Image.Image]] = None,
         output_response: bool = False
     ) -> Action:
         # Create page screenshot image for multimodal models.
@@ -155,17 +150,29 @@ class PromptAgent(Agent):
                 )
 
         if self.multimodal_inputs:
-            prompt = self.prompt_constructor.construct(
+            messages = self.prompt_constructor.construct(
                 trajectory, intent, page_screenshot_img, images, meta_data
             )
         else:
-            prompt = self.prompt_constructor.construct(
+            messages = self.prompt_constructor.construct(
                 trajectory, intent, meta_data
             )
         lm_config = self.lm_config
         n = 0
         while True:
-            response = call_llm(lm_config, prompt)
+            # response = call_llm(lm_config, prompt)
+            # u.write_json(f'{u.get_time()}.json', messages)
+
+            try:
+                model = lm_config.model
+                if 'qwen' in model:
+                    response = self.kq.infer_messages(messages)
+                else:
+                    raise ValueError(lm_config)
+            except Exception as e:
+                ERROR(e)
+                response = 'stop []'
+
             force_prefix = self.prompt_constructor.instruction[
                 "meta_data"
             ].get("force_prefix", "")
@@ -204,14 +211,13 @@ class PromptAgent(Agent):
 def construct_agent(args: argparse.Namespace, captioning_fn=None) -> Agent:
     llm_config = lm_config.construct_llm_config(args)
 
+    default_provider = 'openai'
+    default_model = 'gpt-3.5-turbo-1106'
+    tokenizer = Tokenizer(default_provider, default_model)
+
     agent: Agent
-    if args.agent_type == "teacher_forcing":
-        agent = TeacherForcingAgent()
-    elif args.agent_type == "prompt":
-        with open(args.instruction_path) as f:
-            constructor_type = json.load(f)["meta_data"]["prompt_constructor"]
-        tokenizer = Tokenizer(args.provider, args.model)
-        prompt_constructor = eval(constructor_type)(
+    if args.mode == "som":
+        prompt_constructor = MultimodalCoTPromptConstructor(
             args.instruction_path, lm_config=llm_config, tokenizer=tokenizer
         )
         agent = PromptAgent(
@@ -220,8 +226,29 @@ def construct_agent(args: argparse.Namespace, captioning_fn=None) -> Agent:
             prompt_constructor=prompt_constructor,
             captioning_fn=captioning_fn
         )
+    elif args.mode == "mas":
+        prompt_constructor = MultimodalCoTPromptConstructor(
+            args.instruction_path, lm_config=llm_config, tokenizer=tokenizer
+        )
+        agent = MultiAgent(
+            action_set_tag=args.action_set_tag,
+            lm_config=llm_config,
+            prompt_constructor=prompt_constructor,
+            captioning_fn=captioning_fn
+        )
+    elif args.mode == 'url_mas':
+        from url_infer.url_multi_agent import URLMultiAgent
+        prompt_constructor = MultimodalCoTPromptConstructor(
+            args.instruction_path, lm_config=llm_config, tokenizer=tokenizer
+        )
+        agent = URLMultiAgent(
+            action_set_tag=args.action_set_tag,
+            lm_config=llm_config,
+            prompt_constructor=prompt_constructor,
+            captioning_fn=captioning_fn
+        )
     else:
         raise NotImplementedError(
-            f"agent type {args.agent_type} not implemented"
+            f"agent type {args.mode} not implemented"
         )
     return agent

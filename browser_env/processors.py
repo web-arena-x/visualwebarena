@@ -1,3 +1,4 @@
+import os
 import json
 import pkgutil
 import re
@@ -912,7 +913,7 @@ class ImageObservationProcessor(ObservationProcessor):
         draw = ImageDraw.Draw(img)
 
         # Load a TTF font with a larger size
-        font_path = "media/SourceCodePro-SemiBold.ttf"
+        font_path = f"{os.path.expanduser('~')}/data/font/Arial_Unicode.ttf"
         font_size, padding = 20, 2
         font = ImageFont.truetype(font_path, font_size)
 
@@ -1085,7 +1086,8 @@ class ImageObservationProcessor(ObservationProcessor):
                             :200
                         ]  # Limit to 200 characters
                     text_content_elements.append(
-                        f"[{unique_id}] [{row['Element']}] [{content}]"
+                        f"[{unique_id}] [{row['Element']}] [{content}] [element_name = {row['Id']}]"
+                        # f"[{unique_id}] [{row['Element']}] [{content}]"
                     )
                     if content in text_content_text:
                         # Remove text_content_elements with content
@@ -1140,42 +1142,33 @@ class ImageObservationProcessor(ObservationProcessor):
 
         self.browser_config = browser_info["config"]
 
-        if self.observation_type == "image_som":
-            # Produce the SoM image, with bounding boxes
-            try:
-                screenshot_bytes = page.screenshot()
-                som_bboxes = self.get_page_bboxes(page)
-                screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
-                    som_bboxes,
-                    screenshot_img,
-                    viewport_size=self.viewport_size,
-                )
-                self.som_id_info = id2center
-                self.meta_data["obs_nodes_info"] = id2center
-                screenshot_som = np.array(bbox_img)
-                return screenshot_som, content_str
-            except:
-                page.wait_for_event("load")
-                screenshot_bytes = page.screenshot()
-                som_bboxes = self.get_page_bboxes(page)
-                screenshot_img = Image.open(BytesIO(screenshot_bytes))
-                bbox_img, id2center, content_str = self.draw_bounding_boxes(
-                    som_bboxes,
-                    screenshot_img,
-                    viewport_size=self.viewport_size,
-                )
-                self.som_id_info = id2center
-                self.meta_data["obs_nodes_info"] = id2center
-                screenshot_som = np.array(bbox_img)
-                return screenshot_som, content_str
-        else:
-            try:
-                screenshot = png_bytes_to_numpy(page.screenshot())
-            except:
-                page.wait_for_event("load")
-                screenshot = png_bytes_to_numpy(page.screenshot())
-            return screenshot, ""
+        try:
+            screenshot_bytes = page.screenshot()
+            screenshot = png_bytes_to_numpy(screenshot_bytes)
+            som_bboxes = self.get_page_bboxes(page)
+            screenshot_img = Image.open(BytesIO(screenshot_bytes))
+            bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                som_bboxes,
+                screenshot_img,
+                viewport_size=self.viewport_size,
+            )
+            self.som_id_info = id2center
+            self.meta_data["obs_nodes_info"] = id2center
+            screenshot_som = np.array(bbox_img)
+        except:
+            page.wait_for_event("load", timeout=120000)
+            screenshot_bytes = page.screenshot()
+            som_bboxes = self.get_page_bboxes(page)
+            screenshot_img = Image.open(BytesIO(screenshot_bytes))
+            bbox_img, id2center, content_str = self.draw_bounding_boxes(
+                som_bboxes,
+                screenshot_img,
+                viewport_size=self.viewport_size,
+            )
+            self.som_id_info = id2center
+            self.meta_data["obs_nodes_info"] = id2center
+            screenshot_som = np.array(bbox_img)
+        return screenshot, screenshot_som, content_str
 
     def fetch_browser_info(self, page: Page) -> BrowserInfo:
         client = page.context.new_cdp_session(page)
@@ -1224,11 +1217,6 @@ class ImageObservationProcessor(ObservationProcessor):
         return info
 
     def get_element_center(self, element_id: str) -> tuple[float, float]:
-        if not self.observation_type == "image_som":
-            raise ValueError(
-                "get_element_center() is only supported for 'image_som' observation type."
-            )
-
         browser_config = self.browser_config
         center_x, center_y, width, height = self.som_id_info[element_id]
         return (

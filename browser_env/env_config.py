@@ -82,16 +82,16 @@ else:
 
 
 ACCOUNTS = {
-    "reddit": {"username": "MarvelsGrantMan136", "password": "test1234"},
+    "reddit": {"username": "MarvelsGrantMan136", "password":  os.getenv('REDDIT_PSW', '')},
     "shopping": {
         "username": "emma.lopez@gmail.com",
-        "password": "Password.123",
+        "password": os.getenv('SHOPPING_PSW', ''),
     },
     "classifieds": {
         "username": "blake.sullivan@gmail.com",
-        "password": "Password.123",
+        "password": os.getenv('CLASSIFIEDS_PSW', ''),
     },
-    "shopping_site_admin": {"username": "admin", "password": "admin1234"},
-    "shopping_admin": {"username": "admin", "password": "admin1234"},
-    "gitlab": {"username": "byteblaze", "password": "hello1234"},
+    "shopping_site_admin": {"username": "admin", "password": os.getenv('SHOPPING_SITE_ADMIN_PSW', '')},
+    "shopping_admin": {"username": "admin", "password": os.getenv('SHOPPING_ADMIN_PSW', '')},
+    "gitlab": {"username": "byteblaze", "password": os.getenv('GITLAB_PSW', '')},
 }

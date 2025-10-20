@@ -5,8 +5,16 @@ import os
 
 from browser_env.env_config import *
 
+def get_name(file_path, pure = False):
+    filename_with_ext = os.path.basename(file_path)
+    if pure:
+        last_dot_index = filename_with_ext.rfind('.')
+        name = filename_with_ext[:last_dot_index]
+        ext = filename_with_ext[last_dot_index+1:]
+        return name
+    return filename_with_ext
 
-def main() -> None:
+if __name__ == "__main__":
     DATASET = os.environ["DATASET"]
     if DATASET == "webarena":
         print("DATASET: webarena")
@@ -45,8 +53,13 @@ def main() -> None:
         }
     else:
         raise ValueError(f"Dataset not implemented: {DATASET}")
-        
+
+    data_path = f'{os.path.expanduser("~")}/data/gui_dataset/visualwebarena/'
+    auth_path = f'{data_path}/auth/'
+    os.makedirs(auth_path, exist_ok=True)
+
     for inp_path in inp_paths:
+        inp_path = data_path + inp_path
         output_dir = inp_path.replace('.raw.json', '')
         os.makedirs(output_dir, exist_ok=True)
         with open(inp_path, "r") as f:
@@ -59,8 +72,16 @@ def main() -> None:
         data = json.loads(raw)
         for idx, item in enumerate(data):
             with open(os.path.join(output_dir, f"{idx}.json"), "w") as f:
+                if 'image' in item.keys():
+                    image_path = item['image']
+                    if isinstance(image_path, str):
+                        item['image'] = data_path + image_path[image_path.find('static'):]
+                    elif isinstance(image_path, list):
+                        if image_path:
+                            for i in range(len(image_path)):
+                                item['image'][i] = data_path + image_path[i][image_path[i].find('static'):]
+                storage_state = item['storage_state']
+                storage_name = get_name(storage_state)
+                storage_state = f'{auth_path}/{storage_name}'
+                item['storage_state'] = storage_state
                 json.dump(item, f, indent=2)
-
-
-if __name__ == "__main__":
-    main()

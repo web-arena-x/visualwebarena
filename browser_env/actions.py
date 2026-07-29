@@ -363,7 +363,13 @@ def is_equivalent(a: Action, b: Action) -> bool:
             return np.allclose(a["coords"], b["coords"])
         case ActionTypes.KEYBOARD_TYPE:
             return a["text"] == b["text"]
-        case ActionTypes.CLICK | ActionTypes.HOVER | ActionTypes.TYPE:  # TODO: can be further optimized
+        case (
+            ActionTypes.CLICK
+            | ActionTypes.HOVER
+            | ActionTypes.TYPE
+            | ActionTypes.CLEAR
+            | ActionTypes.UPLOAD
+        ):  # TODO: can be further optimized
             if a["element_id"] and b["element_id"]:
                 return a["element_id"] == b["element_id"]
             elif a["element_role"] and b["element_role"]:
@@ -705,7 +711,7 @@ def create_upload_action(
     action = create_none_action()
     action.update(
         {
-            "action_type": ActionTypes.TYPE,
+            "action_type": ActionTypes.UPLOAD,
             "element_id": element_id,
             "element_role": _role2id[element_role],
             "element_name": element_name,

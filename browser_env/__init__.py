@@ -7,6 +7,7 @@ from .actions import (
     action2create_function,
     action2str,
     create_check_action,
+    create_clear_action,
     create_click_action,
     create_focus_and_click_action,
     create_focus_and_type_action,
@@ -29,6 +30,7 @@ from .actions import (
     create_select_option_action,
     create_stop_action,
     create_type_action,
+    create_upload_action,
     is_equivalent,
 )
 from .async_envs import AsyncScriptBrowserEnv
@@ -66,9 +68,11 @@ __all__ = [
     "create_scroll_action",
     "create_key_press_action",
     "create_check_action",
+    "create_clear_action",
     "create_click_action",
     "create_type_action",
     "create_hover_action",
+    "create_upload_action",
     "create_select_option_action",
     "create_stop_action",
     "ActionParsingError",

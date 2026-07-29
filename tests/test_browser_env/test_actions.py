@@ -22,13 +22,19 @@ def test_is_equivalent() -> None:
                     assert not is_equivalent(action_a, action_b)
                     action_a["text"] = action_b["text"]
                 assert is_equivalent(action_a, action_b)
-            case ActionTypes.CLICK | ActionTypes.HOVER | ActionTypes.TYPE:
+            case (
+                ActionTypes.CLICK
+                | ActionTypes.HOVER
+                | ActionTypes.TYPE
+                | ActionTypes.CLEAR
+                | ActionTypes.UPLOAD
+            ):
                 if action_a["element_id"] and action_b["element_id"]:
                     if action_a["element_id"] != action_b["element_id"]:
                         assert not is_equivalent(action_a, action_b)
                         action_a["element_id"] = action_b["element_id"]
                     assert is_equivalent(action_a, action_b)
-                elif action_a["element_id"] and action_b["element_id"]:
+                elif action_a["element_role"] and action_b["element_role"]:
                     if action_a["element_role"] != action_b["element_role"]:
                         assert not is_equivalent(action_a, action_b)
                         action_a["element_role"] = action_b["element_role"]

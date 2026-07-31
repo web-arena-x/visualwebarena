@@ -12,9 +12,51 @@ import aiolimiter
 import openai
 from openai import AsyncOpenAI, OpenAI
 
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"], base_url=os.environ.get("OPENAI_BASE_URL"))
-aclient = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"], base_url=os.environ.get("OPENAI_BASE_URL"))
 from tqdm.asyncio import tqdm_asyncio
+
+from llms.lm_config import MINIMAX_MODEL_CONFIGS, MINIMAX_OPENAI_BASE_URLS
+
+
+def _get_api_key(model: str) -> str:
+    key = (
+        os.environ.get("MINIMAX_API_KEY")
+        if model in MINIMAX_MODEL_CONFIGS
+        else None
+    ) or os.environ.get("OPENAI_API_KEY")
+    if not key:
+        if model in MINIMAX_MODEL_CONFIGS:
+            raise ValueError(
+                "MINIMAX_API_KEY or OPENAI_API_KEY environment variable must be set."
+            )
+        raise ValueError(
+            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
+        )
+    return key
+
+
+def _get_base_url(model: str) -> str | None:
+    if model not in MINIMAX_MODEL_CONFIGS:
+        return os.environ.get("OPENAI_BASE_URL")
+
+    if os.environ.get("MINIMAX_BASE_URL"):
+        return os.environ["MINIMAX_BASE_URL"]
+    if os.environ.get("OPENAI_BASE_URL"):
+        return os.environ["OPENAI_BASE_URL"]
+
+    region = os.environ.get("MINIMAX_REGION", "global_en")
+    try:
+        return MINIMAX_OPENAI_BASE_URLS[region]
+    except KeyError as exc:
+        raise ValueError(f"Unsupported MiniMax region: {region}") from exc
+
+
+def _get_client(model: str, *, async_client: bool = False):
+    client_cls = AsyncOpenAI if async_client else OpenAI
+    kwargs = {"api_key": _get_api_key(model)}
+    base_url = _get_base_url(model)
+    if base_url:
+        kwargs["base_url"] = base_url
+    return client_cls(**kwargs)
 
 
 def retry_with_exponential_backoff(  # type: ignore
@@ -74,6 +116,7 @@ async def _throttled_openai_completion_acreate(
     top_p: float,
     limiter: aiolimiter.AsyncLimiter,
 ) -> dict[str, Any]:
+    aclient = _get_client(engine, async_client=True)
     async with limiter:
         for _ in range(3):
             try:
@@ -117,10 +160,7 @@ async def agenerate_from_openai_completion(
     Returns:
         List of generated responses.
     """
-    if "OPENAI_API_KEY" not in os.environ:
-        raise ValueError(
-            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
-        )
+    _get_api_key(engine)
 
     limiter = aiolimiter.AsyncLimiter(requests_per_minute)
     async_responses = [
@@ -148,11 +188,7 @@ def generate_from_openai_completion(
     context_length: int,
     stop_token: str | None = None,
 ) -> str:
-    if "OPENAI_API_KEY" not in os.environ:
-        raise ValueError(
-            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
-        )
-
+    client = _get_client(engine)
     response = client.completions.create(
         prompt=prompt,
         engine=engine,
@@ -173,6 +209,7 @@ async def _throttled_openai_chat_completion_acreate(
     top_p: float,
     limiter: aiolimiter.AsyncLimiter,
 ) -> dict[str, Any]:
+    aclient = _get_client(model, async_client=True)
     async with limiter:
         for _ in range(3):
             try:
@@ -219,10 +256,7 @@ async def agenerate_from_openai_chat_completion(
     Returns:
         List of generated responses.
     """
-    if "OPENAI_API_KEY" not in os.environ:
-        raise ValueError(
-            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
-        )
+    _get_api_key(engine)
 
     limiter = aiolimiter.AsyncLimiter(requests_per_minute)
     async_responses = [
@@ -250,10 +284,7 @@ def generate_from_openai_chat_completion(
     context_length: int,
     stop_token: str | None = None,
 ) -> str:
-    if "OPENAI_API_KEY" not in os.environ:
-        raise ValueError(
-            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
-        )
+    client = _get_client(model)
     response = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -276,10 +307,7 @@ def fake_generate_from_openai_chat_completion(
     context_length: int,
     stop_token: str | None = None,
 ) -> str:
-    if "OPENAI_API_KEY" not in os.environ:
-        raise ValueError(
-            "OPENAI_API_KEY environment variable must be set when using OpenAI API."
-        )
+    _get_api_key(model)
 
     answer = "Let's think step-by-step. This page shows a list of links and buttons. There is a search box with the label 'Search query'. I will click on the search box to type the query. So the action I will perform is \"click [60]\"."
     return answer

@@ -23,6 +23,7 @@ from llms import (
     generate_from_openai_completion,
     lm_config,
 )
+from llms.lm_config import supports_multimodal_input
 from llms.tokenizers import Tokenizer
 
 
@@ -116,7 +117,21 @@ class PromptAgent(Agent):
         self.captioning_fn = captioning_fn
 
         # Check if the model is multimodal.
-        if ("gemini" in lm_config.model or "gpt-4" in lm_config.model and "vision" in lm_config.model) and type(prompt_constructor) == MultimodalCoTPromptConstructor:
+        model_modalities = lm_config.gen_config.get("input_modalities", ())
+        registered_multimodal = supports_multimodal_input(
+            lm_config.model
+        ) or bool(set(model_modalities) & {"image", "video"})
+        if (
+            (
+                registered_multimodal
+                or "gemini" in lm_config.model
+                or (
+                    "gpt-4" in lm_config.model
+                    and "vision" in lm_config.model
+                )
+            )
+            and type(prompt_constructor) == MultimodalCoTPromptConstructor
+        ):
             self.multimodal_inputs = True
         else:
             self.multimodal_inputs = False

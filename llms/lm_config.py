@@ -30,6 +30,31 @@ class LMConfig:
     gen_config: dict[str, Any] = dataclasses.field(default_factory=dict)
 
 
+MINIMAX_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "MiniMax-M3": {
+        "context_length": 1_000_000,
+        "tokenizer": "MiniMaxAI/MiniMax-M3",
+        "input_modalities": ("text", "image", "video"),
+    },
+    "MiniMax-M2.7": {
+        "context_length": 204_800,
+        "tokenizer": "MiniMaxAI/MiniMax-M2.7",
+        "input_modalities": ("text",),
+    },
+}
+
+MINIMAX_OPENAI_BASE_URLS = {
+    "global_en": "https://api.minimax.io/v1",
+    "cn_zh": "https://api.minimaxi.com/v1",
+}
+
+
+def supports_multimodal_input(model: str) -> bool:
+    """Return whether a registered model accepts image or video input."""
+    modalities = MINIMAX_MODEL_CONFIGS.get(model, {}).get("input_modalities", ())
+    return bool(set(modalities) & {"image", "video"})
+
+
 def construct_llm_config(args: argparse.Namespace) -> LMConfig:
     llm_config = LMConfig(
         provider=args.provider, model=args.model, mode=args.mode
@@ -37,11 +62,24 @@ def construct_llm_config(args: argparse.Namespace) -> LMConfig:
     if args.provider in ["openai", "google"]:
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p
-        llm_config.gen_config["context_length"] = args.context_length
+        model_config = (
+            MINIMAX_MODEL_CONFIGS.get(args.model)
+            if args.provider == "openai"
+            else None
+        )
+        llm_config.gen_config["context_length"] = (
+            args.context_length
+            or (model_config["context_length"] if model_config else 0)
+        )
         llm_config.gen_config["max_tokens"] = args.max_tokens
         llm_config.gen_config["stop_token"] = args.stop_token
         llm_config.gen_config["max_obs_length"] = args.max_obs_length
         llm_config.gen_config["max_retry"] = args.max_retry
+        if model_config:
+            llm_config.gen_config["input_modalities"] = model_config[
+                "input_modalities"
+            ]
+            llm_config.gen_config["tokenizer"] = model_config["tokenizer"]
     elif args.provider == "huggingface":
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p

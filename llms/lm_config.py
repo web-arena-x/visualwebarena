@@ -30,6 +30,46 @@ class LMConfig:
     gen_config: dict[str, Any] = dataclasses.field(default_factory=dict)
 
 
+MINIMAX_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "MiniMax-M3.1-Flash": {
+        "context_length": 1_000_000,
+        # Local approximation for observation truncation, not a native tokenizer.
+        "tokenizer": "cl100k_base",
+        "input_modalities": ("text", "image", "video"),
+    },
+    "MiniMax-M3": {
+        "context_length": 1_000_000,
+        "tokenizer": "MiniMaxAI/MiniMax-M3",
+        "input_modalities": ("text", "image", "video"),
+    },
+}
+
+# Retain metadata for explicit legacy requests without advertising these models.
+MINIMAX_LEGACY_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "MiniMax-M2.7": {
+        "context_length": 204_800,
+        "tokenizer": "MiniMaxAI/MiniMax-M2.7",
+        "input_modalities": ("text",),
+    },
+}
+
+MINIMAX_OPENAI_BASE_URLS = {
+    "global_en": "https://api.minimax.io/v1",
+    "cn_zh": "https://api.minimax.cn/v1",
+}
+
+
+def get_minimax_model_config(model: str) -> dict[str, Any] | None:
+    """Look up active or explicitly requested legacy model metadata."""
+    return MINIMAX_MODEL_CONFIGS.get(model) or MINIMAX_LEGACY_MODEL_CONFIGS.get(model)
+
+
+def supports_multimodal_input(model: str) -> bool:
+    """Return whether a registered model accepts image or video input."""
+    modalities = (get_minimax_model_config(model) or {}).get("input_modalities", ())
+    return bool(set(modalities) & {"image", "video"})
+
+
 def construct_llm_config(args: argparse.Namespace) -> LMConfig:
     llm_config = LMConfig(
         provider=args.provider, model=args.model, mode=args.mode
@@ -37,11 +77,24 @@ def construct_llm_config(args: argparse.Namespace) -> LMConfig:
     if args.provider in ["openai", "google"]:
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p
-        llm_config.gen_config["context_length"] = args.context_length
+        model_config = (
+            get_minimax_model_config(args.model)
+            if args.provider == "openai"
+            else None
+        )
+        llm_config.gen_config["context_length"] = (
+            args.context_length
+            or (model_config["context_length"] if model_config else 0)
+        )
         llm_config.gen_config["max_tokens"] = args.max_tokens
         llm_config.gen_config["stop_token"] = args.stop_token
         llm_config.gen_config["max_obs_length"] = args.max_obs_length
         llm_config.gen_config["max_retry"] = args.max_retry
+        if model_config:
+            llm_config.gen_config["input_modalities"] = model_config[
+                "input_modalities"
+            ]
+            llm_config.gen_config["tokenizer"] = model_config["tokenizer"]
     elif args.provider == "huggingface":
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p

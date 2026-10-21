@@ -14,17 +14,17 @@ from openai import AsyncOpenAI, OpenAI
 
 from tqdm.asyncio import tqdm_asyncio
 
-from llms.lm_config import MINIMAX_MODEL_CONFIGS, MINIMAX_OPENAI_BASE_URLS
+from llms.lm_config import MINIMAX_OPENAI_BASE_URLS, get_minimax_model_config
 
 
 def _get_api_key(model: str) -> str:
     key = (
         os.environ.get("MINIMAX_API_KEY")
-        if model in MINIMAX_MODEL_CONFIGS
+        if get_minimax_model_config(model)
         else None
     ) or os.environ.get("OPENAI_API_KEY")
     if not key:
-        if model in MINIMAX_MODEL_CONFIGS:
+        if get_minimax_model_config(model):
             raise ValueError(
                 "MINIMAX_API_KEY or OPENAI_API_KEY environment variable must be set."
             )
@@ -35,7 +35,7 @@ def _get_api_key(model: str) -> str:
 
 
 def _get_base_url(model: str) -> str | None:
-    if model not in MINIMAX_MODEL_CONFIGS:
+    if not get_minimax_model_config(model):
         return os.environ.get("OPENAI_BASE_URL")
 
     if os.environ.get("MINIMAX_BASE_URL"):

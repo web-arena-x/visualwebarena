@@ -3,15 +3,17 @@ from typing import Any
 import tiktoken
 from transformers import AutoTokenizer, LlamaTokenizer  # type: ignore
 
-from llms.lm_config import MINIMAX_MODEL_CONFIGS
+from llms.lm_config import get_minimax_model_config
 
 
 class Tokenizer(object):
     def __init__(self, provider: str, model_name: str) -> None:
         self._uses_huggingface_tokenizer = False
         if provider == "openai":
-            model_config = MINIMAX_MODEL_CONFIGS.get(model_name)
-            if model_config:
+            model_config = get_minimax_model_config(model_name)
+            if model_config and model_config["tokenizer"] == "cl100k_base":
+                self.tokenizer = tiktoken.get_encoding("cl100k_base")
+            elif model_config:
                 self.tokenizer = AutoTokenizer.from_pretrained(
                     model_config["tokenizer"]
                 )

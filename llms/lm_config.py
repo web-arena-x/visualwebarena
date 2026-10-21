@@ -31,11 +31,21 @@ class LMConfig:
 
 
 MINIMAX_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
+    "MiniMax-M3.1-Flash": {
+        "context_length": 1_000_000,
+        # Local approximation for observation truncation, not a native tokenizer.
+        "tokenizer": "cl100k_base",
+        "input_modalities": ("text", "image", "video"),
+    },
     "MiniMax-M3": {
         "context_length": 1_000_000,
         "tokenizer": "MiniMaxAI/MiniMax-M3",
         "input_modalities": ("text", "image", "video"),
     },
+}
+
+# Retain metadata for explicit legacy requests without advertising these models.
+MINIMAX_LEGACY_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
     "MiniMax-M2.7": {
         "context_length": 204_800,
         "tokenizer": "MiniMaxAI/MiniMax-M2.7",
@@ -45,13 +55,18 @@ MINIMAX_MODEL_CONFIGS: dict[str, dict[str, Any]] = {
 
 MINIMAX_OPENAI_BASE_URLS = {
     "global_en": "https://api.minimax.io/v1",
-    "cn_zh": "https://api.minimaxi.com/v1",
+    "cn_zh": "https://api.minimax.cn/v1",
 }
+
+
+def get_minimax_model_config(model: str) -> dict[str, Any] | None:
+    """Look up active or explicitly requested legacy model metadata."""
+    return MINIMAX_MODEL_CONFIGS.get(model) or MINIMAX_LEGACY_MODEL_CONFIGS.get(model)
 
 
 def supports_multimodal_input(model: str) -> bool:
     """Return whether a registered model accepts image or video input."""
-    modalities = MINIMAX_MODEL_CONFIGS.get(model, {}).get("input_modalities", ())
+    modalities = (get_minimax_model_config(model) or {}).get("input_modalities", ())
     return bool(set(modalities) & {"image", "video"})
 
 
@@ -63,7 +78,7 @@ def construct_llm_config(args: argparse.Namespace) -> LMConfig:
         llm_config.gen_config["temperature"] = args.temperature
         llm_config.gen_config["top_p"] = args.top_p
         model_config = (
-            MINIMAX_MODEL_CONFIGS.get(args.model)
+            get_minimax_model_config(args.model)
             if args.provider == "openai"
             else None
         )

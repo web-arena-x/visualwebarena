@@ -42,6 +42,23 @@ pytest -x
 ```
 
 
+## MiniMax models
+
+Use `--provider openai --mode chat --model MiniMax-M3.1-Flash` for MiniMax,
+or select `--model MiniMax-M3`. Set `MINIMAX_API_KEY`; `OPENAI_API_KEY` is
+also accepted as a fallback. The default MiniMax endpoint is
+`https://api.minimax.io/v1`. Set `MINIMAX_REGION=cn_zh` for
+`https://api.minimax.cn/v1`, or use `MINIMAX_BASE_URL` for an explicit endpoint
+(`OPENAI_BASE_URL` remains a fallback override).
+
+Both active models accept image and video input and have a 1,000,000-token
+context window. An explicit `--context_length` still takes precedence. Flash
+uses `cl100k_base` as an approximation for local observation truncation, not an
+exact MiniMax token counter. Existing M3 and explicitly requested M2.7 tokenizer
+selection is retained, as are explicitly configured base URLs. Flash uses the API's default adaptive
+thinking and maximum reasoning effort; allocate enough `--max_tokens` for both
+reasoning and the answer. The existing defaults for other providers are unchanged.
+
 ## End-to-end Evaluation
 1. Setup the standalone environments.
 Please check out [this page](environment_docker/README.md) for details.
